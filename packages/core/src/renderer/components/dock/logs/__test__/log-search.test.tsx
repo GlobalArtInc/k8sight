@@ -26,7 +26,7 @@ function mockLogTabViewModel(tabId: TabId, deps: Partial<LogTabViewModelDependen
     renameTab: jest.fn(),
     stopLoadingLogs: jest.fn(),
     getPodById: jest.fn(),
-    getPodsByOwnerId: jest.fn(),
+    getPodsByOwner: jest.fn(),
     areLogsPresent: jest.fn(),
     searchStore: new SearchStore(),
     downloadLogs: jest.fn(),

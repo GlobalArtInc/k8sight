@@ -4,6 +4,8 @@ import { showCheckedErrorNotificationInjectable } from "@kubesightapp/notificati
 import { withInjectables } from "@ogre-tools/injectable-react";
 import React from "react";
 import openConfirmDialogInjectable from "../confirm-dialog/open.injectable";
+import createWorkloadLogsTabInjectable from "../dock/logs/create-workload-logs-tab.injectable";
+import hideDetailsInjectable, { type HideDetails } from "../kube-detail-params/hide-details.injectable";
 import { MenuItem } from "../menu";
 
 import type { StatefulSetApi } from "@kubesightapp/kube-api";
@@ -19,6 +21,8 @@ interface Dependencies {
   statefulSetApi: StatefulSetApi;
   openConfirmDialog: OpenConfirmDialog;
   showCheckedErrorNotification: ShowCheckedErrorNotification;
+  createWorkloadLogsTab: (data: { workload: StatefulSet }) => string;
+  hideDetails: HideDetails;
 }
 
 const NonInjectedStatefulSetMenu = ({
@@ -27,8 +31,23 @@ const NonInjectedStatefulSetMenu = ({
   toolbar,
   showCheckedErrorNotification,
   openConfirmDialog,
+  createWorkloadLogsTab,
+  hideDetails,
 }: Dependencies & StatefulSetMenuProps) => (
   <>
+    <MenuItem
+      onClick={() => {
+        try {
+          createWorkloadLogsTab({ workload: object });
+          hideDetails();
+        } catch (err) {
+          showCheckedErrorNotification(err, "Failed to open logs");
+        }
+      }}
+    >
+      <Icon material="subject" tooltip="View Logs" interactive={toolbar} />
+      <span className="title">View Logs</span>
+    </MenuItem>
     <MenuItem
       onClick={() =>
         openConfirmDialog({
@@ -64,5 +83,7 @@ export const StatefulSetMenu = withInjectables<Dependencies, StatefulSetMenuProp
     showCheckedErrorNotification: di.inject(showCheckedErrorNotificationInjectable),
     statefulSetApi: di.inject(statefulSetApiInjectable),
     openConfirmDialog: di.inject(openConfirmDialogInjectable),
+    createWorkloadLogsTab: di.inject(createWorkloadLogsTabInjectable),
+    hideDetails: di.inject(hideDetailsInjectable),
   }),
 });

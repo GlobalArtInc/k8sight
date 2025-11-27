@@ -3,10 +3,9 @@
   "version": "1.7.0-0",
   "description": "Kubernetes client for K8Sight",
   "author": {
-    "name": "K8Sight Authors",
-    "email": "k8sight@kubesight.app"
+    "name": "GlobalArt Inc.",
+    "email": "tech@globalart.dev"
   },
-  "copyright": "© 2025 K8Sight Authors",
   "license": "MIT",
   "private": false,
   "publishConfig": {

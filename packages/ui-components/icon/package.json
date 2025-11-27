@@ -24,8 +24,8 @@
   },
   "types": "dist/index.d.ts",
   "author": {
-    "name": "K8Sight Authors",
-    "email": "k8sight@kubesight.app"
+    "name": "GlobalArt Inc.",
+    "email": "tech@globalart.dev"
   },
   "license": "MIT",
   "homepage": "https://k8sight.app",

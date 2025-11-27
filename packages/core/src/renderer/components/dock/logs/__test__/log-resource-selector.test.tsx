@@ -31,7 +31,7 @@ function mockLogTabViewModel(tabId: TabId, deps: Partial<LogTabViewModelDependen
     renameTab: jest.fn(),
     stopLoadingLogs: jest.fn(),
     getPodById: jest.fn(),
-    getPodsByOwnerId: jest.fn(),
+    getPodsByOwner: jest.fn(),
     searchStore: new SearchStore(),
     areLogsPresent: jest.fn(),
     downloadLogs: jest.fn(),
@@ -90,8 +90,8 @@ const getFewPodsTabData = (tabId: TabId, deps: Partial<LogTabViewModelDependenci
 
       return undefined;
     },
-    getPodsByOwnerId: (id) => {
-      if (id === "uuid") {
+    getPodsByOwner: (owner, namespace) => {
+      if (owner.uid === "uuid" && owner.kind === "Deployment") {
         return [selectedPod, anotherPod];
       }
 

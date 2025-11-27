@@ -6,8 +6,8 @@
     "k8sight"
   ],
   "author": {
-    "name": "K8Sight Authors",
-    "email": "k8sight@kubesight.app"
+    "name": "GlobalArt Inc.",
+    "email": "tech@globalart.dev"
   },
   "scripts": {
     "asar": "corepack pnpm dlx @electron/asar@4.0.1",

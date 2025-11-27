@@ -8,6 +8,7 @@ import type { IComputedValue } from "mobx";
 
 import type { TabId } from "../dock/store";
 import type { CallForLogs } from "./call-for-logs.injectable";
+import type { GetPodsByOwner } from "../../workloads-pods/get-pods-by-owner.injectable";
 import type { LogTabData } from "./tab-store";
 
 type PodLogLine = string;
@@ -16,6 +17,7 @@ const logLinesToLoad = 500;
 
 interface Dependencies {
   callForLogs: CallForLogs;
+  getPodsByOwner: GetPodsByOwner;
 }
 
 export class LogStore {
@@ -102,8 +104,29 @@ export class LogStore {
         sinceTime: this.getLastSinceTime(tabId),
       });
 
-      // Add newly received logs to bottom
-      this.podLogs.set(tabId, [...oldLogs, ...logs.filter(Boolean)]);
+      const newLogs = logs.filter(Boolean);
+      const combinedLogs = [...oldLogs, ...newLogs];
+
+      const sortedLogs = combinedLogs.sort((a, b) => {
+        const timestampA = this.extractTimestamp(a);
+        const timestampB = this.extractTimestamp(b);
+
+        if (timestampA && timestampB) {
+          return timestampA.getTime() - timestampB.getTime();
+        }
+
+        if (timestampA) {
+          return -1;
+        }
+
+        if (timestampB) {
+          return 1;
+        }
+
+        return 0;
+      });
+
+      this.podLogs.set(tabId, sortedLogs);
     } catch (error) {
       this.handlerError(tabId, error);
     }
@@ -123,7 +146,7 @@ export class LogStore {
   ): Promise<string[]> {
     const {
       pod,
-      tabData: { selectedContainer, showPrevious },
+      tabData: { selectedContainer, showPrevious, owner },
     } = await waitUntilDefined(() => {
       const pod = computedPod.get();
       const tabData = logTabData.get();
@@ -134,6 +157,61 @@ export class LogStore {
 
       return undefined;
     });
+
+    if (owner?.uid) {
+      const tabData = logTabData.get();
+
+      if (!tabData) {
+        return [];
+      }
+
+      const pods = this.dependencies.getPodsByOwner(owner, tabData.namespace);
+
+      if (pods.length === 0) {
+        return [];
+      }
+
+      const allLogs: string[] = [];
+
+      await Promise.all(
+        pods.map(async (pod) => {
+          try {
+            const namespace = pod.getNs();
+            const name = pod.getName();
+            const podLogs = await this.dependencies.callForLogs(
+              { namespace, name },
+              {
+                ...params,
+                timestamps: true,
+                container: selectedContainer,
+                previous: showPrevious,
+              },
+            );
+
+            const lines = podLogs.trimEnd().replace(/\r/g, "\n").split("\n").filter(Boolean);
+
+            for (const line of lines) {
+              allLogs.push(`[${name}] ${line}`);
+            }
+          } catch (error) {
+            const errorMessage = `[${pod.getName()}] Failed to load logs: ${error instanceof Error ? error.message : String(error)}`;
+            allLogs.push(errorMessage);
+          }
+        }),
+      );
+
+      return allLogs.sort((a, b) => {
+        const timestampA = this.extractTimestamp(a);
+        const timestampB = this.extractTimestamp(b);
+
+        if (timestampA && timestampB) {
+          return timestampA.getTime() - timestampB.getTime();
+        }
+
+        return 0;
+      });
+    }
+
     const namespace = pod.getNs();
     const name = pod.getName();
 
@@ -141,13 +219,80 @@ export class LogStore {
       { namespace, name },
       {
         ...params,
-        timestamps: true, // Always setting timestamp to separate old logs from new ones
+        timestamps: true,
         container: selectedContainer,
         previous: showPrevious,
       },
     );
 
     return result.trimEnd().replace(/\r/g, "\n").split("\n");
+  }
+
+  private extractTimestamp(logLine: string): Date | null {
+    const podMatch = logLine.match(/^\[.*?\]\s*(.+)/);
+
+    if (podMatch) {
+      const rest = podMatch[1];
+      const timestampMatch = rest.match(/^(\d{4}-\d{2}-\d{2}T[\d:.Z+-]+|\d+\S+)/);
+
+      if (timestampMatch) {
+        try {
+          const timestampStr = timestampMatch[1];
+
+          if (timestampStr.includes("T")) {
+            return new Date(timestampStr);
+          }
+
+          const numericMatch = timestampStr.match(/^(\d+)/);
+
+          if (numericMatch) {
+            const timestamp = parseInt(numericMatch[1], 10);
+
+            if (!isNaN(timestamp) && timestamp > 0) {
+              if (timestamp > 1e12) {
+                return new Date(timestamp / 1e6);
+              }
+
+              return new Date(timestamp);
+            }
+          }
+        } catch {
+          return null;
+        }
+      }
+    }
+
+    const match = logLine.match(/^(\d{4}-\d{2}-\d{2}T[\d:.Z+-]+|\d+\S+)/);
+
+    if (!match) {
+      return null;
+    }
+
+    try {
+      const timestampStr = match[1];
+
+      if (timestampStr.includes("T")) {
+        return new Date(timestampStr);
+      }
+
+      const numericMatch = timestampStr.match(/^(\d+)/);
+
+      if (numericMatch) {
+        const timestamp = parseInt(numericMatch[1], 10);
+
+        if (!isNaN(timestamp) && timestamp > 0) {
+          if (timestamp > 1e12) {
+            return new Date(timestamp / 1e6);
+          }
+
+          return new Date(timestamp);
+        }
+      }
+
+      return null;
+    } catch {
+      return null;
+    }
   }
 
   /**
@@ -203,15 +348,44 @@ export class LogStore {
    */
   getLastSinceTime(tabId: TabId): string {
     const logs = this.podLogs.get(tabId) ?? [];
-    const [timestamp] = this.getTimestamps(logs[logs.length - 1]) ?? [];
-    const stamp = timestamp ? new Date(timestamp) : new Date();
 
-    stamp.setSeconds(stamp.getSeconds() + 1); // avoid duplicates from last second
+    if (logs.length === 0) {
+      return new Date().toISOString();
+    }
+
+    let latestTimestamp: Date | null = null;
+
+    for (let i = logs.length - 1; i >= 0; i--) {
+      const timestamp = this.extractTimestamp(logs[i]);
+
+      if (timestamp) {
+        latestTimestamp = timestamp;
+        break;
+      }
+    }
+
+    const stamp = latestTimestamp ?? new Date();
+
+    stamp.setSeconds(stamp.getSeconds() + 1);
 
     return stamp.toISOString();
   }
 
   splitOutTimestamp(logs: string): [string, string] {
+    const podMatch = logs.match(/^(\[.*?\])\s*(.*)/);
+
+    if (podMatch) {
+      const podPrefix = podMatch[1];
+      const rest = podMatch[2];
+      const extraction = /^(\d+\S+)(.*)/m.exec(rest);
+
+      if (extraction && extraction.length >= 3) {
+        return [`${podPrefix} ${extraction[1]}`, extraction[2]];
+      }
+
+      return [podPrefix, rest];
+    }
+
     const extraction = /^(\d+\S+)(.*)/m.exec(logs);
 
     if (!extraction || extraction.length < 3) {
@@ -222,10 +396,31 @@ export class LogStore {
   }
 
   getTimestamps(logs: string) {
+    const podMatch = logs.match(/^\[.*?\]\s*(.*)/);
+
+    if (podMatch) {
+      const rest = podMatch[1];
+      const timestampMatch = rest.match(/^(\d+\S+)/);
+
+      if (timestampMatch) {
+        return [timestampMatch[1]];
+      }
+    }
+
     return logs.match(/^\d+\S+/gm);
   }
 
   removeTimestamps(logs: string): string {
+    const podMatch = logs.match(/^(\[.*?\])\s*(.*)/);
+
+    if (podMatch) {
+      const podPrefix = podMatch[1];
+      const rest = podMatch[2];
+      const withoutTimestamp = rest.replace(/^\d+.*?\s/gm, "");
+
+      return `${podPrefix} ${withoutTimestamp}`;
+    }
+
     return logs.replace(/^\d+.*?\s/gm, "");
   }
 

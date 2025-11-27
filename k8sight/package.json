@@ -14,11 +14,11 @@
     "url": "https://github.com/GlobalArtInc/k8sight/issues"
   },
   "main": "static/build/main.js",
-  "copyright": "© 2024-2025 K8Sight Authors",
+  "copyright": "© 2024-2025 GlobalArt Inc.",
   "license": "MIT",
   "author": {
-    "name": "K8Sight Authors",
-    "email": "k8sight@kubesight.app"
+    "name": "GlobalArt Inc.",
+    "email": "tech@globalart.dev"
   },
   "scripts": {
     "clean": "corepack pnpm dlx rimraf@6.1.2 binaries dist static/build",

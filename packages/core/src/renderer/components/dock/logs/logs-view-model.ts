@@ -9,7 +9,7 @@ import type { IComputedValue } from "mobx";
 
 import type { SearchStore } from "../../../search-store/search-store";
 import type { GetPodById } from "../../workloads-pods/get-pod-by-id.injectable";
-import type { GetPodsByOwnerId } from "../../workloads-pods/get-pods-by-owner-id.injectable";
+import type { GetPodsByOwner } from "../../workloads-pods/get-pods-by-owner.injectable";
 import type { TabId } from "../dock/store";
 import type { LoadLogs } from "./load-logs.injectable";
 import type { LogTabData } from "./tab-store";
@@ -29,7 +29,7 @@ export interface LogTabViewModelDependencies {
   renameTab: (tabId: TabId, title: string) => void;
   stopLoadingLogs: (tabId: TabId) => void;
   getPodById: GetPodById;
-  getPodsByOwnerId: GetPodsByOwnerId;
+  getPodsByOwner: GetPodsByOwner;
   areLogsPresent: (tabId: TabId) => boolean;
   downloadLogs: (filename: string, logs: string[]) => void;
   downloadAllLogs: (params: ResourceDescriptor, query: PodLogsQuery) => Promise<void>;
@@ -58,8 +58,8 @@ export class LogTabViewModel {
       return [];
     }
 
-    if (typeof data.owner?.uid === "string") {
-      return this.dependencies.getPodsByOwnerId(data.owner.uid);
+    if (data.owner?.uid && data.owner?.kind) {
+      return this.dependencies.getPodsByOwner(data.owner, data.namespace);
     }
 
     return [this.dependencies.getPodById(data.selectedPodId)].filter(isDefined);

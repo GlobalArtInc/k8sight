@@ -4,6 +4,8 @@ import { showCheckedErrorNotificationInjectable } from "@kubesightapp/notificati
 import { withInjectables } from "@ogre-tools/injectable-react";
 import React from "react";
 import openConfirmDialogInjectable from "../confirm-dialog/open.injectable";
+import createWorkloadLogsTabInjectable from "../dock/logs/create-workload-logs-tab.injectable";
+import hideDetailsInjectable, { type HideDetails } from "../kube-detail-params/hide-details.injectable";
 import { MenuItem } from "../menu";
 import openDeploymentScaleDialogInjectable from "./scale/open.injectable";
 
@@ -22,6 +24,8 @@ interface Dependencies {
   deploymentApi: DeploymentApi;
   openConfirmDialog: OpenConfirmDialog;
   showCheckedErrorNotification: ShowCheckedErrorNotification;
+  createWorkloadLogsTab: (data: { workload: Deployment }) => string;
+  hideDetails: HideDetails;
 }
 
 const NonInjectedDeploymentMenu = ({
@@ -31,8 +35,23 @@ const NonInjectedDeploymentMenu = ({
   toolbar,
   openConfirmDialog,
   showCheckedErrorNotification,
+  createWorkloadLogsTab,
+  hideDetails,
 }: Dependencies & DeploymentMenuProps) => (
   <>
+    <MenuItem
+      onClick={() => {
+        try {
+          createWorkloadLogsTab({ workload: object });
+          hideDetails();
+        } catch (err) {
+          showCheckedErrorNotification(err, "Failed to open logs");
+        }
+      }}
+    >
+      <Icon material="subject" tooltip="View Logs" interactive={toolbar} />
+      <span className="title">View Logs</span>
+    </MenuItem>
     <MenuItem onClick={() => openDeploymentScaleDialog(object)}>
       <Icon material="open_with" tooltip="Scale" interactive={toolbar} />
       <span className="title">Scale</span>
@@ -73,5 +92,7 @@ export const DeploymentMenu = withInjectables<Dependencies, DeploymentMenuProps>
     openDeploymentScaleDialog: di.inject(openDeploymentScaleDialogInjectable),
     openConfirmDialog: di.inject(openConfirmDialogInjectable),
     showCheckedErrorNotification: di.inject(showCheckedErrorNotificationInjectable),
+    createWorkloadLogsTab: di.inject(createWorkloadLogsTabInjectable),
+    hideDetails: di.inject(hideDetailsInjectable),
   }),
 });

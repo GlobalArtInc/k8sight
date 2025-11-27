@@ -1,7 +1,7 @@
 import { getInjectable, lifecycleEnum } from "@ogre-tools/injectable";
 import searchStoreInjectable from "../../../search-store/search-store.injectable";
 import getPodByIdInjectable from "../../workloads-pods/get-pod-by-id.injectable";
-import getPodsByOwnerIdInjectable from "../../workloads-pods/get-pods-by-owner-id.injectable";
+import getPodsByOwnerInjectable from "../../workloads-pods/get-pods-by-owner.injectable";
 import renameTabInjectable from "../dock/rename-tab.injectable";
 import areLogsPresentInjectable from "./are-logs-present.injectable";
 import downloadAllLogsInjectable from "./download-all-logs.injectable";
@@ -38,7 +38,7 @@ const logsViewModelInjectable = getInjectable({
       stopLoadingLogs: di.inject(stopLoadingLogsInjectable),
       areLogsPresent: di.inject(areLogsPresentInjectable),
       getPodById: di.inject(getPodByIdInjectable),
-      getPodsByOwnerId: di.inject(getPodsByOwnerIdInjectable),
+      getPodsByOwner: di.inject(getPodsByOwnerInjectable),
       downloadLogs: di.inject(downloadLogsInjectable),
       downloadAllLogs: di.inject(downloadAllLogsInjectable),
       searchStore: di.inject(searchStoreInjectable),

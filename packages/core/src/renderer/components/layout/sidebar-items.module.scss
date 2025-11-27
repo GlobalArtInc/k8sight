@@ -23,19 +23,6 @@
     padding-block: var(--sidebar-item-padding-block);
     padding-inline: var(--sidebar-item-padding-inline);
     cursor: pointer;
-    transition:
-      background-color var(--sidebar-item-transition-duration) var(--sidebar-item-transition-timing),
-      color var(--sidebar-item-transition-duration) var(--sidebar-item-transition-timing);
-
-    &:global(.active),
-    &:hover {
-      background-color: var(--primary);
-      color: var(--sidebarActiveColor);
-
-      + .subMenu {
-        border-inline-start-color: var(--primary);
-      }
-    }
 
     span {
       word-break: break-word;
@@ -59,10 +46,13 @@
       .navItem {
         padding-block: var(--sidebar-item-submenu-padding-block);
 
-        &:global(.active),
         &:hover {
+          background-color: var(--sidebarItemHoverBackground);
+        }
+
+        &:global(.active) {
+          background-color: var(--sidebarItemHoverBackground);
           color: var(--sidebarSubmenuActiveColor);
-          background-color: transparent;
         }
       }
     }

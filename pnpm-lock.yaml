@@ -37,6 +37,12 @@ importers:
       '@astronautlabs/jsonpath':
         specifier: ^1.1.2
         version: 1.1.2
+      '@hapi/call':
+        specifier: ^9.0.1
+        version: 9.0.1
+      '@hapi/subtext':
+        specifier: ^8.1.1
+        version: 8.1.1
       '@kubesightapp/application':
         specifier: workspace:^
         version: link:../packages/technical-features/application/application
@@ -103,12 +109,6 @@ importers:
       '@kubesightapp/utilities':
         specifier: workspace:^
         version: link:../packages/utility-features/utilities
-      '@hapi/call':
-        specifier: ^9.0.1
-        version: 9.0.1
-      '@hapi/subtext':
-        specifier: ^8.1.1
-        version: 8.1.1
       '@ogre-tools/fp':
         specifier: ^17.11.1
         version: 17.11.1(lodash@4.17.21)
@@ -584,6 +584,12 @@ importers:
 
   packages/core:
     dependencies:
+      '@hapi/call':
+        specifier: ^9.0.1
+        version: 9.0.1
+      '@hapi/subtext':
+        specifier: ^8.1.1
+        version: 8.1.1
       '@kubesightapp/animate':
         specifier: workspace:^
         version: link:../ui-components/animate
@@ -689,12 +695,6 @@ importers:
       '@kubesightapp/utilities':
         specifier: workspace:^
         version: link:../utility-features/utilities
-      '@hapi/call':
-        specifier: ^9.0.1
-        version: 9.0.1
-      '@hapi/subtext':
-        specifier: ^8.1.1
-        version: 8.1.1
       '@mui/lab':
         specifier: 5.0.0-alpha.142
         version: 5.0.0-alpha.142(@emotion/react@11.14.0(@types/react@17.0.89)(react@17.0.2))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@17.0.89)(react@17.0.2))(@types/react@17.0.89)(react@17.0.2))(@mui/material@5.17.1(@emotion/react@11.14.0(@types/react@17.0.89)(react@17.0.2))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@17.0.89)(react@17.0.2))(@types/react@17.0.89)(react@17.0.2))(@types/react@17.0.89)(react-dom@17.0.2(react@17.0.2))(react@17.0.2))(@types/react@17.0.89)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
@@ -2360,12 +2360,12 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1
     devDependencies:
-      '@kubesightapp/typescript':
-        specifier: workspace:^
-        version: link:../../infrastructure/typescript
       '@kubernetes/client-node':
         specifier: ^1.4.0
         version: 1.4.0(encoding@0.1.13)
+      '@kubesightapp/typescript':
+        specifier: workspace:^
+        version: link:../../infrastructure/typescript
       ts-loader:
         specifier: ^9.5.4
         version: 9.5.4(typescript@5.9.3)(webpack@5.102.1)

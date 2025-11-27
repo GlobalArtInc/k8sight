@@ -13,6 +13,10 @@ const setupContextMenuHandlerInjectable = getInjectable({
     const isDevelopment = di.inject(isDevelopmentInjectable);
 
     return (win) => {
+      if (!isDevelopment) {
+        return;
+      }
+
       win.webContents.on("context-menu", (event, params) => {
         const menu = new Menu();
 
@@ -39,15 +43,6 @@ const setupContextMenuHandlerInjectable = getInjectable({
             new MenuItem({
               label: "Paste",
               role: "paste",
-            }),
-          );
-        }
-
-        if (params.editFlags.canSelectAll) {
-          menu.append(
-            new MenuItem({
-              label: "Select All",
-              role: "selectAll",
             }),
           );
         }

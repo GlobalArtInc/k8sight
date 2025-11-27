@@ -3,7 +3,6 @@
   "productName": "K8Sight extensions",
   "description": "K8Sight - Free IDE for Kubernetes: extensions",
   "version": "1.7.0-0",
-  "copyright": "© 2024-2025 K8Sight Authors",
   "license": "MIT",
   "main": "dist/extension-api.js",
   "types": "dist/extension-api.d.ts",
@@ -13,8 +12,8 @@
     "dist/**/*.js"
   ],
   "author": {
-    "name": "K8Sight Authors",
-    "email": "k8sight@kubesight.app"
+    "name": "GlobalArt Inc.",
+    "email": "tech@globalart.dev"
   },
   "publishConfig": {
     "access": "public",
