@@ -1,0 +1,37 @@
+import { beforeElectronIsReadyInjectionToken } from "@kubesightapp/application-for-electron-main";
+import { runManySyncFor } from "@kubesightapp/run-many";
+import { getInjectable } from "@ogre-tools/injectable";
+import isIntegrationTestingInjectable from "../../../common/vars/is-integration-testing.injectable";
+import userPreferencesStateInjectable from "../../../features/user-preferences/common/state.injectable";
+import { afterQuitOfFrontEndInjectionToken } from "../../start-main-application/runnable-tokens/phases";
+import electronAppInjectable from "../electron-app.injectable";
+import isAutoUpdatingInjectable from "../features/is-auto-updating.injectable";
+
+const setupBehaviourOnCloseOfLastWindowInjectable = getInjectable({
+  id: "setup-behaviour-on-close-of-last-window",
+  instantiate: (di) => ({
+    run: () => {
+      const runManySync = runManySyncFor(di);
+      const runAfterQuitOfFrontEnd = runManySync(afterQuitOfFrontEndInjectionToken);
+      const app = di.inject(electronAppInjectable);
+      const isIntegrationTesting = di.inject(isIntegrationTestingInjectable);
+      const isAutoUpdating = di.inject(isAutoUpdatingInjectable);
+
+      app.on("window-all-closed", () => {
+        runAfterQuitOfFrontEnd();
+
+        const userPreferencesState = di.inject(userPreferencesStateInjectable);
+        const showTray = userPreferencesState.showTrayIcon;
+
+        if (isIntegrationTesting || isAutoUpdating.get() || !showTray) {
+          app.quit();
+        }
+      });
+
+      return undefined;
+    },
+  }),
+  injectionToken: beforeElectronIsReadyInjectionToken,
+});
+
+export default setupBehaviourOnCloseOfLastWindowInjectable;

@@ -1,0 +1,101 @@
+import { Icon } from "@kubesightapp/icon";
+import { cronJobApiInjectable } from "@kubesightapp/kube-api-specifics";
+import { showCheckedErrorNotificationInjectable } from "@kubesightapp/notifications";
+import { withInjectables } from "@ogre-tools/injectable-react";
+import React from "react";
+import openConfirmDialogInjectable from "../confirm-dialog/open.injectable";
+import { MenuItem } from "../menu";
+import openCronJobTriggerDialogInjectable from "./trigger-dialog/open.injectable";
+
+import type { CronJobApi } from "@kubesightapp/kube-api";
+import type { CronJob } from "@kubesightapp/kube-object";
+import type { ShowCheckedErrorNotification } from "@kubesightapp/notifications";
+
+import type { OpenConfirmDialog } from "../confirm-dialog/open.injectable";
+import type { KubeObjectMenuProps } from "../kube-object-menu";
+import type { OpenCronJobTriggerDialog } from "./trigger-dialog/open.injectable";
+
+export interface CronJobMenuProps extends KubeObjectMenuProps<CronJob> {}
+
+interface Dependencies {
+  openConfirmDialog: OpenConfirmDialog;
+  openCronJobTriggerDialog: OpenCronJobTriggerDialog;
+  cronJobApi: CronJobApi;
+  showCheckedErrorNotification: ShowCheckedErrorNotification;
+}
+
+const NonInjectedCronJobMenu = ({
+  object,
+  toolbar,
+  openConfirmDialog,
+  openCronJobTriggerDialog,
+  cronJobApi,
+  showCheckedErrorNotification,
+}: Dependencies & CronJobMenuProps) => (
+  <>
+    <MenuItem onClick={() => openCronJobTriggerDialog(object)}>
+      <Icon material="play_circle_filled" tooltip="Trigger" interactive={toolbar} />
+      <span className="title">Trigger</span>
+    </MenuItem>
+
+    {object.isSuspend() ? (
+      <MenuItem
+        onClick={() =>
+          openConfirmDialog({
+            ok: async () => {
+              try {
+                await cronJobApi.resume({ namespace: object.getNs(), name: object.getName() });
+              } catch (err) {
+                showCheckedErrorNotification(err, "Unknown error occurred while resuming CronJob");
+              }
+            },
+            labelOk: `Resume`,
+            message: (
+              <p>
+                {"Resume CronJob "}
+                <b>{object.getName()}</b>?
+              </p>
+            ),
+          })
+        }
+      >
+        <Icon material="play_circle_outline" tooltip="Resume" interactive={toolbar} />
+        <span className="title">Resume</span>
+      </MenuItem>
+    ) : (
+      <MenuItem
+        onClick={() =>
+          openConfirmDialog({
+            ok: async () => {
+              try {
+                await cronJobApi.suspend({ namespace: object.getNs(), name: object.getName() });
+              } catch (err) {
+                showCheckedErrorNotification(err, "Unknown error occurred while suspending CronJob");
+              }
+            },
+            labelOk: `Suspend`,
+            message: (
+              <p>
+                {"Suspend CronJob "}
+                <b>{object.getName()}</b>?
+              </p>
+            ),
+          })
+        }
+      >
+        <Icon material="pause_circle_filled" tooltip="Suspend" interactive={toolbar} />
+        <span className="title">Suspend</span>
+      </MenuItem>
+    )}
+  </>
+);
+
+export const CronJobMenu = withInjectables<Dependencies, CronJobMenuProps>(NonInjectedCronJobMenu, {
+  getProps: (di, props) => ({
+    ...props,
+    openConfirmDialog: di.inject(openConfirmDialogInjectable),
+    openCronJobTriggerDialog: di.inject(openCronJobTriggerDialogInjectable),
+    cronJobApi: di.inject(cronJobApiInjectable),
+    showCheckedErrorNotification: di.inject(showCheckedErrorNotificationInjectable),
+  }),
+});

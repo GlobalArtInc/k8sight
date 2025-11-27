@@ -1,0 +1,39 @@
+{
+  "name": "@kubesightapp/legacy-global-di",
+  "private": false,
+  "version": "1.7.0-0",
+  "description": "Injection tokens for implementing metrics for K8Sight",
+  "type": "commonjs",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlobalArtInc/k8sight.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": {
+    "name": "K8Sight Authors",
+    "email": "k8sight@kubesight.app"
+  },
+  "license": "MIT",
+  "homepage": "https://k8sight.app",
+  "scripts": {
+    "build": "lens-webpack-build",
+    "build:dev": "lens-webpack-build",
+    "clean": "pnpm dlx rimraf@6.1.2 dist",
+    "clean:node_modules": "pnpm dlx rimraf@6.1.2 node_modules"
+  },
+  "devDependencies": {
+    "@kubesightapp/typescript": "workspace:^",
+    "@kubesightapp/webpack": "workspace:^",
+    "@ogre-tools/injectable": "^17.11.1",
+    "ts-loader": "^9.5.4",
+    "webpack": "^5.102.1"
+  }
+}

@@ -1,0 +1,21 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import lensProtocolRouterMainInjectable from "../../protocol-handler/lens-protocol-router-main/lens-protocol-router-main.injectable";
+import { onQuitOfBackEndInjectionToken } from "../../start-main-application/runnable-tokens/phases";
+
+const cleanUpDeepLinkingInjectable = getInjectable({
+  id: "clean-up-deep-linking",
+
+  instantiate: (di) => ({
+    run: () => {
+      const lensProtocolRouterMain = di.inject(lensProtocolRouterMainInjectable);
+
+      lensProtocolRouterMain.cleanup();
+
+      return undefined;
+    },
+  }),
+
+  injectionToken: onQuitOfBackEndInjectionToken,
+});
+
+export default cleanUpDeepLinkingInjectable;

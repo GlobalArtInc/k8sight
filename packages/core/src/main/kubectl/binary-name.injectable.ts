@@ -1,0 +1,9 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import binaryNameInjectable from "../../common/utils/binary-name.injectable";
+
+const kubectlBinaryNameInjectable = getInjectable({
+  id: "kubectl-binary-name",
+  instantiate: (di) => di.inject(binaryNameInjectable, "kubectl"),
+});
+
+export default kubectlBinaryNameInjectable;

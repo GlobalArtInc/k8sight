@@ -1,0 +1,35 @@
+import { withInjectables } from "@ogre-tools/injectable-react";
+import React from "react";
+import { ResourceMetrics } from "../resource-metrics";
+import { IngressCharts } from "./ingress-charts";
+import ingressMetricsInjectable from "./metrics.injectable";
+
+import type { Ingress } from "@kubesightapp/kube-object";
+
+import type { IAsyncComputed } from "@ogre-tools/injectable-react";
+
+import type { IngressMetricData } from "../../../common/k8s-api/endpoints/metrics.api/request-ingress-metrics.injectable";
+import type { KubeObjectDetailsProps } from "../kube-object-details";
+
+interface Dependencies {
+  metrics: IAsyncComputed<IngressMetricData>;
+}
+
+const NonInjectedIngressMetricsDetailsComponent = ({
+  object,
+  metrics,
+}: KubeObjectDetailsProps<Ingress> & Dependencies) => (
+  <ResourceMetrics tabs={["Network", "Duration"]} object={object} metrics={metrics}>
+    <IngressCharts />
+  </ResourceMetrics>
+);
+
+export const IngressMetricsDetailsComponent = withInjectables<Dependencies, KubeObjectDetailsProps<Ingress>>(
+  NonInjectedIngressMetricsDetailsComponent,
+  {
+    getProps: (di, props) => ({
+      metrics: di.inject(ingressMetricsInjectable, props.object),
+      ...props,
+    }),
+  },
+);

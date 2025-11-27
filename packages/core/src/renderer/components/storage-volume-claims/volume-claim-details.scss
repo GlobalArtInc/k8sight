@@ -1,0 +1,9 @@
+@use "../vars" as *;
+
+.PersistentVolumeClaimDetails {
+  .pods {
+    a {
+      padding-right: $padding;
+    }
+  }
+}

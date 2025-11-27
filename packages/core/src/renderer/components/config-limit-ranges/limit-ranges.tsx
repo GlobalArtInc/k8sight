@@ -1,0 +1,66 @@
+import "./limit-ranges.scss";
+
+import { withInjectables } from "@ogre-tools/injectable-react";
+import { observer } from "mobx-react";
+import React from "react";
+import { KubeObjectAge } from "../kube-object/age";
+import { KubeObjectListLayout } from "../kube-object-list-layout";
+import { KubeObjectStatusIcon } from "../kube-object-status-icon";
+import { SiblingsInTabLayout } from "../layout/siblings-in-tab-layout";
+import { NamespaceSelectBadge } from "../namespaces/namespace-select-badge";
+import { WithTooltip } from "../with-tooltip";
+import limitRangeStoreInjectable from "./store.injectable";
+
+import type { LimitRangeStore } from "./store";
+
+enum columnId {
+  name = "name",
+  namespace = "namespace",
+  age = "age",
+}
+
+interface Dependencies {
+  limitRangeStore: LimitRangeStore;
+}
+
+@observer
+class NonInjectedLimitRanges extends React.Component<Dependencies> {
+  render() {
+    return (
+      <SiblingsInTabLayout>
+        <KubeObjectListLayout
+          isConfigurable
+          tableId="configuration_limitranges"
+          className="LimitRanges"
+          store={this.props.limitRangeStore}
+          sortingCallbacks={{
+            [columnId.name]: (limitRange) => limitRange.getName(),
+            [columnId.namespace]: (limitRange) => limitRange.getNs(),
+            [columnId.age]: (limitRange) => -limitRange.getCreationTimestamp(),
+          }}
+          searchFilters={[(item) => item.getName(), (item) => item.getNs()]}
+          renderHeaderTitle="Limit Ranges"
+          renderTableHeader={[
+            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+            { className: "warning", showWithColumn: columnId.name },
+            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          ]}
+          renderTableContents={(limitRange) => [
+            <WithTooltip>{limitRange.getName()}</WithTooltip>,
+            <KubeObjectStatusIcon key="icon" object={limitRange} />,
+            <NamespaceSelectBadge key="namespace" namespace={limitRange.getNs()} />,
+            <KubeObjectAge key="age" object={limitRange} />,
+          ]}
+        />
+      </SiblingsInTabLayout>
+    );
+  }
+}
+
+export const LimitRanges = withInjectables<Dependencies>(NonInjectedLimitRanges, {
+  getProps: (di, props) => ({
+    ...props,
+    limitRangeStore: di.inject(limitRangeStoreInjectable),
+  }),
+});

@@ -1,0 +1,32 @@
+$node-status-color-list: (
+  OutOfDisk: #ce3933,
+  NetworkUnavailable: #812727,
+  MemoryPressure: #901995,
+  DiskPressure: #cc8d00,
+  PidPressure: #068dbf,
+  Ready: var(--colorSuccess),
+  SchedulingDisabled: #ff9800,
+  InvalidLicense: #ce3933,
+  Cordoned: var(--colorWarning),
+  KernelReady: var(--colorOk),
+  ContainerRuntimeReady: var(--colorOk),
+  StorageReady: var(--colorOk),
+  NetworkingReady: var(--colorOk),
+);
+
+@mixin node-status-bgs {
+  @each $status, $color in $node-status-color-list {
+    .#{$status} {
+      background: $color;
+      color: white;
+    }
+  }
+}
+
+@mixin node-status-colors {
+  @each $status, $color in $node-status-color-list {
+    &.#{$status} {
+      color: $color;
+    }
+  }
+}

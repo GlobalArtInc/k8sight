@@ -1,0 +1,6 @@
+@use "../mixins";
+
+.NamespaceSelectBadge {
+  @include mixins.pseudo-link;
+  border-bottom: unset;
+}

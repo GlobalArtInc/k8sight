@@ -1,0 +1,14 @@
+@use "../namespaces/namespaces-mixins";
+@use "../vars" as *;
+
+.NamespaceDetails {
+  .status {
+    @include namespaces-mixins.namespaceStatus;
+  }
+
+  .quotas {
+    .value a {
+      margin-right: $margin;
+    }
+  }
+}

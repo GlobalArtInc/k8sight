@@ -1,0 +1,26 @@
+@use "../../components/mixins.scss";
+
+.AddClusters {
+  --flex-gap: calc(var(--unit) * 2);
+
+  code {
+    color: rgb(236, 64, 122);
+  }
+
+  a[href] {
+    color: var(--colorInfo);
+  }
+}
+
+.editor {
+  min-height: 600px;
+  max-height: 600px;
+  border: 1px solid var(--colorVague);
+  border-radius: var(--border-radius);
+}
+
+@include mixins.theme-light {
+  .editor {
+    border-color: var(--borderFaintColor);
+  }
+}

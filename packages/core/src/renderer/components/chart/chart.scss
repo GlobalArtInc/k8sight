@@ -1,0 +1,29 @@
+@use "../vars" as *;
+
+.Chart {
+  position: relative;
+
+  &.BarChart {
+    margin-left: -$margin * 2.2;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .legend {
+    .LegendBadge {
+      background: transparent;
+      transition: background-color 250ms;
+      white-space: normal;
+
+      &:hover {
+        background: var(--colorVague);
+        cursor: default;
+      }
+    }
+  }
+
+  .zebra-cover {
+    position: absolute;
+    pointer-events: none;
+  }
+}

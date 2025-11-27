@@ -1,0 +1,18 @@
+$custom-resource-condition-colors: (
+  Accepted: var(--colorOk),
+  Available: var(--colorOk),
+  Succeeded: var(--colorOk),
+  Success: var(--colorOk),
+  Ready: var(--colorSuccess),
+);
+
+.CustomResourceDetails {
+  .conditions {
+    @each $status, $color in $custom-resource-condition-colors {
+      .#{$status} {
+        background: $color;
+        color: white;
+      }
+    }
+  }
+}

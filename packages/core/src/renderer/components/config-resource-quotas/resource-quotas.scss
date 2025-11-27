@@ -1,0 +1,13 @@
+@use "../table/table.mixins";
+
+.ResourceQuotas {
+  .TableCell {
+    &.warning {
+      @include table.table-cell-warning;
+    }
+
+    &.age {
+      flex-grow: 0.3;
+    }
+  }
+}

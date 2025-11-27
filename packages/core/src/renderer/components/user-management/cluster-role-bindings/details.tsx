@@ -1,0 +1,158 @@
+import "./details.scss";
+
+import { ObservableHashSet, prevDefault } from "@kubesightapp/utilities";
+import { withInjectables } from "@ogre-tools/injectable-react";
+import autoBindReact from "auto-bind/react";
+import { reaction } from "mobx";
+import { disposeOnUnmount, observer } from "mobx-react";
+import React from "react";
+import { AddRemoveButtons } from "../../add-remove-buttons";
+import openConfirmDialogInjectable from "../../confirm-dialog/open.injectable";
+import { DrawerTitle } from "../../drawer";
+import { LinkToClusterRole, LinkToNamespace, LinkToServiceAccount } from "../../kube-object-link";
+import { Table, TableCell, TableHead, TableRow } from "../../table";
+import { WithTooltip } from "../../with-tooltip";
+import { hashSubject } from "../hashers";
+import openClusterRoleBindingDialogInjectable from "./dialog/open.injectable";
+import clusterRoleBindingStoreInjectable from "./store.injectable";
+
+import type { ClusterRoleBinding } from "@kubesightapp/kube-object";
+
+import type { OpenConfirmDialog } from "../../confirm-dialog/open.injectable";
+import type { KubeObjectDetailsProps } from "../../kube-object-details";
+import type { OpenClusterRoleBindingDialog } from "./dialog/open.injectable";
+import type { ClusterRoleBindingStore } from "./store";
+
+export interface ClusterRoleBindingDetailsProps extends KubeObjectDetailsProps<ClusterRoleBinding> {}
+
+interface Dependencies {
+  openConfirmDialog: OpenConfirmDialog;
+  openClusterRoleBindingDialog: OpenClusterRoleBindingDialog;
+  clusterRoleBindingStore: ClusterRoleBindingStore;
+}
+
+@observer
+class NonInjectedClusterRoleBindingDetails extends React.Component<ClusterRoleBindingDetailsProps & Dependencies> {
+  selectedSubjects = new ObservableHashSet([], hashSubject);
+
+  constructor(props: ClusterRoleBindingDetailsProps & Dependencies) {
+    super(props);
+    autoBindReact(this);
+  }
+
+  async componentDidMount() {
+    disposeOnUnmount(this, [
+      reaction(
+        () => this.props.object,
+        () => {
+          this.selectedSubjects.clear();
+        },
+      ),
+    ]);
+  }
+
+  removeSelectedSubjects() {
+    const { object: clusterRoleBinding, openConfirmDialog, clusterRoleBindingStore } = this.props;
+    const { selectedSubjects } = this;
+
+    openConfirmDialog({
+      ok: () => clusterRoleBindingStore.removeSubjects(clusterRoleBinding, selectedSubjects),
+      labelOk: `Remove`,
+      message: (
+        <p>
+          Remove selected bindings for
+          <b>{clusterRoleBinding.getName()}</b>?
+        </p>
+      ),
+    });
+  }
+
+  render() {
+    const { selectedSubjects } = this;
+    const { object: clusterRoleBinding, openClusterRoleBindingDialog } = this.props;
+
+    if (!clusterRoleBinding) {
+      return null;
+    }
+    const { roleRef } = clusterRoleBinding;
+    const subjects = clusterRoleBinding.getSubjects();
+
+    return (
+      <div className="ClusterRoleBindingDetails">
+        <DrawerTitle>Reference</DrawerTitle>
+        <Table>
+          <TableHead>
+            <TableCell>Kind</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>API Group</TableCell>
+          </TableHead>
+          <TableRow>
+            <TableCell>
+              <WithTooltip>{roleRef.kind}</WithTooltip>
+            </TableCell>
+            <TableCell>
+              <LinkToClusterRole name={roleRef.name} />
+            </TableCell>
+            <TableCell>
+              <WithTooltip>{roleRef.apiGroup}</WithTooltip>
+            </TableCell>
+          </TableRow>
+        </Table>
+
+        <DrawerTitle>Bindings</DrawerTitle>
+        {subjects.length > 0 && (
+          <Table selectable className="bindings box grow">
+            <TableHead>
+              <TableCell checkbox />
+              <TableCell className="type">Type</TableCell>
+              <TableCell className="binding">Name</TableCell>
+              <TableCell className="ns">Namespace</TableCell>
+            </TableHead>
+            {subjects.map((subject, i) => {
+              const { kind, name, namespace } = subject;
+              const isSelected = selectedSubjects.has(subject);
+
+              return (
+                <TableRow
+                  key={i}
+                  selected={isSelected}
+                  onClick={prevDefault(() => this.selectedSubjects.toggle(subject))}
+                >
+                  <TableCell checkbox isChecked={isSelected} />
+                  <TableCell className="type">
+                    <WithTooltip>{kind}</WithTooltip>
+                  </TableCell>
+                  <TableCell className="binding">
+                    {kind === "ServiceAccount" ? <LinkToServiceAccount name={name} namespace={namespace} /> : name}
+                  </TableCell>
+                  <TableCell className="ns">
+                    <LinkToNamespace namespace={namespace} />
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </Table>
+        )}
+
+        <AddRemoveButtons
+          onAdd={() => openClusterRoleBindingDialog(clusterRoleBinding)}
+          onRemove={selectedSubjects.size ? this.removeSelectedSubjects : undefined}
+          addTooltip={`Add bindings to ${roleRef.name}`}
+          removeTooltip={`Remove selected bindings from ${roleRef.name}`}
+        />
+      </div>
+    );
+  }
+}
+
+export const ClusterRoleBindingDetails = withInjectables<Dependencies, ClusterRoleBindingDetailsProps>(
+  NonInjectedClusterRoleBindingDetails,
+  {
+    getProps: (di, props) => ({
+      ...props,
+      openConfirmDialog: di.inject(openConfirmDialogInjectable),
+      openClusterRoleBindingDialog: di.inject(openClusterRoleBindingDialogInjectable),
+      clusterRoleBindingStore: di.inject(clusterRoleBindingStoreInjectable),
+    }),
+  },
+);

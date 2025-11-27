@@ -1,0 +1,30 @@
+import { DaemonSet } from "@kubesightapp/kube-object";
+import moment from "moment";
+import { KubeApi } from "../kube-api";
+
+import type { DerivedKubeApiOptions, KubeApiDependencies, NamespacedResourceDescriptor } from "../kube-api";
+
+export class DaemonSetApi extends KubeApi<DaemonSet> {
+  constructor(deps: KubeApiDependencies, opts?: DerivedKubeApiOptions) {
+    super(deps, {
+      ...(opts ?? {}),
+      objectConstructor: DaemonSet,
+    });
+  }
+
+  restart(params: NamespacedResourceDescriptor) {
+    return this.patch(
+      params,
+      {
+        spec: {
+          template: {
+            metadata: {
+              annotations: { "kubectl.kubernetes.io/restartedAt": moment.utc().format() },
+            },
+          },
+        },
+      },
+      "strategic",
+    );
+  }
+}

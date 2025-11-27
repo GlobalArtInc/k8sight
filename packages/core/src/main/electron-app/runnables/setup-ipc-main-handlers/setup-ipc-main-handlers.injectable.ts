@@ -1,0 +1,45 @@
+import { onLoadOfApplicationInjectionToken } from "@kubesightapp/application";
+import { loggerInjectionToken } from "@kubesightapp/logger";
+import { getInjectable } from "@ogre-tools/injectable";
+import clusterFramesInjectable from "../../../../common/cluster-frames.injectable";
+import applicationMenuItemCompositeInjectable from "../../../../features/application-menu/main/application-menu-item-composite.injectable";
+import clustersInjectable from "../../../../features/cluster/storage/common/clusters.injectable";
+import getClusterByIdInjectable from "../../../../features/cluster/storage/common/get-by-id.injectable";
+import pushCatalogToRendererInjectable from "../../../catalog-sync-to-renderer/push-catalog-to-renderer.injectable";
+import clusterConnectionInjectable from "../../../cluster/cluster-connection.injectable";
+import { setupIpcMainHandlers } from "./setup-ipc-main-handlers";
+
+const setupIpcMainHandlersInjectable = getInjectable({
+  id: "setup-ipc-main-handlers",
+
+  instantiate: (di) => ({
+    run: () => {
+      const logger = di.inject(loggerInjectionToken);
+
+      logger.debug("[APP-MAIN] initializing ipc main handlers");
+
+      setupIpcMainHandlers({
+        applicationMenuItemComposite: di.inject(applicationMenuItemCompositeInjectable),
+        pushCatalogToRenderer: di.inject(pushCatalogToRendererInjectable),
+        clusters: di.inject(clustersInjectable),
+        getClusterById: di.inject(getClusterByIdInjectable),
+        clusterFrames: di.inject(clusterFramesInjectable),
+
+        refreshClusterAccessibility: async (clusterId) => {
+          const getClusterById = di.inject(getClusterByIdInjectable);
+          const cluster = getClusterById(clusterId);
+
+          if (!cluster) return;
+
+          const connection = di.inject(clusterConnectionInjectable, cluster);
+          await connection.refreshAccessibilityAndMetadata();
+        },
+      });
+    },
+  }),
+
+  injectionToken: onLoadOfApplicationInjectionToken,
+  causesSideEffects: true,
+});
+
+export default setupIpcMainHandlersInjectable;

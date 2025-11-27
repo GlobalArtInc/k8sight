@@ -1,0 +1,7 @@
+@use "../workloads/workloads-mixins";
+
+.JobDetails {
+  .conditions {
+    @include workloads-mixins.job-condition-bgs;
+  }
+}

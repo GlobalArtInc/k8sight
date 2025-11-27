@@ -1,0 +1,13 @@
+@use "../../mixins";
+
+.controls {
+  @include mixins.hidden-scrollbar;
+
+  display: flex;
+  gap: var(--padding);
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  background: var(--dockInfoBackground);
+  padding: var(--padding) calc(var(--padding) * 2);
+}

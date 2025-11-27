@@ -1,0 +1,17 @@
+@use "autoscaler.mixins";
+
+.VpaDetails {
+  .conditions {
+    @include autoscaler.vpa-status-bgc;
+  }
+
+  .metrics .Table {
+    .TableCell {
+      word-break: break-word;
+
+      &.name {
+        flex-grow: 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import isMacInjectable from "../../../../common/vars/is-mac.injectable";
+
+import type React from "react";
+
+export type IsMultiSelectionKey = (event: React.KeyboardEvent) => boolean;
+
+const isMultiSelectionKeyInjectable = getInjectable({
+  id: "is-multi-selection-key",
+  instantiate: (di): IsMultiSelectionKey => {
+    const isMac = di.inject(isMacInjectable);
+
+    return isMac ? ({ key }) => key === "Meta" : ({ key }) => key === "Control";
+  },
+});
+
+export default isMultiSelectionKeyInjectable;

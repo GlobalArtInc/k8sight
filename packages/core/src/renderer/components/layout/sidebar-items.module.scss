@@ -1,0 +1,80 @@
+.SidebarItem {
+  --sidebar-item-gap: 8px;
+  --sidebar-item-padding-block: 6px;
+  --sidebar-item-padding-inline: 8px 10px;
+  --sidebar-item-padding-inline-start: 10px;
+  --sidebar-item-submenu-indent: 25px;
+  --sidebar-item-submenu-border-width: 4px;
+  --sidebar-item-submenu-padding-block: 4px;
+  --sidebar-item-transition-duration: 150ms;
+  --sidebar-item-transition-timing: ease-in-out;
+
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 100%;
+  user-select: none;
+
+  > .navItem {
+    display: flex;
+    align-items: center;
+    gap: var(--sidebar-item-gap);
+    text-decoration: none;
+    padding-block: var(--sidebar-item-padding-block);
+    padding-inline: var(--sidebar-item-padding-inline);
+    cursor: pointer;
+    transition:
+      background-color var(--sidebar-item-transition-duration) var(--sidebar-item-transition-timing),
+      color var(--sidebar-item-transition-duration) var(--sidebar-item-transition-timing);
+
+    &:global(.active),
+    &:hover {
+      background-color: var(--primary);
+      color: var(--sidebarActiveColor);
+
+      + .subMenu {
+        border-inline-start-color: var(--primary);
+      }
+    }
+
+    span {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+  }
+
+  .expandIcon {
+    margin-inline-start: auto;
+    flex-shrink: 0;
+  }
+
+  .subMenu {
+    border-inline-start: var(--sidebar-item-submenu-border-width) solid transparent;
+    transition: border-inline-start-color var(--sidebar-item-transition-duration) var(--sidebar-item-transition-timing);
+
+    .SidebarItem {
+      color: var(--textColorPrimary);
+      padding-inline-start: var(--sidebar-item-submenu-indent);
+
+      .navItem {
+        padding-block: var(--sidebar-item-submenu-padding-block);
+
+        &:global(.active),
+        &:hover {
+          color: var(--sidebarSubmenuActiveColor);
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .subMenu .subMenu {
+    &.active {
+      border-inline-start-color: transparent;
+    }
+
+    .SidebarItem {
+      padding-inline-start: calc(var(--padding) / 2);
+    }
+  }
+}

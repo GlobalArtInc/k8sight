@@ -1,0 +1,9 @@
+@use "../table/table.mixins";
+
+.MutatingWebhookConfigurations {
+  .TableCell {
+    &.age {
+      flex: 0.3;
+    }
+  }
+}

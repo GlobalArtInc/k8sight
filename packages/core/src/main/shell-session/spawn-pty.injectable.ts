@@ -1,0 +1,18 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import { spawn } from "node-pty";
+
+import type { IPty, IPtyForkOptions, IWindowsPtyForkOptions } from "node-pty";
+
+export type WindowsSpawnPtyOptions = Omit<IWindowsPtyForkOptions, "env"> & { env?: Partial<Record<string, string>> };
+export type UnixSpawnPtyOptions = Omit<IPtyForkOptions, "env"> & { env?: Partial<Record<string, string>> };
+export type SpawnPtyOptions = UnixSpawnPtyOptions | WindowsSpawnPtyOptions;
+
+export type SpawnPty = (file: string, args: string[], options: SpawnPtyOptions) => IPty;
+
+const spawnPtyInjectable = getInjectable({
+  id: "spawn-pty",
+  instantiate: () => spawn as SpawnPty,
+  causesSideEffects: true,
+});
+
+export default spawnPtyInjectable;

@@ -1,0 +1,18 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import { navigateToRouteInjectionToken } from "../../navigate-to-route-injection-token";
+import entitySettingsRouteInjectable from "./entity-settings-route.injectable";
+
+export type NavigateToEntitySettings = (entityId: string, targetTabId?: string) => void;
+
+const navigateToEntitySettingsInjectable = getInjectable({
+  id: "navigate-to-entity-settings",
+
+  instantiate: (di): NavigateToEntitySettings => {
+    const navigateToRoute = di.inject(navigateToRouteInjectionToken);
+    const route = di.inject(entitySettingsRouteInjectable);
+
+    return (entityId, targetTabId) => navigateToRoute(route, { parameters: { entityId }, fragment: targetTabId });
+  },
+});
+
+export default navigateToEntitySettingsInjectable;

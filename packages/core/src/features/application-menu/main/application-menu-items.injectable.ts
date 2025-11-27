@@ -1,0 +1,22 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import { computedInjectManyInjectable } from "@ogre-tools/injectable-extension-for-mobx";
+import { computed } from "mobx";
+import applicationMenuItemInjectionToken from "./menu-items/application-menu-item-injection-token";
+
+import type { MenuItemConstructorOptions } from "electron";
+
+export interface MenuItemOpts extends MenuItemConstructorOptions {
+  submenu?: MenuItemConstructorOptions[];
+}
+
+const applicationMenuItemsInjectable = getInjectable({
+  id: "application-menu-items",
+
+  instantiate: (di) => {
+    const computedInjectMany = di.inject(computedInjectManyInjectable);
+
+    return computed(() => computedInjectMany(applicationMenuItemInjectionToken).get());
+  },
+});
+
+export default applicationMenuItemsInjectable;

@@ -1,0 +1,19 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import joinPathsInjectable from "../path/join-paths.injectable";
+import isProductionInjectable from "./is-production.injectable";
+import lensResourcesDirInjectable from "./lens-resources-dir.injectable";
+import normalizedPlatformInjectable from "./normalized-platform.injectable";
+
+const bundledResourcesDirectoryInjectable = getInjectable({
+  id: "bundled-resources-directory",
+  instantiate: (di) => {
+    const isProduction = di.inject(isProductionInjectable);
+    const normalizedPlatform = di.inject(normalizedPlatformInjectable);
+    const joinPaths = di.inject(joinPathsInjectable);
+    const lensResourcesDir = di.inject(lensResourcesDirInjectable);
+
+    return isProduction ? lensResourcesDir : joinPaths(lensResourcesDir, "binaries", "client", normalizedPlatform);
+  },
+});
+
+export default bundledResourcesDirectoryInjectable;

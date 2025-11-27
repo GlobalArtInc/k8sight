@@ -1,0 +1,32 @@
+@use "../storage/storage-mixins";
+@use "../vars" as *;
+
+.VolumeDetailsList {
+  position: relative;
+
+  .Table {
+    margin: 0 (-$margin * 3);
+
+    &.virtual {
+      height: 500px; // applicable for 100+ items
+    }
+  }
+
+  .TableCell {
+    &:first-child {
+      margin-left: $margin;
+    }
+
+    &:last-child {
+      margin-right: $margin;
+    }
+
+    &.name {
+      flex-grow: 2;
+    }
+
+    &.status {
+      @include storage-mixins.pv-status-colors;
+    }
+  }
+}

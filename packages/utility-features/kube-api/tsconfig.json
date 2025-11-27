@@ -1,0 +1,4 @@
+{
+  "extends": "@kubesightapp/typescript/config/base.json",
+  "include": ["**/*.ts", "../kube-api-specifics/src/token.ts"]
+}

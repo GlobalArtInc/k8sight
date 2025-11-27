@@ -1,0 +1,20 @@
+@use "../workloads/workloads-mixins";
+@use "../vars" as *;
+
+.CronJobDetails {
+  .job {
+    .title {
+      margin-top: $margin * 2;
+      margin-bottom: $margin;
+
+      span {
+        font-weight: bold;
+        color: var(--colorInfo);
+      }
+    }
+  }
+
+  .conditions {
+    @include workloads-mixins.job-condition-bgs;
+  }
+}

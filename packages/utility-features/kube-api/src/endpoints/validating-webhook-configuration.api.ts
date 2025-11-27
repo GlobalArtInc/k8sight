@@ -1,0 +1,13 @@
+import { ValidatingWebhookConfiguration } from "@kubesightapp/kube-object";
+import { KubeApi } from "../kube-api";
+
+import type { DerivedKubeApiOptions, KubeApiDependencies } from "../kube-api";
+
+export class ValidatingWebhookConfigurationApi extends KubeApi<ValidatingWebhookConfiguration> {
+  constructor(deps: KubeApiDependencies, opts?: DerivedKubeApiOptions) {
+    super(deps, {
+      ...(opts ?? {}),
+      objectConstructor: ValidatingWebhookConfiguration,
+    });
+  }
+}

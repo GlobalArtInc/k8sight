@@ -1,0 +1,13 @@
+@use "../../table/table.mixins";
+
+.ServiceAccounts {
+  .TableCell {
+    &.warning {
+      @include table.table-cell-warning;
+    }
+
+    &.age {
+      flex-grow: 0.4;
+    }
+  }
+}

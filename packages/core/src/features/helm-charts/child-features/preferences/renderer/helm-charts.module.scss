@@ -1,0 +1,22 @@
+.repos {
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(var(--margin) * 2);
+}
+
+.repos .repo + .repo {
+  margin-top: calc(var(--margin) * 1.5);
+}
+
+.contents {
+  display: flex;
+  gap: var(--padding);
+}
+
+.repoName {
+  font-weight: 500;
+}
+
+.repoUrl {
+  color: var(--textColorDimmed);
+}

@@ -1,0 +1,27 @@
+import { beforeElectronIsReadyInjectionToken } from "@kubesightapp/application-for-electron-main";
+import { getInjectable } from "@ogre-tools/injectable";
+import * as Mobx from "mobx";
+
+const setupMobxInjectable = getInjectable({
+  id: "setup-mobx",
+
+  instantiate: () => ({
+    run: () => {
+      // Docs: https://mobx.js.org/configuration.html
+      Mobx.configure({
+        enforceActions: "never",
+
+        // TODO: enable later (read more: https://mobx.js.org/migrating-from-4-or-5.html)
+        // computedRequiresReaction: true,
+        // reactionRequiresObservable: true,
+        // observableRequiresReaction: true,
+      });
+
+      return undefined;
+    },
+  }),
+
+  injectionToken: beforeElectronIsReadyInjectionToken,
+});
+
+export default setupMobxInjectable;

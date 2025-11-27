@@ -1,0 +1,34 @@
+@use "../vars" as *;
+
+.KubeObjectStatusIcon {
+  &.warning {
+    color: var(--golden);
+  }
+}
+
+.KubeObjectStatusTooltip {
+  white-space: normal;
+
+  .level {
+    padding: 4px;
+
+    &:not(:only-child):not(:last-child) {
+      border-bottom: 1px solid var(--borderFaintColor);
+    }
+
+    .title {
+      font-weight: bold;
+      .Icon {
+        margin-right: $margin;
+      }
+    }
+
+    .msg {
+      margin: $margin * 0.5;
+    }
+
+    .age {
+      color: var(--halfGray);
+    }
+  }
+}

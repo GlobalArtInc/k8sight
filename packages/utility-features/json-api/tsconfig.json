@@ -1,0 +1,7 @@
+{
+  "extends": "@kubesightapp/typescript/config/base.json",
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "moduleResolution": "node"
+  }
+}

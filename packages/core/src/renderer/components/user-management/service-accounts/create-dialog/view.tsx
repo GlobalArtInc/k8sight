@@ -1,0 +1,102 @@
+import "./view.scss";
+
+import { showCheckedErrorNotificationInjectable } from "@kubesightapp/notifications";
+import { withInjectables } from "@ogre-tools/injectable-react";
+import { observer } from "mobx-react";
+import React from "react";
+import { Dialog } from "../../../dialog";
+import { Input } from "../../../input";
+import { systemName } from "../../../input/input_validators";
+import showDetailsInjectable from "../../../kube-detail-params/show-details.injectable";
+import { SubTitle } from "../../../layout/sub-title";
+import { NamespaceSelect } from "../../../namespaces/namespace-select";
+import { Wizard, WizardStep } from "../../../wizard";
+import serviceAccountStoreInjectable from "../store.injectable";
+import closeCreateServiceAccountDialogInjectable from "./close.injectable";
+import createServiceAccountDialogStateInjectable from "./state.injectable";
+
+import type { ShowCheckedErrorNotification } from "@kubesightapp/notifications";
+
+import type { DialogProps } from "../../../dialog";
+import type { ShowDetails } from "../../../kube-detail-params/show-details.injectable";
+import type { ServiceAccountStore } from "../store";
+import type { CreateServiceAccountDialogState } from "./state.injectable";
+
+export interface CreateServiceAccountDialogProps extends Partial<DialogProps> {}
+
+interface Dependencies {
+  state: CreateServiceAccountDialogState;
+  serviceAccountStore: ServiceAccountStore;
+  closeCreateServiceAccountDialog: () => void;
+  showDetails: ShowDetails;
+  showCheckedErrorNotification: ShowCheckedErrorNotification;
+}
+
+@observer
+class NonInjectedCreateServiceAccountDialog extends React.Component<CreateServiceAccountDialogProps & Dependencies> {
+  createAccount = async () => {
+    const { closeCreateServiceAccountDialog, serviceAccountStore, state, showDetails, showCheckedErrorNotification } =
+      this.props;
+
+    try {
+      const serviceAccount = await serviceAccountStore.create({
+        namespace: state.namespace.get(),
+        name: state.name.get(),
+      });
+
+      showDetails(serviceAccount.selfLink);
+      closeCreateServiceAccountDialog();
+    } catch (err) {
+      showCheckedErrorNotification(err, "Unknown error occurred while creating service account");
+    }
+  };
+
+  render() {
+    const { closeCreateServiceAccountDialog, serviceAccountStore, state, ...dialogProps } = this.props;
+
+    return (
+      <Dialog
+        {...dialogProps}
+        className="CreateServiceAccountDialog"
+        isOpen={state.isOpen.get()}
+        close={closeCreateServiceAccountDialog}
+      >
+        <Wizard header={<h5>Create Service Account</h5>} done={closeCreateServiceAccountDialog}>
+          <WizardStep nextLabel="Create" next={this.createAccount}>
+            <SubTitle title="Account Name" />
+            <Input
+              autoFocus
+              required
+              placeholder="Enter a name"
+              trim
+              validators={systemName}
+              value={state.name.get()}
+              onChange={(v) => state.name.set(v.toLowerCase())}
+            />
+            <SubTitle title="Namespace" />
+            <NamespaceSelect
+              id="create-dialog-namespace-select-input"
+              themeName="light"
+              value={state.namespace.get()}
+              onChange={(option) => state.namespace.set(option?.value ?? "default")}
+            />
+          </WizardStep>
+        </Wizard>
+      </Dialog>
+    );
+  }
+}
+
+export const CreateServiceAccountDialog = withInjectables<Dependencies, CreateServiceAccountDialogProps>(
+  NonInjectedCreateServiceAccountDialog,
+  {
+    getProps: (di, props) => ({
+      ...props,
+      closeCreateServiceAccountDialog: di.inject(closeCreateServiceAccountDialogInjectable),
+      serviceAccountStore: di.inject(serviceAccountStoreInjectable),
+      showDetails: di.inject(showDetailsInjectable),
+      state: di.inject(createServiceAccountDialogStateInjectable),
+      showCheckedErrorNotification: di.inject(showCheckedErrorNotificationInjectable),
+    }),
+  },
+);

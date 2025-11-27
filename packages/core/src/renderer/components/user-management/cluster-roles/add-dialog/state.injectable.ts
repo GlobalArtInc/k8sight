@@ -1,0 +1,19 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import { observable } from "mobx";
+
+import type { IObservableValue } from "mobx";
+
+export interface AddClusterRoleDialogState {
+  isOpen: IObservableValue<boolean>;
+  clusterRoleName: IObservableValue<string>;
+}
+
+const addClusterRoleDialogStateInjectable = getInjectable({
+  id: "add-cluster-role-dialog-open-state",
+  instantiate: (): AddClusterRoleDialogState => ({
+    clusterRoleName: observable.box(""),
+    isOpen: observable.box(false),
+  }),
+});
+
+export default addClusterRoleDialogStateInjectable;

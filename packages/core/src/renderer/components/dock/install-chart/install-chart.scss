@@ -1,0 +1,18 @@
+@use "../../vars" as *;
+
+.InstallChart {
+  .Select {
+    &.NamespaceSelect {
+      min-width: 130px;
+    }
+
+    &.chart-version {
+      min-width: 130px;
+    }
+  }
+}
+
+.InstallChartDone {
+  --flex-gap: #{$padding * 1.5};
+  padding: $padding * 2;
+}

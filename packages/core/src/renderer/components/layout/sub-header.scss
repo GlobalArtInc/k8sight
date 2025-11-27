@@ -1,0 +1,15 @@
+@use "../vars" as *;
+
+.SubHeader {
+  color: var(--textColorAccent);
+  font-weight: $font-weight-bold;
+  text-align: center;
+
+  &:not(.compact) {
+    padding: $padding * 2;
+  }
+
+  &.withLine {
+    border-bottom: 1px solid var(--borderColor);
+  }
+}

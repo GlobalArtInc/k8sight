@@ -1,0 +1,50 @@
+{
+  "name": "@kubesightapp/json-api",
+  "private": false,
+  "version": "1.7.0-0",
+  "description": "JSON api client",
+  "type": "commonjs",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlobalArtInc/k8sight.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": {
+    "name": "K8Sight Authors",
+    "email": "k8sight@kubesight.app"
+  },
+  "license": "MIT",
+  "homepage": "https://k8sight.app",
+  "scripts": {
+    "build": "lens-webpack-build",
+    "build:dev": "lens-webpack-build",
+    "clean": "pnpm dlx rimraf@6.1.2 dist",
+    "clean:node_modules": "pnpm dlx rimraf@6.1.2 node_modules",
+    "dev": "lens-webpack-build --watch"
+  },
+  "dependencies": {
+    "@kubesightapp/event-emitter": "workspace:^",
+    "@kubesightapp/utilities": "workspace:^",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@kubesightapp/logger": "workspace:^",
+    "@kubesightapp/node-fetch": "workspace:^",
+    "@kubesightapp/typescript": "workspace:^",
+    "@kubesightapp/webpack": "workspace:^",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "~22.16.5",
+    "rfc6902": "^5.1.2",
+    "ts-loader": "^9.5.4",
+    "type-fest": "^5.2.0",
+    "webpack": "^5.102.1"
+  }
+}

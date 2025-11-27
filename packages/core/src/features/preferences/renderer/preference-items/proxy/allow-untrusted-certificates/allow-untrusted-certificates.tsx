@@ -1,0 +1,31 @@
+import { withInjectables } from "@ogre-tools/injectable-react";
+import { observer } from "mobx-react";
+import React from "react";
+import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
+import { Switch } from "../../../../../../renderer/components/switch";
+import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+
+import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
+
+interface Dependencies {
+  state: UserPreferencesState;
+}
+
+const NonInjectedAllowUntrustedCertificates = observer(({ state }: Dependencies) => (
+  <section className="small">
+    <SubTitle title="Certificate Trust" />
+    <Switch checked={state.allowUntrustedCAs} onChange={() => (state.allowUntrustedCAs = !state.allowUntrustedCAs)}>
+      Allow untrusted Certificate Authorities
+    </Switch>
+    <small className="hint">
+      This will make K8Sight to trust ANY certificate authority without any validations. Needed with some corporate
+      proxies that do certificate re-writing. Does not affect cluster communications!
+    </small>
+  </section>
+));
+
+export const AllowUntrustedCertificates = withInjectables<Dependencies>(NonInjectedAllowUntrustedCertificates, {
+  getProps: (di) => ({
+    state: di.inject(userPreferencesStateInjectable),
+  }),
+});

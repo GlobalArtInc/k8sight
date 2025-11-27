@@ -1,0 +1,24 @@
+import type { ItemObject } from "@kubesightapp/list-layout";
+
+import type { HelmReleaseData } from "../../../features/helm-releases/common/channels";
+
+export interface HelmReleaseUpdateDetails {
+  log: string;
+  release: HelmReleaseData;
+}
+
+export interface HelmRelease extends ItemObject {
+  appVersion: string;
+  name: string;
+  namespace: string;
+  chart: string;
+  status: string;
+  updated: string;
+  revision: string;
+  getNs: () => string;
+  getChart: (withVersion?: boolean) => string;
+  getRevision: () => number;
+  getStatus: () => string;
+  getVersion: () => string;
+  getUpdated: (humanize?: boolean, compact?: boolean) => string | number;
+}

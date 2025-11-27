@@ -1,0 +1,17 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import electronAppInjectable from "../electron-app.injectable";
+
+import type { Settings } from "electron";
+
+export type SetLoginItemSettings = (settings: Settings) => void;
+
+const setLoginItemSettingsInjectable = getInjectable({
+  id: "set-login-item-settings",
+  instantiate: (di): SetLoginItemSettings => {
+    const electronApp = di.inject(electronAppInjectable);
+
+    return (settings) => electronApp.setLoginItemSettings(settings);
+  },
+});
+
+export default setLoginItemSettingsInjectable;

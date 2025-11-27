@@ -1,0 +1,17 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import workloadsOverviewRouteInjectable from "../../../common/front-end-routing/routes/cluster/workloads/overview/workloads-overview-route.injectable";
+import { routeSpecificComponentInjectionToken } from "../../routes/route-specific-component-injection-token";
+import { WorkloadsOverview } from "./overview";
+
+const workloadsOverviewRouteComponentInjectable = getInjectable({
+  id: "workloads-overview-route-component",
+
+  instantiate: (di) => ({
+    route: di.inject(workloadsOverviewRouteInjectable),
+    Component: WorkloadsOverview,
+  }),
+
+  injectionToken: routeSpecificComponentInjectionToken,
+});
+
+export default workloadsOverviewRouteComponentInjectable;

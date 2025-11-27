@@ -1,0 +1,41 @@
+{
+  "name": "@kubesightapp/extensions",
+  "productName": "K8Sight extensions",
+  "description": "K8Sight - Free IDE for Kubernetes: extensions",
+  "version": "1.7.0-0",
+  "copyright": "© 2024-2025 K8Sight Authors",
+  "license": "MIT",
+  "main": "dist/extension-api.js",
+  "types": "dist/extension-api.d.ts",
+  "files": [
+    "dist/**/*.ts",
+    "__mocks__/*.ts",
+    "dist/**/*.js"
+  ],
+  "author": {
+    "name": "K8Sight Authors",
+    "email": "k8sight@kubesight.app"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "webpack --config webpack/extensions.ts",
+    "build:dev": "webpack --config webpack/extensions.ts",
+    "clean": "pnpm dlx rimraf@6.1.2 dist",
+    "clean:node_modules": "pnpm dlx rimraf@6.1.2 node_modules"
+  },
+  "dependencies": {
+    "@kubesightapp/core": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/node": "~22.16.5",
+    "ts-loader": "^9.5.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-plugin-css-modules": "^5.2.0",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1"
+  }
+}

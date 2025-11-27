@@ -1,0 +1,56 @@
+{
+  "name": "@kubesightapp/messaging-for-renderer",
+  "private": false,
+  "version": "1.7.0-0",
+  "description": "Implementations for 'messaging' in Electron renderer",
+  "type": "commonjs",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlobalArtInc/k8sight.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": {
+    "name": "K8Sight Authors",
+    "email": "k8sight@kubesight.app"
+  },
+  "license": "MIT",
+  "homepage": "https://k8sight.app",
+  "scripts": {
+    "clean": "pnpm dlx rimraf@6.1.2 dist",
+    "clean:node_modules": "pnpm dlx rimraf@6.1.2 node_modules",
+    "build": "lens-webpack-build",
+    "test:unit": "jest --coverage --runInBand"
+  },
+  "dependencies": {
+    "@kubesightapp/application": "workspace:^",
+    "@kubesightapp/feature-core": "workspace:^",
+    "@kubesightapp/messaging": "workspace:^",
+    "@ogre-tools/injectable": "^17.11.1",
+    "@ogre-tools/injectable-extension-for-auto-registration": "^17.11.1",
+    "electron": "^35.7.5"
+  },
+  "devDependencies": {
+    "@async-fn/jest": "^1.6.4",
+    "@kubesightapp/jest": "workspace:^",
+    "@kubesightapp/typescript": "workspace:^",
+    "@kubesightapp/webpack": "workspace:^",
+    "@ogre-tools/injectable-extension-for-mobx": "^17.11.1",
+    "@types/webpack-env": "^1.18.8",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "lodash": "^4.17.21",
+    "mobx": "^6.15.0",
+    "ts-jest": "^29.4.5",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.1"
+  }
+}

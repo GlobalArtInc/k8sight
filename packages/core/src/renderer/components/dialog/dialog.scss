@@ -1,0 +1,23 @@
+@use "sass:color";
+@use "../vars" as *;
+
+.Dialog {
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: $unit * 5;
+  z-index: $zIndex-dialog;
+  overscroll-behavior: none; // prevent swiping with touch-pad on MacOSX
+  overflow: auto;
+
+  &.modal {
+    background: color.adjust(#222, $alpha: -0.5, $space: hsl);
+  }
+
+  h5 {
+    color: white;
+  }
+}

@@ -1,0 +1,35 @@
+import { getMessageChannelListenerInjectable } from "@kubesightapp/messaging";
+import { MESSAGE } from "triple-beam";
+import { ipcFileLoggerChannel } from "../common/ipc-file-logger-channel";
+import ipcFileLoggerInjectable from "./ipc-file-logger.injectable";
+
+import type { IpcFileLogObject } from "../common/ipc-file-logger-channel";
+
+/**
+ * Winston uses symbol property for the actual message.
+ *
+ * For that to get through IPC, use the internalMessage property instead
+ */
+export function deserializeLogFromIpc(ipcFileLogObject: IpcFileLogObject) {
+  const { internalMessage, ...standardEntry } = ipcFileLogObject.entry;
+
+  return {
+    ...ipcFileLogObject,
+    entry: {
+      ...standardEntry,
+      [MESSAGE]: internalMessage,
+    },
+  };
+}
+
+const ipcFileLoggingListenerInjectable = getMessageChannelListenerInjectable({
+  id: "ipc-file-logging",
+  channel: ipcFileLoggerChannel,
+  getHandler: (di) => {
+    const ipcFileLogger = di.inject(ipcFileLoggerInjectable);
+
+    return (ipcFileLogObject) => ipcFileLogger.log(deserializeLogFromIpc(ipcFileLogObject));
+  },
+});
+
+export default ipcFileLoggingListenerInjectable;

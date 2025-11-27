@@ -1,0 +1,44 @@
+import "./tab-layout.scss";
+
+import { ErrorBoundary } from "@kubesightapp/error-boundary";
+import { cssNames } from "@kubesightapp/utilities";
+import { observer } from "mobx-react";
+import React from "react";
+import { Tab, Tabs } from "../tabs";
+
+import type { SidebarItemDeclaration } from "@kubesightapp/cluster-sidebar";
+import type { StrictReactNode } from "@kubesightapp/utilities";
+
+export interface TabLayoutProps {
+  tabs?: SidebarItemDeclaration[];
+  children?: StrictReactNode;
+  scrollable?: boolean;
+}
+
+export const TabLayout = observer(({ tabs = [], scrollable, children }: TabLayoutProps) => {
+  const hasTabs = tabs.length > 0;
+
+  return (
+    <div className={cssNames("TabLayout")} data-testid="tab-layout">
+      {hasTabs && (
+        <Tabs center>
+          {tabs.map(({ onClick, id, title, isActive }) => (
+            <Tab
+              onClick={onClick}
+              key={id}
+              label={title}
+              active={isActive.get()}
+              data-is-active-test={isActive.get()}
+              data-testid={`tab-link-for-${id}`}
+              value={undefined}
+            />
+          ))}
+        </Tabs>
+      )}
+
+      <main className={cssNames({ scrollable })}>
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </main>
+    </div>
+  );
+});

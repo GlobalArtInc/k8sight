@@ -1,0 +1,15 @@
+@use "../vars" as *;
+
+@mixin namespaceSelectCommon {
+  .Icon {
+    margin-right: $margin * 0.5;
+  }
+}
+
+.NamespaceSelect {
+  @include namespaceSelectCommon;
+}
+
+.NamespaceSelectMenu {
+  @include namespaceSelectCommon;
+}

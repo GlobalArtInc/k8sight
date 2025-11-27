@@ -1,0 +1,20 @@
+@use "../workloads/workloads-mixins";
+
+.DeploymentDetails {
+  .conditions {
+    .Available {
+      color: white;
+      background-color: workloads-mixins.$deployment-available;
+    }
+
+    .Progressing {
+      color: white;
+      background-color: workloads-mixins.$deployment-progressing;
+    }
+
+    .ReplicaFailure {
+      color: white;
+      background-color: workloads-mixins.$deployment-replicafailure;
+    }
+  }
+}

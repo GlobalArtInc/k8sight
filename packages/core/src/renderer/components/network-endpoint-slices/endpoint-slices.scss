@@ -1,0 +1,17 @@
+@use "../table/table.mixins";
+
+.EndpointSlices {
+  .TableCell {
+    &.ports {
+      flex-grow: 2;
+    }
+
+    &.endpoints {
+      flex-grow: 3;
+    }
+
+    &.age {
+      flex-grow: 0.3;
+    }
+  }
+}

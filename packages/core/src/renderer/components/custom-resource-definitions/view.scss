@@ -1,0 +1,36 @@
+@use "mixins.scss";
+
+.CustomResourceDefinitions {
+  .TableCell {
+    &.kind {
+      flex: 1.5;
+    }
+
+    &.group {
+      flex: 2;
+    }
+
+    &.short-names {
+      flex: 0.5;
+    }
+
+    &.age {
+      flex-grow: 0.4;
+    }
+  }
+
+  .group-select {
+    .Select {
+      &__placeholder {
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .SearchInput {
+    width: 300px;
+  }
+}

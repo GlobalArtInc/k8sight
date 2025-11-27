@@ -1,0 +1,11 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import { WindowAction } from "../../../../../../../common/ipc/window";
+import { requestWindowAction } from "../../../../../../ipc";
+
+const maximizeWindowInjectable = getInjectable({
+  id: "maximize-window",
+  instantiate: () => () => requestWindowAction(WindowAction.MINIMIZE),
+  causesSideEffects: true,
+});
+
+export default maximizeWindowInjectable;

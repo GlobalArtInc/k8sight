@@ -1,0 +1,3 @@
+{
+  "extends": "@kubesightapp/typescript/config/base.json"
+}

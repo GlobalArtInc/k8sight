@@ -1,0 +1,17 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import namespacesRouteInjectable from "../../../common/front-end-routing/routes/cluster/namespaces/namespaces-route.injectable";
+import { routeSpecificComponentInjectionToken } from "../../routes/route-specific-component-injection-token";
+import { NamespacesRoute } from "./route";
+
+const namespacesRouteComponentInjectable = getInjectable({
+  id: "namespaces-route-component",
+
+  instantiate: (di) => ({
+    route: di.inject(namespacesRouteInjectable),
+    Component: NamespacesRoute,
+  }),
+
+  injectionToken: routeSpecificComponentInjectionToken,
+});
+
+export default namespacesRouteComponentInjectable;

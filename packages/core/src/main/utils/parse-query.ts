@@ -1,0 +1,14 @@
+export function getBoolean(query: URLSearchParams, key: string): boolean {
+  const value = query.get(key);
+
+  switch (value?.toLowerCase()) {
+    case "false":
+    case "f":
+    case "0":
+    case null:
+    case undefined:
+      return false;
+    default:
+      return true;
+  }
+}

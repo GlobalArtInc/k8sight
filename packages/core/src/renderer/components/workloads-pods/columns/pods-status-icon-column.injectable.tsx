@@ -1,0 +1,21 @@
+import { podListLayoutColumnInjectionToken } from "@kubesightapp/list-layout";
+import { getInjectable } from "@ogre-tools/injectable";
+import React from "react";
+import { KubeObjectStatusIcon } from "../../kube-object-status-icon";
+import { COLUMN_PRIORITY } from "./column-priority";
+
+const columnId = "qos";
+
+export const podsQosColumnInjectable = getInjectable({
+  id: "pods-status-icon-column",
+  instantiate: () => ({
+    id: columnId,
+    kind: "Pod",
+    apiVersion: "v1",
+    priority: COLUMN_PRIORITY.STATUS_ICON,
+    content: (pod) => <KubeObjectStatusIcon key="icon" object={pod} />,
+    header: { className: "warning", showWithColumn: "name" },
+    sortingCallBack: (pod) => pod.getQosClass(),
+  }),
+  injectionToken: podListLayoutColumnInjectionToken,
+});

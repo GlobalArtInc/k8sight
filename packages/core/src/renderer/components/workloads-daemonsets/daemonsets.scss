@@ -1,0 +1,42 @@
+@use "../table/table.mixins";
+
+.DaemonSets {
+  .TableCell {
+    &.name {
+      flex-grow: 1.6;
+    }
+
+    &.desired {
+      flex-grow: 0.4;
+    }
+
+    &.current {
+      flex-grow: 0.4;
+    }
+
+    &.ready {
+      flex-grow: 0.4;
+    }
+
+    &.updated {
+      flex-grow: 0.4;
+    }
+
+    &.available {
+      flex-grow: 0.4;
+    }
+
+    &.warning {
+      @include table.table-cell-warning;
+    }
+
+    &.labels {
+      flex-grow: 1.5;
+      @include table.table-cell-labels-offsets;
+    }
+
+    &.age {
+      flex-grow: 0.3;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+import { Ingress } from "@kubesightapp/kube-object";
+import { KubeApi } from "../kube-api";
+
+import type { DerivedKubeApiOptions, KubeApiDependencies } from "../kube-api";
+
+export class IngressApi extends KubeApi<Ingress> {
+  constructor(deps: KubeApiDependencies, opts?: DerivedKubeApiOptions) {
+    super(deps, {
+      ...(opts ?? {}),
+      objectConstructor: Ingress,
+      // Add fallback for Kubernetes <1.19
+      checkPreferredVersion: true,
+      fallbackApiBases: ["/apis/extensions/v1beta1/ingresses"],
+    });
+  }
+}

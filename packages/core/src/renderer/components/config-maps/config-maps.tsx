@@ -1,0 +1,70 @@
+import "./config-maps.scss";
+
+import { withInjectables } from "@ogre-tools/injectable-react";
+import { observer } from "mobx-react";
+import React from "react";
+import { KubeObjectAge } from "../kube-object/age";
+import { KubeObjectListLayout } from "../kube-object-list-layout";
+import { KubeObjectStatusIcon } from "../kube-object-status-icon";
+import { SiblingsInTabLayout } from "../layout/siblings-in-tab-layout";
+import { NamespaceSelectBadge } from "../namespaces/namespace-select-badge";
+import { WithTooltip } from "../with-tooltip";
+import configMapStoreInjectable from "./store.injectable";
+
+import type { ConfigMapStore } from "./store";
+
+enum columnId {
+  name = "name",
+  namespace = "namespace",
+  keys = "keys",
+  age = "age",
+}
+
+interface Dependencies {
+  configMapStore: ConfigMapStore;
+}
+
+@observer
+class NonInjectedConfigMaps extends React.Component<Dependencies> {
+  render() {
+    return (
+      <SiblingsInTabLayout>
+        <KubeObjectListLayout
+          isConfigurable
+          tableId="configuration_configmaps"
+          className="ConfigMaps"
+          store={this.props.configMapStore}
+          sortingCallbacks={{
+            [columnId.name]: (configMap) => configMap.getName(),
+            [columnId.namespace]: (configMap) => configMap.getNs(),
+            [columnId.keys]: (configMap) => configMap.getKeys(),
+            [columnId.age]: (configMap) => -configMap.getCreationTimestamp(),
+          }}
+          searchFilters={[(configMap) => configMap.getSearchFields(), (configMap) => configMap.getKeys()]}
+          renderHeaderTitle="Config Maps"
+          renderTableHeader={[
+            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+            { className: "warning", showWithColumn: columnId.name },
+            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: "Keys", className: "keys", sortBy: columnId.keys, id: columnId.keys },
+            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          ]}
+          renderTableContents={(configMap) => [
+            <WithTooltip>{configMap.getName()}</WithTooltip>,
+            <KubeObjectStatusIcon key="icon" object={configMap} />,
+            <NamespaceSelectBadge key="namespace" namespace={configMap.getNs()} />,
+            <WithTooltip>{configMap.getKeys().join(", ")}</WithTooltip>,
+            <KubeObjectAge key="age" object={configMap} />,
+          ]}
+        />
+      </SiblingsInTabLayout>
+    );
+  }
+}
+
+export const ConfigMaps = withInjectables<Dependencies>(NonInjectedConfigMaps, {
+  getProps: (di, props) => ({
+    ...props,
+    configMapStore: di.inject(configMapStoreInjectable),
+  }),
+});

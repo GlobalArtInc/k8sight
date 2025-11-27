@@ -1,0 +1,64 @@
+{
+  "name": "@kubesightapp/react-application",
+  "private": false,
+  "version": "1.7.0-0",
+  "description": "Package for React Application",
+  "type": "commonjs",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlobalArtInc/k8sight.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": {
+    "name": "K8Sight Authors",
+    "email": "k8sight@kubesight.app"
+  },
+  "license": "MIT",
+  "homepage": "https://k8sight.app",
+  "scripts": {
+    "clean": "pnpm dlx rimraf@6.1.2 dist",
+    "clean:node_modules": "pnpm dlx rimraf@6.1.2 node_modules",
+    "build": "lens-webpack-build",
+    "test:unit": "jest --coverage --runInBand"
+  },
+  "dependencies": {
+    "@kubesightapp/application": "workspace:^",
+    "@kubesightapp/feature-core": "workspace:^",
+    "@ogre-tools/injectable": "^17.11.1",
+    "@ogre-tools/injectable-extension-for-auto-registration": "^17.11.1",
+    "@ogre-tools/injectable-extension-for-mobx": "^17.11.1",
+    "@ogre-tools/injectable-react": "^17.11.1",
+    "mobx": "^6.15.0",
+    "mobx-react": "^7.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@kubesightapp/jest": "workspace:^",
+    "@kubesightapp/react-testing-library-discovery": "workspace:^",
+    "@kubesightapp/typescript": "workspace:^",
+    "@kubesightapp/utilities": "workspace:^",
+    "@kubesightapp/webpack": "workspace:^",
+    "@ogre-tools/fp": "^17.11.1",
+    "@testing-library/react": "^12.1.5",
+    "@types/react": "^17.0.89",
+    "@types/react-dom": "^17.0.26",
+    "@types/webpack-env": "^1.18.8",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "lodash": "^4.17.21",
+    "ts-jest": "^29.4.5",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.1"
+  }
+}

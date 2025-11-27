@@ -1,0 +1,27 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import React from "react";
+import { WebLink } from "../../../../../common/catalog-entities";
+import { DrawerItem, DrawerTitle } from "../../../drawer";
+import { catalogEntityDetailItemInjectionToken } from "../token";
+
+const weblinkDetailsItemInjectable = getInjectable({
+  id: "weblink-details-item",
+  instantiate: () => ({
+    apiVersions: new Set([WebLink.apiVersion]),
+    kind: WebLink.kind,
+    components: {
+      Details: ({ entity }) => (
+        <>
+          <DrawerTitle>More Information</DrawerTitle>
+          <DrawerItem name="URL" data-testid={`weblink-url-for-${entity.getId()}`}>
+            {entity.spec.url}
+          </DrawerItem>
+        </>
+      ),
+    },
+    orderNumber: 40,
+  }),
+  injectionToken: catalogEntityDetailItemInjectionToken,
+});
+
+export default weblinkDetailsItemInjectable;

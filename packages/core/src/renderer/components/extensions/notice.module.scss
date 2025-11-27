@@ -1,0 +1,10 @@
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--unit) * 2);
+  background-color: var(--inputControlBackground);
+  border: 1px solid var(--boxShadow);
+  color: var(--textColorTertiary);
+  border-radius: 4px;
+  padding: calc(var(--padding) * 2);
+}

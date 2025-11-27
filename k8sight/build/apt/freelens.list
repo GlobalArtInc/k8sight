@@ -1,0 +1,1 @@
+deb [signed-by=/etc/apt/keyrings/k8sight.asc] https://github.com/GlobalArtInc/k8sight/releases/latest/download ./

@@ -1,0 +1,9 @@
+@use "../vars" as *;
+
+.EndpointSubsetList {
+  .title {
+    margin-top: $margin * 2;
+    margin-bottom: $margin;
+    font-weight: bold;
+  }
+}

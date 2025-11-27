@@ -1,0 +1,28 @@
+{
+  "name": "@kubesightapp/typescript",
+  "private": false,
+  "version": "1.7.0-0",
+  "description": "Typescript configuration for K8Sight packages.",
+  "type": "commonjs",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlobalArtInc/k8sight.git"
+  },
+  "author": {
+    "name": "K8Sight Authors",
+    "email": "k8sight@kubesight.app"
+  },
+  "license": "MIT",
+  "homepage": "https://k8sight.app",
+  "scripts": {
+    "clean:node_modules": "pnpm dlx rimraf@6.1.2 node_modules"
+  },
+  "dependencies": {
+    "typescript": "^5.9.3",
+    "typescript-plugin-css-modules": "^5.2.0"
+  }
+}

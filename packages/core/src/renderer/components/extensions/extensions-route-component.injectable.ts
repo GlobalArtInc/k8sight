@@ -1,0 +1,17 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import extensionsRouteInjectable from "../../../common/front-end-routing/routes/extensions/extensions-route.injectable";
+import { routeSpecificComponentInjectionToken } from "../../routes/route-specific-component-injection-token";
+import { Extensions } from "./extensions";
+
+const extensionsRouteComponentInjectable = getInjectable({
+  id: "extensions-route-component",
+
+  instantiate: (di) => ({
+    route: di.inject(extensionsRouteInjectable),
+    Component: Extensions,
+  }),
+
+  injectionToken: routeSpecificComponentInjectionToken,
+});
+
+export default extensionsRouteComponentInjectable;

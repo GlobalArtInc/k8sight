@@ -1,0 +1,17 @@
+import { beforeApplicationIsLoadingInjectionToken } from "@kubesightapp/application";
+import { getInjectablesForInitializable } from "../../../../common/initializable-state/create";
+import getBuildVersionInjectable from "../../../../main/electron-app/features/get-build-version.injectable";
+import { buildVersionInitializable } from "../common/token";
+
+export const {
+  stateInjectable: buildVersionStateInjectable,
+  initializationInjectable: buildVersionInitializationInjectable,
+} = getInjectablesForInitializable({
+  token: buildVersionInitializable,
+  phase: beforeApplicationIsLoadingInjectionToken,
+  init: (di) => {
+    const getBuildVersion = di.inject(getBuildVersionInjectable);
+
+    return getBuildVersion();
+  },
+});

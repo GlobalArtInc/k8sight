@@ -1,0 +1,159 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/electron-userland/electron-builder/refs/heads/master/packages/app-builder-lib/scheme.json
+
+electronVersion: 35.7.5 # datasource=npm depName=electron
+
+## Run `pnpm electron-rebuild` instead
+npmRebuild: false
+
+## There is no support in app for autoupdates yet
+detectUpdateChannel: false
+generateUpdatesFilesForAllChannels: true
+publish: []
+
+## Files in app.asar
+files:
+  - static
+  - "!node_modules/@kubesightapp/*/src"
+  - "!node_modules/@kubesightapp/core/build"
+  - "!node_modules/@kubesightapp/core/static/build/library/fonts"
+  - "!node_modules/electron"
+
+## Notarization
+afterSign: build/notarize.js
+
+## Used to register the app as a handler for the k8sight:// protocol
+protocols:
+  name: K8Sight Protocol Handler
+  schemes:
+    - k8sight
+  role: Viewer
+
+## For Linux targets
+linux:
+  appId: app.k8sight.K8Sight
+  category: Development;Network
+  artifactName: ${productName}-${version}.${arch}.${ext}
+  target:
+    - AppImage
+  extraResources:
+    - from: binaries/client/linux/${arch}/kubectl
+      to: ./${arch}/kubectl
+    - from: binaries/client/linux/${arch}/k8sight-k8s-proxy
+      to: ./${arch}/k8sight-k8s-proxy
+    - from: binaries/client/linux/${arch}/helm
+      to: ./${arch}/helm
+  publish: null
+
+appImage:
+  executableArgs:
+    - --ozone-platform-hint=auto
+    - --enable-features=WebRTCPipeWireCapturer
+    - --enable-features=WaylandWindowDecorations
+    - --disable-gpu-compositing
+    - --no-sandbox
+  license: static/build/license.txt
+
+deb:
+  depends:
+    - libgtk-3-0
+    - libnotify4
+    - libnss3
+    - libxss1
+    - libxtst6
+    - xdg-utils
+    - libatspi2.0-0
+    - libuuid1
+    - libsecret-1-0
+    - libasound2
+    - libgbm1
+  executableArgs:
+    - --ozone-platform-hint=auto
+    - --enable-features=WebRTCPipeWireCapturer
+    - --enable-features=WaylandWindowDecorations
+    - --disable-gpu-compositing
+  afterInstall: ./build/after-install-deb.sh
+  afterRemove: ./build/after-remove-deb.sh
+  fpm:
+    - ./build/apparmor-profile.aa=/etc/apparmor.d/k8sight
+    - ./build/apt/k8sight.asc=/etc/apt/keyrings/k8sight.asc
+    - ./build/apt/k8sight.sources=/etc/apt/sources.list.d/k8sight.sources
+    - ./build/metainfo.xml=/usr/share/metainfo/app.k8sight.K8Sight.metainfo.xml
+  packageCategory: devel
+
+## Official Flatpak is built from the separate repository
+flatpak:
+  useWaylandFlags: true
+  license: static/build/license.txt
+
+## Official Snap is built from the separate repository
+snap:
+  allowNativeWayland: true
+  confinement: classic
+
+rpm:
+  depends:
+    - gtk3
+    - libnotify
+    - nss
+    - libXScrnSaver
+    - (libXtst or libXtst6)
+    - xdg-utils
+    - at-spi2-core
+    - (libdrm2 or libdrm)
+    - (libgbm1 or libgmb or mesa-libgbm)
+    - (alsa-lib or libalsa2 or libasound2)
+  executableArgs:
+    - --ozone-platform-hint=auto
+    - --enable-features=WebRTCPipeWireCapturer
+    - --enable-features=WaylandWindowDecorations
+    - --disable-gpu-compositing
+  fpm:
+    - --rpm-rpmbuild-define=_build_id_links none
+    - ./build/metainfo.xml=/usr/share/metainfo/app.k8sight.K8Sight.metainfo.xml
+  packageCategory: devel
+
+## For macOS targets
+mac:
+  appId: app.k8sight.K8Sight
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  category: public.app-category.developer-tools
+  darkModeSupport: true
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  extraResources:
+    - from: binaries/client/darwin/${arch}/kubectl
+      to: ./${arch}/kubectl
+    - from: binaries/client/darwin/${arch}/k8sight-k8s-proxy
+      to: ./${arch}/k8sight-k8s-proxy
+    - from: binaries/client/darwin/${arch}/helm
+      to: ./${arch}/helm
+  publish: null
+
+pkg:
+  license: static/build/license.txt
+
+## For Windows targets
+win:
+  appId: app.k8sight.K8Sight
+  target:
+    - nsis
+  extraResources:
+    - from: binaries/client/windows/${arch}/kubectl.exe
+      to: ./${arch}/kubectl.exe
+    - from: binaries/client/windows/${arch}/k8sight-k8s-proxy.exe
+      to: ./${arch}/k8sight-k8s-proxy.exe
+    - from: binaries/client/windows/${arch}/helm.exe
+      to: ./${arch}/helm.exe
+  publish: null
+
+msi:
+  perMachine: false
+
+nsis:
+  include: build/installer.nsh
+  oneClick: false
+  allowElevation: true
+  createStartMenuShortcut: true
+  allowToChangeInstallationDirectory: true
+  license: static/build/license.txt

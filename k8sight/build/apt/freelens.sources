@@ -1,0 +1,4 @@
+Types: deb
+URIs: https://github.com/GlobalArtInc/k8sight/releases/latest/download
+Suites: ./
+Signed-By: /etc/apt/keyrings/k8sight.asc

@@ -1,0 +1,24 @@
+import { podListLayoutColumnInjectionToken } from "@kubesightapp/list-layout";
+import { getInjectable } from "@ogre-tools/injectable";
+import { kebabCase } from "lodash";
+import { COLUMN_PRIORITY } from "./column-priority";
+
+const columnId = "status";
+
+export const podsStatusColumnInjectable = getInjectable({
+  id: "pods-status-column",
+  instantiate: () => ({
+    id: columnId,
+    kind: "Pod",
+    apiVersion: "v1",
+    priority: COLUMN_PRIORITY.STATUS,
+    content: (pod) => ({
+      title: pod.getStatusMessage(),
+      className: kebabCase(pod.getStatusMessage()),
+    }),
+    header: { title: "Status", className: "status", sortBy: columnId, id: columnId },
+    sortingCallBack: (pod) => pod.getStatusMessage(),
+    searchFilter: (pod) => pod.getStatusMessage(),
+  }),
+  injectionToken: podListLayoutColumnInjectionToken,
+});

@@ -1,0 +1,9 @@
+import { getInjectable } from "@ogre-tools/injectable";
+
+const isFlatpakPackageInjectable = getInjectable({
+  id: "is-flatpak",
+  instantiate: () => Boolean(process.env.FLATPAK_SANDBOX_DIR),
+  causesSideEffects: true,
+});
+
+export default isFlatpakPackageInjectable;

@@ -1,0 +1,11 @@
+.ReplicationControllerDetails {
+  .replicas {
+    display: flex;
+    gap: calc(var(--margin) * 2);
+    align-items: center;
+
+    > * {
+      flex-shrink: 0;
+    }
+  }
+}
