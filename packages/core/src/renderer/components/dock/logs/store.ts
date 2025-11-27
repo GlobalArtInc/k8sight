@@ -6,8 +6,11 @@ import type { IntervalFn } from "@kubesightapp/utilities";
 
 import type { IComputedValue } from "mobx";
 
+import type { DeploymentStore } from "../../workloads-deployments/store";
 import type { TabId } from "../dock/store";
 import type { CallForLogs } from "./call-for-logs.injectable";
+import type { GetPodsByOwnerId } from "../../workloads-pods/get-pods-by-owner-id.injectable";
+import type { PodStore } from "../../workloads-pods/store";
 import type { LogTabData } from "./tab-store";
 
 type PodLogLine = string;
@@ -16,6 +19,9 @@ const logLinesToLoad = 500;
 
 interface Dependencies {
   callForLogs: CallForLogs;
+  getPodsByOwnerId: GetPodsByOwnerId;
+  podStore: PodStore;
+  deploymentStore: DeploymentStore;
 }
 
 export class LogStore {
@@ -102,8 +108,36 @@ export class LogStore {
         sinceTime: this.getLastSinceTime(tabId),
       });
 
-      // Add newly received logs to bottom
-      this.podLogs.set(tabId, [...oldLogs, ...logs.filter(Boolean)]);
+      const newLogs = logs.filter(Boolean);
+      if (newLogs.length === 0) {
+        return;
+      }
+
+      const tabData = logTabData.get();
+      if (tabData?.owner?.uid) {
+        const mergedLogs = [...oldLogs, ...newLogs];
+        mergedLogs.sort((a, b) => {
+          const timestampA = a.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z|\d+\S+)/)?.[1];
+          const timestampB = b.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z|\d+\S+)/)?.[1];
+
+          if (!timestampA || !timestampB) {
+            return 0;
+          }
+
+          const dateA = new Date(timestampA);
+          const dateB = new Date(timestampB);
+
+          if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+            return 0;
+          }
+
+          return dateA.getTime() - dateB.getTime();
+        });
+
+        this.podLogs.set(tabId, mergedLogs);
+      } else {
+        this.podLogs.set(tabId, [...oldLogs, ...newLogs]);
+      }
     } catch (error) {
       this.handlerError(tabId, error);
     }
@@ -123,7 +157,7 @@ export class LogStore {
   ): Promise<string[]> {
     const {
       pod,
-      tabData: { selectedContainer, showPrevious },
+      tabData: { selectedContainer, showPrevious, owner },
     } = await waitUntilDefined(() => {
       const pod = computedPod.get();
       const tabData = logTabData.get();
@@ -132,8 +166,104 @@ export class LogStore {
         return { pod, tabData };
       }
 
+      if (tabData?.owner) {
+        return { pod: undefined, tabData };
+      }
+
       return undefined;
     });
+
+    if (owner?.uid) {
+      let pods: Pod[];
+
+      if (owner.kind === "Deployment") {
+        const deployment = this.dependencies.deploymentStore.items.find((item) => item.getId() === owner.uid);
+
+        if (deployment) {
+          pods = this.dependencies.deploymentStore.getChildPods(deployment);
+        } else {
+          pods = [];
+        }
+      } else {
+        pods = this.dependencies.getPodsByOwnerId(owner.uid);
+      }
+
+      if (pods.length === 0) {
+        return [];
+      }
+
+      const logPromises = pods.map(async (pod) => {
+        try {
+          const namespace = pod.getNs();
+          const name = pod.getName();
+          const podContainers = pod.getAllContainers();
+          const containerToUse = podContainers.find((c) => c.name === selectedContainer) ?? podContainers[0];
+
+          if (!containerToUse) {
+            const podName = pod.getName();
+            return [`[${podName}] No containers available`];
+          }
+
+          const result = await this.dependencies.callForLogs(
+            { namespace, name },
+            {
+              ...params,
+              timestamps: true,
+              container: containerToUse.name,
+              previous: showPrevious,
+            },
+          );
+
+          const lines = result.trimEnd().replace(/\r/g, "\n").split("\n").filter(Boolean);
+          const podName = pod.getName();
+
+          return lines.map((line) => {
+            const timestampMatch = line.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z|\d+\S+)\s*(.*)/);
+            if (timestampMatch) {
+              return `${timestampMatch[1]} [${podName}] ${timestampMatch[2]}`;
+            }
+            return `[${podName}] ${line}`;
+          });
+        } catch (error) {
+          const podName = pod.getName();
+          const errorMessage = error instanceof Error ? error.message : String(error);
+          
+          if (errorMessage.includes("not found") || errorMessage.includes("no logs available")) {
+            return [];
+          }
+          
+          return [`[${podName}] Failed to load logs: ${errorMessage}`];
+        }
+      });
+
+      const allLogs = await Promise.all(logPromises);
+      const mergedLogs = allLogs.flat();
+
+      mergedLogs.sort((a, b) => {
+        const timestampA = a.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z|\d+\S+)/)?.[1];
+        const timestampB = b.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z|\d+\S+)/)?.[1];
+
+        if (!timestampA || !timestampB) {
+          return 0;
+        }
+
+        const dateA = new Date(timestampA);
+        const dateB = new Date(timestampB);
+
+        if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+          return 0;
+        }
+
+        return dateA.getTime() - dateB.getTime();
+      });
+
+      return mergedLogs;
+    }
+
+    if (!pod) {
+      return [];
+    }
+
     const namespace = pod.getNs();
     const name = pod.getName();
 
@@ -141,7 +271,7 @@ export class LogStore {
       { namespace, name },
       {
         ...params,
-        timestamps: true, // Always setting timestamp to separate old logs from new ones
+        timestamps: true,
         container: selectedContainer,
         previous: showPrevious,
       },
@@ -212,6 +342,11 @@ export class LogStore {
   }
 
   splitOutTimestamp(logs: string): [string, string] {
+    const extractionWithPod = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z|\d+\S+)\s+\[([^\]]+)\]\s+(.*)/m.exec(logs);
+    if (extractionWithPod && extractionWithPod.length >= 4) {
+      return [extractionWithPod[1], `[${extractionWithPod[2]}] ${extractionWithPod[3]}`];
+    }
+
     const extraction = /^(\d+\S+)(.*)/m.exec(logs);
 
     if (!extraction || extraction.length < 3) {
@@ -222,10 +357,20 @@ export class LogStore {
   }
 
   getTimestamps(logs: string) {
+    const timestampWithPod = logs.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z|\d+\S+)\s+\[/m);
+    if (timestampWithPod) {
+      return [timestampWithPod[1]];
+    }
+
     return logs.match(/^\d+\S+/gm);
   }
 
   removeTimestamps(logs: string): string {
+    const withoutTimestampAndPod = logs.replace(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z\s+\[[^\]]+\]\s+/gm, "");
+    if (withoutTimestampAndPod !== logs) {
+      return withoutTimestampAndPod;
+    }
+
     return logs.replace(/^\d+.*?\s/gm, "");
   }
 

@@ -1,10 +1,12 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import getPodsByOwnerIdInjectable from "../../workloads-pods/get-pods-by-owner-id.injectable";
+import podStoreInjectable from "../../workloads-pods/store.injectable";
 import createLogsTabInjectable from "./create-logs-tab.injectable";
 
 import type { DaemonSet, Deployment, Job, ReplicaSet, StatefulSet } from "@kubesightapp/kube-object";
 
 import type { GetPodsByOwnerId } from "../../workloads-pods/get-pods-by-owner-id.injectable";
+import type { PodStore } from "../../workloads-pods/store";
 import type { TabId } from "../dock/store";
 import type { CreateLogsTabData } from "./create-logs-tab.injectable";
 
@@ -15,12 +17,22 @@ export interface WorkloadLogsTabData {
 interface Dependencies {
   createLogsTab: (title: string, data: CreateLogsTabData) => TabId;
   getPodsByOwnerId: GetPodsByOwnerId;
+  podStore: PodStore;
 }
 
 const createWorkloadLogsTab =
-  ({ createLogsTab, getPodsByOwnerId }: Dependencies) =>
+  ({ createLogsTab, getPodsByOwnerId, podStore }: Dependencies) =>
   ({ workload }: WorkloadLogsTabData): TabId | undefined => {
-    const pods = getPodsByOwnerId(workload.getId());
+    let pods;
+
+    if (workload.kind === "Deployment") {
+      const deployment = workload as Deployment;
+      pods = podStore
+        .getByLabel(deployment.getTemplateLabels())
+        .filter((pod) => pod.getNs() === deployment.getNs());
+    } else {
+      pods = getPodsByOwnerId(workload.getId());
+    }
 
     if (pods.length === 0) {
       return undefined;
@@ -47,6 +59,7 @@ const createWorkloadLogsTabInjectable = getInjectable({
     createWorkloadLogsTab({
       createLogsTab: di.inject(createLogsTabInjectable),
       getPodsByOwnerId: di.inject(getPodsByOwnerIdInjectable),
+      podStore: di.inject(podStoreInjectable),
     }),
 });
 

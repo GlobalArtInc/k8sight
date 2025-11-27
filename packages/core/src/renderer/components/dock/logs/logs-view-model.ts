@@ -7,9 +7,11 @@ import type { Pod, PodLogsQuery } from "@kubesightapp/kube-object";
 
 import type { IComputedValue } from "mobx";
 
+import type { DeploymentStore } from "../../workloads-deployments/store";
 import type { SearchStore } from "../../../search-store/search-store";
 import type { GetPodById } from "../../workloads-pods/get-pod-by-id.injectable";
 import type { GetPodsByOwnerId } from "../../workloads-pods/get-pods-by-owner-id.injectable";
+import type { PodStore } from "../../workloads-pods/store";
 import type { TabId } from "../dock/store";
 import type { LoadLogs } from "./load-logs.injectable";
 import type { LogTabData } from "./tab-store";
@@ -30,6 +32,8 @@ export interface LogTabViewModelDependencies {
   stopLoadingLogs: (tabId: TabId) => void;
   getPodById: GetPodById;
   getPodsByOwnerId: GetPodsByOwnerId;
+  podStore: PodStore;
+  deploymentStore: DeploymentStore;
   areLogsPresent: (tabId: TabId) => boolean;
   downloadLogs: (filename: string, logs: string[]) => void;
   downloadAllLogs: (params: ResourceDescriptor, query: PodLogsQuery) => Promise<void>;
@@ -59,6 +63,16 @@ export class LogTabViewModel {
     }
 
     if (typeof data.owner?.uid === "string") {
+      if (data.owner.kind === "Deployment") {
+        const deployment = this.dependencies.deploymentStore.items.find(
+          (item) => item.getId() === data.owner?.uid,
+        );
+
+        if (deployment) {
+          return this.dependencies.deploymentStore.getChildPods(deployment);
+        }
+      }
+
       return this.dependencies.getPodsByOwnerId(data.owner.uid);
     }
 
