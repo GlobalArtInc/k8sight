@@ -5,7 +5,10 @@ import { cssNames } from "@kubesightapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import autoBindReact from "auto-bind/react";
 import { observer } from "mobx-react";
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
+import * as uuid from "uuid";
+import { Checkbox } from "../checkbox";
+import { MenuActions, MenuItem } from "../menu";
 import isMacInjectable from "../../../common/vars/is-mac.injectable";
 import { Input } from "./input";
 
@@ -28,6 +31,27 @@ const defaultProps: Partial<SearchInputProps> = {
 interface Dependencies {
   isMac: boolean;
 }
+
+const SearchModifiers = () => {
+  const [wildcard, setWildcard] = useState(false);
+  const [menuId] = useState(() => `search-modifiers-menu-${uuid.v4()}`);
+
+  return (
+    <div className="search-modifiers">
+      <MenuActions
+        id={menuId}
+        className="SearchModifiersMenu"
+        toolbar={false}
+        autoCloseOnSelect={false}
+        triggerIcon={<></>}
+      >
+        <MenuItem className="input">
+          <Checkbox label="Wildcard" value={wildcard} onChange={(checked) => setWildcard(checked)} />
+        </MenuItem>
+      </MenuActions>
+    </div>
+  );
+};
 
 @observer
 class NonInjectedSearchInput extends React.Component<SearchInputProps & Dependencies> {
@@ -87,6 +111,7 @@ class NonInjectedSearchInput extends React.Component<SearchInputProps & Dependen
         className={cssNames("SearchInput", className, { compact })}
         value={value}
         onKeyDown={this.onKeyDown}
+        iconLeft={<SearchModifiers />}
         iconRight={rightIcon}
         ref={this.inputRef}
         blurOnEnter={false}

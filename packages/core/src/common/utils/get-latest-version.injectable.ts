@@ -9,7 +9,6 @@ const getLatestVersionInjectable = getInjectable({
   id: "get-latest-version",
   instantiate: (di) => {
     const downloadJson = di.inject(downloadJsonInjectable);
-
     return async (name: string): Promise<string> => {
       const result = await downloadJson(`https://registry.npmjs.org/${name}/latest`, {
         timeout: 5000,

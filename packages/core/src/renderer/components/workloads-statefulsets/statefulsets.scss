@@ -1,25 +1,47 @@
 @use "../table/table.mixins";
+@use "../workloads/workloads-mixins";
+@use "../vars" as *;
 
 .StatefulSets {
   .TableCell {
     &.name {
-      flex-grow: 2;
+      flex-grow: 1.5;
     }
 
-    &.ready {
+    &.namespace {
+      flex-grow: 1.5;
+    }
+
+    &.pods {
       flex-grow: 0.4;
     }
 
-    &.desired {
+    &.replicas {
       flex-grow: 0.4;
+    }
+
+    &.age {
+      flex-grow: 0.3;
+    }
+
+    &.status {
+      flex-grow: 0.5;
+
+      .running {
+        color: workloads-mixins.$pod-status-running-color;
+      }
+
+      .pending {
+        color: workloads-mixins.$pod-status-pending-color;
+      }
+
+      .failed {
+        color: workloads-mixins.$pod-status-failed-color;
+      }
     }
 
     &.warning {
       @include table.table-cell-warning;
-    }
-
-    &.age {
-      flex-grow: 0.2;
     }
   }
 }

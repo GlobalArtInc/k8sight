@@ -1,16 +1,12 @@
-// Custom css-styles for react-select
-// Docs: https://react-select.com/styles
-
 @use "../vars" as *;
 
 html {
-  $menuBackgroundColor: var(--contentColor);
-
-  --select-menu-bgc: #{$menuBackgroundColor};
+  --select-menu-bgc: var(--contentColor);
   --select-menu-border-color: var(--halfGray);
   --select-option-selected-color: var(--inputOptionHoverColor);
   --select-option-focused-bgc: var(--colorInfo);
   --select-option-focused-color: var(--textColorAccent);
+  --select-transition-duration: 0.15s;
 
   .Select {
     position: relative;
@@ -21,7 +17,7 @@ html {
     }
 
     &--is-disabled {
-      opacity: 0.75;
+      opacity: 0.6;
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -34,20 +30,24 @@ html {
       box-shadow: 0 0 0 1px var(--halfGray);
       cursor: pointer;
       line-height: 1;
-
-      &--is-focused {
-        box-shadow: 0 0 0 1px var(--primary);
-      }
+      transition: box-shadow var(--select-transition-duration) ease;
     }
 
     &__single-value {
       color: var(--textColorSecondary);
       overflow: visible;
+      transition: color var(--select-transition-duration) ease;
+    }
+
+    &__placeholder {
+      color: var(--textColorTertiary);
+      opacity: 0.7;
     }
 
     &__indicator {
       padding: $padding * 0.5;
-      opacity: 0.55;
+      opacity: 0.6;
+      transition: opacity var(--select-transition-duration) ease, transform var(--select-transition-duration) ease;
 
       &:hover {
         color: inherit;
@@ -63,7 +63,12 @@ html {
       &-indicator {
         color: inherit !important;
         padding: $padding * 0.5;
+        transition: transform var(--select-transition-duration) ease;
       }
+    }
+
+    &__control--menu-is-open &__dropdown-indicator {
+      transform: rotate(180deg);
     }
 
     &__menu {
@@ -71,31 +76,51 @@ html {
       box-shadow: inset 0 0 0 1px var(--select-menu-border-color);
       width: max-content;
       min-width: 100%;
+      border-radius: $radius;
+      overflow: hidden;
+      margin-top: 4px;
 
       &-list {
-        padding: 6px;
+        padding: 4px;
         width: max-content;
         min-width: 100%;
+        max-height: 300px;
       }
 
       &-notice {
-        padding: $padding * 0.3333;
+        padding: $padding * 0.5;
+        color: var(--textColorTertiary);
+        text-align: center;
       }
     }
 
     &__option {
       white-space: nowrap;
       cursor: pointer;
-      border-radius: 3px;
-      padding: 6px 8px;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 2px 0;
+      transition:
+        background-color var(--select-transition-duration) ease,
+        color var(--select-transition-duration) ease;
 
-      &:active {
+      &:hover:not(&--is-disabled) {
+        background: var(--halfGray);
+      }
+
+      &:active:not(&--is-disabled) {
         background: var(--primary);
+        color: var(--textColorAccent);
       }
 
       &--is-selected {
         background: var(--menuSelectedOptionBgc);
         color: var(--select-option-selected-color);
+        font-weight: 500;
+
+        &:hover {
+          background: var(--menuSelectedOptionBgc);
+        }
       }
 
       &--is-focused {
@@ -107,27 +132,52 @@ html {
         cursor: not-allowed;
         background: none !important;
         color: inherit;
-        opacity: 0.75;
+        opacity: 0.5;
+
+        &:hover {
+          background: none !important;
+        }
       }
 
       .Icon {
         transition: none;
+        margin-right: 6px;
       }
     }
 
     &__value-container {
-      &--is-multi {
-      }
+      padding: $padding * 0.5 $padding * 0.75;
 
-      &--has-value {
+      &--is-multi {
+        padding: $padding * 0.25 $padding * 0.5;
       }
+    }
+
+    &__input-container {
+      margin: 0;
+      padding: 0;
     }
 
     &__multi-value {
       background: var(--layoutBackground);
+      border-radius: 4px;
+      margin: 2px;
+      padding: 2px 6px;
+      transition: background-color var(--select-transition-duration) ease;
+
+      &__label {
+        color: var(--textColorPrimary);
+        padding: 0;
+      }
 
       &__remove {
         background: inherit;
+        border-radius: 2px;
+        padding: 2px 4px;
+        margin-left: 4px;
+        transition:
+          background-color var(--select-transition-duration) ease,
+          color var(--select-transition-duration) ease;
 
         &:hover {
           background: var(--colorError);
@@ -135,12 +185,21 @@ html {
         }
       }
     }
+
+    &__clear-indicator {
+      padding: $padding * 0.5;
+      opacity: 0.6;
+      transition: opacity var(--select-transition-duration) ease;
+
+      &:hover {
+        opacity: 1;
+        color: var(--colorError);
+      }
+    }
   }
 
-  //-- Themes
-
   .Select__menu {
-    z-index: $zIndex-select-portal; // render at the top when used inside dialog
+    z-index: $zIndex-select-portal;
   }
 
   .Select,
@@ -150,6 +209,14 @@ html {
       --select-option-selected-color: var(--textColorSecondary);
 
       .Select {
+        &__control {
+          background: white;
+
+          &:hover:not(&--is-disabled) {
+            box-shadow: 0 0 0 1px var(--halfGray);
+          }
+        }
+
         &__multi-value {
           background: none;
           box-shadow: 0 0 0 1px var(--textColorSecondary);
@@ -158,78 +225,109 @@ html {
         &__option {
           &:active {
             color: white;
+            background: var(--primary);
           }
 
           &:hover {
             color: white;
+            background: var(--primary);
           }
 
           &--is-focused {
             color: white;
+            background: var(--primary);
           }
 
           &--is-disabled:hover {
             color: inherit;
+            background: none;
           }
         }
       }
     }
 
     &.theme-lens {
-      :hover {
-        &.Select__control {
-          box-shadow: 0 0 0 1px var(--inputControlHoverBorder);
-          transition: box-shadow 0.1s;
-        }
-      }
-
-      :focus-within {
-        &.Select__control {
-          box-shadow: 0 0 0 1px var(--colorInfo);
-        }
-      }
-
-      &.Select__menu {
-        box-shadow: inset 0 0 0 1px var(--inputControlBorder);
-      }
-
       .Select {
-        &__value-container {
-          margin-top: 2px;
-          margin-bottom: 2px;
-        }
-
         &__control {
           box-shadow: 0 0 0 1px var(--inputControlBorder);
           background: var(--inputControlBackground);
           border-radius: var(--border-radius);
+          transition: box-shadow var(--select-transition-duration) ease;
+
+          &:hover:not(&--is-disabled) {
+            box-shadow: 0 0 0 1px var(--inputControlHoverBorder);
+          }
+
+          &--is-focused {
+            box-shadow: 0 0 0 1px var(--colorInfo);
+          }
         }
 
         &__single-value {
           color: var(--textColorTertiary);
         }
 
+        &__placeholder {
+          color: var(--textColorTertiary);
+          opacity: 0.6;
+        }
+
+        &__value-container {
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
+
         &__menu {
+          box-shadow: inset 0 0 0 1px var(--inputControlBorder);
+          background: var(--inputControlBackground);
+          border-radius: var(--border-radius);
+
           &-list {
-            padding: 6px;
+            padding: 4px;
           }
         }
 
         &__option {
           border-radius: 4px;
+          margin: 1px 0;
 
-          &:active {
-            background: var(--inputControlBackground);
+          &:hover:not(&--is-disabled) {
+            background: var(--halfGray);
+          }
+
+          &:active:not(&--is-disabled) {
+            background: var(--halfGray);
           }
 
           &--is-selected {
             background: var(--inputControlBackground);
             color: var(--textColorAccent);
+            font-weight: 500;
+
+            &:hover {
+              background: var(--halfGray);
+            }
           }
 
           &--is-focused {
             color: var(--textColorPrimary);
-            background: var(--inputControlBackground);
+            background: var(--halfGray);
+          }
+
+          &--is-disabled {
+            opacity: 0.5;
+          }
+        }
+
+        &__multi-value {
+          background: var(--inputControlBackground);
+          border: 1px solid var(--inputControlBorder);
+
+          &__remove {
+            &:hover {
+              background: var(--colorError);
+              color: var(--textColorAccent);
+            }
           }
         }
       }

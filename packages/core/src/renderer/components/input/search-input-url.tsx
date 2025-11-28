@@ -1,4 +1,3 @@
-import { Icon } from "@kubesightapp/icon";
 import { storesAndApisCanBeCreatedInjectionToken } from "@kubesightapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import debounce from "lodash/debounce";
@@ -210,12 +209,6 @@ class NonInjectedSearchInputUrl extends React.Component<SearchInputUrlProps & De
           }}
           onClear={this.clear}
           {...searchInputProps}
-        />
-        <Icon
-          small
-          material={persistentSearchStore.isEnabled ? "link" : "link_off"}
-          onClick={() => this.togglePersistence(!persistentSearchStore.isEnabled)}
-          tooltip={persistentSearchStore.isEnabled ? "Unlink search (per-view)" : "Link search (shared)"}
         />
       </div>
     );

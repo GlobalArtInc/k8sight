@@ -8,14 +8,56 @@
   > label {
     color: inherit;
     background: none;
-    border: none;
-    border-radius: var(--border-radius);
     box-shadow: 0 0 0 1px var(--halfGray);
     padding: var(--spacing);
 
     .Icon {
       height: calc(var(--margin) * 2);
       width: calc(var(--margin) * 2);
+    }
+
+    .search-modifiers {
+      display: flex;
+      align-items: center;
+      margin-right: 4px;
+      color: var(--textColorTertiary);
+      font-size: 12px;
+      user-select: none;
+
+      .modifiers-trigger {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+
+      .modifier {
+        padding: 2px 4px;
+        transition: background-color 0.15s, color 0.15s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 16px;
+        height: 16px;
+
+        &:hover {
+          background-color: var(--halfGray);
+        }
+
+        .square-icon {
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          background-color: currentColor;
+          border-radius: 1px;
+        }
+      }
+    }
+  }
+
+  .SearchModifiersMenu {
+    .Menu {
+      min-width: 180px;
     }
   }
 

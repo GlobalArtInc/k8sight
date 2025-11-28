@@ -49,20 +49,29 @@
     background: var(--blue);
     color: var(--drawerTitleText);
     padding: $padding $padding * 2.5;
-    word-break: break-all;
     position: relative;
     min-height: 54px;
+    flex-wrap: wrap;
+    gap: $padding * 0.5;
 
     .drawer-title-text {
       font-weight: bold;
-      flex-grow: 2;
+      flex: 1 1 auto;
+      min-width: 0;
       padding-right: $padding;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .drawer-title-text .Icon {
       opacity: 0;
       font-weight: normal;
-      margin-left: 8px;
+      margin-left: 0;
+      flex-shrink: 0;
     }
 
     .drawer-title-text:hover .Icon {
@@ -70,8 +79,38 @@
       transition: opacity 250ms;
     }
 
-    .MenuActions.toolbar .Icon {
-      color: var(--drawerTitleText);
+    .MenuActions.toolbar {
+      flex-shrink: 0;
+      margin-left: auto;
+
+      .Icon {
+        color: var(--drawerTitleText);
+      }
+    }
+
+    > .Icon {
+      flex-shrink: 0;
+    }
+
+    @container (max-width: 500px) {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .drawer-title-text {
+        width: 100%;
+        padding-right: 0;
+      }
+
+      .MenuActions.toolbar {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      > .Icon {
+        align-self: flex-end;
+        margin-top: $padding * 0.5;
+      }
     }
 
     .Menu {

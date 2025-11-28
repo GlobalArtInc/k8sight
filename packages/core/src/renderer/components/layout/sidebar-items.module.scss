@@ -24,6 +24,15 @@
     padding-inline: var(--sidebar-item-padding-inline);
     cursor: pointer;
 
+    &:hover {
+      background-color: var(--sidebarItemHoverBackground);
+    }
+
+    &:global(.active) {
+      background-color: var(--sidebarItemHoverBackground);
+      color: var(--sidebarSubmenuActiveColor);
+    }
+
     span {
       word-break: break-word;
       overflow-wrap: break-word;

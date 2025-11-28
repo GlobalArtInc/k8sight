@@ -23,7 +23,6 @@ const NonInjectableLogsButton: React.FC<LogsButtonProps & Dependencies> = ({ pod
     event.stopPropagation();
 
     const containers = pod.getAllContainers();
-
     if (containers.length === 0) {
       return;
     }

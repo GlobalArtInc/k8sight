@@ -1,10 +1,13 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { runInAction } from "mobx";
+import dockStoreInjectable from "../dock/store.injectable";
 import createDockTabInjectable from "../dock/create-dock-tab.injectable";
 import { TabKind } from "../dock/store";
 import getRandomIdForPodLogsTabInjectable from "./get-random-id-for-pod-logs-tab.injectable";
 import setLogTabDataInjectable from "./set-log-tab-data.injectable";
+import logTabStoreInjectable from "./tab-store.injectable";
 
+import type { DockStore } from "../dock/store";
 import type { DockTab, DockTabCreate, TabId } from "../dock/store";
 import type { LogTabData } from "./tab-store";
 
@@ -15,11 +18,35 @@ interface Dependencies {
   createDockTab: (rawTabDesc: DockTabCreate, addNumber?: boolean) => DockTab;
   setLogTabData: (tabId: string, data: LogTabData) => void;
   getRandomId: () => string;
+  dockStore: DockStore;
+  logTabStore: { getData: (tabId: TabId) => LogTabData | undefined };
 }
 
 const createLogsTab =
-  ({ createDockTab, setLogTabData, getRandomId }: Dependencies) =>
+  ({ createDockTab, setLogTabData, getRandomId, dockStore, logTabStore }: Dependencies) =>
   (title: string, data: CreateLogsTabData): TabId => {
+    if (data.owner?.uid && data.owner?.kind && data.namespace) {
+      for (const tab of dockStore.tabs) {
+        if (tab.kind !== TabKind.POD_LOGS) {
+          continue;
+        }
+
+        const tabData = logTabStore.getData(tab.id);
+
+        if (
+          tabData &&
+          tabData.owner?.uid === data.owner.uid &&
+          tabData.owner?.kind === data.owner.kind &&
+          tabData.namespace === data.namespace
+        ) {
+          dockStore.open();
+          dockStore.selectTab(tab.id);
+
+          return tab.id;
+        }
+      }
+    }
+
     const id = `log-tab-${getRandomId()}`;
 
     runInAction(() => {
@@ -49,6 +76,8 @@ const createLogsTabInjectable = getInjectable({
       createDockTab: di.inject(createDockTabInjectable),
       setLogTabData: di.inject(setLogTabDataInjectable),
       getRandomId: di.inject(getRandomIdForPodLogsTabInjectable),
+      dockStore: di.inject(dockStoreInjectable),
+      logTabStore: di.inject(logTabStoreInjectable),
     }),
 });
 

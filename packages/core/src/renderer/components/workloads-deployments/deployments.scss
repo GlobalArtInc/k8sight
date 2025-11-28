@@ -12,53 +12,40 @@
       flex-grow: 1.5;
     }
 
-    &.replicas {
+    &.pods {
       flex-grow: 0.4;
     }
 
-    &.ready {
-      flex-grow: 0.3;
-    }
-
-    &.desired {
-      flex-grow: 0.3;
-    }
-
-    &.updated {
-      flex-grow: 0.3;
-    }
-
-    &.available {
-      flex-grow: 0.3;
+    &.replicas {
+      flex-grow: 0.4;
     }
 
     &.age {
       flex-grow: 0.3;
     }
 
-    &.warning {
-      @include table.table-cell-warning;
+    &.status {
+      flex-grow: 0.5;
+
+      .running {
+        color: workloads-mixins.$pod-status-running-color;
+      }
+
+      .pending {
+        color: workloads-mixins.$pod-status-pending-color;
+      }
+
+      .failed {
+        color: workloads-mixins.$pod-status-failed-color;
+      }
+
+      .scaled-to-zero {
+        color: var(--textColorTertiary);
+      }
     }
 
-    &.conditions {
-      flex-grow: 1.5;
-
-      .condition {
-        display: inline-block;
-        margin-right: $margin;
-
-        &.Available {
-          color: workloads-mixins.$deployment-available;
-        }
-
-        &.Progressing {
-          color: workloads-mixins.$deployment-progressing;
-        }
-
-        &.ReplicaFailure {
-          color: workloads-mixins.$deployment-replicafailure;
-        }
-      }
+    &.warning {
+      @include table.table-cell-warning;
     }
   }
 }
