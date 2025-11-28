@@ -1,4 +1,4 @@
-import { KubeObject } from "@kubesightapp/kube-object";
+import { KubeObject, Node } from "@kubesightapp/kube-object";
 import { Tooltip } from "@kubesightapp/tooltip";
 import { observer } from "mobx-react";
 import React from "react";
@@ -22,15 +22,18 @@ export const KubeObjectConditionsList = observer((props: KubeObjectConditionsLis
   if (!(object instanceof KubeObject)) {
     return null;
   }
-
-  const conditions = (object as KubeObject<KubeObjectMetadata, KubeObjectStatus>).status?.conditions;
+  
+  const conditions =
+    object instanceof Node
+      ? object.getConditions()
+      : (object as KubeObject<KubeObjectMetadata, KubeObjectStatus>).status?.conditions;
 
   if (!conditions?.length) return null;
 
   return (
     <>
       {sortConditions(conditions, conditionTypePriorities)
-        ?.filter((condition) => condition.status === "True" || condition.type === "Ready")
+        ?.filter((condition) => condition.status === "True")
         ?.sort((a, b) => {
           // Always put "Ready" type first
           if (a.type === "Ready" && b.type !== "Ready") return -1;

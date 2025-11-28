@@ -8,7 +8,6 @@ import { makeObservable, observable } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
 import requestAllNodeMetricsInjectable from "../../../common/k8s-api/endpoints/metrics.api/request-metrics-for-all-nodes.injectable";
-import { BadgeBoolean } from "../badge";
 import eventStoreInjectable from "../events/store.injectable";
 import { KubeObjectAge } from "../kube-object/age";
 import { KubeObjectConditionsList } from "../kube-object-conditions";
@@ -38,7 +37,6 @@ enum columnId {
   version = "version",
   internalIp = "internalIp",
   age = "age",
-  schedulable = "schedulable",
   conditions = "condition",
   status = "status",
 }
@@ -205,7 +203,6 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
             [columnId.version]: (node) => node.getKubeletVersion(),
             [columnId.internalIp]: (node) => node.getInternalIP(),
             [columnId.age]: (node) => -node.getCreationTimestamp(),
-            [columnId.schedulable]: (node) => (node.isUnschedulable() ? "False" : "True"),
             [columnId.conditions]: (node) => node.getNodeConditionText(),
           }}
           searchFilters={[
@@ -228,7 +225,6 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
             { title: "Version", className: "version", sortBy: columnId.version, id: columnId.version },
             { title: "Internal IP", className: "internalIp", sortBy: columnId.internalIp, id: columnId.internalIp },
             { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-            { title: "Schedulable", className: "schedulable", sortBy: columnId.schedulable, id: columnId.schedulable },
             {
               title: "Conditions",
               className: "conditions scrollable",
@@ -256,7 +252,6 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
               <WithTooltip>{node.getKubeletVersion()}</WithTooltip>,
               <WithTooltip>{node.getInternalIP()}</WithTooltip>,
               <KubeObjectAge key="age" object={node} />,
-              <BadgeBoolean value={!node.isUnschedulable()} />,
               <KubeObjectConditionsList key="conditions" object={node} />,
             ];
           }}

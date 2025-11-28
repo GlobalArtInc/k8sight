@@ -1,42 +1,38 @@
 @use "../table/table.mixins";
 @use "../workloads/workloads-mixins";
+@use "../vars" as *;
 
 .Jobs {
   .TableCell {
     &.name {
-      flex-grow: 2;
+      flex-grow: 1.5;
     }
 
-    &.resumed {
-      flex-grow: 0.4;
-    }
-
-    &.status {
-      @include workloads-mixins.job-condition-colors;
-    }
-
-    &.succeeded {
-      flex-grow: 0.5;
+    &.namespace {
+      flex-grow: 1.5;
     }
 
     &.completions {
       flex-grow: 0.5;
     }
 
-    &.parallelism {
-      flex-grow: 0.5;
+    &.age {
+      flex-grow: 0.3;
+    }
+
+    &.conditions {
+      flex: 1.7;
+
+      .condition {
+        display: inline-block;
+        margin-right: $margin;
+
+        @include workloads-mixins.job-condition-colors;
+      }
     }
 
     &.warning {
       @include table.table-cell-warning;
-    }
-
-    &.duration {
-      flex-grow: 0.4;
-    }
-
-    &.age {
-      flex-grow: 0.3;
     }
   }
 }
