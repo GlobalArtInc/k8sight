@@ -6,6 +6,10 @@
   color: var(--textColorTertiary);
 }
 
+.selected {
+  color: var(--textColorAccent);
+}
+
 .label {
   font-size: var(--font-size) !important;
   background-color: transparent !important;
