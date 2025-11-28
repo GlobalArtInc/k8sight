@@ -1,9 +1,11 @@
 import "./statefulsets.scss";
 
+import { Icon } from "@kubesightapp/icon";
 import { PodStatusPhase } from "@kubesightapp/kube-object";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
+import createWorkloadLogsTabInjectable from "../dock/logs/create-workload-logs-tab.injectable";
 import eventStoreInjectable from "../events/store.injectable";
 import { KubeObjectAge } from "../kube-object/age";
 import { KubeObjectListLayout } from "../kube-object-list-layout";
@@ -27,12 +29,14 @@ enum columnId {
   replicas = "replicas",
   age = "age",
   status = "status",
+  logs = "logs",
 }
 
 interface Dependencies {
   statefulSetStore: StatefulSetStore;
   eventStore: EventStore;
   podStore: PodStore;
+  createWorkloadLogsTab: (data: { workload: StatefulSet }) => string;
 }
 
 function getPods(statefulSet: StatefulSet, statefulSetStore: StatefulSetStore) {
@@ -62,7 +66,7 @@ function getStatus(statefulSet: StatefulSet, statefulSetStore: StatefulSetStore)
 }
 
 const NonInjectedStatefulSets = observer((props: Dependencies) => {
-  const { eventStore, statefulSetStore, podStore } = props;
+  const { eventStore, statefulSetStore, podStore, createWorkloadLogsTab } = props;
 
   return (
     <SiblingsInTabLayout>
@@ -89,6 +93,7 @@ const NonInjectedStatefulSets = observer((props: Dependencies) => {
         renderTableHeader={[
           { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
           { className: "warning", showWithColumn: columnId.name },
+          { className: "logs", showWithColumn: columnId.name },
           {
             title: "Namespace",
             className: "namespace",
@@ -105,6 +110,21 @@ const NonInjectedStatefulSets = observer((props: Dependencies) => {
           return [
             <WithTooltip key="name">{statefulSet.getName()}</WithTooltip>,
             <KubeObjectStatusIcon key="icon" object={statefulSet} />,
+            <Icon
+              key="logs"
+              material="subject"
+              tooltip="View Logs"
+              interactive
+              onClick={(event) => {
+                event.stopPropagation();
+                try {
+                  createWorkloadLogsTab({ workload: statefulSet });
+                } catch (err) {
+                  console.error("Failed to open logs", err);
+                }
+              }}
+              style={{ cursor: "pointer" }}
+            />,
             <NamespaceSelectBadge key="namespace" namespace={statefulSet.getNs()} />,
             getPods(statefulSet, statefulSetStore),
             statefulSet.getReplicas(),
@@ -123,5 +143,6 @@ export const StatefulSets = withInjectables<Dependencies>(NonInjectedStatefulSet
     eventStore: di.inject(eventStoreInjectable),
     statefulSetStore: di.inject(statefulSetStoreInjectable),
     podStore: di.inject(podStoreInjectable),
+    createWorkloadLogsTab: di.inject(createWorkloadLogsTabInjectable),
   }),
 });

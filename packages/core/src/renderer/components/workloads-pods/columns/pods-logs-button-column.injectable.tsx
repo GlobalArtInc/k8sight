@@ -57,7 +57,7 @@ export const podsLogsButtonColumnInjectable = getInjectable({
     apiVersion: "v1",
     priority: COLUMN_PRIORITY.LOGS,
     content: (pod: Pod) => <LogsButton pod={pod} />,
-    header: { title: <Icon material="subject" />, className: "logs", id: columnId },
+    header: { className: "logs"},
   }),
   injectionToken: podListLayoutColumnInjectionToken,
 });

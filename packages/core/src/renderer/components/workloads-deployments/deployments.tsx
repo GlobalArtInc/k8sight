@@ -1,9 +1,11 @@
 import "./deployments.scss";
 
+import { Icon } from "@kubesightapp/icon";
 import { PodStatusPhase } from "@kubesightapp/kube-object";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
+import createWorkloadLogsTabInjectable from "../dock/logs/create-workload-logs-tab.injectable";
 import eventStoreInjectable from "../events/store.injectable";
 import { KubeObjectAge } from "../kube-object/age";
 import { KubeObjectListLayout } from "../kube-object-list-layout";
@@ -27,12 +29,14 @@ enum columnId {
   replicas = "replicas",
   age = "age",
   status = "status",
+  logs = "logs",
 }
 
 interface Dependencies {
   deploymentStore: DeploymentStore;
   eventStore: EventStore;
   podStore: PodStore;
+  createWorkloadLogsTab: (data: { workload: Deployment }) => string;
 }
 
 function getPods(deployment: Deployment, deploymentStore: DeploymentStore) {
@@ -64,7 +68,7 @@ function getStatus(deployment: Deployment, deploymentStore: DeploymentStore): { 
 @observer
 class NonInjectedDeployments extends React.Component<Dependencies> {
   render() {
-    const { deploymentStore, eventStore, podStore } = this.props;
+    const { deploymentStore, eventStore, podStore, createWorkloadLogsTab } = this.props;
 
     return (
       <SiblingsInTabLayout>
@@ -91,6 +95,7 @@ class NonInjectedDeployments extends React.Component<Dependencies> {
           renderTableHeader={[
             { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
             { className: "warning", showWithColumn: columnId.name },
+            { className: "logs", showWithColumn: columnId.name },
             {
               title: "Namespace",
               className: "namespace",
@@ -107,6 +112,21 @@ class NonInjectedDeployments extends React.Component<Dependencies> {
             return [
               <WithTooltip key="name">{deployment.getName()}</WithTooltip>,
               <KubeObjectStatusIcon key="icon" object={deployment} />,
+              <Icon
+                key="logs"
+                material="subject"
+                tooltip="View Logs"
+                interactive
+                onClick={(event) => {
+                  event.stopPropagation();
+                  try {
+                    createWorkloadLogsTab({ workload: deployment });
+                  } catch (err) {
+                    console.error("Failed to open logs", err);
+                  }
+                }}
+                style={{ cursor: "pointer" }}
+              />,
               <NamespaceSelectBadge key="namespace" namespace={deployment.getNs()} />,
               getPods(deployment, deploymentStore),
               deployment.getReplicas(),
@@ -126,5 +146,6 @@ export const Deployments = withInjectables<Dependencies>(NonInjectedDeployments,
     deploymentStore: di.inject(deploymentStoreInjectable),
     eventStore: di.inject(eventStoreInjectable),
     podStore: di.inject(podStoreInjectable),
+    createWorkloadLogsTab: di.inject(createWorkloadLogsTabInjectable),
   }),
 });

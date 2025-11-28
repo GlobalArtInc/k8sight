@@ -44,6 +44,11 @@
       }
     }
 
+    &.logs {
+      flex-grow: 0.2;
+      justify-content: center;
+    }
+
     &.warning {
       @include table.table-cell-warning;
     }
