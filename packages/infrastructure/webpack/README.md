@@ -1,6 +1,6 @@
 # @kubesightapp/webpack
 
-This package contains webpack configurations for Lens packages.
+This package contains webpack configurations for K8sight packages.
 
 ## Install
 
@@ -29,7 +29,7 @@ module.exports = require("@kubesightapp/webpack").configForReact;
 
 ### Multi export package
 
-This configuration should be used when package contains **multiple entrypoint** e.g. for different environments. You need to add `lensMultiExportConfig` to `package.json` with configuration. Note that also `exports` property needs to be set, but the correct values are generated from `lensMultiExportConfig` when using `lens-build` -script.
+This configuration should be used when package contains **multiple entrypoint** e.g. for different environments. You need to add `k8sightMultiExportConfig` to `package.json` with configuration. Note that also `exports` property needs to be set, but the correct values are generated from `k8sightMultiExportConfig` when using `k8sight-build` -script.
 
 **webpack.config.js**
 ```javascript
@@ -41,7 +41,7 @@ module.exports = require("@kubesightapp/webpack").getMultiExportConfig(packageJs
 **package.json**
 ```json
 {
-  "lensMultiExportConfig": {
+  "k8sightMultiExportConfig": {
     "./main": {
       "buildType": "node",
       "entrypoint": "./src/main/index.ts"
@@ -71,5 +71,5 @@ module.exports = require("@kubesightapp/webpack").getMultiExportConfig(packageJs
 
 ## Scripts
 
-1. `lens-build` which builds the packages
-2. `lens-remove-build` which removes the build directory from packages. It's useful for cleaning up.
+1. `k8sight-build` which builds the packages
+2. `k8sight-remove-build` which removes the build directory from packages. It's useful for cleaning up.

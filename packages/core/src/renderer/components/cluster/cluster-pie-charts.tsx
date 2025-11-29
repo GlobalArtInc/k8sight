@@ -19,7 +19,7 @@ import type { IAsyncComputed } from "@ogre-tools/injectable-react";
 import type { IComputedValue } from "mobx";
 
 import type { ClusterMetricData } from "../../../common/k8s-api/endpoints/metrics.api/request-cluster-metrics-by-node-names.injectable";
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 import type { PieChartData } from "../chart";
 import type { SelectedNodeRoleForMetrics } from "./overview/selected-node-role-for-metrics.injectable";
 
@@ -32,7 +32,7 @@ const checkedBytesToUnits = (value: number | undefined) => (typeof value === "nu
 interface Dependencies {
   selectedNodeRoleForMetrics: SelectedNodeRoleForMetrics;
   clusterOverviewMetrics: IAsyncComputed<ClusterMetricData | undefined>;
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
 }
 
 const renderLimitWarning = () => (

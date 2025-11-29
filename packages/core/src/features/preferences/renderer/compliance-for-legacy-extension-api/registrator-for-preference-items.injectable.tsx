@@ -7,13 +7,13 @@ import { preferenceItemInjectionToken } from "../preference-items/preference-ite
 import { PreferencePageComponent } from "../preference-page-component";
 import { ExtensionPreferenceBlock } from "./extension-preference-block";
 
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 
 const registratorForPreferenceItemsInjectable = getInjectable({
   id: "registrator-for-preference-items",
 
   instantiate: () => (ext) => {
-    const extension = ext as LensRendererExtension;
+    const extension = ext as K8sightRendererExtension;
 
     const commonId = `preference-item-for-extension-${extension.sanitizedExtensionId}`;
 

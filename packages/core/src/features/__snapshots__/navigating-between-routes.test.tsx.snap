@@ -73,7 +73,7 @@ exports[`navigating between routes given route with optional path parameters whe
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <pre>
         {
@@ -281,7 +281,7 @@ exports[`navigating between routes given route without path parameters when navi
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <div>
         Some component

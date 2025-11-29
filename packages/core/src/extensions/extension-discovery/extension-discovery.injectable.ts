@@ -18,7 +18,7 @@ import getRelativePathInjectable from "../../common/path/get-relative-path.injec
 import joinPathsInjectable from "../../common/path/join-paths.injectable";
 import fileSystemSeparatorInjectable from "../../common/path/separator.injectable";
 import isProductionInjectable from "../../common/vars/is-production.injectable";
-import lensResourcesDirInjectable from "../../common/vars/lens-resources-dir.injectable";
+import k8sightResourcesDirInjectable from "../../common/vars/k8sight-resources-dir.injectable";
 import isExtensionEnabledInjectable from "../../features/extensions/enabled/common/is-enabled.injectable";
 import extensionInstallationStateStoreInjectable from "../extension-installation-state-store/extension-installation-state-store.injectable";
 import extensionLoaderInjectable from "../extension-loader/extension-loader.injectable";
@@ -39,7 +39,7 @@ const extensionDiscoveryInjectable = getInjectable({
       isCompatibleExtension: di.inject(isCompatibleExtensionInjectable),
       installExtension: di.inject(installExtensionInjectable),
       extensionPackageRootDirectory: di.inject(extensionPackageRootDirectoryInjectable),
-      resourcesDirectory: di.inject(lensResourcesDirInjectable),
+      resourcesDirectory: di.inject(k8sightResourcesDirInjectable),
       readJsonFile: di.inject(readJsonFileInjectable),
       pathExists: di.inject(pathExistsInjectable),
       watch: di.inject(watchInjectable),

@@ -8,11 +8,11 @@ import type { CustomResourceDefinition } from "@kubesightapp/kube-object";
 
 import type { IComputedValue } from "mobx";
 
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 import type { CommandRegistration, RegisteredCommand } from "./commands";
 
 interface Dependencies {
-  extensions: IComputedValue<LensRendererExtension[]>;
+  extensions: IComputedValue<K8sightRendererExtension[]>;
   customResourceDefinitions: IComputedValue<CustomResourceDefinition[]>;
   internalCommands: CommandRegistration[];
 }

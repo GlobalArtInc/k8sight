@@ -24,7 +24,7 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
     const state = di.inject(userPreferencesStateInjectable);
 
     return createPersistentStorage<UserStoreModel>({
-      configName: "lens-user-store",
+      configName: "k8sight-user-store",
       projectVersion: di.inject(storeMigrationVersionInjectable),
       migrations: di.inject(persistentStorageMigrationsInjectable, userPreferencesMigrationInjectionToken),
       fromStore: action(({ preferences = {} }) => {

@@ -45,7 +45,7 @@ const NonInjectedAddingOfPublicHelmRepository = observer(
         formatOptionLabel={formatOptionLabel}
         controlShouldRenderValue={false}
         className="box grow"
-        themeName="lens"
+        themeName="k8sight"
       />
     );
   },

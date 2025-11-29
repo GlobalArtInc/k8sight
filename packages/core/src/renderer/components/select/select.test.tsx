@@ -10,7 +10,7 @@ import { Select } from "./select";
 
 import type { DiContainer } from "@ogre-tools/injectable";
 
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 import type { DiRender } from "../test-utils/renderFor";
 import type { SelectOption } from "./select";
 
@@ -23,7 +23,7 @@ describe("<Select />", () => {
     render = renderFor(di);
 
     di.override(directoryForUserDataInjectable, () => "/some-directory-for-user-data");
-    di.override(rendererExtensionsInjectable, () => computed(() => [] as LensRendererExtension[]));
+    di.override(rendererExtensionsInjectable, () => computed(() => [] as K8sightRendererExtension[]));
   });
 
   it("should render the select", async () => {

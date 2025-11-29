@@ -6,7 +6,7 @@ import joinPathsInjectable from "../../../common/path/join-paths.injectable";
 import staticFilesDirectoryInjectable from "../../../common/vars/static-files-directory.injectable";
 import { contentTypes } from "../../router/router-content-types";
 
-import type { LensApiRequest } from "../../router/route";
+import type { K8sightApiRequest } from "../../router/route";
 
 const prodStaticFileRouteHandlerInjectable = getInjectable({
   id: "prod-static-file-route-handler",
@@ -16,7 +16,7 @@ const prodStaticFileRouteHandlerInjectable = getInjectable({
     const staticFilesDirectory = di.inject(staticFilesDirectoryInjectable);
     const logger = di.inject(prefixedLoggerInjectable, "FILE-ROUTE");
 
-    return async ({ params }: LensApiRequest<"/{path*}">) => {
+    return async ({ params }: K8sightApiRequest<"/{path*}">) => {
       const filePath =
         !params.path || params.path === "/"
           ? "/build/index.html"

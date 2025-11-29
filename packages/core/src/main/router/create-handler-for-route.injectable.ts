@@ -4,12 +4,12 @@ import { getInjectable } from "@ogre-tools/injectable";
 import { contentTypes } from "./router-content-types";
 import type { ServerResponse } from "http";
 
-import type { LensApiRequest, Route } from "./route";
+import type { K8sightApiRequest, Route } from "./route";
 
-export type RouteHandler = (request: LensApiRequest<string>, response: ServerResponse) => Promise<void>;
+export type RouteHandler = (request: K8sightApiRequest<string>, response: ServerResponse) => Promise<void>;
 export type CreateHandlerForRoute = (route: Route<unknown, string>) => RouteHandler;
 
-interface LensServerResponse {
+interface K8sightServerResponse {
   statusCode: number;
   content: any;
   headers: {
@@ -19,7 +19,7 @@ interface LensServerResponse {
 
 const writeServerResponseFor =
   (serverResponse: ServerResponse) =>
-  ({ statusCode, content, headers }: LensServerResponse) => {
+  ({ statusCode, content, headers }: K8sightServerResponse) => {
     serverResponse.statusCode = statusCode;
 
     for (const [name, value] of object.entries(headers)) {

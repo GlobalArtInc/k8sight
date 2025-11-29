@@ -75,7 +75,7 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
               {option.isSelected && <Icon smallest material="check" className="box right" />}
             </div>
           )}
-          themeName="lens"
+          themeName="k8sight"
         />
         <Button primary label="Hide all metrics" onClick={this.onChangeButton} />
         <Button primary label="Reset" onClick={this.reset} />

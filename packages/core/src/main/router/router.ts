@@ -2,10 +2,10 @@ import Call from "@hapi/call";
 import type http from "http";
 
 import type { Cluster } from "../../common/cluster/cluster";
-import type { ServerIncomingMessage } from "../lens-proxy/lens-proxy";
+import type { ServerIncomingMessage } from "../k8sight-proxy/k8sight-proxy";
 import type { CreateHandlerForRoute, RouteHandler } from "./create-handler-for-route.injectable";
 import type { ParseRequest } from "./parse-request.injectable";
-import type { LensApiRequest, Route } from "./route";
+import type { K8sightApiRequest, Route } from "./route";
 
 export interface RouterRequestOpts {
   req: http.IncomingMessage;
@@ -51,7 +51,7 @@ export class Router {
     return true;
   }
 
-  protected async getRequest(opts: RouterRequestOpts): Promise<LensApiRequest<string>> {
+  protected async getRequest(opts: RouterRequestOpts): Promise<K8sightApiRequest<string>> {
     const { req, res, url, cluster, params } = opts;
     const { payload } = await this.dependencies.parseRequest(req, null, {
       parse: true,

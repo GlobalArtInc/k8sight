@@ -5,15 +5,15 @@ import extensionIsEnabledForClusterInjectable from "../../extensions/extension-l
 import activeKubernetesClusterInjectable from "../cluster-frame-context/active-kubernetes-cluster.injectable";
 
 import type { KubernetesCluster } from "../../common/catalog-entities";
-import type { LensRendererExtension } from "../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../extensions/k8sight-renderer-extension";
 
 const extensionShouldBeEnabledForClusterFrameInjectable = getInjectable({
   id: "extension-should-be-enabled-for-cluster-frame",
 
-  instantiate: (di, extension: LensRendererExtension) => {
+  instantiate: (di, extension: K8sightRendererExtension) => {
     const activeKubernetesCluster = di.inject(activeKubernetesClusterInjectable);
 
-    const getExtensionIsEnabledForCluster = (extension: LensRendererExtension, cluster: KubernetesCluster) =>
+    const getExtensionIsEnabledForCluster = (extension: K8sightRendererExtension, cluster: KubernetesCluster) =>
       untracked(() => di.inject(extensionIsEnabledForClusterInjectable, { extension, cluster }));
 
     return asyncComputed({
@@ -32,7 +32,7 @@ const extensionShouldBeEnabledForClusterFrameInjectable = getInjectable({
   },
 
   lifecycle: lifecycleEnum.keyedSingleton({
-    getInstanceKey: (di, extension: LensRendererExtension) => extension.sanitizedExtensionId,
+    getInstanceKey: (di, extension: K8sightRendererExtension) => extension.sanitizedExtensionId,
   }),
 });
 

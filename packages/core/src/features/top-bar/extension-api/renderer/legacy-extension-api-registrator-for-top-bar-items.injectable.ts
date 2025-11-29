@@ -5,13 +5,13 @@ import { computed } from "mobx";
 import { extensionRegistratorInjectionToken } from "../../../../extensions/extension-loader/extension-registrator-injection-token";
 import { topBarItemOnRightSideInjectionToken } from "../../../../renderer/components/layout/top-bar/top-bar-items/top-bar-item-injection-token";
 
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 
 const legacyExtensionApiRegistratorForTopBarItemsInjectable = getInjectable({
   id: "legacy-extension-api-registrator-for-top-bar-items",
 
   instantiate: () => (ext) => {
-    const extension = ext as LensRendererExtension;
+    const extension = ext as K8sightRendererExtension;
 
     return pipeline(
       extension.topBarItems,

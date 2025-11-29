@@ -4,7 +4,7 @@ import assert from "assert";
 import { matches } from "lodash/fp";
 import { computed, observable, runInAction } from "mobx";
 import React from "react";
-import directoryForLensLocalStorageInjectable from "../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import { navigateToRouteInjectionToken } from "../../common/front-end-routing/navigate-to-route-injection-token";
 import pathExistsInjectable from "../../common/fs/path-exists.injectable";
 import readJsonFileInjectable from "../../common/fs/read-json-file.injectable";
@@ -35,7 +35,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
     applicationBuilder.beforeWindowStart(({ windowDi }) => {
       windowDi.override(storageSaveDelayInjectable, () => 250);
 
-      windowDi.override(directoryForLensLocalStorageInjectable, () => "/some-directory-for-lens-local-storage");
+      windowDi.override(directoryForK8sightLocalStorageInjectable, () => "/some-directory-for-k8sight-local-storage");
     });
   });
 
@@ -169,7 +169,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
         applicationBuilder.beforeWindowStart(async ({ windowDi }) => {
           const writeJsonFileFake = windowDi.inject(writeJsonFileInjectable);
 
-          await writeJsonFileFake("/some-directory-for-lens-local-storage/some-cluster-id.json", {
+          await writeJsonFileFake("/some-directory-for-k8sight-local-storage/some-cluster-id.json", {
             sidebar: {
               expanded: { "sidebar-item-some-extension-name-some-parent-id": true },
               width: 200,
@@ -202,7 +202,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
         applicationBuilder.beforeWindowStart(async ({ windowDi }) => {
           const writeJsonFileFake = windowDi.inject(writeJsonFileInjectable);
 
-          await writeJsonFileFake("/some-directory-for-lens-local-storage/some-cluster-id.json", {
+          await writeJsonFileFake("/some-directory-for-k8sight-local-storage/some-cluster-id.json", {
             sidebar: {
               expanded: { "some-extension-name-some-unknown-parent-id": true },
               width: 200,
@@ -229,7 +229,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
         applicationBuilder.beforeWindowStart(async ({ windowDi }) => {
           const writeJsonFileFake = windowDi.inject(writeJsonFileInjectable);
 
-          await writeJsonFileFake("/some-directory-for-lens-local-storage/some-cluster-id.json", {
+          await writeJsonFileFake("/some-directory-for-k8sight-local-storage/some-cluster-id.json", {
             someThingButSidebar: {},
           });
         });
@@ -360,7 +360,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
 
             const pathExistsFake = windowDi.inject(pathExistsInjectable);
 
-            const actual = await pathExistsFake("/some-directory-for-lens-local-storage/some-cluster-id.json");
+            const actual = await pathExistsFake("/some-directory-for-k8sight-local-storage/some-cluster-id.json");
 
             expect(actual).toBe(false);
           });
@@ -372,7 +372,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
 
             await flushPromises(); // Needed because of several async calls
 
-            const actual = await readJsonFileFake("/some-directory-for-lens-local-storage/some-cluster-id.json");
+            const actual = await readJsonFileFake("/some-directory-for-k8sight-local-storage/some-cluster-id.json");
 
             expect(actual).toEqual({
               sidebar: {

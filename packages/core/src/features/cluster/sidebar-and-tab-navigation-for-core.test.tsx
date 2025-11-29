@@ -90,7 +90,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
           const writeJsonFile = windowDi.inject(writeJsonFileInjectable);
 
           await writeJsonFile(
-            "/some-directory-for-app-data/some-product-name/lens-local-storage/some-cluster-id.json",
+            "/some-directory-for-app-data/some-product-name/k8sight-local-storage/some-cluster-id.json",
             {
               sidebar: {
                 expanded: { "sidebar-item-some-parent": true },
@@ -126,7 +126,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
           const writeJsonFileFake = windowDi.inject(writeJsonFileInjectable);
 
           await writeJsonFileFake(
-            "/some-directory-for-app-data/some-product-name/lens-local-storage/some-hosted-cluster-id.json",
+            "/some-directory-for-app-data/some-product-name/k8sight-local-storage/some-hosted-cluster-id.json",
             {
               sidebar: {
                 expanded: { "some-unknown-parent-id": true },
@@ -156,7 +156,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
           const writeJsonFileFake = windowDi.inject(writeJsonFileInjectable);
 
           await writeJsonFileFake(
-            "/some-directory-for-app-data/some-product-name/lens-local-storage/some-hosted-cluster-id.json",
+            "/some-directory-for-app-data/some-product-name/k8sight-local-storage/some-hosted-cluster-id.json",
             {
               someThingButSidebar: {},
             },
@@ -258,7 +258,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
             const pathExistsFake = windowDi.inject(pathExistsInjectable);
 
             const actual = await pathExistsFake(
-              "/some-directory-for-app-data/some-product-name/lens-local-storage/some-hosted-cluster-id.json",
+              "/some-directory-for-app-data/some-product-name/k8sight-local-storage/some-hosted-cluster-id.json",
             );
 
             expect(actual).toBe(false);
@@ -272,7 +272,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
             await flushPromises();
 
             const actual = await readJsonFileFake(
-              "/some-directory-for-app-data/some-product-name/lens-local-storage/some-cluster-id.json",
+              "/some-directory-for-app-data/some-product-name/k8sight-local-storage/some-cluster-id.json",
             );
 
             expect(actual).toEqual({

@@ -1,5 +1,5 @@
 import asyncFn from "@async-fn/jest";
-import directoryForLensLocalStorageInjectable from "../../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import writeJsonFileInjectable from "../../../common/fs/write-json-file.injectable";
 import { HelmChart } from "../../../common/k8s-api/endpoints/helm-charts.api";
 import requestHelmChartValuesInjectable from "../../../common/k8s-api/endpoints/helm-charts.api/request-values.injectable";
@@ -33,7 +33,7 @@ describe("installing helm chart from previously opened tab", () => {
     builder.namespaces.add("some-other-namespace");
 
     builder.beforeWindowStart(({ windowDi }) => {
-      windowDi.override(directoryForLensLocalStorageInjectable, () => "/some-directory-for-lens-local-storage");
+      windowDi.override(directoryForK8sightLocalStorageInjectable, () => "/some-directory-for-k8sight-local-storage");
       windowDi.override(requestHelmChartVersionsInjectable, () => requestHelmChartVersionsMock);
       windowDi.override(requestHelmChartValuesInjectable, () => requestHelmChartValuesMock);
       windowDi.override(requestCreateHelmReleaseInjectable, () => jest.fn());
@@ -51,7 +51,7 @@ describe("installing helm chart from previously opened tab", () => {
       builder.beforeWindowStart(async ({ windowDi }) => {
         const writeJsonFile = windowDi.inject(writeJsonFileInjectable);
 
-        await writeJsonFile("/some-directory-for-lens-local-storage/some-cluster-id.json", {
+        await writeJsonFile("/some-directory-for-k8sight-local-storage/some-cluster-id.json", {
           dock: {
             height: 300,
             tabs: [

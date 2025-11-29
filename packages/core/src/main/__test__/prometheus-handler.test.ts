@@ -7,7 +7,7 @@ import writeJsonFileInjectable from "../../common/fs/write-json-file.injectable"
 import prometheusHandlerInjectable from "../cluster/prometheus-handler/prometheus-handler.injectable";
 import { getDiForUnitTesting } from "../getDiForUnitTesting";
 import createKubeAuthProxyInjectable from "../kube-auth-proxy/create-kube-auth-proxy.injectable";
-import lensProxyPortInjectable from "../lens-proxy/lens-proxy-port.injectable";
+import k8sightProxyPortInjectable from "../k8sight-proxy/k8sight-proxy-port.injectable";
 
 import type { PrometheusProvider } from "@kubesightapp/prometheus";
 
@@ -53,7 +53,7 @@ describe("PrometheusHandler", () => {
       port: 9191,
     }));
     di.override(directoryForTempInjectable, () => "/some-temp-dir");
-    di.inject(lensProxyPortInjectable).set(12345);
+    di.inject(k8sightProxyPortInjectable).set(12345);
 
     const writeJsonFile = di.inject(writeJsonFileInjectable);
     const kubeConfigPath = "/some/path-to-a-config";

@@ -9,7 +9,7 @@ import type { Disposer } from "@kubesightapp/utilities";
 import type { ClusterId } from "../../../common/cluster-types";
 import type { GetClusterById } from "../../../features/cluster/storage/common/get-by-id.injectable";
 
-export interface LensView {
+export interface K8sightView {
   isLoaded: boolean;
   frame: HTMLIFrameElement;
 }
@@ -21,7 +21,7 @@ interface Dependencies {
 }
 
 export class ClusterFrameHandler {
-  private readonly views = observable.map<string, LensView>();
+  private readonly views = observable.map<string, K8sightView>();
 
   constructor(protected readonly dependencies: Dependencies) {
     makeObservable(this);
@@ -36,20 +36,20 @@ export class ClusterFrameHandler {
     const cluster = this.dependencies.getClusterById(clusterId);
 
     if (!cluster) {
-      this.dependencies.logger.warn(`[LENS-VIEW]: not initializing view; unknown clusterId="${clusterId}"`);
+      this.dependencies.logger.warn(`[K8SIGHT-VIEW]: not initializing view; unknown clusterId="${clusterId}"`);
 
       return;
     }
 
-    const parentElem = document.getElementById("lens-views");
+    const parentElem = document.getElementById("k8sight-views");
 
-    assert(parentElem, "DOM with #lens-views must be present");
+    assert(parentElem, "DOM with #k8sight-views must be present");
 
     if (this.views.has(clusterId)) {
       return;
     }
 
-    this.dependencies.logger.info(`[LENS-VIEW]: init dashboard, clusterId=${clusterId}`);
+    this.dependencies.logger.info(`[K8SIGHT-VIEW]: init dashboard, clusterId=${clusterId}`);
     const iframe = document.createElement("iframe");
 
     iframe.id = `cluster-frame-${cluster.id}`;
@@ -59,7 +59,7 @@ export class ClusterFrameHandler {
     iframe.addEventListener(
       "load",
       action(() => {
-        this.dependencies.logger.info(`[LENS-VIEW]: frame for clusterId=${clusterId} has loaded`);
+        this.dependencies.logger.info(`[K8SIGHT-VIEW]: frame for clusterId=${clusterId} has loaded`);
         const view = this.views.get(clusterId);
 
         assert(view, `view for ${clusterId} MUST still exist here`);
@@ -70,11 +70,11 @@ export class ClusterFrameHandler {
     this.views.set(clusterId, { frame: iframe, isLoaded: false });
     parentElem.appendChild(iframe);
 
-    this.dependencies.logger.info(`[LENS-VIEW]: waiting cluster to be ready, clusterId=${clusterId}`);
+    this.dependencies.logger.info(`[K8SIGHT-VIEW]: waiting cluster to be ready, clusterId=${clusterId}`);
 
     const dispose = when(
       () => cluster.ready.get(),
-      () => this.dependencies.logger.info(`[LENS-VIEW]: cluster is ready, clusterId=${clusterId}`),
+      () => this.dependencies.logger.info(`[K8SIGHT-VIEW]: cluster is ready, clusterId=${clusterId}`),
     );
 
     when(
@@ -88,7 +88,7 @@ export class ClusterFrameHandler {
             return Boolean(!cluster || (cluster.disconnected.get() && this.views.get(clusterId)?.isLoaded));
           },
           () => {
-            this.dependencies.logger.info(`[LENS-VIEW]: remove dashboard, clusterId=${clusterId}`);
+            this.dependencies.logger.info(`[K8SIGHT-VIEW]: remove dashboard, clusterId=${clusterId}`);
             this.views.delete(clusterId);
 
             // Must only remove iframe from DOM after it unloads old code. Else it crashes
@@ -112,7 +112,7 @@ export class ClusterFrameHandler {
     // Clear the previous when ASAP
     this.prevVisibleClusterChange?.();
 
-    this.dependencies.logger.info(`[LENS-VIEW]: refreshing iframe views, visible cluster id=${clusterId}`);
+    this.dependencies.logger.info(`[K8SIGHT-VIEW]: refreshing iframe views, visible cluster id=${clusterId}`);
     this.dependencies.emitClusterVisibility(null);
 
     for (const { frame: view } of this.views.values()) {
@@ -132,8 +132,8 @@ export class ClusterFrameHandler {
 
           return undefined;
         },
-        (view: LensView) => {
-          this.dependencies.logger.info(`[LENS-VIEW]: cluster id=${clusterId} should now be visible`);
+        (view: K8sightView) => {
+          this.dependencies.logger.info(`[K8SIGHT-VIEW]: cluster id=${clusterId} should now be visible`);
           view.frame.classList.remove("hidden");
           view.frame.focus();
           this.dependencies.emitClusterVisibility(clusterId);

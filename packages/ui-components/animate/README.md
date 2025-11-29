@@ -1,6 +1,6 @@
 # @kubesightapp/animate
 
-This package contains stuff related to creating Lens-applications. 
+This package contains stuff related to creating K8Sight-applications. 
 
 ## Usage
 

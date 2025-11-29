@@ -1,14 +1,14 @@
-import { LensMainExtension } from "../../../extensions/lens-main-extension";
-import { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import { K8sightMainExtension } from "../../../extensions/k8sight-main-extension";
+import { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 
-export class TestExtensionMain extends LensMainExtension {}
-export class TestExtensionRenderer extends LensRendererExtension {}
+export class TestExtensionMain extends K8sightMainExtension {}
+export class TestExtensionRenderer extends K8sightRendererExtension {}
 
 export interface FakeExtensionOptions {
   id: string;
   name: string;
-  rendererOptions?: Partial<LensRendererExtension>;
-  mainOptions?: Partial<LensMainExtension>;
+  rendererOptions?: Partial<K8sightRendererExtension>;
+  mainOptions?: Partial<K8sightMainExtension>;
 }
 
 export const getExtensionFakeForMain = ({ id, name, mainOptions = {} }: FakeExtensionOptions) =>

@@ -23,7 +23,7 @@ const weblinksPersistentStorageInjectable = getInjectable({
     const createPersistentStorage = di.inject(createPersistentStorageInjectable);
 
     return createPersistentStorage<WeblinkStoreModel>({
-      configName: "lens-weblink-store",
+      configName: "k8sight-weblink-store",
       accessPropertiesByDotNotation: false, // To make dots safe in cluster context names
       syncOptions: {
         equals: comparer.structural,

@@ -1,7 +1,7 @@
 import { asLegacyGlobalForExtensionApi } from "@kubesightapp/legacy-global-di";
 import activeThemeInjectable from "../../renderer/themes/active.injectable";
 
-import type { LensTheme } from "../../renderer/themes/lens-theme";
+import type { Theme } from "../../renderer/themes/k8sight-theme";
 
 export const activeTheme = asLegacyGlobalForExtensionApi(activeThemeInjectable);
 
@@ -12,4 +12,4 @@ export function getActiveTheme() {
   return activeTheme.get();
 }
 
-export type { LensTheme };
+export type { Theme };

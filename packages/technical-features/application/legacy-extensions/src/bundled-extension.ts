@@ -1,11 +1,11 @@
 import { getInjectionToken } from "@ogre-tools/injectable";
 
-import type { BundledLensExtensionConstructor, BundledLensExtensionManifest } from "./lens-extension";
+import type { BundledK8sightExtensionConstructor, BundledK8sightExtensionManifest } from "./k8sight-extension";
 
-export type BundledExtensionResult = BundledLensExtensionConstructor | null;
+export type BundledExtensionResult = BundledK8sightExtensionConstructor | null;
 
 export interface BundledExtension {
-  readonly manifest: BundledLensExtensionManifest;
+  readonly manifest: BundledK8sightExtensionManifest;
   main: () => BundledExtensionResult | Promise<BundledExtensionResult>;
   renderer: () => BundledExtensionResult | Promise<BundledExtensionResult>;
 }

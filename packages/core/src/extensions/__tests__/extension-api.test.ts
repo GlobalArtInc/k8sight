@@ -40,7 +40,7 @@ describe("Extensions API", () => {
         expect(typeof extensions.Common.App.getEnabledExtensions).toBe("function");
       });
 
-      it("should have version, appName, isFlatpak, isSnap, isWindows, isMac, isLinux, lensBuildEnvironment as getters", () => {
+      it("should have version, appName, isFlatpak, isSnap, isWindows, isMac, isLinux, k8sightBuildEnvironment as getters", () => {
         expect(() => extensions.Common.App.version).not.toThrow();
         expect(() => extensions.Common.App.appName).not.toThrow();
         expect(() => extensions.Common.App.isFlatpak).not.toThrow();
@@ -152,8 +152,8 @@ describe("Extensions API", () => {
   });
 
   describe("Main API", () => {
-    it("should export LensExtension and Ipc", () => {
-      expect(extensions.Main).toHaveProperty("LensExtension");
+    it("should export K8sightExtension and Ipc", () => {
+      expect(extensions.Main).toHaveProperty("K8sightExtension");
       expect(extensions.Main).toHaveProperty("Ipc");
     });
 
@@ -203,8 +203,8 @@ describe("Extensions API", () => {
   });
 
   describe("Renderer API", () => {
-    it("should export LensExtension and Ipc", () => {
-      expect(extensions.Renderer).toHaveProperty("LensExtension");
+    it("should export K8sightExtension and Ipc", () => {
+      expect(extensions.Renderer).toHaveProperty("K8sightExtension");
       expect(extensions.Renderer).toHaveProperty("Ipc");
     });
 

@@ -1,6 +1,6 @@
 # @kubesightapp/jest
 
-This package contains jest configurations and scripts for Lens packages.
+This package contains jest configurations and scripts for K8sight packages.
 
 ## Install
 
@@ -38,14 +38,14 @@ module.exports = require("@kubesightapp/jest").monorepoRootConfig(__dirname);
 
 ### Scripts
 
-#### lens-test
+#### k8sight-test
 Test package with coverage enforcement. Automatically opens coverage report in case of failure.
 
 **./packages/any-package/package.json**
 ```json
 {
  "scripts": {
-   "test": "lens-test"
+   "test": "k8sight-test"
  }         
 }
 ```

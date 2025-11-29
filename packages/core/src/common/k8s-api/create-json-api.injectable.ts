@@ -2,7 +2,7 @@ import { JsonApi } from "@kubesightapp/json-api";
 import { loggerInjectionToken } from "@kubesightapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import { Agent } from "https";
-import lensProxyCertificateInjectable from "../certificate/lens-proxy-certificate.injectable";
+import k8sightProxyCertificateInjectable from "../certificate/k8sight-proxy-certificate.injectable";
 import nodeFetchInjectable from "../fetch/node-fetch.injectable";
 
 import type { JsonApiConfig, JsonApiData, JsonApiDependencies, JsonApiParams } from "@kubesightapp/json-api";
@@ -20,13 +20,13 @@ const createJsonApiInjectable = getInjectable({
       fetch: di.inject(nodeFetchInjectable),
       logger: di.inject(loggerInjectionToken),
     };
-    const lensProxyCert = di.inject(lensProxyCertificateInjectable);
+    const k8sightProxyCert = di.inject(k8sightProxyCertificateInjectable);
 
     return (config, reqInit) => {
       if (!config.getRequestOptions) {
         config.getRequestOptions = async () => {
           const agent = new Agent({
-            ca: lensProxyCert.get().cert,
+            ca: k8sightProxyCert.get().cert,
           });
 
           // MSD Agent and Node Agent are not compatible

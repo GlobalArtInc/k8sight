@@ -5,7 +5,7 @@ import { action, makeObservable, observe, reaction, toJS } from "mobx";
 import {
   isKubernetesCluster,
   KubernetesCluster,
-  LensKubernetesClusterStatus,
+  K8sightKubernetesClusterStatus,
 } from "../../common/catalog-entities/kubernetes-cluster";
 import { ipcMainOn } from "../../common/ipc";
 
@@ -24,7 +24,7 @@ import type { UpdateEntitySpec } from "./update-entity-spec.injectable";
 
 const logPrefix = "[CLUSTER-MANAGER]:";
 
-const lensSpecificClusterStatuses: Set<string> = new Set(Object.values(LensKubernetesClusterStatus));
+const k8sightSpecificClusterStatuses: Set<string> = new Set(Object.values(K8sightKubernetesClusterStatus));
 
 interface Dependencies {
   readonly catalogEntityRegistry: CatalogEntityRegistry;
@@ -120,7 +120,7 @@ export class ClusterManager {
   @action
   protected updateEntityStatus(entity: KubernetesCluster, cluster?: Cluster) {
     if (this.dependencies.clustersThatAreBeingDeleted.has(entity.getId())) {
-      entity.status.phase = LensKubernetesClusterStatus.DELETING;
+      entity.status.phase = K8sightKubernetesClusterStatus.DELETING;
       entity.status.enabled = false;
     } else {
       entity.status.phase = (() => {
@@ -129,7 +129,7 @@ export class ClusterManager {
             `${logPrefix} setting entity ${entity.getName()} to DISCONNECTED, reason="no cluster"`,
           );
 
-          return LensKubernetesClusterStatus.DISCONNECTED;
+          return K8sightKubernetesClusterStatus.DISCONNECTED;
         }
 
         if (cluster.accessible.get()) {
@@ -137,7 +137,7 @@ export class ClusterManager {
             `${logPrefix} setting entity ${entity.getName()} to CONNECTED, reason="cluster is accessible"`,
           );
 
-          return LensKubernetesClusterStatus.CONNECTED;
+          return K8sightKubernetesClusterStatus.CONNECTED;
         }
 
         if (!cluster.disconnected.get()) {
@@ -145,11 +145,11 @@ export class ClusterManager {
             `${logPrefix} setting entity ${entity.getName()} to CONNECTING, reason="cluster is not disconnected"`,
           );
 
-          return LensKubernetesClusterStatus.CONNECTING;
+          return K8sightKubernetesClusterStatus.CONNECTING;
         }
 
-        // Extensions are not allowed to use the Lens specific status phases
-        if (!lensSpecificClusterStatuses.has(entity?.status?.phase)) {
+        // Extensions are not allowed to use the K8sight specific status phases
+        if (!k8sightSpecificClusterStatuses.has(entity?.status?.phase)) {
           this.dependencies.logger.silly(
             `${logPrefix} not clearing entity ${entity.getName()} status, reason="custom string"`,
           );
@@ -161,7 +161,7 @@ export class ClusterManager {
           `${logPrefix} setting entity ${entity.getName()} to DISCONNECTED, reason="fallthrough"`,
         );
 
-        return LensKubernetesClusterStatus.DISCONNECTED;
+        return K8sightKubernetesClusterStatus.DISCONNECTED;
       })();
 
       entity.status.enabled = true;
@@ -256,8 +256,8 @@ export function catalogEntityFromCluster(cluster: Cluster) {
     },
     status: {
       phase: cluster.disconnected.get()
-        ? LensKubernetesClusterStatus.DISCONNECTED
-        : LensKubernetesClusterStatus.CONNECTED,
+        ? K8sightKubernetesClusterStatus.DISCONNECTED
+        : K8sightKubernetesClusterStatus.CONNECTED,
       reason: "",
       message: "",
       active: !cluster.disconnected.get(),

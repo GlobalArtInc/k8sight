@@ -1,7 +1,7 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import path from "path";
 import extensionDiscoveryInjectable from "../../../../extensions/extension-discovery/extension-discovery.injectable";
-import { sanitizeExtensionName } from "../../../../extensions/lens-extension";
+import { sanitizeExtensionName } from "../../../../extensions/k8sight-extension";
 
 export type GetExtensionDestFolder = (name: string) => string;
 

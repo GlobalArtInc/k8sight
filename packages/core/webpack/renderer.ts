@@ -9,7 +9,7 @@ import { buildDir, isDevelopment } from "./vars";
 import type webpack from "webpack";
 import type { WebpackPluginInstance } from "webpack";
 
-export function webpackLensRenderer(): webpack.Configuration {
+export function webpackK8sightRenderer(): webpack.Configuration {
   return {
     target: "electron-renderer",
     name: "k8sight-app-renderer",
@@ -182,4 +182,4 @@ export function cssModulesWebpackRule({ styleLoader }: CssModulesWebpackRuleOpti
   };
 }
 
-export default webpackLensRenderer;
+export default webpackK8sightRenderer;

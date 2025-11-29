@@ -109,7 +109,7 @@ export class KubeconfigManager {
           caData: Buffer.from(this.dependencies.certificate.cert).toString("base64"),
         },
       ],
-      users: [{ name: "proxy", username: "lens", password: "fake" }],
+      users: [{ name: "proxy", username: "k8sight", password: "fake" }],
       contexts: [
         {
           user: "proxy",

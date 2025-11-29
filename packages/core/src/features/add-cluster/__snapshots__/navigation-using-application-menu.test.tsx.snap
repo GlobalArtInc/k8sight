@@ -72,7 +72,7 @@ exports[`add-cluster - navigation using application menu renders 1`] = `
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <div
         class="flex justify-center Welcome align-center"
@@ -433,7 +433,7 @@ exports[`add-cluster - navigation using application menu when navigating to add 
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <div
         class="SettingLayout AddClusters"

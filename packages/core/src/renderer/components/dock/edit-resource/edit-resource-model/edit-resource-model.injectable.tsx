@@ -58,9 +58,9 @@ interface Dependencies {
 }
 
 function getEditSelfLinkFor(object: RawKubeObject): string | undefined {
-  const lensVersionAnnotation = object.metadata.annotations?.[EditResourceAnnotationName];
+  const k8sightVersionAnnotation = object.metadata.annotations?.[EditResourceAnnotationName];
 
-  if (lensVersionAnnotation) {
+  if (k8sightVersionAnnotation) {
     const parsedKubeApi = parseKubeApi(object.metadata.selfLink);
 
     if (!parsedKubeApi) {
@@ -71,7 +71,7 @@ function getEditSelfLinkFor(object: RawKubeObject): string | undefined {
 
     return createKubeApiURL({
       ...parsedApi,
-      apiVersion: lensVersionAnnotation,
+      apiVersion: k8sightVersionAnnotation,
     });
   }
 
@@ -79,7 +79,7 @@ function getEditSelfLinkFor(object: RawKubeObject): string | undefined {
 }
 
 /**
- * The annotation name that Lens uses to receive the desired api version
+ * The annotation name that K8sight uses to receive the desired api version
  */
 export const EditResourceAnnotationName = "k8sight.app/resource-version";
 

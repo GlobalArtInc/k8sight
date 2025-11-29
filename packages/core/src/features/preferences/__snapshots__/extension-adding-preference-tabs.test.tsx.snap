@@ -74,7 +74,7 @@ exports[`preferences: extension adding preference tabs given in preferences, whe
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -213,7 +213,7 @@ exports[`preferences: extension adding preference tabs given in preferences, whe
                        
                     </div>
                     <div
-                      class="Select theme-lens css-b62m3t-container"
+                      class="Select theme-k8sight css-b62m3t-container"
                     >
                       <span
                         class="css-1f43avz-a11yText-A11yText"
@@ -306,7 +306,7 @@ exports[`preferences: extension adding preference tabs given in preferences, whe
                        
                     </div>
                     <div
-                      class="Select theme-lens css-b62m3t-container"
+                      class="Select theme-k8sight css-b62m3t-container"
                     >
                       <span
                         class="css-1f43avz-a11yText-A11yText"
@@ -508,7 +508,7 @@ exports[`preferences: extension adding preference tabs given in preferences, whe
                        
                     </div>
                     <div
-                      class="Select theme-lens css-b62m3t-container"
+                      class="Select theme-k8sight css-b62m3t-container"
                     >
                       <span
                         class="css-1f43avz-a11yText-A11yText"

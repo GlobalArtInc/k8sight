@@ -13,7 +13,7 @@ import type { CatalogEntityRegistry } from "../../../api/catalog/entity/registry
 import type { CatalogEntityStore } from "../catalog-entity-store.injectable";
 
 class TestEntityOne extends CatalogEntity {
-  public static readonly apiVersion: string = "entity.k8slens.dev/v1alpha1";
+  public static readonly apiVersion: string = "entity.k8sk8sight.dev/v1alpha1";
   public static readonly kind: string = "TestEntityOne";
 
   public readonly apiVersion = TestEntityOne.apiVersion;
@@ -21,7 +21,7 @@ class TestEntityOne extends CatalogEntity {
 }
 
 class TestEntityTwo extends CatalogEntity {
-  public static readonly apiVersion: string = "entity.k8slens.dev/v1alpha1";
+  public static readonly apiVersion: string = "entity.k8sk8sight.dev/v1alpha1";
   public static readonly kind: string = "TestEntityTwo";
 
   public readonly apiVersion = TestEntityTwo.apiVersion;
@@ -29,14 +29,14 @@ class TestEntityTwo extends CatalogEntity {
 }
 
 class TestCategoryOne extends CatalogCategory {
-  apiVersion = "catalog.k8slens.dev/v1alpha1";
+  apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   kind = "CatalogCategory";
   metadata: CatalogCategoryMetadata = {
     icon: "dash",
     name: "test-one",
   };
   spec: CatalogCategorySpec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [categoryVersion("v1alpha1", TestEntityOne)],
     names: {
       kind: "KubernetesCluster",
@@ -45,14 +45,14 @@ class TestCategoryOne extends CatalogCategory {
 }
 
 class TestCategoryTwo extends CatalogCategory {
-  apiVersion = "catalog.k8slens.dev/v1alpha1";
+  apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   kind = "CatalogCategory";
   metadata: CatalogCategoryMetadata = {
     icon: "dash",
     name: "test-two",
   };
   spec: CatalogCategorySpec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [categoryVersion("v1alpha1", TestEntityTwo)],
     names: {
       kind: "KubernetesCluster",

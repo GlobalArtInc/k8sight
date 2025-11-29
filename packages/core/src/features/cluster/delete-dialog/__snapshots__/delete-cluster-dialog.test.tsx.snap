@@ -74,7 +74,7 @@ exports[`Deleting a cluster when an internal kubeconfig cluster is used when the
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -148,7 +148,7 @@ exports[`Deleting a cluster when an internal kubeconfig cluster is used when the
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -179,7 +179,7 @@ exports[`Deleting a cluster when an internal kubeconfig cluster is used when the
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -208,7 +208,7 @@ exports[`Deleting a cluster when an internal kubeconfig cluster is used when the
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -718,7 +718,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -792,7 +792,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -823,7 +823,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -852,7 +852,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -1395,7 +1395,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -1469,7 +1469,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -1500,7 +1500,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -1529,7 +1529,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -2153,7 +2153,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -2227,7 +2227,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -2258,7 +2258,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -2287,7 +2287,7 @@ exports[`Deleting a cluster when the kubeconfig has multiple clusters when the d
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -2911,7 +2911,7 @@ exports[`Deleting a cluster when the kubeconfig has only one cluster when the di
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -2985,7 +2985,7 @@ exports[`Deleting a cluster when the kubeconfig has only one cluster when the di
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -3016,7 +3016,7 @@ exports[`Deleting a cluster when the kubeconfig has only one cluster when the di
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -3045,7 +3045,7 @@ exports[`Deleting a cluster when the kubeconfig has only one cluster when the di
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div

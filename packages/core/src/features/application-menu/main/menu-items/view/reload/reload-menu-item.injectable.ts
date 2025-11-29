@@ -1,5 +1,5 @@
 import { getInjectable } from "@ogre-tools/injectable";
-import reloadCurrentApplicationWindowInjectable from "../../../../../../main/start-main-application/lens-window/reload-current-application-window.injectable";
+import reloadCurrentApplicationWindowInjectable from "../../../../../../main/start-main-application/k8sight-window/reload-current-application-window.injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
 
 const reloadMenuItemInjectable = getInjectable({

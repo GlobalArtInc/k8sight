@@ -8,7 +8,7 @@ import { CatalogCategoryLabel } from "../catalog-category-label";
 import type { CatalogCategorySpec } from "../../../../common/catalog";
 
 class CatalogCategoryWithoutBadge extends CatalogCategory {
-  public readonly apiVersion = "catalog.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   public readonly kind = "CatalogCategory";
 
   public metadata = {
@@ -17,7 +17,7 @@ class CatalogCategoryWithoutBadge extends CatalogCategory {
   };
 
   public spec: CatalogCategorySpec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [],
     names: {
       kind: "Test",

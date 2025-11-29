@@ -1,7 +1,7 @@
 import { getDiForUnitTesting } from "../getDiForUnitTesting";
 import staticFileRouteInjectable from "../routes/files/static-file-route.injectable";
 
-import type { LensApiRequest, Route } from "../router/route";
+import type { K8sightApiRequest, Route } from "../router/route";
 
 describe("static-file-route", () => {
   let handleStaticFileRoute: Route<Buffer, "/{path*}">;
@@ -18,7 +18,7 @@ describe("static-file-route", () => {
         path: "../index.ts",
       },
       raw: {},
-    } as LensApiRequest<"/{path*}">;
+    } as K8sightApiRequest<"/{path*}">;
 
     const result = await handleStaticFileRoute.handler(request);
 
@@ -35,7 +35,7 @@ describe("static-file-route", () => {
         path: "router.test.ts",
       },
       raw: { req },
-    } as LensApiRequest<"/{path*}">;
+    } as K8sightApiRequest<"/{path*}">;
 
     const result = await handleStaticFileRoute.handler(request);
 

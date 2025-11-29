@@ -10,13 +10,13 @@ import { getExtensionRoutePath } from "../../routes/for-extension";
 import routeIsActiveInjectable from "../../routes/route-is-active.injectable";
 import routesInjectable from "../../routes/routes.injectable";
 
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 
 const extensionSidebarItemRegistratorInjectable = getInjectable({
   id: "extension-sidebar-item-registrator",
 
   instantiate: (di) => (ext) => {
-    const extension = ext as LensRendererExtension;
+    const extension = ext as K8sightRendererExtension;
     const navigateToRoute = di.inject(navigateToRouteInjectionToken);
     const routes = di.inject(routesInjectable);
     const extensionShouldBeEnabledForClusterFrame = di.inject(

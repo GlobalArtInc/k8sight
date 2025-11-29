@@ -73,7 +73,7 @@ exports[`Showing correct entity settings renders 1`] = `
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -436,7 +436,7 @@ exports[`Showing correct entity settings when navigating to local cluster entity
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation"
@@ -799,7 +799,7 @@ exports[`Showing correct entity settings when navigating to non-local cluster en
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation"
@@ -1183,7 +1183,7 @@ exports[`Showing correct entity settings when navigating to weblink entity setti
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation"
@@ -1227,7 +1227,7 @@ exports[`Showing correct entity settings when navigating to weblink entity setti
                 data-preference-page-does-not-exist-test="true"
               >
                 No settings found for 
-                entity.k8slens.dev/v1alpha1
+                entity.k8sk8sight.dev/v1alpha1
                 /
                 WebLink
               </div>

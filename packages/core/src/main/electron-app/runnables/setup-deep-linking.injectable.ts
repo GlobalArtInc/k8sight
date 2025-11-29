@@ -2,8 +2,8 @@ import { onLoadOfApplicationInjectionToken } from "@kubesightapp/application";
 import { loggerInjectionToken } from "@kubesightapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import { startsWith, toLower } from "lodash/fp";
-import openDeepLinkInjectable from "../../protocol-handler/lens-protocol-router-main/open-deep-link-for-url/open-deep-link.injectable";
-import showApplicationWindowInjectable from "../../start-main-application/lens-window/show-application-window.injectable";
+import openDeepLinkInjectable from "../../protocol-handler/k8sight-protocol-router-main/open-deep-link-for-url/open-deep-link.injectable";
+import showApplicationWindowInjectable from "../../start-main-application/k8sight-window/show-application-window.injectable";
 import commandLineArgumentsInjectable from "../../utils/command-line-arguments.injectable";
 import electronAppInjectable from "../electron-app.injectable";
 

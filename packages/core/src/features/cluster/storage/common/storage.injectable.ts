@@ -23,7 +23,7 @@ const clustersPersistentStorageInjectable = getInjectable({
     const logger = di.inject(loggerInjectionToken);
 
     return createPersistentStorage<ClusterStoreModel>({
-      configName: "lens-cluster-store",
+      configName: "k8sight-cluster-store",
       accessPropertiesByDotNotation: false, // To make dots safe in cluster context names
       syncOptions: {
         equals: comparer.structural,

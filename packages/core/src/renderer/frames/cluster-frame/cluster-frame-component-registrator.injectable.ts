@@ -5,14 +5,14 @@ import { map } from "lodash/fp";
 import { extensionRegistratorInjectionToken } from "../../../extensions/extension-loader/extension-registrator-injection-token";
 
 import type { ExtensionRegistrator } from "../../../extensions/extension-loader/extension-registrator-injection-token";
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 
 const clusterFrameComponentRegistratorInjectable = getInjectable({
   id: "cluster-frame-component-registrator",
 
   instantiate: (): ExtensionRegistrator => {
     return (ext) => {
-      const extension = ext as LensRendererExtension;
+      const extension = ext as K8sightRendererExtension;
 
       return pipeline(
         extension.clusterFrameComponents,

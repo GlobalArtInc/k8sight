@@ -354,8 +354,8 @@ export abstract class ShellSession {
     if (this.dependencies.isWindows) {
       env.PTYSHELL = shell || "powershell.exe";
       env.PATH = pathStr;
-      env.LENS_SESSION = "true";
-      env.WSLENV = [env.WSLENV, "KUBECONFIG/up:LENS_SESSION/u"].filter(Boolean).join(":");
+      env.K8SIGHT_SESSION = "true";
+      env.WSLENV = [env.WSLENV, "KUBECONFIG/up:K8SIGHT_SESSION/u"].filter(Boolean).join(":");
     } else if (shell !== undefined) {
       env.PTYSHELL = shell;
       env.PATH = pathStr;

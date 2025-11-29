@@ -164,7 +164,7 @@ exports[`Command Pallet: keyboard shortcut tests when on linux renders 1`] = `
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -617,7 +617,7 @@ exports[`Command Pallet: keyboard shortcut tests when on linux when pressing ESC
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -1070,7 +1070,7 @@ exports[`Command Pallet: keyboard shortcut tests when on linux when pressing SHI
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -1535,7 +1535,7 @@ exports[`Command Pallet: keyboard shortcut tests when on linux when pressing SHI
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -1897,7 +1897,7 @@ exports[`Command Pallet: keyboard shortcut tests when on macOS renders 1`] = `
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -2259,7 +2259,7 @@ exports[`Command Pallet: keyboard shortcut tests when on macOS when pressing ESC
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -2621,7 +2621,7 @@ exports[`Command Pallet: keyboard shortcut tests when on macOS when pressing SHI
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -2995,7 +2995,7 @@ exports[`Command Pallet: keyboard shortcut tests when on macOS when pressing SHI
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"

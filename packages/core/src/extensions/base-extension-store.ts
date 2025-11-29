@@ -11,7 +11,7 @@ import type { Options } from "conf";
 
 import type { Migrations } from "../features/persistent-storage/common/migrations.injectable";
 import type { PersistentStorageParams } from "./common-api/stores";
-import type { LensExtension } from "./lens-extension";
+import type { K8sightExtension } from "./k8sight-extension";
 
 export interface ExtensionStoreParams<T extends object>
   extends Omit<PersistentStorageParams<T>, "migrations" | "cwd" | "fromStore" | "toJSON"> {
@@ -66,9 +66,9 @@ export abstract class BaseExtensionStore<M extends object = any> {
     BaseExtensionStore.instances.delete(this);
   }
 
-  protected extension?: LensExtension;
+  protected extension?: K8sightExtension;
 
-  loadExtension(extension: LensExtension) {
+  loadExtension(extension: K8sightExtension) {
     this.extension = extension;
     const {
       projectVersion = this.extension.version,

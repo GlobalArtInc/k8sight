@@ -2,13 +2,13 @@ import { getInjectable } from "@ogre-tools/injectable";
 import { extensionRegistratorInjectionToken } from "../../../../extensions/extension-loader/extension-registrator-injection-token";
 import { customCatalogCategoryColumnInjectionToken } from "./custom-token";
 
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 import type { AdditionalCategoryColumnRegistration } from "../custom-category-columns";
 
 const customCategoryColumnsRegistratorInjectable = getInjectable({
   id: "custom-category-columns-registrator",
   instantiate: () => (ext) => {
-    const extension = ext as LensRendererExtension;
+    const extension = ext as K8sightRendererExtension;
 
     return extension.additionalCategoryColumns.map(getInjectableForColumnRegistrationFor(extension));
   },
@@ -18,7 +18,7 @@ const customCategoryColumnsRegistratorInjectable = getInjectable({
 export default customCategoryColumnsRegistratorInjectable;
 
 const getInjectableForColumnRegistrationFor =
-  (extension: LensRendererExtension) =>
+  (extension: K8sightRendererExtension) =>
   ({
     group,
     id,

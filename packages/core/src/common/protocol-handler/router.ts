@@ -12,7 +12,7 @@ import type { match } from "react-router";
 import type Url from "url-parse";
 
 import type { ExtensionLoader } from "../../extensions/extension-loader";
-import type { LensExtension } from "../../extensions/lens-extension";
+import type { K8sightExtension } from "../../extensions/k8sight-extension";
 import type { IsExtensionEnabled } from "../../features/extensions/enabled/common/is-enabled.injectable";
 import type { RouteHandler, RouteParams } from "./registration";
 
@@ -30,8 +30,8 @@ export const ProtocolHandlerInvalid = `${ProtocolHandlerIpcPrefix}:invalid`;
  * Though under the current (2021/01/18) implementation, these are never matched
  * against in the final matching so their names are less of a concern.
  */
-export const EXTENSION_PUBLISHER_MATCH = "LENS_INTERNAL_EXTENSION_PUBLISHER_MATCH";
-export const EXTENSION_NAME_MATCH = "LENS_INTERNAL_EXTENSION_NAME_MATCH";
+export const EXTENSION_PUBLISHER_MATCH = "K8SIGHT_INTERNAL_EXTENSION_PUBLISHER_MATCH";
+export const EXTENSION_NAME_MATCH = "K8SIGHT_INTERNAL_EXTENSION_NAME_MATCH";
 
 /**
  * Returned from routing attempts
@@ -61,13 +61,13 @@ export function foldAttemptResults(mainAttempt: RouteAttempt, rendererAttempt: R
   }
 }
 
-export interface LensProtocolRouterDependencies {
+export interface K8sightProtocolRouterDependencies {
   readonly extensionLoader: ExtensionLoader;
   readonly logger: Logger;
   isExtensionEnabled: IsExtensionEnabled;
 }
 
-export abstract class LensProtocolRouter {
+export abstract class K8sightProtocolRouter {
   // Map between path schemas and the handlers
   protected internalRoutes = new Map<string, RouteHandler>();
 
@@ -75,7 +75,7 @@ export abstract class LensProtocolRouter {
 
   static readonly ExtensionUrlSchema = `/:${EXTENSION_PUBLISHER_MATCH}(@[A-Za-z0-9_]+)?/:${EXTENSION_NAME_MATCH}`;
 
-  constructor(protected readonly dependencies: LensProtocolRouterDependencies) {}
+  constructor(protected readonly dependencies: K8sightProtocolRouterDependencies) {}
 
   /**
    * Attempts to route the given URL to all internal routes that have been registered
@@ -148,7 +148,7 @@ export abstract class LensProtocolRouter {
         data.extensionName = extensionName;
       }
 
-      this.dependencies.logger.info(`${LensProtocolRouter.LoggingPrefix}: No handler found`, data);
+      this.dependencies.logger.info(`${K8sightProtocolRouter.LoggingPrefix}: No handler found`, data);
 
       return RouteAttempt.MISSING;
     }
@@ -170,21 +170,21 @@ export abstract class LensProtocolRouter {
   }
 
   /**
-   * Tries to find the matching LensExtension instance
+   * Tries to find the matching K8sightExtension instance
    *
    * Note: this needs to be async so that `main`'s overloaded version can also be async
    * @param url the protocol request URI that was "open"-ed
-   * @returns either the found name or the instance of `LensExtension`
+   * @returns either the found name or the instance of `K8sightExtension`
    */
   protected async _findMatchingExtensionByName(
     url: Url<Record<string, string | undefined>>,
-  ): Promise<LensExtension | string> {
+  ): Promise<K8sightExtension | string> {
     interface ExtensionUrlMatch {
       [EXTENSION_PUBLISHER_MATCH]: string;
       [EXTENSION_NAME_MATCH]: string;
     }
 
-    const match = matchPath<ExtensionUrlMatch>(url.pathname, LensProtocolRouter.ExtensionUrlSchema);
+    const match = matchPath<ExtensionUrlMatch>(url.pathname, K8sightProtocolRouter.ExtensionUrlSchema);
 
     if (!match) {
       throw new RoutingError(RoutingErrorType.NO_EXTENSION_ID, url);
@@ -204,29 +204,29 @@ export abstract class LensProtocolRouter {
       });
     } catch (error) {
       this.dependencies.logger.info(
-        `${LensProtocolRouter.LoggingPrefix}: Extension ${name} matched, but not installed (${error})`,
+        `${K8sightProtocolRouter.LoggingPrefix}: Extension ${name} matched, but not installed (${error})`,
       );
 
       return name;
     }
 
-    const extension = extensionLoader.getInstanceByName(name) as LensExtension | undefined;
+    const extension = extensionLoader.getInstanceByName(name) as K8sightExtension | undefined;
 
     if (!extension) {
       this.dependencies.logger.info(
-        `${LensProtocolRouter.LoggingPrefix}: Extension ${name} matched, but does not have a class for ${ipcRenderer ? "renderer" : "main"}`,
+        `${K8sightProtocolRouter.LoggingPrefix}: Extension ${name} matched, but does not have a class for ${ipcRenderer ? "renderer" : "main"}`,
       );
 
       return name;
     }
 
     if (!extension.isBundled && !this.dependencies.isExtensionEnabled(extension.id)) {
-      this.dependencies.logger.info(`${LensProtocolRouter.LoggingPrefix}: Extension ${name} matched, but not enabled`);
+      this.dependencies.logger.info(`${K8sightProtocolRouter.LoggingPrefix}: Extension ${name} matched, but not enabled`);
 
       return name;
     }
 
-    this.dependencies.logger.info(`${LensProtocolRouter.LoggingPrefix}: Extension ${name} matched`);
+    this.dependencies.logger.info(`${K8sightProtocolRouter.LoggingPrefix}: Extension ${name} matched`);
 
     return extension;
   }
@@ -275,7 +275,7 @@ export abstract class LensProtocolRouter {
    */
   public addInternalHandler(urlSchema: string, handler: RouteHandler): this {
     pathToRegexp(urlSchema); // verify now that the schema is valid
-    this.dependencies.logger.info(`${LensProtocolRouter.LoggingPrefix}: internal registering ${urlSchema}`);
+    this.dependencies.logger.info(`${K8sightProtocolRouter.LoggingPrefix}: internal registering ${urlSchema}`);
     this.internalRoutes.set(urlSchema, handler);
 
     return this;

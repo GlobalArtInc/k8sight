@@ -1,5 +1,5 @@
 import { getEnvironmentSpecificLegacyGlobalDiForExtensionApi } from "@kubesightapp/legacy-global-di";
-import navigateInjectable from "../../main/start-main-application/lens-window/navigate.injectable";
+import navigateInjectable from "../../main/start-main-application/k8sight-window/navigate.injectable";
 
 export function navigate(url: string) {
   const di = getEnvironmentSpecificLegacyGlobalDiForExtensionApi("main");

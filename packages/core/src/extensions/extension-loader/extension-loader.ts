@@ -16,9 +16,9 @@ import type {
   BundledInstalledExtension,
   ExternalInstalledExtension,
   InstalledExtension,
-  LegacyLensExtension,
-  LensExtensionConstructor,
-  LensExtensionId,
+  LegacyK8sightExtension,
+  K8sightExtensionConstructor,
+  K8sightExtensionId,
 } from "@kubesightapp/legacy-extensions";
 import type { Logger } from "@kubesightapp/logger";
 
@@ -27,24 +27,24 @@ import type { ObservableMap } from "mobx";
 import type { GetDirnameOfPath } from "../../common/path/get-dirname.injectable";
 import type { JoinPaths } from "../../common/path/join-paths.injectable";
 import type { UpdateExtensionsState } from "../../features/extensions/enabled/common/update-state.injectable";
-import type { LensExtension } from "../lens-extension";
+import type { K8sightExtension } from "../k8sight-extension";
 import type { Extension } from "./extension/extension.injectable";
 
 const logModule = "[EXTENSIONS-LOADER]";
 
 interface Dependencies {
-  readonly extensionInstances: ObservableMap<LensExtensionId, LegacyLensExtension>;
+  readonly extensionInstances: ObservableMap<K8sightExtensionId, LegacyK8sightExtension>;
   readonly bundledExtensions: BundledExtension[];
   readonly logger: Logger;
   readonly extensionEntryPointName: "main" | "renderer";
   updateExtensionsState: UpdateExtensionsState;
-  getExtension: (instance: LegacyLensExtension) => Extension;
+  getExtension: (instance: LegacyK8sightExtension) => Extension;
   joinPaths: JoinPaths;
   getDirnameOfPath: GetDirnameOfPath;
 }
 
 interface ExtensionBeingActivated {
-  instance: LensExtension;
+  instance: K8sightExtension;
   installedExtension: InstalledExtension;
   activated: Promise<void>;
 }
@@ -55,15 +55,15 @@ export interface ExtensionLoading {
 }
 
 /**
- * Loads installed extensions to the Lens application
+ * Loads installed extensions to the K8sight application
  */
 export class ExtensionLoader {
-  protected readonly extensions = observable.map<LensExtensionId, InstalledExtension>();
+  protected readonly extensions = observable.map<K8sightExtensionId, InstalledExtension>();
 
   /**
    * This is the set of extensions that don't come with either
-   * - Main.LensExtension when running in the main process
-   * - Renderer.LensExtension when running in the renderer process
+   * - Main.K8sightExtension when running in the main process
+   * - Renderer.K8sightExtension when running in the renderer process
    */
   protected readonly nonInstancesByName = observable.set<string>();
 
@@ -88,12 +88,12 @@ export class ExtensionLoader {
    * Get the extension instance by its manifest name
    * @param name The name of the extension
    * @returns one of the following:
-   * - the instance of `Main.LensExtension` on the main process if created
-   * - the instance of `Renderer.LensExtension` on the renderer process if created
+   * - the instance of `Main.K8sightExtension` on the main process if created
+   * - the instance of `Renderer.K8sightExtension` on the renderer process if created
    * - `null` if no class definition is provided for the current process
    * - `undefined` if the name is not known about
    */
-  getInstanceByName(name: string): LegacyLensExtension | null | undefined {
+  getInstanceByName(name: string): LegacyK8sightExtension | null | undefined {
     if (this.nonInstancesByName.has(name)) {
       return null;
     }
@@ -142,7 +142,7 @@ export class ExtensionLoader {
     );
   }
 
-  initExtensions(extensions: Map<LensExtensionId, InstalledExtension>) {
+  initExtensions(extensions: Map<K8sightExtensionId, InstalledExtension>) {
     this.extensions.replace(extensions);
   }
 
@@ -151,9 +151,9 @@ export class ExtensionLoader {
   }
 
   @action
-  removeInstance(lensExtensionId: LensExtensionId) {
-    this.dependencies.logger.info(`${logModule} deleting extension instance ${lensExtensionId}`);
-    const instance = this.dependencies.extensionInstances.get(lensExtensionId);
+  removeInstance(k8sightExtensionId: K8sightExtensionId) {
+    this.dependencies.logger.info(`${logModule} deleting extension instance ${k8sightExtensionId}`);
+    const instance = this.dependencies.extensionInstances.get(k8sightExtensionId);
 
     if (!instance) {
       return;
@@ -167,25 +167,25 @@ export class ExtensionLoader {
       extension.deregister();
 
       this.onRemoveExtensionId.emit(instance.id);
-      this.dependencies.extensionInstances.delete(lensExtensionId);
+      this.dependencies.extensionInstances.delete(k8sightExtensionId);
       this.nonInstancesByName.delete(instance.name);
     } catch (error) {
-      this.dependencies.logger.error(`${logModule}: deactivation extension error`, { lensExtensionId, error });
+      this.dependencies.logger.error(`${logModule}: deactivation extension error`, { k8sightExtensionId, error });
     }
   }
 
-  removeExtension(lensExtensionId: LensExtensionId) {
-    this.removeInstance(lensExtensionId);
+  removeExtension(k8sightExtensionId: K8sightExtensionId) {
+    this.removeInstance(k8sightExtensionId);
 
-    if (!this.extensions.delete(lensExtensionId)) {
-      throw new Error(`Can't remove extension ${lensExtensionId}, doesn't exist.`);
+    if (!this.extensions.delete(k8sightExtensionId)) {
+      throw new Error(`Can't remove extension ${k8sightExtensionId}, doesn't exist.`);
     }
   }
 
-  setIsEnabled(lensExtensionId: LensExtensionId, isEnabled: boolean) {
-    const extension = this.extensions.get(lensExtensionId);
+  setIsEnabled(k8sightExtensionId: K8sightExtensionId, isEnabled: boolean) {
+    const extension = this.extensions.get(k8sightExtensionId);
 
-    assert(extension, `Extension "${lensExtensionId}" must be registered before it can be enabled.`);
+    assert(extension, `Extension "${k8sightExtensionId}" must be registered before it can be enabled.`);
     assert(!extension.isBundled, `Cannot change the enabled state of a bundled extension`);
 
     extension.isEnabled = isEnabled;
@@ -200,30 +200,30 @@ export class ExtensionLoader {
 
     ipcMainHandle(extensionLoaderFromMainChannel, () => [...this.toJSON()]);
 
-    ipcMainOn(extensionLoaderFromRendererChannel, (event, extensions: [LensExtensionId, InstalledExtension][]) => {
+    ipcMainOn(extensionLoaderFromRendererChannel, (event, extensions: [K8sightExtensionId, InstalledExtension][]) => {
       this.syncExtensions(extensions);
     });
   }
 
   protected async initRenderer() {
-    const extensionListHandler = (extensions: [LensExtensionId, InstalledExtension][]) => {
+    const extensionListHandler = (extensions: [K8sightExtensionId, InstalledExtension][]) => {
       runInAction(() => {
         this.isLoaded.set(true);
       });
       this.syncExtensions(extensions);
 
-      const receivedExtensionIds = extensions.map(([lensExtensionId]) => lensExtensionId);
+      const receivedExtensionIds = extensions.map(([k8sightExtensionId]) => k8sightExtensionId);
 
       // Remove deleted extensions in renderer side only
-      this.extensions.forEach((_, lensExtensionId) => {
-        if (!receivedExtensionIds.includes(lensExtensionId)) {
-          this.removeExtension(lensExtensionId);
+      this.extensions.forEach((_, k8sightExtensionId) => {
+        if (!receivedExtensionIds.includes(k8sightExtensionId)) {
+          this.removeExtension(k8sightExtensionId);
         }
       });
     };
 
     requestExtensionLoaderInitialState().then(extensionListHandler);
-    ipcRendererOn(extensionLoaderFromMainChannel, (event, extensions: [LensExtensionId, InstalledExtension][]) => {
+    ipcRendererOn(extensionLoaderFromMainChannel, (event, extensions: [K8sightExtensionId, InstalledExtension][]) => {
       extensionListHandler(extensions);
     });
   }
@@ -234,10 +234,10 @@ export class ExtensionLoader {
     broadcastMessage(channel, Array.from(this.extensions));
   }
 
-  syncExtensions(extensions: [LensExtensionId, InstalledExtension][]) {
-    extensions.forEach(([lensExtensionId, extension]) => {
-      if (!isEqual(this.extensions.get(lensExtensionId), extension)) {
-        this.extensions.set(lensExtensionId, extension);
+  syncExtensions(extensions: [K8sightExtensionId, InstalledExtension][]) {
+    extensions.forEach(([k8sightExtensionId, extension]) => {
+      if (!isEqual(this.extensions.get(k8sightExtensionId), extension)) {
+        this.extensions.set(k8sightExtensionId, extension);
       }
     });
   }
@@ -246,9 +246,9 @@ export class ExtensionLoader {
     const bundledExtensions = await Promise.all(
       this.dependencies.bundledExtensions.map(async (extension) => {
         try {
-          const LensExtensionClass = await extension[this.dependencies.extensionEntryPointName]();
+          const K8sightExtensionClass = await extension[this.dependencies.extensionEntryPointName]();
 
-          if (!LensExtensionClass) {
+          if (!K8sightExtensionClass) {
             return null;
           }
 
@@ -261,7 +261,7 @@ export class ExtensionLoader {
             manifest: extension.manifest,
             manifestPath: "irrelevant",
           };
-          const instance = new LensExtensionClass(installedExtension);
+          const instance = new K8sightExtensionClass(installedExtension);
 
           this.dependencies.extensionInstances.set(extension.manifest.name, instance);
 
@@ -330,15 +330,15 @@ export class ExtensionLoader {
 
         if (installedExtension.isCompatible && installedExtension.isEnabled && !alreadyInit) {
           try {
-            const LensExtensionClass = this.requireExtension(installedExtension);
+            const K8sightExtensionClass = this.requireExtension(installedExtension);
 
-            if (!LensExtensionClass) {
+            if (!K8sightExtensionClass) {
               this.nonInstancesByName.add(installedExtension.manifest.name);
 
               return null;
             }
 
-            const instance = new LensExtensionClass(installedExtension);
+            const instance = new K8sightExtensionClass(installedExtension);
 
             this.dependencies.extensionInstances.set(extId, instance);
 
@@ -381,7 +381,7 @@ export class ExtensionLoader {
     return loadedExtensions;
   }
 
-  protected requireExtension(extension: ExternalInstalledExtension): LensExtensionConstructor | null {
+  protected requireExtension(extension: ExternalInstalledExtension): K8sightExtensionConstructor | null {
     const extRelativePath = extension.manifest[this.dependencies.extensionEntryPointName];
 
     if (!extRelativePath) {
@@ -407,15 +407,15 @@ export class ExtensionLoader {
     return null;
   }
 
-  getExtensionById(extId: LensExtensionId) {
+  getExtensionById(extId: K8sightExtensionId) {
     return this.extensions.get(extId);
   }
 
-  getInstanceById(extId: LensExtensionId) {
+  getInstanceById(extId: K8sightExtensionId) {
     return this.dependencies.extensionInstances.get(extId);
   }
 
-  toJSON(): Map<LensExtensionId, InstalledExtension> {
+  toJSON(): Map<K8sightExtensionId, InstalledExtension> {
     return toJS(this.extensions);
   }
 }

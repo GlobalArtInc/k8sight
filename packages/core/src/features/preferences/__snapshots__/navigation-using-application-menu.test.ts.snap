@@ -72,7 +72,7 @@ exports[`preferences - navigation using application menu renders 1`] = `
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <div
         class="flex justify-center Welcome align-center"
@@ -433,7 +433,7 @@ exports[`preferences - navigation using application menu when navigating to pref
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <div
         class="SettingLayout showNavigation Preferences"
@@ -548,7 +548,7 @@ exports[`preferences - navigation using application menu when navigating to pref
                      
                   </div>
                   <div
-                    class="Select theme-lens css-b62m3t-container"
+                    class="Select theme-k8sight css-b62m3t-container"
                   >
                     <span
                       class="css-1f43avz-a11yText-A11yText"
@@ -641,7 +641,7 @@ exports[`preferences - navigation using application menu when navigating to pref
                      
                   </div>
                   <div
-                    class="Select theme-lens css-b62m3t-container"
+                    class="Select theme-k8sight css-b62m3t-container"
                   >
                     <span
                       class="css-1f43avz-a11yText-A11yText"
@@ -843,7 +843,7 @@ exports[`preferences - navigation using application menu when navigating to pref
                      
                   </div>
                   <div
-                    class="Select theme-lens css-b62m3t-container"
+                    class="Select theme-k8sight css-b62m3t-container"
                   >
                     <span
                       class="css-1f43avz-a11yText-A11yText"

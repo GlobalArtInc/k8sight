@@ -11,7 +11,7 @@ import { trayMenuItemInjectionToken } from "./tray-menu-item-injection-token";
 import type { Injectable } from "@ogre-tools/injectable";
 
 import type { WithErrorLoggingFor } from "../../../common/utils/with-error-logging/with-error-logging.injectable";
-import type { LensMainExtension } from "../../../extensions/lens-main-extension";
+import type { K8sightMainExtension } from "../../../extensions/k8sight-main-extension";
 import type { TrayMenuRegistration } from "../tray-menu-registration";
 import type { TrayMenuItem } from "./tray-menu-item-injection-token";
 
@@ -19,7 +19,7 @@ const trayMenuItemRegistratorInjectable = getInjectable({
   id: "tray-menu-item-registrator",
 
   instantiate: (di) => (extension) => {
-    const mainExtension = extension as LensMainExtension;
+    const mainExtension = extension as K8sightMainExtension;
     const withErrorLoggingFor = di.inject(withErrorLoggingInjectable);
     const getRandomId = di.inject(getRandomIdInjectionToken);
 
@@ -38,7 +38,7 @@ const trayMenuItemRegistratorInjectable = getInjectable({
 export default trayMenuItemRegistratorInjectable;
 
 const toItemInjectablesFor = (
-  extension: LensMainExtension,
+  extension: K8sightMainExtension,
   withErrorLoggingFor: WithErrorLoggingFor,
   getRandomId: () => string,
 ) => {

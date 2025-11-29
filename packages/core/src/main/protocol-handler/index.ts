@@ -1,1 +1,1 @@
-export * from "./lens-protocol-router-main/lens-protocol-router-main";
+export * from "./k8sight-protocol-router-main/k8sight-protocol-router-main";

@@ -1,10 +1,10 @@
-import { lensBuildEnvironmentInjectionToken } from "@kubesightapp/application";
+import { k8sightBuildEnvironmentInjectionToken } from "@kubesightapp/application";
 import { getInjectable } from "@ogre-tools/injectable";
 
-const lensBuildEnvironmentInjectable = getInjectable({
-  id: "lens-build-environment",
+const k8sightBuildEnvironmentInjectable = getInjectable({
+  id: "k8sight-build-environment",
   instantiate: () => "unknown",
-  injectionToken: lensBuildEnvironmentInjectionToken,
+  injectionToken: k8sightBuildEnvironmentInjectionToken,
 });
 
-export default lensBuildEnvironmentInjectable;
+export default k8sightBuildEnvironmentInjectable;

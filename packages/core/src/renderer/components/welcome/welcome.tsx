@@ -29,7 +29,7 @@ const NonInjectedWelcome = observer(({ welcomeMenuItems, productName, newVersion
   return (
     <div className="flex justify-center Welcome align-center" data-testid="welcome-page">
       <div style={{ width: `${defaultWidth}px` }} data-testid="welcome-banner-container">
-        <Icon svg="logo-lens" className="logo" welcomeLogo={true} data-testid="no-welcome-banners-icon" />
+        <Icon svg="logo-k8sight" className="logo" welcomeLogo={true} data-testid="no-welcome-banners-icon" />
 
         <div className="flex justify-center">
           <div style={{ width: `${defaultWidth}px` }} data-testid="welcome-text-container">

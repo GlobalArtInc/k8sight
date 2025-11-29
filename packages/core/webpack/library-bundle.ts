@@ -1,6 +1,6 @@
-import webpackLensMain from "./main";
-import { webpackLensRenderer } from "./renderer";
+import webpackK8sightMain from "./main";
+import { webpackK8sightRenderer } from "./renderer";
 
-const config = [webpackLensMain(), webpackLensRenderer()];
+const config = [webpackK8sightMain(), webpackK8sightRenderer()];
 
 export default config;

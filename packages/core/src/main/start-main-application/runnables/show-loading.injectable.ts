@@ -1,7 +1,7 @@
 import { onLoadOfApplicationInjectionToken } from "@kubesightapp/application";
 import { getInjectable } from "@ogre-tools/injectable";
 import shouldStartHiddenInjectable from "../../electron-app/features/should-start-hidden.injectable";
-import splashWindowInjectable from "../lens-window/splash-window/splash-window.injectable";
+import splashWindowInjectable from "../k8sight-window/splash-window/splash-window.injectable";
 
 const showLoadingInjectable = getInjectable({
   id: "show-loading",

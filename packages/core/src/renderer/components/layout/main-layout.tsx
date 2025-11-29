@@ -22,7 +22,7 @@ export interface MainLayoutProps {
 /**
  * Main layout is commonly used as a wrapper for "global pages"
  *
- * @link https://api-docs.k8slens.dev/master/extensions/capabilities/common-capabilities/#global-pages
+ * @link https://api-docs.k8sk8sight.dev/master/extensions/capabilities/common-capabilities/#global-pages
  */
 
 interface Dependencies {

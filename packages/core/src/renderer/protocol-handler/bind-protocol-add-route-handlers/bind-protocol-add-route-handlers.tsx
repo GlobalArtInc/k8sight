@@ -1,6 +1,6 @@
 import assert from "assert";
 import React from "react";
-import { EXTENSION_NAME_MATCH, EXTENSION_PUBLISHER_MATCH, LensProtocolRouter } from "../../../common/protocol-handler";
+import { EXTENSION_NAME_MATCH, EXTENSION_PUBLISHER_MATCH, K8sightProtocolRouter } from "../../../common/protocol-handler";
 
 import type { ShowNotification } from "@kubesightapp/notifications";
 
@@ -10,11 +10,11 @@ import type { NavigateToEntitySettings } from "../../../common/front-end-routing
 import type { GetClusterById } from "../../../features/cluster/storage/common/get-by-id.injectable";
 import type { CatalogEntityRegistry } from "../../api/catalog/entity/registry";
 import type { AttemptInstallByInfo } from "../../components/extensions/attempt-install-by-info.injectable";
-import type { LensProtocolRouterRenderer } from "../lens-protocol-router-renderer/lens-protocol-router-renderer";
+import type { K8sightProtocolRouterRenderer } from "../k8sight-protocol-router-renderer/k8sight-protocol-router-renderer";
 
 interface Dependencies {
   attemptInstallByInfo: AttemptInstallByInfo;
-  lensProtocolRouterRenderer: LensProtocolRouterRenderer;
+  k8sightProtocolRouterRenderer: K8sightProtocolRouterRenderer;
   navigateToCatalog: NavigateToCatalog;
   navigateToAddCluster: () => void;
   navigateToExtensions: () => void;
@@ -29,7 +29,7 @@ interface Dependencies {
 export const bindProtocolAddRouteHandlers =
   ({
     attemptInstallByInfo,
-    lensProtocolRouterRenderer,
+    k8sightProtocolRouterRenderer,
     navigateToCatalog,
     navigateToAddCluster,
     navigateToExtensions,
@@ -41,7 +41,7 @@ export const bindProtocolAddRouteHandlers =
     showShortInfoNotification,
   }: Dependencies) =>
   () => {
-    lensProtocolRouterRenderer
+    k8sightProtocolRouterRenderer
       .addInternalHandler("/preferences", ({ search: { highlight: tabId } }) => {
         if (tabId) {
           navigateToPreferences(tabId);
@@ -122,7 +122,7 @@ export const bindProtocolAddRouteHandlers =
         navigateToExtensions();
       })
       .addInternalHandler(
-        `/extensions/install${LensProtocolRouter.ExtensionUrlSchema}`,
+        `/extensions/install${K8sightProtocolRouter.ExtensionUrlSchema}`,
         ({ pathname, search: { version } }) => {
           const name = [pathname[EXTENSION_PUBLISHER_MATCH], pathname[EXTENSION_NAME_MATCH]].filter(Boolean).join("/");
 

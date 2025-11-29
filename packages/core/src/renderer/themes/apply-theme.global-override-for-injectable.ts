@@ -1,4 +1,4 @@
 import { getGlobalOverride } from "@kubesightapp/test-utils";
-import applyLensThemeInjectable from "./apply-lens-theme.injectable";
+import applyThemeInjectable from "./apply-k8sight-theme.injectable";
 
-export default getGlobalOverride(applyLensThemeInjectable, () => () => {});
+export default getGlobalOverride(applyThemeInjectable, () => () => {});

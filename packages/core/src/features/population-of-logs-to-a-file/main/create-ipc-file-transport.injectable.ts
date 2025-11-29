@@ -15,7 +15,7 @@ const createIpcFileLoggerTransportInjectable = getInjectable({
     return (fileId: string) =>
       new transports.File({
         ...options,
-        filename: `lens-${fileId}.log`,
+        filename: `k8sight-${fileId}.log`,
       });
   },
   causesSideEffects: true,

@@ -26,7 +26,7 @@ const NonInjectedLineNumbers = observer(({ state: { editorConfiguration } }: Dep
       options={lineNumberOptions}
       value={editorConfiguration.lineNumbers}
       onChange={(option) => (editorConfiguration.lineNumbers = option?.value ?? defaultEditorConfig.lineNumbers)}
-      themeName="lens"
+      themeName="k8sight"
     />
   </section>
 ));

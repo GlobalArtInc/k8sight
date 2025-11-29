@@ -6,7 +6,7 @@ import setStatusBarStatusInjectable from "./components/status-bar/set-status-bar
 
 // @experimental
 export { nodeEnvInjectionToken } from "../common/vars/node-env-injection-token";
-export { registerLensCore } from "./register-lens-core";
+export { registerK8sightCore } from "./register-k8sight-core";
 export { React, ReactDOM, setStatusBarStatusInjectable };
 
 export * as Mobx from "mobx";

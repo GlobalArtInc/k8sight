@@ -16,7 +16,7 @@ describe("get-multi-export-config", () => {
     maximalPackageJson = {
       name: "some-name",
 
-      lensMultiExportConfig: {
+      k8sightMultiExportConfig: {
         ".": {
           buildType: "node",
           entrypoint: "./index.ts",
@@ -131,7 +131,7 @@ describe("get-multi-export-config", () => {
     }).toThrow('Tried to get multi export config but exports of package.json for "some-name" did not match exactly:');
   });
 
-  it("given maximal package.json but exports do not match lens multi export config, when creating configuration, throws", () => {
+  it("given maximal package.json but exports do not match k8sight multi export config, when creating configuration, throws", () => {
     maximalPackageJson.exports = {};
 
     expect(() => {
@@ -151,8 +151,8 @@ describe("get-multi-export-config", () => {
     }).toThrow('Tried to get multi export config but exports of package.json for "some-name" did not match exactly:');
   });
 
-  it("given maximal package.json but lens multi export config is missing, when creating configuration, throws", () => {
-    delete maximalPackageJson.lensMultiExportConfig;
+  it("given maximal package.json but k8sight multi export config is missing, when creating configuration, throws", () => {
+    delete maximalPackageJson.k8sightMultiExportConfig;
 
     expect(() => {
       getMultiExportConfig(maximalPackageJson, {
@@ -162,7 +162,7 @@ describe("get-multi-export-config", () => {
   });
 
   it("given maximal package.json but a build type is incorrect, when creating configuration, throws", () => {
-    maximalPackageJson.lensMultiExportConfig["."].buildType = "some-invalid";
+    maximalPackageJson.k8sightMultiExportConfig["."].buildType = "some-invalid";
 
     expect(() => {
       getMultiExportConfig(maximalPackageJson, {
@@ -174,7 +174,7 @@ describe("get-multi-export-config", () => {
   });
 
   it("given maximal package.json but entrypoint is missing, when creating configuration, throws", () => {
-    delete maximalPackageJson.lensMultiExportConfig["./some-entrypoint"].entrypoint;
+    delete maximalPackageJson.k8sightMultiExportConfig["./some-entrypoint"].entrypoint;
 
     expect(() => {
       getMultiExportConfig(maximalPackageJson, {

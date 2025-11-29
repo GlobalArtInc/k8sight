@@ -10,7 +10,7 @@ import {
 import { toJS } from "../../common/utils";
 import ipcRendererInjectable from "../utils/channel/ipc-renderer.injectable";
 
-import type { InstalledExtension, LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { InstalledExtension, K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
 import type { Location } from "history";
 
@@ -56,6 +56,6 @@ export function requestInitialExtensionDiscovery(): Promise<{ isLoaded: boolean 
   return requestMain(extensionDiscoveryStateChannel);
 }
 
-export function requestExtensionLoaderInitialState(): Promise<[LensExtensionId, InstalledExtension][]> {
+export function requestExtensionLoaderInitialState(): Promise<[K8sightExtensionId, InstalledExtension][]> {
   return requestMain(extensionLoaderFromMainChannel);
 }

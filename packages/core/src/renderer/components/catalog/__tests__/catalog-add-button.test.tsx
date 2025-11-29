@@ -11,14 +11,14 @@ import type { UserEvent } from "@testing-library/user-event";
 import type { CatalogCategorySpec } from "../../../../common/catalog";
 
 class TestCatalogCategory extends CatalogCategory {
-  public readonly apiVersion = "catalog.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   public readonly kind = "CatalogCategory";
   public metadata = {
     name: "Test Category",
     icon: "",
   };
   public spec: CatalogCategorySpec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [],
     names: {
       kind: "Test",

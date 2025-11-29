@@ -2,7 +2,7 @@ import { getInjectable } from "@ogre-tools/injectable";
 import { extensionRegistratorInjectionToken } from "../../../extensions/extension-loader/extension-registrator-injection-token";
 import { entitySettingInjectionToken } from "./token";
 
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 import type { CatalogEntity } from "../../api/catalog-entity";
 
 export interface EntitySettingViewProps {
@@ -38,7 +38,7 @@ export interface RegisteredEntitySetting {
 const entitySettingExtensionRegistratorInjectable = getInjectable({
   id: "entity-setting-extension-registrator",
   instantiate: () => (ext) => {
-    const extension = ext as LensRendererExtension;
+    const extension = ext as K8sightRendererExtension;
 
     return extension.entitySettings.map(getInjectableForEntitySettingRegistrationFor(extension));
   },
@@ -48,7 +48,7 @@ const entitySettingExtensionRegistratorInjectable = getInjectable({
 export default entitySettingExtensionRegistratorInjectable;
 
 const getInjectableForEntitySettingRegistrationFor =
-  (extension: LensRendererExtension) =>
+  (extension: K8sightRendererExtension) =>
   ({
     apiVersions,
     components,

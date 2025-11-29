@@ -7,7 +7,7 @@ import type { KubernetesCluster } from "../../../../common/catalog-entities";
 const kubernetesDistributionColumnInjectable = getInjectable({
   id: "kubernetes-distribution-column",
   instantiate: () => ({
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     kind: "KubernetesCluster",
     registration: {
       id: "distro",

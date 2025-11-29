@@ -18,7 +18,7 @@ import type { Logger } from "@kubesightapp/logger";
 import type { IComputedValue } from "mobx";
 
 import type { UserPreferencesState } from "../../../features/user-preferences/common/state.injectable";
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 import type { MonacoTheme } from "./monaco-themes";
 
 export type MonacoEditorId = string;
@@ -44,7 +44,7 @@ export interface MonacoEditorProps {
 
 interface Dependencies {
   state: UserPreferencesState;
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
   getEditorHeightFromLinesCount: (linesCount: number) => number;
   logger: Logger;
 }

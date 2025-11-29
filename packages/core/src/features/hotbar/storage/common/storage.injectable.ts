@@ -28,7 +28,7 @@ const hotbarsPersistentStorageInjectable = getInjectable({
     const createHotbar = di.inject(createHotbarInjectable);
 
     return createPersistentStorage<HotbarStoreModel>({
-      configName: "lens-hotbar-store",
+      configName: "k8sight-hotbar-store",
       accessPropertiesByDotNotation: false, // To make dots safe in cluster context names
       syncOptions: {
         equals: comparer.structural,

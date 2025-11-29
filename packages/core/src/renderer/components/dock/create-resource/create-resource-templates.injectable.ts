@@ -1,6 +1,6 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { computed } from "mobx";
-import lensCreateResourceTemplatesInjectable from "./lens-templates.injectable";
+import k8sightCreateResourceTemplatesInjectable from "./k8sight-templates.injectable";
 import userCreateResourceTemplatesInjectable from "./user-templates.injectable";
 
 import type { GroupBase } from "react-select";
@@ -18,10 +18,10 @@ const createResourceTemplatesInjectable = getInjectable({
   id: "create-resource-templates",
 
   instantiate: (di) => {
-    const lensResourceTemplates = di.inject(lensCreateResourceTemplatesInjectable);
+    const k8sightResourceTemplates = di.inject(k8sightCreateResourceTemplatesInjectable);
     const userResourceTemplates = di.inject(userCreateResourceTemplatesInjectable);
 
-    return computed((): GroupBase<RawTemplate>[] => [...userResourceTemplates.get(), lensResourceTemplates]);
+    return computed((): GroupBase<RawTemplate>[] => [...userResourceTemplates.get(), k8sightResourceTemplates]);
   },
 });
 

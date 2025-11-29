@@ -73,7 +73,7 @@ exports[`extendability-using-extension-api given an extension with a weakly type
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -444,7 +444,7 @@ exports[`extendability-using-extension-api given an extension with top-bar items
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -806,7 +806,7 @@ exports[`extendability-using-extension-api given an extension with top-bar items
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -1168,7 +1168,7 @@ exports[`extendability-using-extension-api renders 1`] = `
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"

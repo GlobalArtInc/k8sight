@@ -18,14 +18,14 @@ export const getMultiExportConfig = (packageJson: any, _dependencies: Partial<De
     ..._dependencies,
   };
 
-  if (!packageJson.lensMultiExportConfig) {
+  if (!packageJson.k8sightMultiExportConfig) {
     throw new Error(`Tried to get multi export config for package "${packageJson.name}" but configuration is missing.`);
   }
 
   const validBuildTypes = ["node", "react"];
 
   const invalidBuildTypes = pipeline(
-    packageJson.lensMultiExportConfig,
+    packageJson.k8sightMultiExportConfig,
     values,
     map((config) => config.buildType),
     reject((buildType) => validBuildTypes.includes(buildType)),
@@ -40,7 +40,7 @@ export const getMultiExportConfig = (packageJson: any, _dependencies: Partial<De
   }
 
   const exportsWithMissingEntrypoint = pipeline(
-    packageJson.lensMultiExportConfig,
+    packageJson.k8sightMultiExportConfig,
     toPairs,
     filter(([, config]) => !config.entrypoint),
     map(nth(0)),
@@ -54,7 +54,7 @@ export const getMultiExportConfig = (packageJson: any, _dependencies: Partial<De
     );
   }
 
-  const expectedExports = pipeline(packageJson.lensMultiExportConfig, keys, map(toExpectedExport), fromPairs);
+  const expectedExports = pipeline(packageJson.k8sightMultiExportConfig, keys, map(toExpectedExport), fromPairs);
 
   if (!isEqual(expectedExports, packageJson.exports)) {
     throw new Error(
@@ -66,7 +66,7 @@ export const getMultiExportConfig = (packageJson: any, _dependencies: Partial<De
 
   const toExportSpecificWebpackConfig = toExportSpecificWebpackConfigFor(dependencies);
 
-  return pipeline(packageJson.lensMultiExportConfig, toPairs, map(toExportSpecificWebpackConfig));
+  return pipeline(packageJson.k8sightMultiExportConfig, toPairs, map(toExportSpecificWebpackConfig));
 };
 
 const toExpectedExport = (externalImportPath: string) => {

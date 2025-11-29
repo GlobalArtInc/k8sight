@@ -74,7 +74,7 @@ exports[`entity running technical tests when navigated to catalog renders 1`] = 
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -148,7 +148,7 @@ exports[`entity running technical tests when navigated to catalog renders 1`] = 
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -179,7 +179,7 @@ exports[`entity running technical tests when navigated to catalog renders 1`] = 
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -208,7 +208,7 @@ exports[`entity running technical tests when navigated to catalog renders 1`] = 
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -239,7 +239,7 @@ exports[`entity running technical tests when navigated to catalog renders 1`] = 
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/Mock-tab"
+                      data-testid="entity.k8sk8sight.dev/Mock-tab"
                       role="treeitem"
                     >
                       <div
@@ -787,7 +787,7 @@ exports[`entity running technical tests when navigated to catalog when details p
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -861,7 +861,7 @@ exports[`entity running technical tests when navigated to catalog when details p
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -892,7 +892,7 @@ exports[`entity running technical tests when navigated to catalog when details p
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -921,7 +921,7 @@ exports[`entity running technical tests when navigated to catalog when details p
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -952,7 +952,7 @@ exports[`entity running technical tests when navigated to catalog when details p
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/Mock-tab"
+                      data-testid="entity.k8sk8sight.dev/Mock-tab"
                       role="treeitem"
                     >
                       <div

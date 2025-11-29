@@ -10,7 +10,7 @@ import extensionLoaderInjectable from "../extension-loader/extension-loader.inje
 import type { IpcRenderer } from "electron";
 import type { ObservableMap } from "mobx";
 
-import type { LensExtensionState } from "../../features/extensions/enabled/common/state.injectable";
+import type { K8sightExtensionState } from "../../features/extensions/enabled/common/state.injectable";
 import type { ExtensionLoader } from "../extension-loader";
 
 const manifestPath = "manifest/path";
@@ -19,7 +19,7 @@ const manifestPath3 = "manifest/path3";
 
 describe("ExtensionLoader", () => {
   let extensionLoader: ExtensionLoader;
-  let enabledExtensionsState: ObservableMap<string, LensExtensionState>;
+  let enabledExtensionsState: ObservableMap<string, K8sightExtensionState>;
 
   beforeEach(() => {
     const di = getDiForUnitTesting();

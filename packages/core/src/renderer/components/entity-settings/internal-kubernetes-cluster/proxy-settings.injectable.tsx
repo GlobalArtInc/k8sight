@@ -39,7 +39,7 @@ const ProxyKubernetesClusterSettings = withInjectables<Dependencies, EntitySetti
 const proxyKubernetesClusterEntitySettingsInjectable = getInjectable({
   id: "proxy-kubernetes-cluster-entity-settings",
   instantiate: () => ({
-    apiVersions: new Set(["entity.k8slens.dev/v1alpha1"]),
+    apiVersions: new Set(["entity.k8sk8sight.dev/v1alpha1"]),
     kind: "KubernetesCluster",
     title: "Proxy",
     group: "Settings",

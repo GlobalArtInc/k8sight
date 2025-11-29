@@ -12,8 +12,8 @@ import type { Stats } from "fs";
 import type {
   ExternalInstalledExtension,
   InstalledExtension,
-  LensExtensionId,
-  LensExtensionManifest,
+  K8sightExtensionId,
+  K8sightExtensionManifest,
 } from "@kubesightapp/legacy-extensions";
 import type { Logger } from "@kubesightapp/logger";
 
@@ -50,7 +50,7 @@ interface Dependencies {
   readonly homeDirectoryPath: string;
   readonly directoryForUserData: string;
   isExtensionEnabled: IsExtensionEnabled;
-  isCompatibleExtension: (manifest: LensExtensionManifest) => boolean;
+  isCompatibleExtension: (manifest: K8sightExtensionManifest) => boolean;
   installExtension: InstallExtension;
   readJsonFile: ReadJson;
   pathExists: PathExists;
@@ -85,7 +85,7 @@ const isDirectoryLike = (lstat: Stats) => lstat.isDirectory() || lstat.isSymboli
 
 interface ExtensionDiscoveryEvents {
   add: (ext: InstalledExtension) => void;
-  remove: (extId: LensExtensionId) => void;
+  remove: (extId: K8sightExtensionId) => void;
 }
 
 /**
@@ -96,7 +96,7 @@ interface ExtensionDiscoveryEvents {
  * .init() must be called to start the directory watching.
  * The class emits events for added and removed extensions:
  * - "add": When extension is added. The event is of type InstalledExtension
- * - "remove": When extension is removed. The event is of type LensExtensionId
+ * - "remove": When extension is removed. The event is of type K8sightExtensionId
  */
 export class ExtensionDiscovery {
   protected bundledFolderPath!: string;
@@ -262,13 +262,13 @@ export class ExtensionDiscovery {
       // If the extension is deleted manually while the application is running, also remove the symlink
       await this.removeSymlinkByPackageName(extensionName);
 
-      // The path to the manifest file is the lens extension id
+      // The path to the manifest file is the k8sight extension id
       // Note: that we need to use the symlinked path
-      const lensExtensionId = extension.manifestPath;
+      const k8sightExtensionId = extension.manifestPath;
 
       this.extensions.delete(extension.id);
       this.dependencies.logger.info(`${logModule} removed extension ${extensionName}`);
-      this.events.emit("remove", lensExtensionId);
+      this.events.emit("remove", k8sightExtensionId);
 
       return;
     }
@@ -280,7 +280,7 @@ export class ExtensionDiscovery {
    * Remove the symlink under node_modules if exists.
    * If we don't remove the symlink, the uninstall would leave a non-working symlink,
    * which wouldn't be fixed if the extension was reinstalled, causing the extension not to work.
-   * @param name e.g. "@mirantis/lens-extension-cc"
+   * @param name e.g. "@mirantis/k8sight-extension-cc"
    */
   removeSymlinkByPackageName(name: string): Promise<void> {
     return this.dependencies.removePath(this.getInstalledPath(name));
@@ -291,7 +291,7 @@ export class ExtensionDiscovery {
    * The application will detect the folder unlink and remove the extension from the UI automatically.
    * @param extensionId The ID of the extension to uninstall.
    */
-  async uninstallExtension(extensionId: LensExtensionId): Promise<void> {
+  async uninstallExtension(extensionId: K8sightExtensionId): Promise<void> {
     const extension =
       this.extensions.get(extensionId) ?? this.dependencies.extensionLoader.getExtensionById(extensionId);
 
@@ -332,7 +332,7 @@ export class ExtensionDiscovery {
     installLock.release();
   }
 
-  async load(): Promise<Map<LensExtensionId, InstalledExtension>> {
+  async load(): Promise<Map<K8sightExtensionId, InstalledExtension>> {
     if (this.loadStarted) {
       // The class is simplified by only supporting .load() to be called once
       throw new Error("ExtensionDiscovery.load() can be only be called once");
@@ -359,7 +359,7 @@ export class ExtensionDiscovery {
 
   /**
    * Returns the symlinked path to the extension folder,
-   * e.g. "/Users/<username>/Library/Application Support/Lens/node_modules/@publisher/extension"
+   * e.g. "/Users/<username>/Library/Application Support/K8sight/node_modules/@publisher/extension"
    */
   protected getInstalledPath(name: string): string {
     return this.dependencies.joinPaths(this.nodeModulesPath, name);
@@ -367,7 +367,7 @@ export class ExtensionDiscovery {
 
   /**
    * Returns the symlinked path to the package.json,
-   * e.g. "/Users/<username>/Library/Application Support/Lens/node_modules/@publisher/extension/package.json"
+   * e.g. "/Users/<username>/Library/Application Support/K8sight/node_modules/@publisher/extension/package.json"
    */
   protected getInstalledManifestPath(name: string): string {
     return this.dependencies.joinPaths(this.getInstalledPath(name), manifestFilename);
@@ -381,7 +381,7 @@ export class ExtensionDiscovery {
     const manifestPath = this.dependencies.joinPaths(folderPath, manifestFilename);
 
     try {
-      const manifest = (await this.dependencies.readJsonFile(manifestPath)) as unknown as LensExtensionManifest;
+      const manifest = (await this.dependencies.readJsonFile(manifestPath)) as unknown as K8sightExtensionManifest;
       const id = this.getInstalledManifestPath(manifest.name);
       const isEnabled = this.dependencies.isExtensionEnabled(id);
       const extensionDir = this.dependencies.getDirnameOfPath(manifestPath);
@@ -413,7 +413,7 @@ export class ExtensionDiscovery {
     }
   }
 
-  async ensureExtensions(): Promise<Map<LensExtensionId, ExternalInstalledExtension>> {
+  async ensureExtensions(): Promise<Map<K8sightExtensionId, ExternalInstalledExtension>> {
     const userExtensions = await this.loadFromFolder(this.localFolderPath);
 
     return (this.extensions = new Map(userExtensions.map((extension) => [extension.id, extension])));

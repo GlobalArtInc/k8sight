@@ -1,5 +1,5 @@
 // Extensions-api types bundle (main + renderer)
-// Available for lens-extensions via NPM-package "@kubesightapp/extensions"
+// Available for k8sight-extensions via NPM-package "@kubesightapp/extensions"
 
 import * as Common from "./common-api";
 import * as Main from "./main-api";

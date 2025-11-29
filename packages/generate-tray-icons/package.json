@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/generate-tray-icons",
   "version": "1.7.0-0",
-  "description": "CLI generating tray icons for building a lens-like application",
+  "description": "CLI generating tray icons for building a k8sight-like application",
   "license": "MIT",
   "scripts": {
     "clean": "pnpm dlx rimraf@6.1.2 dist",

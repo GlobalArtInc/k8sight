@@ -16,7 +16,7 @@ const setupKubernetesClusterContextMenuOpenInjectable = getInjectable({
       const logger = di.inject(loggerInjectionToken);
 
       catalogCategoryRegistry
-        .getForGroupKind("entity.k8slens.dev", "KubernetesCluster")
+        .getForGroupKind("entity.k8sk8sight.dev", "KubernetesCluster")
         ?.on("contextMenuOpen", (entity, context) => {
           if (entity.metadata?.source == "local") {
             context.menuItems.push({

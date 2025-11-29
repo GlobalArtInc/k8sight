@@ -5,7 +5,7 @@ import { extensionRegistratorInjectionToken } from "../../../../extensions/exten
 import extensionShouldBeEnabledForClusterFrameInjectable from "../../../extension-loader/extension-should-be-enabled-for-cluster-frame.injectable";
 import { workloadOverviewDetailInjectionToken } from "./workload-overview-detail-injection-token";
 
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 
 const workloadOverviewDetailRegistratorInjectable = getInjectable({
   id: "workload-overview-detail-registrator",
@@ -14,7 +14,7 @@ const workloadOverviewDetailRegistratorInjectable = getInjectable({
     const getRandomId = di.inject(getRandomIdInjectionToken);
 
     return (ext) => {
-      const extension = ext as LensRendererExtension;
+      const extension = ext as K8sightRendererExtension;
       const extensionShouldBeEnabledForClusterFrame = di.inject(
         extensionShouldBeEnabledForClusterFrameInjectable,
         extension,

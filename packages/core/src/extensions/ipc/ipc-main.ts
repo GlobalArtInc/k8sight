@@ -3,13 +3,13 @@ import { loggerInjectionToken } from "@kubesightapp/logger";
 import { ipcMain } from "electron";
 import { once } from "lodash";
 import { ipcMainHandle } from "../../common/ipc";
-import { Disposers } from "../lens-extension";
+import { Disposers } from "../k8sight-extension";
 import { IpcPrefix, IpcRegistrar } from "./ipc-registrar";
 
 import type { Logger } from "@kubesightapp/logger";
 import type { Disposer } from "@kubesightapp/utilities";
 
-import type { LensMainExtension } from "../lens-main-extension";
+import type { K8sightMainExtension } from "../k8sight-main-extension";
 
 interface Dependencies {
   readonly logger: Logger;
@@ -18,7 +18,7 @@ interface Dependencies {
 export abstract class IpcMain extends IpcRegistrar {
   private readonly dependencies: Dependencies;
 
-  constructor(extension: LensMainExtension) {
+  constructor(extension: K8sightMainExtension) {
     super(extension);
 
     const di = getEnvironmentSpecificLegacyGlobalDiForExtensionApi("main");
@@ -35,7 +35,7 @@ export abstract class IpcMain extends IpcRegistrar {
    * Listen for broadcasts within your extension
    * @param channel The channel to listen for broadcasts on
    * @param listener The function that will be called with the arguments of the broadcast
-   * @returns An optional disposer, Lens will cleanup when the extension is disabled or uninstalled even if this is not called
+   * @returns An optional disposer, K8sight will cleanup when the extension is disabled or uninstalled even if this is not called
    */
   listen(channel: string, listener: (event: Electron.IpcMainEvent, ...args: any[]) => any): Disposer {
     const prefixedChannel = `extensions@${this[IpcPrefix]}:${channel}`;
@@ -59,7 +59,7 @@ export abstract class IpcMain extends IpcRegistrar {
   }
 
   /**
-   * Declare a RPC over `channel`. Lens will cleanup when the extension is disabled or uninstalled
+   * Declare a RPC over `channel`. K8sight will cleanup when the extension is disabled or uninstalled
    * @param channel The name of the RPC
    * @param handler The remote procedure that is called
    */

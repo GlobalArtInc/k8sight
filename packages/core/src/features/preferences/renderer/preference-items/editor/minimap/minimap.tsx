@@ -35,7 +35,7 @@ const NonInjectedMinimap = observer(({ state: { editorConfiguration } }: Depende
         <SubHeader compact>Position</SubHeader>
         <Select
           id="minimap-input"
-          themeName="lens"
+          themeName="k8sight"
           options={minimapPositionOptions}
           value={editorConfiguration.minimap.side}
           onChange={(option) => (editorConfiguration.minimap.side = option?.value)}

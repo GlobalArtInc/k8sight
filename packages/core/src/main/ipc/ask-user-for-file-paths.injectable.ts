@@ -1,6 +1,6 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import showOpenDialogInjectable from "../electron-app/features/show-open-dialog.injectable";
-import showApplicationWindowInjectable from "../start-main-application/lens-window/show-application-window.injectable";
+import showApplicationWindowInjectable from "../start-main-application/k8sight-window/show-application-window.injectable";
 
 import type { RequestChannelHandler } from "@kubesightapp/messaging";
 

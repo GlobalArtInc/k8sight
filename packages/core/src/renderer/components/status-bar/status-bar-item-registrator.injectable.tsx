@@ -10,7 +10,7 @@ import type { Logger } from "@kubesightapp/logger";
 
 import type { Injectable } from "@ogre-tools/injectable";
 
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 import type { StatusBarItem } from "./status-bar-item-injection-token";
 import type { StatusBarRegistration } from "./status-bar-registration";
 
@@ -18,7 +18,7 @@ const statusBarItemRegistratorInjectable = getInjectable({
   id: "status-bar-item-registrator",
 
   instantiate: (di) => (extension) => {
-    const rendererExtension = extension as LensRendererExtension;
+    const rendererExtension = extension as K8sightRendererExtension;
     const getRandomId = di.inject(getRandomIdInjectionToken);
     const logger = di.inject(loggerInjectionToken);
 
@@ -30,7 +30,7 @@ const statusBarItemRegistratorInjectable = getInjectable({
 
 export default statusBarItemRegistratorInjectable;
 
-const toItemInjectableFor = (extension: LensRendererExtension, getRandomId: () => string, logger: Logger) => {
+const toItemInjectableFor = (extension: K8sightRendererExtension, getRandomId: () => string, logger: Logger) => {
   return (registration: StatusBarRegistration): Injectable<StatusBarItem, StatusBarItem, void>[] => {
     const id = `${getRandomId()}-status-bar-item-for-extension-${extension.sanitizedExtensionId}`;
     let component: React.ComponentType;

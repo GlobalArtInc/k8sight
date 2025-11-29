@@ -11,7 +11,7 @@ import { PieChart } from "../chart";
 import type { IComputedValue } from "mobx";
 import type { PascalCase } from "type-fest";
 
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 import type { PieChartData } from "../chart";
 import type { Workload } from "./workloads/workload-injection-token";
 
@@ -28,7 +28,7 @@ export interface OverviewWorkloadStatusProps {
 }
 
 interface Dependencies {
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
 }
 
 const statusBackgroundColorMapping = {

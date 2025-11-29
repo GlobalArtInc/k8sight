@@ -7,7 +7,7 @@ import type { StrictReactNode } from "@kubesightapp/utilities";
 
 import type { DiContainer } from "@ogre-tools/injectable";
 
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 import type { CustomCategoryViewRegistration } from "../custom-views";
 
 describe("Custom Category Views", () => {
@@ -54,7 +54,7 @@ describe("Custom Category Views", () => {
                 } as CustomCategoryViewRegistration,
               ],
             },
-          ] as LensRendererExtension[],
+          ] as K8sightRendererExtension[],
       ),
     );
 
@@ -97,7 +97,7 @@ describe("Custom Category Views", () => {
                 } as CustomCategoryViewRegistration,
               ],
             },
-          ] as LensRendererExtension[],
+          ] as K8sightRendererExtension[],
       ),
     );
 

@@ -6,7 +6,7 @@ import path from "path";
 import React from "react";
 import { TextDecoder as TextDecoderNode, TextEncoder } from "util";
 
-import type * as K8slensTooltip from "@kubesightapp/tooltip";
+import type * as K8sk8sightTooltip from "@kubesightapp/tooltip";
 
 declare global {
   interface InjectablePaths {
@@ -66,7 +66,7 @@ jest.mock("@kubesightapp/tooltip", () => ({
       }
 
       return <Target {...props} />;
-    }) as typeof K8slensTooltip.withTooltip,
+    }) as typeof K8sk8sightTooltip.withTooltip,
 }));
 jest.mock("monaco-editor");
 

@@ -27,7 +27,7 @@ const NonInjectedTimezone = observer(({ state, currentTimezone }: Dependencies) 
       options={timezoneOptions}
       value={state.localeTimezone}
       onChange={(value) => (state.localeTimezone = value?.value ?? currentTimezone)}
-      themeName="lens"
+      themeName="k8sight"
     />
   </section>
 ));

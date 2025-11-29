@@ -5,7 +5,7 @@ import type httpProxy from "http-proxy-node16";
 import type Joi from "joi";
 
 import type { Cluster } from "../../common/cluster/cluster";
-import type { LensApiResultContentType } from "./router-content-types";
+import type { K8sightApiResultContentType } from "./router-content-types";
 
 export type InferParam<T extends string, PathParams extends Record<string, string>> = T extends `{${infer P}?}`
   ? PathParams & Partial<Record<P, string>>
@@ -21,7 +21,7 @@ export type InferParamFromPath<P extends string> = P extends `${string}/{${infer
     ? InferParam<A, Record<string, string> & InferParamFromPath<B>>
     : InferParam<P, {}>;
 
-export interface LensApiRequest<Path extends string> {
+export interface K8sightApiRequest<Path extends string> {
   path: Path;
   payload: unknown;
   params: InferParamFromPath<Path>;
@@ -33,23 +33,23 @@ export interface LensApiRequest<Path extends string> {
   };
 }
 
-export interface ClusterLensApiRequest<Path extends string> extends LensApiRequest<Path> {
+export interface ClusterK8sightApiRequest<Path extends string> extends K8sightApiRequest<Path> {
   cluster: Cluster;
 }
 
-export interface LensApiResult<Response> {
+export interface K8sightApiResult<Response> {
   statusCode?: number;
   response?: Response;
   error?: any;
-  contentType?: LensApiResultContentType;
+  contentType?: K8sightApiResultContentType;
   headers?: Partial<Record<string, string>>;
   proxy?: httpProxy;
 }
 
-export type RouteResponse<Response> = LensApiResult<Response> | void;
+export type RouteResponse<Response> = K8sightApiResult<Response> | void;
 
 export interface RouteHandler<TResponse, Path extends string> {
-  (request: LensApiRequest<Path>): RouteResponse<TResponse> | Promise<RouteResponse<TResponse>>;
+  (request: K8sightApiRequest<Path>): RouteResponse<TResponse> | Promise<RouteResponse<TResponse>>;
 }
 
 export interface BaseRoutePaths<Path extends string> {
@@ -81,7 +81,7 @@ export function route<Path extends string>(parts: BaseRoutePaths<Path>): BindHan
 }
 
 export interface ClusterRouteHandler<Response, Path extends string> {
-  (request: ClusterLensApiRequest<Path>): RouteResponse<Response> | Promise<RouteResponse<Response>>;
+  (request: ClusterK8sightApiRequest<Path>): RouteResponse<Response> | Promise<RouteResponse<Response>>;
 }
 
 export interface BindClusterHandler<Path extends string> {
@@ -104,12 +104,12 @@ export function clusterRoute<Path extends string>(parts: BaseRoutePaths<Path>): 
   });
 }
 
-export interface ValidatedClusterLensApiRequest<Path extends string, Payload> extends ClusterLensApiRequest<Path> {
+export interface ValidatedClusterK8sightApiRequest<Path extends string, Payload> extends ClusterK8sightApiRequest<Path> {
   payload: Payload;
 }
 
 export interface ValidatedClusterRouteHandler<Payload, Response, Path extends string> {
-  (request: ValidatedClusterLensApiRequest<Path, Payload>): RouteResponse<Response> | Promise<RouteResponse<Response>>;
+  (request: ValidatedClusterK8sightApiRequest<Path, Payload>): RouteResponse<Response> | Promise<RouteResponse<Response>>;
 }
 
 export interface BindValidatedClusterHandler<Path extends string, Payload> {

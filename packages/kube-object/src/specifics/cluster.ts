@@ -34,7 +34,7 @@ export interface Cluster {
       adminPassword?: string;
       kubeconfig?: string;
       processState?: string;
-      lensAddress?: string;
+      k8sightAddress?: string;
     };
     errorMessage?: string;
     errorReason?: string;

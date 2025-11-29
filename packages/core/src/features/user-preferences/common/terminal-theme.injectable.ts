@@ -4,10 +4,10 @@ import userPreferencesStateInjectable from "./state.injectable";
 
 export type TerminalThemePreference =
   | {
-      matchLensTheme: true;
+      matchTheme: true;
     }
   | {
-      matchLensTheme: false;
+      matchTheme: false;
       themeId: string;
     };
 
@@ -20,12 +20,12 @@ const terminalThemePreferenceInjectable = getInjectable({
       // NOTE: remove use of magic strings
       if (!state.terminalTheme) {
         return {
-          matchLensTheme: true,
+          matchTheme: true,
         };
       }
 
       return {
-        matchLensTheme: false,
+        matchTheme: false,
         themeId: state.terminalTheme,
       };
     });

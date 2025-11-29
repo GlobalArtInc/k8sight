@@ -7,7 +7,7 @@ import type { KubernetesCluster } from "../../../../common/catalog-entities";
 const kubernetesApiVersionColumnInjectable = getInjectable({
   id: "kubernetes-api-version-column",
   instantiate: () => ({
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     kind: "KubernetesCluster",
     registration: {
       id: "version",

@@ -54,8 +54,8 @@ export interface CatalogCategorySpec {
    * The specific versions of the constructors.
    *
    * NOTE: the field `.apiVersion` after construction MUST match `{.group}/{.versions.[] | .name}`.
-   * For example, if `group = "entity.k8slens.dev"` and there is an entry in `.versions` with
-   * `name = "v1alpha1"` then the resulting `.apiVersion` MUST be `entity.k8slens.dev/v1alpha1`
+   * For example, if `group = "entity.k8sk8sight.dev"` and there is an entry in `.versions` with
+   * `name = "v1alpha1"` then the resulting `.apiVersion` MUST be `entity.k8sk8sight.dev/v1alpha1`
    */
   readonly versions: CatalogCategoryVersion[];
 
@@ -140,7 +140,7 @@ export abstract class CatalogCategory extends (EventEmitter as new () => TypedEm
    *
    * Currently supported values:
    *
-   * - `"catalog.k8slens.dev/v1alpha1"`
+   * - `"catalog.k8sk8sight.dev/v1alpha1"`
    */
   abstract readonly apiVersion: string;
 

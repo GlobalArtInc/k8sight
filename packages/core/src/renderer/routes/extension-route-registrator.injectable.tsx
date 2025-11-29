@@ -14,7 +14,7 @@ import { routeSpecificComponentInjectionToken } from "./route-specific-component
 import type { DiContainerForInjection } from "@ogre-tools/injectable";
 import type { IComputedValue } from "mobx";
 
-import type { LensRendererExtension } from "../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../extensions/k8sight-renderer-extension";
 import type { PageRegistration } from "./page-registration";
 
 const extensionRouteRegistratorInjectable = getInjectable({
@@ -22,7 +22,7 @@ const extensionRouteRegistratorInjectable = getInjectable({
 
   instantiate: (di) => {
     return (ext) => {
-      const extension = ext as LensRendererExtension;
+      const extension = ext as K8sightRendererExtension;
       const toRouteInjectable = toRouteInjectableFor(di, extension);
 
       const extensionShouldBeEnabledForClusterFrame = di.inject(
@@ -58,7 +58,7 @@ const extensionRouteRegistratorInjectable = getInjectable({
 export default extensionRouteRegistratorInjectable;
 
 const toRouteInjectableFor =
-  (di: DiContainerForInjection, extension: LensRendererExtension) =>
+  (di: DiContainerForInjection, extension: K8sightRendererExtension) =>
   (clusterFrame: boolean, getIsEnabled: (registration: PageRegistration) => IComputedValue<boolean>) =>
   (registration: PageRegistration) => {
     const routeInjectable = getInjectable({

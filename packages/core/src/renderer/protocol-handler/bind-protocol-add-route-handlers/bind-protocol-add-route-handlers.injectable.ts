@@ -9,7 +9,7 @@ import getClusterByIdInjectable from "../../../features/cluster/storage/common/g
 import navigateToPreferencesInjectable from "../../../features/preferences/common/navigate-to-preferences.injectable";
 import catalogEntityRegistryInjectable from "../../api/catalog/entity/registry.injectable";
 import attemptInstallByInfoInjectable from "../../components/extensions/attempt-install-by-info.injectable";
-import lensProtocolRouterRendererInjectable from "../lens-protocol-router-renderer/lens-protocol-router-renderer.injectable";
+import k8sightProtocolRouterRendererInjectable from "../k8sight-protocol-router-renderer/k8sight-protocol-router-renderer.injectable";
 import { bindProtocolAddRouteHandlers } from "./bind-protocol-add-route-handlers";
 
 const bindProtocolAddRouteHandlersInjectable = getInjectable({
@@ -18,7 +18,7 @@ const bindProtocolAddRouteHandlersInjectable = getInjectable({
   instantiate: (di) =>
     bindProtocolAddRouteHandlers({
       attemptInstallByInfo: di.inject(attemptInstallByInfoInjectable),
-      lensProtocolRouterRenderer: di.inject(lensProtocolRouterRendererInjectable),
+      k8sightProtocolRouterRenderer: di.inject(k8sightProtocolRouterRendererInjectable),
       navigateToCatalog: di.inject(navigateToCatalogInjectable),
       navigateToAddCluster: di.inject(navigateToAddClusterInjectable),
       navigateToExtensions: di.inject(navigateToExtensionsInjectable),

@@ -337,13 +337,13 @@ export {
  * The `KubeObject` that can be used in extensions with additional property to
  * get CRD metainfo and the API and Store objects.
  */
-export class LensExtensionKubeObject<
+export class K8sightExtensionKubeObject<
   Metadata extends KubeObjectMetadata = KubeObjectMetadata,
   Status = unknown,
   Spec = unknown,
 > extends KubeObject<Metadata, Status, Spec> {
   /** Metadata about this CRD object */
-  static readonly crd?: LensExtensionKubeObjectCRD;
+  static readonly crd?: K8sightExtensionKubeObjectCRD;
 
   /**
    * Returns `KubeApi` object for this kind of resource or throws an error.
@@ -392,7 +392,7 @@ export class LensExtensionKubeObject<
   }
 }
 
-export interface LensExtensionKubeObjectCRD {
+export interface K8sightExtensionKubeObjectCRD {
   apiVersions: string[];
   plural: string;
   singular: string;

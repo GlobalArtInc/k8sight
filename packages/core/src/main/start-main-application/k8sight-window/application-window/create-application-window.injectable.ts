@@ -1,0 +1,69 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import { runInAction } from "mobx";
+import emitAppEventInjectable from "../../../../common/app-event-bus/emit-event.injectable";
+import appNameInjectable from "../../../../common/vars/app-name.injectable";
+import isMacInjectable from "../../../../common/vars/is-mac.injectable";
+import k8sightProxyPortInjectable from "../../../k8sight-proxy/k8sight-proxy-port.injectable";
+import { applicationWindowInjectionToken } from "./application-window-injection-token";
+import createK8sightWindowInjectable from "./create-k8sight-window.injectable";
+import waitUntilBundledExtensionsAreLoadedInjectable from "./wait-until-bundled-extensions-are-loaded.injectable";
+
+const createApplicationWindowInjectable = getInjectable({
+  id: "create-application-window",
+
+  instantiate: (parentDi) => (id: string) => {
+    const windowInjectable = getInjectable({
+      id: `application-window-for-${id}`,
+
+      instantiate: (di) => {
+        const createK8sightWindow = di.inject(createK8sightWindowInjectable);
+        const isMac = di.inject(isMacInjectable);
+        const applicationName = di.inject(appNameInjectable);
+        const waitUntilBundledExtensionsAreLoaded = di.inject(waitUntilBundledExtensionsAreLoadedInjectable);
+        const k8sightProxyPort = di.inject(k8sightProxyPortInjectable);
+        const emitAppEvent = di.inject(emitAppEventInjectable);
+
+        return createK8sightWindow({
+          id,
+          title: applicationName,
+          defaultHeight: 900,
+          defaultWidth: 1440,
+          getContentSource: () => ({
+            url: `https://renderer.k8sight.app:${k8sightProxyPort.get()}`,
+          }),
+          resizable: true,
+          windowFrameUtilitiesAreShown: isMac,
+          titleBarStyle: isMac ? "hiddenInset" : "hidden",
+          centered: false,
+          onFocus: () => {
+            emitAppEvent({ name: "app", action: "focus" });
+          },
+          onBlur: () => {
+            emitAppEvent({ name: "app", action: "blur" });
+          },
+          onDomReady: () => {
+            emitAppEvent({ name: "app", action: "dom-ready" });
+          },
+
+          onClose: () => {
+            runInAction(() => {
+              parentDi.deregister(windowInjectable);
+            });
+          },
+
+          beforeOpen: waitUntilBundledExtensionsAreLoaded,
+        });
+      },
+
+      injectionToken: applicationWindowInjectionToken,
+    });
+
+    runInAction(() => {
+      parentDi.register(windowInjectable);
+    });
+
+    return parentDi.inject(windowInjectable);
+  },
+});
+
+export default createApplicationWindowInjectable;

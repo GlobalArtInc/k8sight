@@ -2,14 +2,14 @@ import asyncFn from "@async-fn/jest";
 import { runInAction } from "mobx";
 import staticFilesDirectoryInjectable from "../../common/vars/static-files-directory.injectable";
 import focusApplicationInjectable from "../../main/electron-app/features/focus-application.injectable";
-import createElectronWindowInjectable from "../../main/start-main-application/lens-window/application-window/create-electron-window.injectable";
-import splashWindowInjectable from "../../main/start-main-application/lens-window/splash-window/splash-window.injectable";
+import createElectronWindowInjectable from "../../main/start-main-application/k8sight-window/application-window/create-electron-window.injectable";
+import splashWindowInjectable from "../../main/start-main-application/k8sight-window/splash-window/splash-window.injectable";
 import { getApplicationBuilder } from "../../renderer/components/test-utils/get-application-builder";
 
 import type { AsyncFnMock } from "@async-fn/jest";
 
-import type { CreateElectronWindow } from "../../main/start-main-application/lens-window/application-window/create-electron-window.injectable";
-import type { LensWindow } from "../../main/start-main-application/lens-window/application-window/create-lens-window.injectable";
+import type { CreateElectronWindow } from "../../main/start-main-application/k8sight-window/application-window/create-electron-window.injectable";
+import type { K8sightWindow } from "../../main/start-main-application/k8sight-window/application-window/create-k8sight-window.injectable";
 import type { ApplicationBuilder } from "../../renderer/components/test-utils/get-application-builder";
 
 describe("opening application window using tray", () => {
@@ -229,7 +229,7 @@ describe("opening application window using tray", () => {
 });
 
 const expectWindowsToBeOpenFor = (builder: ApplicationBuilder) => (windowIds: string[]) => {
-  const windows: LensWindow[] = [builder.mainDi.inject(splashWindowInjectable), ...builder.applicationWindow.getAll()];
+  const windows: K8sightWindow[] = [builder.mainDi.inject(splashWindowInjectable), ...builder.applicationWindow.getAll()];
 
   expect(windows.filter((window) => window.isVisible).map((window) => window.id)).toEqual(windowIds);
 };

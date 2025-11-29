@@ -1,2 +1,2 @@
 export { bindProtocolAddRouteHandlers } from "./bind-protocol-add-route-handlers/bind-protocol-add-route-handlers";
-export { LensProtocolRouterRenderer } from "./lens-protocol-router-renderer/lens-protocol-router-renderer";
+export { K8sightProtocolRouterRenderer } from "./k8sight-protocol-router-renderer/k8sight-protocol-router-renderer";

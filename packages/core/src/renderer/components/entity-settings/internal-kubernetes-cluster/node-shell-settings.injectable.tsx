@@ -42,7 +42,7 @@ const NodeShellKubernetesClusterSettings = withInjectables<Dependencies, EntityS
 const nodeShellKubernetesClusterEntitySettingsInjectable = getInjectable({
   id: "node-shell-kubernetes-cluster-entity-settings",
   instantiate: () => ({
-    apiVersions: new Set(["entity.k8slens.dev/v1alpha1"]),
+    apiVersions: new Set(["entity.k8sk8sight.dev/v1alpha1"]),
     kind: "KubernetesCluster",
     title: "Node Shell",
     group: "Settings",

@@ -35,7 +35,7 @@ export interface CustomCategoryViewRegistration {
    * The catalog entity group that is declared by the category for this registration
    *
    * e.g.
-   * - `"entity.k8slens.dev"`
+   * - `"entity.k8sk8sight.dev"`
    */
   group: string;
 

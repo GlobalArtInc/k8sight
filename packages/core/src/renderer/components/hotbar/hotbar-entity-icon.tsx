@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import React from "react";
 import catalogCategoryRegistryInjectable from "../../../common/catalog/category-registry.injectable";
 import visitEntityContextMenuInjectable from "../../../common/catalog/visit-entity-context-menu.injectable";
-import { LensKubernetesClusterStatus } from "../../../common/catalog-entities/kubernetes-cluster";
+import { K8sightKubernetesClusterStatus } from "../../../common/catalog-entities/kubernetes-cluster";
 import activeEntityInjectable from "../../api/catalog/entity/active.injectable";
 import navigateInjectable from "../../navigation/navigate.injectable";
 import styles from "./hotbar-entity-icon.module.scss";
@@ -66,7 +66,7 @@ class NonInjectedHotbarEntityIcon extends React.Component<HotbarEntityIconProps 
       <div
         className={cssNames(styles.led, {
           // TODO: make it more generic
-          [styles.online]: this.props.entity.status.phase === LensKubernetesClusterStatus.CONNECTED,
+          [styles.online]: this.props.entity.status.phase === K8sightKubernetesClusterStatus.CONNECTED,
         })}
       />
     );

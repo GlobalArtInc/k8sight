@@ -2,13 +2,13 @@ import { getInjectable } from "@ogre-tools/injectable";
 import { action } from "mobx";
 import enabledExtensionsStateInjectable from "./state.injectable";
 
-import type { LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
 import type { IObservableMapInitialValues } from "mobx";
 
-import type { LensExtensionState } from "./state.injectable";
+import type { K8sightExtensionState } from "./state.injectable";
 
-export type UpdateExtensionsState = (state: IObservableMapInitialValues<LensExtensionId, LensExtensionState>) => void;
+export type UpdateExtensionsState = (state: IObservableMapInitialValues<K8sightExtensionId, K8sightExtensionState>) => void;
 
 const updateExtensionsStateInjectable = getInjectable({
   id: "update-extensions-state",

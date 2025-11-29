@@ -5,7 +5,7 @@ import withErrorLoggingInjectable from "../../../../common/utils/with-error-logg
 import { withErrorSuppression } from "../../../../common/utils/with-error-suppression/with-error-suppression";
 import productNameInjectable from "../../../../common/vars/product-name.injectable";
 import showAboutInjectable from "../../../../features/application-menu/main/menu-items/special-menu-for-mac-application/show-about-application/show-about.injectable";
-import showApplicationWindowInjectable from "../../../start-main-application/lens-window/show-application-window.injectable";
+import showApplicationWindowInjectable from "../../../start-main-application/k8sight-window/show-application-window.injectable";
 import { trayMenuItemInjectionToken } from "../tray-menu-item-injection-token";
 
 const aboutAppTrayItemInjectable = getInjectable({

@@ -11,7 +11,7 @@ import { buildVersionStateInjectable } from "../../../features/vars/build-versio
 import { getDiForUnitTesting } from "../../getDiForUnitTesting";
 import kubeconfigManagerInjectable from "../../kubeconfig-manager/kubeconfig-manager.injectable";
 import createKubectlInjectable from "../../kubectl/create-kubectl.injectable";
-import lensProxyPortInjectable from "../../lens-proxy/lens-proxy-port.injectable";
+import k8sightProxyPortInjectable from "../../k8sight-proxy/k8sight-proxy-port.injectable";
 import spawnPtyInjectable from "../spawn-pty.injectable";
 import openLocalShellSessionInjectable from "./open.injectable";
 
@@ -47,7 +47,7 @@ describe("technical unit tests for local shell sessions", () => {
     di.override(statInjectable, () => () => {
       throw new Error("tried call stat without override");
     });
-    di.inject(lensProxyPortInjectable).set(1111);
+    di.inject(k8sightProxyPortInjectable).set(1111);
   });
 
   describe("when on windows", () => {

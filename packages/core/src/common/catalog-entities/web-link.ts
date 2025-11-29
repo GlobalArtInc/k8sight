@@ -16,7 +16,7 @@ export interface WebLinkSpec {
 }
 
 export class WebLink extends CatalogEntity<CatalogEntityMetadata, WebLinkStatus, WebLinkSpec> {
-  public static readonly apiVersion = "entity.k8slens.dev/v1alpha1";
+  public static readonly apiVersion = "entity.k8sk8sight.dev/v1alpha1";
   public static readonly kind = "WebLink";
 
   public readonly apiVersion = WebLink.apiVersion;
@@ -46,14 +46,14 @@ export class WebLink extends CatalogEntity<CatalogEntityMetadata, WebLinkStatus,
 }
 
 export class WebLinkCategory extends CatalogCategory {
-  public readonly apiVersion = "catalog.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   public readonly kind = "CatalogCategory";
   public metadata = {
     name: "Web Links",
     icon: "public",
   };
   public spec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [categoryVersion("v1alpha1", WebLink)],
     names: {
       kind: "WebLink",

@@ -6,11 +6,11 @@ import rendererExtensionsInjectable from "../../../extensions/renderer-extension
 
 import type { IComputedValue } from "mobx";
 
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 import type { CustomCategoryViewComponents } from "./custom-views";
 
 interface Dependencies {
-  extensions: IComputedValue<LensRendererExtension[]>;
+  extensions: IComputedValue<K8sightRendererExtension[]>;
 }
 
 export interface RegisteredCustomCategoryViewDecl {

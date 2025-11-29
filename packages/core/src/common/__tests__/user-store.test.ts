@@ -34,7 +34,7 @@ describe("user store tests", () => {
     beforeEach(() => {
       const writeJsonSync = di.inject(writeJsonSyncInjectable);
 
-      writeJsonSync("/some-directory-for-user-data/lens-user-store.json", {});
+      writeJsonSync("/some-directory-for-user-data/k8sight-user-store.json", {});
       writeJsonSync("/some-directory-for-user-data/kube_config", {});
 
       di.inject(userPreferencesPersistentStorageInjectable).loadAndStartSyncing();

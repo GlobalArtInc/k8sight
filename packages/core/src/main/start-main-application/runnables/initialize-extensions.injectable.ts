@@ -33,8 +33,8 @@ const initializeExtensionsInjectable = getInjectable({
           .on("add", (extension) => {
             extensionLoader.addExtension(extension);
           })
-          .on("remove", (lensExtensionId) => {
-            extensionLoader.removeExtension(lensExtensionId);
+          .on("remove", (k8sightExtensionId) => {
+            extensionLoader.removeExtension(k8sightExtensionId);
           });
 
         extensionLoader.initExtensions(extensions);

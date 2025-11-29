@@ -58,7 +58,7 @@ describe("<CustomResourceDetails />", () => {
               ],
             },
           ],
-          group: "stable.lens.dev",
+          group: "stable.k8sight.dev",
           names: {
             kind: "MyCrd",
             plural: "my-crds",
@@ -70,12 +70,12 @@ describe("<CustomResourceDetails />", () => {
 
     it("should display false in an additionalPrinterColumn as 'false'", () => {
       const cr = new KubeObject({
-        apiVersion: "stable.lens.dev/v1",
+        apiVersion: "stable.k8sight.dev/v1",
         kind: "MyCrd",
         metadata: {
           name: "first-crd",
           resourceVersion: "1",
-          selfLink: "stable.lens.dev/v1/first-crd",
+          selfLink: "stable.k8sight.dev/v1/first-crd",
           uid: "2",
         },
         spec: {
@@ -90,12 +90,12 @@ describe("<CustomResourceDetails />", () => {
 
     it("should display true in an additionalPrinterColumn as 'true'", () => {
       const cr = new KubeObject({
-        apiVersion: "stable.lens.dev/v1",
+        apiVersion: "stable.k8sight.dev/v1",
         kind: "MyCrd",
         metadata: {
           name: "first-crd",
           resourceVersion: "1",
-          selfLink: "stable.lens.dev/v1/first-crd",
+          selfLink: "stable.k8sight.dev/v1/first-crd",
           uid: "2",
         },
         spec: {
@@ -152,7 +152,7 @@ describe("<CustomResourceDetails />", () => {
               ],
             },
           ],
-          group: "stable.lens.dev",
+          group: "stable.k8sight.dev",
           names: {
             kind: "MyCrd",
             plural: "my-crds",
@@ -164,12 +164,12 @@ describe("<CustomResourceDetails />", () => {
 
     it("should display 0 in an additionalPrinterColumn as '0'", () => {
       const cr = new KubeObject({
-        apiVersion: "stable.lens.dev/v1",
+        apiVersion: "stable.k8sight.dev/v1",
         kind: "MyCrd",
         metadata: {
           name: "first-crd",
           resourceVersion: "1",
-          selfLink: "stable.lens.dev/v1/first-crd",
+          selfLink: "stable.k8sight.dev/v1/first-crd",
           uid: "2",
         },
         spec: {
@@ -184,12 +184,12 @@ describe("<CustomResourceDetails />", () => {
 
     it("should display 1234 in an additionalPrinterColumn as '1234'", () => {
       const cr = new KubeObject({
-        apiVersion: "stable.lens.dev/v1",
+        apiVersion: "stable.k8sight.dev/v1",
         kind: "MyCrd",
         metadata: {
           name: "first-crd",
           resourceVersion: "1",
-          selfLink: "stable.lens.dev/v1/first-crd",
+          selfLink: "stable.k8sight.dev/v1/first-crd",
           uid: "2",
         },
         spec: {

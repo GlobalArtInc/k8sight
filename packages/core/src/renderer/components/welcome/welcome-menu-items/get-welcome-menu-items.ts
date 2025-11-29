@@ -3,10 +3,10 @@ import { computed } from "mobx";
 import type { IComputedValue } from "mobx";
 
 import type { NavigateToCatalog } from "../../../../common/front-end-routing/routes/catalog/navigate-to-catalog.injectable";
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 
 interface Dependencies {
-  extensions: IComputedValue<LensRendererExtension[]>;
+  extensions: IComputedValue<K8sightRendererExtension[]>;
   navigateToCatalog: NavigateToCatalog;
 }
 
@@ -17,7 +17,7 @@ export const getWelcomeMenuItems = ({ extensions, navigateToCatalog }: Dependenc
 
     click: () =>
       navigateToCatalog({
-        group: "entity.k8slens.dev",
+        group: "entity.k8sk8sight.dev",
         kind: "KubernetesCluster",
       }),
   };

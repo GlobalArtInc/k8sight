@@ -3,7 +3,7 @@ import httpProxy from "http-proxy-node16";
 import path from "path";
 import { webpackDevServerPort } from "../../../../webpack/vars";
 
-import type { LensApiRequest, RouteResponse } from "../../router/route";
+import type { K8sightApiRequest, RouteResponse } from "../../router/route";
 
 const devStaticFileRouteHandlerInjectable = getInjectable({
   id: "dev-static-file-route-handler",
@@ -11,7 +11,7 @@ const devStaticFileRouteHandlerInjectable = getInjectable({
     const proxy = httpProxy.createProxy();
     const proxyTarget = `http://127.0.0.1:${webpackDevServerPort}`;
 
-    return async ({ raw: { req, res }, params }: LensApiRequest<"/{path*}">): Promise<RouteResponse<Buffer>> => {
+    return async ({ raw: { req, res }, params }: K8sightApiRequest<"/{path*}">): Promise<RouteResponse<Buffer>> => {
       const filePath =
         !params.path || params.path === "/"
           ? "/build/index.html"

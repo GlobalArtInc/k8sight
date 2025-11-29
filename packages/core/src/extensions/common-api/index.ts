@@ -10,11 +10,11 @@ export * as Store from "./stores";
 export * as Types from "./types";
 export { Util } from "./utils";
 
-export type { InstalledExtension, LensExtensionManifest } from "@kubesightapp/legacy-extensions";
+export type { InstalledExtension, K8sightExtensionManifest } from "@kubesightapp/legacy-extensions";
 export type { Logger } from "@kubesightapp/logger";
 
 export type { PackageJson } from "type-fest";
 
-export type { LensExtension } from "../lens-extension";
+export type { K8sightExtension } from "../k8sight-extension";
 
 export const logger = asLegacyGlobalForExtensionApi(loggerInjectionToken);

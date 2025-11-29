@@ -15,7 +15,7 @@ import {
   commonExtensionApi as Common,
   metricsFeature,
   rendererExtensionApi as Renderer,
-  registerLensCore,
+  registerK8sightCore,
 } from "@kubesightapp/core/renderer";
 import { registerFeature } from "@kubesightapp/feature-core";
 import { keyboardShortcutsFeature } from "@kubesightapp/keyboard-shortcuts";
@@ -41,7 +41,7 @@ const di = createContainer(environment, {
 runInAction(() => {
   registerMobX(di);
   registerInjectableReact(di);
-  registerLensCore(di, environment);
+  registerK8sightCore(di, environment);
 
   registerFeature(di, loggerFeature);
 
@@ -84,7 +84,7 @@ export {
   ReactRouterDom,
 } from "@kubesightapp/core/renderer";
 
-export const LensExtensions = {
+export const K8sightExtensions = {
   Renderer,
   Common,
 };

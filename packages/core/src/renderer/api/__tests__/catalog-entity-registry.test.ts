@@ -10,14 +10,14 @@ import type { CatalogCategoryRegistry } from "../../../common/catalog";
 import type { CatalogEntityRegistry } from "../catalog/entity/registry";
 
 class FooBarCategory extends CatalogCategory {
-  public readonly apiVersion = "entityRegistry.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "entityRegistry.k8sk8sight.dev/v1alpha1";
   public readonly kind = "CatalogCategory";
   public metadata = {
     name: "FooBars",
     icon: "broken",
   };
   public spec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [categoryVersion("v1alpha1", WebLink)],
     names: {
       kind: "FooBar",
@@ -32,7 +32,7 @@ const entity = new WebLink({
     labels: {},
   },
   spec: {
-    url: "https://k8slens.dev",
+    url: "https://k8sk8sight.dev",
   },
   status: {
     phase: "available",
@@ -46,7 +46,7 @@ const entity2 = new WebLink({
     labels: {},
   },
   spec: {
-    url: "https://k8slens.dev",
+    url: "https://k8sk8sight.dev",
   },
   status: {
     phase: "available",
@@ -83,7 +83,7 @@ describe("CatalogEntityRegistry", () => {
     it("adds new catalog item", () => {
       const items = [
         {
-          apiVersion: "entity.k8slens.dev/v1alpha1",
+          apiVersion: "entity.k8sk8sight.dev/v1alpha1",
           kind: "KubernetesCluster",
           metadata: {
             uid: "123",
@@ -102,7 +102,7 @@ describe("CatalogEntityRegistry", () => {
       expect(entityRegistry.items.get().length).toEqual(1);
 
       items.push({
-        apiVersion: "entity.k8slens.dev/v1alpha1",
+        apiVersion: "entity.k8sk8sight.dev/v1alpha1",
         kind: "KubernetesCluster",
         metadata: {
           uid: "456",
@@ -123,7 +123,7 @@ describe("CatalogEntityRegistry", () => {
     it("updates existing items", () => {
       const items = [
         {
-          apiVersion: "entity.k8slens.dev/v1alpha1",
+          apiVersion: "entity.k8sk8sight.dev/v1alpha1",
           kind: "KubernetesCluster",
           metadata: {
             uid: "123",
@@ -152,7 +152,7 @@ describe("CatalogEntityRegistry", () => {
     it("updates activeEntity", () => {
       const items = [
         {
-          apiVersion: "entity.k8slens.dev/v1alpha1",
+          apiVersion: "entity.k8sk8sight.dev/v1alpha1",
           kind: "KubernetesCluster",
           metadata: {
             uid: "123",
@@ -179,7 +179,7 @@ describe("CatalogEntityRegistry", () => {
     it("removes deleted items", () => {
       const items = [
         {
-          apiVersion: "entity.k8slens.dev/v1alpha1",
+          apiVersion: "entity.k8sk8sight.dev/v1alpha1",
           kind: "KubernetesCluster",
           metadata: {
             uid: "123",
@@ -193,7 +193,7 @@ describe("CatalogEntityRegistry", () => {
           spec: {},
         },
         {
-          apiVersion: "entity.k8slens.dev/v1alpha1",
+          apiVersion: "entity.k8sk8sight.dev/v1alpha1",
           kind: "KubernetesCluster",
           metadata: {
             uid: "456",
@@ -220,7 +220,7 @@ describe("CatalogEntityRegistry", () => {
     it("does not return items without matching category", () => {
       const items = [
         {
-          apiVersion: "entity.k8slens.dev/v1alpha1",
+          apiVersion: "entity.k8sk8sight.dev/v1alpha1",
           kind: "KubernetesCluster",
           metadata: {
             uid: "123",
@@ -234,7 +234,7 @@ describe("CatalogEntityRegistry", () => {
           spec: {},
         },
         {
-          apiVersion: "entity.k8slens.dev/v1alpha1",
+          apiVersion: "entity.k8sk8sight.dev/v1alpha1",
           kind: "FooBar",
           metadata: {
             uid: "456",
@@ -257,7 +257,7 @@ describe("CatalogEntityRegistry", () => {
   it("does return items after matching category is added", () => {
     const items = [
       {
-        apiVersion: "entity.k8slens.dev/v1alpha1",
+        apiVersion: "entity.k8sk8sight.dev/v1alpha1",
         kind: "FooBar",
         metadata: {
           uid: "456",

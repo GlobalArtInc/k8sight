@@ -2,9 +2,9 @@ import { isObject, isString, listTarEntries, readFileFromTar } from "@kubesighta
 import path from "path";
 import { manifestFilename } from "../../../../extensions/extension-discovery/extension-discovery";
 
-import type { LensExtensionManifest } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionManifest } from "@kubesightapp/legacy-extensions";
 
-export async function validatePackage(filePath: string): Promise<LensExtensionManifest> {
+export async function validatePackage(filePath: string): Promise<K8sightExtensionManifest> {
   const tarFiles = await listTarEntries(filePath);
 
   // tarball from npm contains single root folder "package/*"
@@ -36,5 +36,5 @@ export async function validatePackage(filePath: string): Promise<LensExtensionMa
     throw new Error(`${manifestFilename} must specify "k8sight" in "engines" field`);
   }
 
-  return manifest as unknown as LensExtensionManifest;
+  return manifest as unknown as K8sightExtensionManifest;
 }

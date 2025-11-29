@@ -4,12 +4,12 @@ import { getInjectable, lifecycleEnum } from "@ogre-tools/injectable";
 import { map } from "lodash/fp";
 import createPageParamInjectable from "../navigation/create-page-param.injectable";
 
-import type { LensRendererExtension } from "../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../extensions/k8sight-renderer-extension";
 import type { PageParamInit } from "../navigation/page-param";
 import type { PageRegistration } from "./page-registration";
 
 export interface ExtensionPageParametersInstantiationParam {
-  extension: LensRendererExtension;
+  extension: K8sightRendererExtension;
   registration: PageRegistration;
 }
 

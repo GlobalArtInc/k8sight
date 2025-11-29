@@ -1,4 +1,4 @@
-import { lensBuildEnvironmentInjectionToken } from "@kubesightapp/application";
+import { k8sightBuildEnvironmentInjectionToken } from "@kubesightapp/application";
 import { asLegacyGlobalForExtensionApi, getLegacyGlobalDiForExtensionApi } from "@kubesightapp/legacy-global-di";
 import { issuesTrackerUrl } from "../../common/vars";
 import appNameInjectable from "../../common/vars/app-name.injectable";
@@ -58,10 +58,10 @@ export const App = {
 
     return di.inject(isLinuxInjectable);
   },
-  get lensBuildEnvironment() {
+  get k8sightBuildEnvironment() {
     const di = getLegacyGlobalDiForExtensionApi();
 
-    return di.inject(lensBuildEnvironmentInjectionToken);
+    return di.inject(k8sightBuildEnvironmentInjectionToken);
   },
   /**
    * @deprecated This value is now `""` and is left here for backwards compatibility.

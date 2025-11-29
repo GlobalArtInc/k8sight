@@ -1,7 +1,7 @@
 import { onLoadOfApplicationInjectionToken } from "@kubesightapp/application";
 import { loggerInjectionToken } from "@kubesightapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
-import showApplicationWindowInjectable from "../../start-main-application/lens-window/show-application-window.injectable";
+import showApplicationWindowInjectable from "../../start-main-application/k8sight-window/show-application-window.injectable";
 import electronAppInjectable from "../electron-app.injectable";
 
 const setupMainWindowVisibilityAfterActivationInjectable = getInjectable({

@@ -78,7 +78,7 @@ const createPersistentStorageInjectable = getInjectable({
         logger.info(`[${displayName}]: LOADING ...`);
 
         const config = getConfigurationFileModel({
-          projectName: "lens",
+          projectName: "k8sight",
           cwd,
           migrations: migrations as Options<T>["migrations"],
           ...params,

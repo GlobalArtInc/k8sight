@@ -1,10 +1,10 @@
 import { getInjectable } from "@ogre-tools/injectable";
-import { lensThemeDeclarationInjectionToken } from "./declaration";
+import { themeDeclarationInjectionToken } from "./declaration";
 
-const defaultLensThemeInjectable = getInjectable({
-  id: "default-lens-theme",
+const defaultThemeInjectable = getInjectable({
+  id: "default-theme",
   instantiate: (di) => {
-    const themes = di.injectMany(lensThemeDeclarationInjectionToken);
+    const themes = di.injectMany(themeDeclarationInjectionToken);
     const [defaultTheme, ...rest] = themes.filter((theme) => theme.isDefault);
 
     if (rest.length > 0) {
@@ -19,4 +19,4 @@ const defaultLensThemeInjectable = getInjectable({
   },
 });
 
-export default defaultLensThemeInjectable;
+export default defaultThemeInjectable;

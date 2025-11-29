@@ -90,7 +90,7 @@ abstract class BinaryDownloader {
   }
 
   async ensureBinary(): Promise<void> {
-    if (process.env.LENS_SKIP_DOWNLOAD_BINARIES === "true") {
+    if (process.env.K8SIGHT_SKIP_DOWNLOAD_BINARIES === "true") {
       return;
     }
 

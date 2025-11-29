@@ -23,7 +23,7 @@ import type {
   SingleValue,
 } from "react-select";
 
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 
 const { Menu } = components;
 
@@ -56,7 +56,7 @@ export interface SelectProps<
   Group extends GroupBase<Option> = GroupBase<Option>,
 > extends Omit<ReactSelectProps<Option, IsMulti, Group>, "value" | "options"> {
   id?: string; // Optional only because of Extension API. Required to make Select deterministic in unit tests
-  themeName?: "dark" | "light" | "outlined" | "lens";
+  themeName?: "dark" | "light" | "outlined" | "k8sight";
   menuClass?: string;
   value?: PropsValue<Value>;
   options: NonNullable<ReactSelectProps<Option, IsMulti, Group>["options"]> | LegacyAutoConvertedOptions;
@@ -87,7 +87,7 @@ const defaultFilter = createFilter({
 });
 
 interface Dependencies {
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
 }
 
 export function onMultiSelectFor<

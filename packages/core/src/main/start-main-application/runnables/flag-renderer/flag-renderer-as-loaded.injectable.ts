@@ -1,6 +1,6 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { runInAction } from "mobx";
-import lensProtocolRouterMainInjectable from "../../../protocol-handler/lens-protocol-router-main/lens-protocol-router-main.injectable";
+import k8sightProtocolRouterMainInjectable from "../../../protocol-handler/k8sight-protocol-router-main/k8sight-protocol-router-main.injectable";
 import { afterRootFrameIsReadyInjectionToken } from "../../runnable-tokens/phases";
 
 const flagRendererAsLoadedInjectable = getInjectable({
@@ -8,11 +8,11 @@ const flagRendererAsLoadedInjectable = getInjectable({
 
   instantiate: (di) => ({
     run: () => {
-      const lensProtocolRouterMain = di.inject(lensProtocolRouterMainInjectable);
+      const k8sightProtocolRouterMain = di.inject(k8sightProtocolRouterMainInjectable);
 
       runInAction(() => {
         // Todo: remove this kludge which enables out-of-place temporal dependency.
-        lensProtocolRouterMain.rendererLoaded.set(true);
+        k8sightProtocolRouterMain.rendererLoaded.set(true);
       });
     },
   }),

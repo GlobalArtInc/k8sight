@@ -1,9 +1,9 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import extensionLoaderInjectable from "../../../extensions/extension-loader/extension-loader.injectable";
 
-import type { LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
-export type DisableExtension = (extId: LensExtensionId) => void;
+export type DisableExtension = (extId: K8sightExtensionId) => void;
 
 const disableExtensionInjectable = getInjectable({
   id: "disable-extension",

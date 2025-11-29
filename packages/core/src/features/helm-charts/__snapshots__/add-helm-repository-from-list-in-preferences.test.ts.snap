@@ -74,7 +74,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -219,7 +219,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -404,7 +404,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -511,7 +511,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow Select--is-disabled css-3iigni-container"
+                            class="Select theme-k8sight box grow Select--is-disabled css-3iigni-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -867,7 +867,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -1012,7 +1012,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -1197,7 +1197,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -1332,7 +1332,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow css-b62m3t-container"
+                            class="Select theme-k8sight box grow css-b62m3t-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -1698,7 +1698,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -1843,7 +1843,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -2028,7 +2028,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -2163,7 +2163,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow css-b62m3t-container"
+                            class="Select theme-k8sight box grow css-b62m3t-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -2457,7 +2457,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
     class="Select__menu-portal css-yj2v5g"
   >
     <div
-      class="theme-lens selection-of-active-public-helm-repository-options Select__menu css-1nmdiq5-menu"
+      class="theme-k8sight selection-of-active-public-helm-repository-options Select__menu css-1nmdiq5-menu"
     >
       <div
         aria-multiselectable="false"
@@ -2587,7 +2587,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -2732,7 +2732,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -2917,7 +2917,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -3052,7 +3052,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow css-b62m3t-container"
+                            class="Select theme-k8sight box grow css-b62m3t-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -3418,7 +3418,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -3563,7 +3563,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -3748,7 +3748,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -3883,7 +3883,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow css-b62m3t-container"
+                            class="Select theme-k8sight box grow css-b62m3t-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -4249,7 +4249,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -4394,7 +4394,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -4579,7 +4579,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -4714,7 +4714,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow Select--is-disabled css-3iigni-container"
+                            class="Select theme-k8sight box grow Select--is-disabled css-3iigni-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -5070,7 +5070,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -5215,7 +5215,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -5400,7 +5400,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -5535,7 +5535,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow css-b62m3t-container"
+                            class="Select theme-k8sight box grow css-b62m3t-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -5935,7 +5935,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -6080,7 +6080,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -6265,7 +6265,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -6400,7 +6400,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow css-b62m3t-container"
+                            class="Select theme-k8sight box grow css-b62m3t-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -6728,7 +6728,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
     class="Select__menu-portal css-yj2v5g"
   >
     <div
-      class="theme-lens selection-of-active-public-helm-repository-options Select__menu css-1nmdiq5-menu"
+      class="theme-k8sight selection-of-active-public-helm-repository-options Select__menu css-1nmdiq5-menu"
     >
       <div
         aria-multiselectable="false"
@@ -6868,7 +6868,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -7013,7 +7013,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -7198,7 +7198,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -7333,7 +7333,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow css-b62m3t-container"
+                            class="Select theme-k8sight box grow css-b62m3t-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"
@@ -7733,7 +7733,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -7878,7 +7878,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                            
                         </div>
                         <div
-                          class="Select theme-lens css-b62m3t-container"
+                          class="Select theme-k8sight css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"
@@ -8063,7 +8063,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           >
                             <input
                               class="input box grow"
-                              placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                              placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                               spellcheck="false"
                               value=""
                             />
@@ -8198,7 +8198,7 @@ exports[`add helm repository from list in preferences when navigating to prefere
                           class="flex gaps"
                         >
                           <div
-                            class="Select theme-lens box grow Select--is-disabled css-3iigni-container"
+                            class="Select theme-k8sight box grow Select--is-disabled css-3iigni-container"
                           >
                             <span
                               class="css-1f43avz-a11yText-A11yText"

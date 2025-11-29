@@ -74,7 +74,7 @@ exports[`preferences: URLs of legacy extensions given extension with both custom
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -504,7 +504,7 @@ exports[`preferences: URLs of legacy extensions given extension with both custom
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -934,7 +934,7 @@ exports[`preferences: URLs of legacy extensions given extension with custom pref
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -1326,7 +1326,7 @@ exports[`preferences: URLs of legacy extensions given extension with custom pref
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"
@@ -1692,7 +1692,7 @@ exports[`preferences: URLs of legacy extensions given extension with custom pref
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="SettingLayout showNavigation Preferences"

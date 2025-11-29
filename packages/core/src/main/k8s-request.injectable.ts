@@ -1,8 +1,8 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { withTimeout } from "../common/fetch/timeout-controller";
-import lensFetchInjectable, { type LensRequestInit } from "./fetch/lens-fetch.injectable";
+import k8sightFetchInjectable, { type K8sightRequestInit } from "./fetch/k8sight-fetch.injectable";
 
-export interface K8sRequestInit extends LensRequestInit {
+export interface K8sRequestInit extends K8sightRequestInit {
   timeout?: number;
 }
 
@@ -16,7 +16,7 @@ const k8sRequestInjectable = getInjectable({
   id: "k8s-request",
 
   instantiate: (di): K8sRequest => {
-    const lensFetch = di.inject(lensFetchInjectable);
+    const k8sightFetch = di.inject(k8sightFetchInjectable);
 
     return async (cluster, pathnameAndQuery, { timeout = 30_000, signal, ...init } = {}) => {
       const controller = timeout ? withTimeout(timeout) : undefined;
@@ -25,7 +25,7 @@ const k8sRequestInjectable = getInjectable({
         signal.addEventListener("abort", () => controller.abort());
       }
 
-      const response = await lensFetch(`/${cluster.id}${pathnameAndQuery}`, {
+      const response = await k8sightFetch(`/${cluster.id}${pathnameAndQuery}`, {
         ...init,
         signal: controller?.signal ?? (signal as any),
       });

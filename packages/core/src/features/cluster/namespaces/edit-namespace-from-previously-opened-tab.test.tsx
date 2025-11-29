@@ -1,7 +1,7 @@
 import asyncFn from "@async-fn/jest";
 import { Namespace } from "@kubesightapp/kube-object";
 import { act } from "@testing-library/react";
-import directoryForLensLocalStorageInjectable from "../../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import writeJsonFileInjectable from "../../../common/fs/write-json-file.injectable";
 import { TabKind } from "../../../renderer/components/dock/dock/store";
 import requestKubeResourceInjectable from "../../../renderer/components/dock/edit-resource/edit-resource-model/request-kube-resource.injectable";
@@ -25,7 +25,7 @@ describe("cluster/namespaces - edit namespaces from previously opened tab", () =
     requestKubeResourceMock = asyncFn();
 
     builder.beforeWindowStart(({ windowDi }) => {
-      windowDi.override(directoryForLensLocalStorageInjectable, () => "/some-directory-for-lens-local-storage");
+      windowDi.override(directoryForK8sightLocalStorageInjectable, () => "/some-directory-for-k8sight-local-storage");
 
       windowDi.override(requestKubeResourceInjectable, () => requestKubeResourceMock);
     });
@@ -45,7 +45,7 @@ describe("cluster/namespaces - edit namespaces from previously opened tab", () =
       builder.beforeWindowStart(async ({ windowDi }) => {
         const writeJsonFile = windowDi.inject(writeJsonFileInjectable);
 
-        await writeJsonFile("/some-directory-for-lens-local-storage/some-cluster-id.json", {
+        await writeJsonFile("/some-directory-for-k8sight-local-storage/some-cluster-id.json", {
           dock: {
             height: 300,
             tabs: [

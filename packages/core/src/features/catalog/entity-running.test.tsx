@@ -17,14 +17,14 @@ import type { CatalogEntityOnBeforeRun, CatalogEntityRegistry } from "../../rend
 import type { ApplicationBuilder } from "../../renderer/components/test-utils/get-application-builder";
 
 class MockCatalogCategory extends CatalogCategory {
-  apiVersion = "catalog.k8slens.dev/v1alpha1";
+  apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   kind = "CatalogCategory";
   metadata = {
     name: "mock",
     icon: "gear",
   };
   spec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [
       categoryVersion(
         "v1alpha1",
@@ -52,7 +52,7 @@ class MockCatalogCategory extends CatalogCategory {
 }
 
 class MockCatalogEntity extends CatalogEntity {
-  public apiVersion = "entity.k8slens.dev/v1alpha1";
+  public apiVersion = "entity.k8sk8sight.dev/v1alpha1";
   public kind = "Mock";
 }
 

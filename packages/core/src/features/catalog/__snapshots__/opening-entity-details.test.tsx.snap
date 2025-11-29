@@ -73,7 +73,7 @@ exports[`opening catalog entity details panel renders 1`] = `
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"
@@ -436,7 +436,7 @@ exports[`opening catalog entity details panel when navigated to the catalog rend
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -510,7 +510,7 @@ exports[`opening catalog entity details panel when navigated to the catalog rend
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -541,7 +541,7 @@ exports[`opening catalog entity details panel when navigated to the catalog rend
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -570,7 +570,7 @@ exports[`opening catalog entity details panel when navigated to the catalog rend
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -1279,7 +1279,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -1353,7 +1353,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -1384,7 +1384,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -1413,7 +1413,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -2154,7 +2154,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -2228,7 +2228,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -2259,7 +2259,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -2288,7 +2288,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -3029,7 +3029,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -3103,7 +3103,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -3134,7 +3134,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -3163,7 +3163,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -4155,7 +4155,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -4229,7 +4229,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -4260,7 +4260,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -4289,7 +4289,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -5018,7 +5018,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -5092,7 +5092,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -5123,7 +5123,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -5152,7 +5152,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -5881,7 +5881,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -5955,7 +5955,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -5986,7 +5986,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -6015,7 +6015,7 @@ exports[`opening catalog entity details panel when navigated to the catalog when
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -6914,7 +6914,7 @@ exports[`opening catalog entity details panel when not navigated to the catalog 
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"

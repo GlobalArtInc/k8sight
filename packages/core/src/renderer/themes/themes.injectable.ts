@@ -1,13 +1,13 @@
 import { getInjectable } from "@ogre-tools/injectable";
-import { lensThemeDeclarationInjectionToken } from "./declaration";
+import { themeDeclarationInjectionToken } from "./declaration";
 
-const lensThemesInjectable = getInjectable({
-  id: "lens-themes",
+const themesInjectable = getInjectable({
+  id: "themes",
   instantiate: (di) => {
-    const themes = di.injectMany(lensThemeDeclarationInjectionToken);
+    const themes = di.injectMany(themeDeclarationInjectionToken);
 
     return new Map(themes.map((theme) => [theme.name, theme]));
   },
 });
 
-export default lensThemesInjectable;
+export default themesInjectable;

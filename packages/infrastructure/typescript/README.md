@@ -1,6 +1,6 @@
 # @kubesightapp/typescript
 
-This package contains typescript configurations for Lens packages.
+This package contains typescript configurations for K8sight packages.
 
 ## Install
 

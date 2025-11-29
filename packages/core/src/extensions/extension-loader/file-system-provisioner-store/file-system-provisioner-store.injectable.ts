@@ -14,7 +14,7 @@ const fileSystemProvisionerStoreInjectable = getInjectable({
     const storeMigrationVersion = di.inject(storeMigrationVersionInjectable);
 
     const store = createPersistentStorage({
-      configName: "lens-filesystem-provisioner-store",
+      configName: "k8sight-filesystem-provisioner-store",
       accessPropertiesByDotNotation: false, // To make dots safe in cluster context names
       projectVersion: storeMigrationVersion,
       fromStore: action(({ extensions = {} }) => {

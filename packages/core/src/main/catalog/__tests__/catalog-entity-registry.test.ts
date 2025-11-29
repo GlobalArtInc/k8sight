@@ -9,7 +9,7 @@ import type { WebLinkSpec, WebLinkStatus } from "../../../common/catalog-entitie
 import type { CatalogEntityRegistry } from "../entity-registry";
 
 class InvalidEntity extends CatalogEntity<CatalogEntityMetadata, WebLinkStatus, WebLinkSpec> {
-  public readonly apiVersion = "entity.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "entity.k8sk8sight.dev/v1alpha1";
   public readonly kind = "Invalid";
 
   async onRun() {
@@ -39,7 +39,7 @@ describe("CatalogEntityRegistry", () => {
       labels: {},
     },
     spec: {
-      url: "https://k8slens.dev",
+      url: "https://k8sk8sight.dev",
     },
     status: {
       phase: "available",
@@ -53,7 +53,7 @@ describe("CatalogEntityRegistry", () => {
       labels: {},
     },
     spec: {
-      url: "https://k8slens.dev",
+      url: "https://k8sk8sight.dev",
     },
     status: {
       phase: "available",

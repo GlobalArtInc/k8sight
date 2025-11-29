@@ -1,6 +1,6 @@
 # @kubesightapp/keyboard-shortcuts
 
-This Feature enables keyboard shortcuts in Lens
+This Feature enables keyboard shortcuts in K8sight
 
 ## Usage
 

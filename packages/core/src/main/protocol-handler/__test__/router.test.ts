@@ -9,17 +9,17 @@ import {
   ProtocolHandlerInvalid,
 } from "../../../common/protocol-handler";
 import extensionInstancesInjectable from "../../../extensions/extension-loader/extension-instances.injectable";
-import { LensMainExtension } from "../../../extensions/lens-main-extension";
+import { K8sightMainExtension } from "../../../extensions/k8sight-main-extension";
 import enabledExtensionsStateInjectable from "../../../features/extensions/enabled/common/state.injectable";
 import { getDiForUnitTesting } from "../../getDiForUnitTesting";
-import lensProtocolRouterMainInjectable from "../lens-protocol-router-main/lens-protocol-router-main.injectable";
+import k8sightProtocolRouterMainInjectable from "../k8sight-protocol-router-main/k8sight-protocol-router-main.injectable";
 
-import type { LegacyLensExtension, LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { LegacyK8sightExtension, K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
 import type { ObservableMap } from "mobx";
 
-import type { LensExtensionState } from "../../../features/extensions/enabled/common/state.injectable";
-import type { LensProtocolRouterMain } from "../lens-protocol-router-main/lens-protocol-router-main";
+import type { K8sightExtensionState } from "../../../features/extensions/enabled/common/state.injectable";
+import type { K8sightProtocolRouterMain } from "../k8sight-protocol-router-main/k8sight-protocol-router-main";
 
 function throwIfDefined(val: any): void {
   if (val != null) {
@@ -28,9 +28,9 @@ function throwIfDefined(val: any): void {
 }
 
 describe("protocol router tests", () => {
-  let extensionInstances: ObservableMap<LensExtensionId, LegacyLensExtension>;
-  let lpr: LensProtocolRouterMain;
-  let enabledExtensions: ObservableMap<LensExtensionId, LensExtensionState>;
+  let extensionInstances: ObservableMap<K8sightExtensionId, LegacyK8sightExtension>;
+  let lpr: K8sightProtocolRouterMain;
+  let enabledExtensions: ObservableMap<K8sightExtensionId, K8sightExtensionState>;
   let broadcastMessageMock: jest.Mock;
 
   beforeEach(async () => {
@@ -43,14 +43,14 @@ describe("protocol router tests", () => {
     di.override(broadcastMessageInjectable, () => broadcastMessageMock);
 
     extensionInstances = di.inject(extensionInstancesInjectable);
-    lpr = di.inject(lensProtocolRouterMainInjectable);
+    lpr = di.inject(k8sightProtocolRouterMainInjectable);
 
     runInAction(() => {
       lpr.rendererLoaded.set(true);
     });
   });
 
-  it("should broadcast invalid protocol on non-lens URLs", async () => {
+  it("should broadcast invalid protocol on non-k8sight URLs", async () => {
     await lpr.route("https://google.ca");
     expect(broadcastMessageMock).toBeCalledWith(ProtocolHandlerInvalid, "invalid protocol", "https://google.ca");
   });
@@ -74,7 +74,7 @@ describe("protocol router tests", () => {
 
   it("should broadcast external route when called with valid host", async () => {
     const extId = uuid.v4();
-    const ext = new LensMainExtension({
+    const ext = new K8sightMainExtension({
       id: extId,
       manifestPath: "/foo/bar",
       manifest: {
@@ -160,7 +160,7 @@ describe("protocol router tests", () => {
     let called: any = 0;
 
     const extId = uuid.v4();
-    const ext = new LensMainExtension({
+    const ext = new K8sightMainExtension({
       id: extId,
       manifestPath: "/foo/bar",
       manifest: {
@@ -211,7 +211,7 @@ describe("protocol router tests", () => {
 
     {
       const extId = uuid.v4();
-      const ext = new LensMainExtension({
+      const ext = new K8sightMainExtension({
         id: extId,
         manifestPath: "/foo/bar",
         manifest: {
@@ -238,7 +238,7 @@ describe("protocol router tests", () => {
 
     {
       const extId = uuid.v4();
-      const ext = new LensMainExtension({
+      const ext = new K8sightMainExtension({
         id: extId,
         manifestPath: "/foo/bar",
         manifest: {

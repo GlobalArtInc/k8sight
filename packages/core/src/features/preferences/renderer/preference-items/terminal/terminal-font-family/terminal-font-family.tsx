@@ -15,7 +15,7 @@ const NonInjectedTerminalFontFamily = observer(({ model }: Dependencies) => (
   <section>
     <SubTitle title="Font family" />
     <Select
-      themeName="lens"
+      themeName="k8sight"
       controlShouldRenderValue
       value={model.current.get()}
       options={model.options.get()}

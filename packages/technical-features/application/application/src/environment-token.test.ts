@@ -1,5 +1,5 @@
 import { createContainer, DiContainer, getInjectable } from "@ogre-tools/injectable";
-import { lensBuildEnvironmentInjectionToken } from "./environment-token";
+import { k8sightBuildEnvironmentInjectionToken } from "./environment-token";
 
 describe("environment-token coverage tests", () => {
   let di: DiContainer;
@@ -13,10 +13,10 @@ describe("environment-token coverage tests", () => {
       getInjectable({
         id: "some-id",
         instantiate: () => "some-value",
-        injectionToken: lensBuildEnvironmentInjectionToken,
+        injectionToken: k8sightBuildEnvironmentInjectionToken,
       }),
     );
 
-    expect(di.inject(lensBuildEnvironmentInjectionToken)).toBe("some-value");
+    expect(di.inject(k8sightBuildEnvironmentInjectionToken)).toBe("some-value");
   });
 });

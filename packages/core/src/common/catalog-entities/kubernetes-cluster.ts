@@ -44,7 +44,7 @@ export interface KubernetesClusterSpec extends CatalogEntitySpec {
   accessibleNamespaces?: string[];
 }
 
-export enum LensKubernetesClusterStatus {
+export enum K8sightKubernetesClusterStatus {
   DELETING = "deleting",
   CONNECTING = "connecting",
   CONNECTED = "connected",
@@ -72,7 +72,7 @@ export class KubernetesCluster<
   Status extends KubernetesClusterStatus = KubernetesClusterStatus,
   Spec extends KubernetesClusterSpec = KubernetesClusterSpec,
 > extends CatalogEntity<Metadata, Status, Spec> {
-  public static readonly apiVersion: string = "entity.k8slens.dev/v1alpha1";
+  public static readonly apiVersion: string = "entity.k8sk8sight.dev/v1alpha1";
   public static readonly kind: string = "KubernetesCluster";
 
   public readonly apiVersion = KubernetesCluster.apiVersion;
@@ -117,8 +117,8 @@ export class KubernetesCluster<
     }
 
     switch (this.status.phase) {
-      case LensKubernetesClusterStatus.CONNECTED:
-      case LensKubernetesClusterStatus.CONNECTING:
+      case K8sightKubernetesClusterStatus.CONNECTED:
+      case K8sightKubernetesClusterStatus.CONNECTING:
         context.menuItems.push({
           title: "Disconnect",
           icon: "link_off",
@@ -128,7 +128,7 @@ export class KubernetesCluster<
           },
         });
         break;
-      case LensKubernetesClusterStatus.DISCONNECTED:
+      case K8sightKubernetesClusterStatus.DISCONNECTED:
         context.menuItems.push({
           title: "Connect",
           icon: "link",
@@ -140,14 +140,14 @@ export class KubernetesCluster<
 }
 
 export class KubernetesClusterCategory extends CatalogCategory {
-  public readonly apiVersion = "catalog.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   public readonly kind = "CatalogCategory";
   public metadata = {
     name: "Clusters",
     icon: KubeClusterCategoryIcon,
   };
   public spec: CatalogCategorySpec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [categoryVersion("v1alpha1", KubernetesCluster as CatalogEntityConstructor<KubernetesCluster>)],
     names: {
       kind: "KubernetesCluster",

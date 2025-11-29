@@ -7,7 +7,7 @@ import { buildDir, isDevelopment } from "./vars";
 
 import type webpack from "webpack";
 
-const webpackLensMain = (): webpack.Configuration => {
+const webpackK8sightMain = (): webpack.Configuration => {
   return {
     name: "k8sight-app-main",
     context: __dirname,
@@ -77,4 +77,4 @@ const webpackLensMain = (): webpack.Configuration => {
   };
 };
 
-export default webpackLensMain;
+export default webpackK8sightMain;

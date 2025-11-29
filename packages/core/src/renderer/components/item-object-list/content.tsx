@@ -26,7 +26,7 @@ import type { IComputedValue } from "mobx";
 
 import type { IsTableColumnHidden } from "../../../features/user-preferences/common/is-table-column-hidden.injectable";
 import type { ToggleTableColumnVisibility } from "../../../features/user-preferences/common/toggle-table-column-visibility.injectable";
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 import type { AddRemoveButtonsProps } from "../add-remove-buttons";
 import type { ConfirmDialogParams } from "../confirm-dialog";
 import type { OpenConfirmDialog } from "../confirm-dialog/open.injectable";
@@ -72,7 +72,7 @@ export interface ItemListLayoutContentProps<Item extends ItemObject, PreLoadStor
 }
 
 interface Dependencies {
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
   pageFiltersStore: PageFiltersStore;
   openConfirmDialog: OpenConfirmDialog;
   toggleTableColumnVisibility: ToggleTableColumnVisibility;

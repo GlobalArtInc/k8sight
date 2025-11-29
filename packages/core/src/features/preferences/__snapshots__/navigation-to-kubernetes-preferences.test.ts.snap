@@ -73,7 +73,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <div
         class="SettingLayout showNavigation Preferences"
@@ -188,7 +188,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
                      
                   </div>
                   <div
-                    class="Select theme-lens css-b62m3t-container"
+                    class="Select theme-k8sight css-b62m3t-container"
                   >
                     <span
                       class="css-1f43avz-a11yText-A11yText"
@@ -281,7 +281,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
                      
                   </div>
                   <div
-                    class="Select theme-lens css-b62m3t-container"
+                    class="Select theme-k8sight css-b62m3t-container"
                   >
                     <span
                       class="css-1f43avz-a11yText-A11yText"
@@ -483,7 +483,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
                      
                   </div>
                   <div
-                    class="Select theme-lens css-b62m3t-container"
+                    class="Select theme-k8sight css-b62m3t-container"
                   >
                     <span
                       class="css-1f43avz-a11yText-A11yText"
@@ -796,7 +796,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
     </div>
     <main>
       <div
-        id="lens-views"
+        id="k8sight-views"
       />
       <div
         class="SettingLayout showNavigation Preferences"
@@ -941,7 +941,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
                          
                       </div>
                       <div
-                        class="Select theme-lens css-b62m3t-container"
+                        class="Select theme-k8sight css-b62m3t-container"
                       >
                         <span
                           class="css-1f43avz-a11yText-A11yText"
@@ -1126,7 +1126,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
                         >
                           <input
                             class="input box grow"
-                            placeholder="/irrelavent-dir-for-lens-resources/x64/helm"
+                            placeholder="/irrelavent-dir-for-k8sight-resources/x64/helm"
                             spellcheck="false"
                             value=""
                           />
@@ -1233,7 +1233,7 @@ exports[`preferences - navigation to kubernetes preferences given in preferences
                         class="flex gaps"
                       >
                         <div
-                          class="Select theme-lens box grow css-b62m3t-container"
+                          class="Select theme-k8sight box grow css-b62m3t-container"
                         >
                           <span
                             class="css-1f43avz-a11yText-A11yText"

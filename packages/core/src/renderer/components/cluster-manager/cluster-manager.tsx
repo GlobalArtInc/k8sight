@@ -62,7 +62,7 @@ class NonInjectedClusterManager extends React.Component<Dependencies> {
       <div className={cssNames("ClusterManager", { hotbarAutoHide: this.props.userPreferencesState.hotbarAutoHide })}>
         <TopBar />
         <main>
-          <div id="lens-views" />
+          <div id="k8sight-views" />
           {this.renderMainComponent()}
         </main>
         <HotbarMenu />

@@ -11,8 +11,8 @@ describe("unionPATHs", () => {
   });
 
   it("should remove duplicate entries, appending non duplicates in order received", () => {
-    expect(unionPATHs(`/bin/bar${path.delimiter}/usr/bin`, `/bin/bar${path.delimiter}/usr/lens/bat`)).toBe(
-      `/bin/bar${path.delimiter}/usr/bin${path.delimiter}/usr/lens/bat`,
+    expect(unionPATHs(`/bin/bar${path.delimiter}/usr/bin`, `/bin/bar${path.delimiter}/usr/k8sight/bat`)).toBe(
+      `/bin/bar${path.delimiter}/usr/bin${path.delimiter}/usr/k8sight/bat`,
     );
   });
 
@@ -20,9 +20,9 @@ describe("unionPATHs", () => {
     expect(
       unionPATHs(
         `/bin/bar${path.delimiter}/usr/bin`,
-        `/bin/bar${path.delimiter}/usr/lens/bat`,
-        `/usr/local/lens${path.delimiter}/usr/bin`,
+        `/bin/bar${path.delimiter}/usr/k8sight/bat`,
+        `/usr/local/k8sight${path.delimiter}/usr/bin`,
       ),
-    ).toBe(`/bin/bar${path.delimiter}/usr/bin${path.delimiter}/usr/lens/bat${path.delimiter}/usr/local/lens`);
+    ).toBe(`/bin/bar${path.delimiter}/usr/bin${path.delimiter}/usr/k8sight/bat${path.delimiter}/usr/local/k8sight`);
   });
 });

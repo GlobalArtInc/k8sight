@@ -1,23 +1,23 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import assert from "assert";
 import { computed } from "mobx";
-import lensColorThemePreferenceInjectable from "../../features/user-preferences/common/lens-color-theme.injectable";
-import { lensThemeDeclarationInjectionToken } from "./declaration";
-import defaultLensThemeInjectable from "./default-theme.injectable";
+import colorThemePreferenceInjectable from "../../features/user-preferences/common/k8sight-color-theme.injectable";
+import { themeDeclarationInjectionToken } from "./declaration";
+import defaultThemeInjectable from "./default-theme.injectable";
 import systemThemeConfigurationInjectable from "./system-theme.injectable";
-import lensThemesInjectable from "./themes.injectable";
+import themesInjectable from "./themes.injectable";
 
 const activeThemeInjectable = getInjectable({
   id: "active-theme",
   instantiate: (di) => {
-    const lensThemes = di.inject(lensThemesInjectable);
-    const themeDecls = di.injectMany(lensThemeDeclarationInjectionToken);
-    const lensColorThemePreference = di.inject(lensColorThemePreferenceInjectable);
+    const themes = di.inject(themesInjectable);
+    const themeDecls = di.injectMany(themeDeclarationInjectionToken);
+    const colorThemePreference = di.inject(colorThemePreferenceInjectable);
     const systemThemeConfiguration = di.inject(systemThemeConfigurationInjectable);
-    const defaultLensTheme = di.inject(defaultLensThemeInjectable);
+    const defaultTheme = di.inject(defaultThemeInjectable);
 
     return computed(() => {
-      const pref = lensColorThemePreference.get();
+      const pref = colorThemePreference.get();
 
       if (pref.useSystemTheme) {
         const systemThemeType = systemThemeConfiguration.get();
@@ -28,7 +28,7 @@ const activeThemeInjectable = getInjectable({
         return matchingTheme;
       }
 
-      return lensThemes.get(pref.lensThemeId) ?? defaultLensTheme;
+      return themes.get(pref.themeId) ?? defaultTheme;
     });
   },
 });

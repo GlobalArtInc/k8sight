@@ -30,7 +30,7 @@ const NonInjectedKubectlDownloadMirror = observer(({ state }: Dependencies) => (
       value={state.downloadMirror}
       onChange={(option) => (state.downloadMirror = option?.value ?? defaultPackageMirror)}
       isDisabled={!state.downloadKubectlBinaries}
-      themeName="lens"
+      themeName="k8sight"
     />
   </section>
 ));

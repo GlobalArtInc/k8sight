@@ -16,7 +16,7 @@ import { getDiForUnitTesting } from "../getDiForUnitTesting";
 import kubeconfigManagerInjectable from "../kubeconfig-manager/kubeconfig-manager.injectable";
 import kubectlBinaryNameInjectable from "../kubectl/binary-name.injectable";
 import kubectlDownloadingNormalizedArchInjectable from "../kubectl/normalized-arch.injectable";
-import lensProxyPortInjectable from "../lens-proxy/lens-proxy-port.injectable";
+import k8sightProxyPortInjectable from "../k8sight-proxy/k8sight-proxy-port.injectable";
 
 import type { Logger } from "@kubesightapp/logger";
 
@@ -59,7 +59,7 @@ describe("kubeconfig manager tests", () => {
     di.override(writeJsonSyncInjectable, () => () => {
       throw new Error("tried call writeJsonSync without override");
     });
-    di.inject(lensProxyPortInjectable).set(9191);
+    di.inject(k8sightProxyPortInjectable).set(9191);
 
     readFileMock = asyncFn();
     di.override(readFileInjectable, () => readFileMock);
@@ -172,7 +172,7 @@ describe("kubeconfig manager tests", () => {
           beforeEach(async () => {
             await writeFileMock.resolveSpecific([
               "/some-directory-for-temp/kubeconfig-foo",
-              "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: PGNhLWRhdGE+\n    insecure-skip-tls-verify: false\n    server: https://127.0.0.1:9191/foo\n  name: kind-kind\ncontexts:\n- context:\n    cluster: kind-kind\n    user: proxy\n  name: kind-kind\ncurrent-context: kind-kind\nkind: Config\npreferences: {}\nusers:\n- name: proxy\n  user:\n    password: fake\n    username: lens\n",
+              "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: PGNhLWRhdGE+\n    insecure-skip-tls-verify: false\n    server: https://127.0.0.1:9191/foo\n  name: kind-kind\ncontexts:\n- context:\n    cluster: kind-kind\n    user: proxy\n  name: kind-kind\ncurrent-context: kind-kind\nkind: Config\npreferences: {}\nusers:\n- name: proxy\n  user:\n    password: fake\n    username: k8sight\n",
             ]);
           });
 
@@ -299,7 +299,7 @@ describe("kubeconfig manager tests", () => {
                     beforeEach(async () => {
                       await writeFileMock.resolveSpecific([
                         "/some-directory-for-temp/kubeconfig-foo",
-                        "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: PGNhLWRhdGE+\n    insecure-skip-tls-verify: false\n    server: https://127.0.0.1:9191/foo\n  name: kind-kind\ncontexts:\n- context:\n    cluster: kind-kind\n    user: proxy\n  name: kind-kind\ncurrent-context: kind-kind\nkind: Config\npreferences: {}\nusers:\n- name: proxy\n  user:\n    password: fake\n    username: lens\n",
+                        "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: PGNhLWRhdGE+\n    insecure-skip-tls-verify: false\n    server: https://127.0.0.1:9191/foo\n  name: kind-kind\ncontexts:\n- context:\n    cluster: kind-kind\n    user: proxy\n  name: kind-kind\ncurrent-context: kind-kind\nkind: Config\npreferences: {}\nusers:\n- name: proxy\n  user:\n    password: fake\n    username: k8sight\n",
                       ]);
                     });
 

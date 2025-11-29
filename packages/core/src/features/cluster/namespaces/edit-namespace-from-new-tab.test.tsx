@@ -4,7 +4,7 @@ import { Namespace } from "@kubesightapp/kube-object";
 import { showErrorNotificationInjectable, showSuccessNotificationInjectable } from "@kubesightapp/notifications";
 import { fireEvent } from "@testing-library/react";
 import React from "react";
-import directoryForLensLocalStorageInjectable from "../../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import navigateToNamespacesInjectable from "../../../common/front-end-routing/routes/cluster/namespaces/navigate-to-namespaces.injectable";
 import readJsonFileInjectable from "../../../common/fs/read-json-file.injectable";
 import hostedClusterIdInjectable from "../../../renderer/cluster-frame-context/hosted-cluster-id.injectable";
@@ -39,7 +39,7 @@ describe("cluster/namespaces - edit namespace from new tab", () => {
     builder.setEnvironmentToClusterFrame();
 
     builder.beforeWindowStart(({ windowDi }) => {
-      windowDi.override(directoryForLensLocalStorageInjectable, () => "/some-directory-for-lens-local-storage");
+      windowDi.override(directoryForK8sightLocalStorageInjectable, () => "/some-directory-for-k8sight-local-storage");
 
       windowDi.override(hostedClusterIdInjectable, () => "some-cluster-id");
 
@@ -487,7 +487,7 @@ metadata:
                 const readJsonFile = windowDi.inject(readJsonFileInjectable);
 
                 const actual = (await readJsonFile(
-                  "/some-directory-for-lens-local-storage/some-cluster-id.json",
+                  "/some-directory-for-k8sight-local-storage/some-cluster-id.json",
                 )) as Record<string, Record<string, unknown>>;
 
                 expect(actual.edit_resource_store["some-first-tab-id"]).toEqual({

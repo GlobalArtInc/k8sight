@@ -9,7 +9,7 @@ const fileLoggerTransportInjectable = getInjectable({
     new transports.File({
       handleExceptions: false,
       level: "debug",
-      filename: "lens.log",
+      filename: "k8sight.log",
       /**
        * SAFTEY: the `ipcMain` check above should mean that this is only
        * called in the main process

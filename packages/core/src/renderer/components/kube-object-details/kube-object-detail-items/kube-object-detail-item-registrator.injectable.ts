@@ -7,7 +7,7 @@ import currentKubeObjectInDetailsInjectable from "../current-kube-object-in-deta
 import { kubeObjectDetailItemInjectionToken } from "./kube-object-detail-item-injection-token";
 import { kubeObjectMatchesToKindAndApiVersion } from "./kube-object-matches-to-kind-and-api-version";
 
-import type { LensRendererExtension } from "../../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../../extensions/k8sight-renderer-extension";
 
 const kubeObjectDetailItemRegistratorInjectable = getInjectable({
   id: "kube-object-detail-item-registrator",
@@ -15,11 +15,11 @@ const kubeObjectDetailItemRegistratorInjectable = getInjectable({
   instantiate: (di) => {
     const getRandomId = di.inject(getRandomIdInjectionToken);
 
-    const getExtensionShouldBeEnabledForClusterFrame = (extension: LensRendererExtension) =>
+    const getExtensionShouldBeEnabledForClusterFrame = (extension: K8sightRendererExtension) =>
       di.inject(extensionShouldBeEnabledForClusterFrameInjectable, extension);
 
     return (ext) => {
-      const extension = ext as LensRendererExtension;
+      const extension = ext as K8sightRendererExtension;
 
       const extensionShouldBeEnabledForClusterFrame = getExtensionShouldBeEnabledForClusterFrame(extension);
 

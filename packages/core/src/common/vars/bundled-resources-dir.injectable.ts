@@ -1,7 +1,7 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import joinPathsInjectable from "../path/join-paths.injectable";
 import isProductionInjectable from "./is-production.injectable";
-import lensResourcesDirInjectable from "./lens-resources-dir.injectable";
+import k8sightResourcesDirInjectable from "./k8sight-resources-dir.injectable";
 import normalizedPlatformInjectable from "./normalized-platform.injectable";
 
 const bundledResourcesDirectoryInjectable = getInjectable({
@@ -10,9 +10,9 @@ const bundledResourcesDirectoryInjectable = getInjectable({
     const isProduction = di.inject(isProductionInjectable);
     const normalizedPlatform = di.inject(normalizedPlatformInjectable);
     const joinPaths = di.inject(joinPathsInjectable);
-    const lensResourcesDir = di.inject(lensResourcesDirInjectable);
+    const k8sightResourcesDir = di.inject(k8sightResourcesDirInjectable);
 
-    return isProduction ? lensResourcesDir : joinPaths(lensResourcesDir, "binaries", "client", normalizedPlatform);
+    return isProduction ? k8sightResourcesDir : joinPaths(k8sightResourcesDir, "binaries", "client", normalizedPlatform);
   },
 });
 

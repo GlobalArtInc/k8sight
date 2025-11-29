@@ -3,17 +3,17 @@ import { observer } from "mobx-react";
 import React from "react";
 import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
 import { Select } from "../../../../../../renderer/components/select";
-import { lensThemeDeclarationInjectionToken } from "../../../../../../renderer/themes/declaration";
-import defaultLensThemeInjectable from "../../../../../../renderer/themes/default-theme.injectable";
+import { themeDeclarationInjectionToken } from "../../../../../../renderer/themes/declaration";
+import defaultThemeInjectable from "../../../../../../renderer/themes/default-theme.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
 
-import type { LensTheme } from "../../../../../../renderer/themes/lens-theme";
+import type { Theme as ThemeType } from "../../../../../../renderer/themes/k8sight-theme";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 
 interface Dependencies {
   state: UserPreferencesState;
-  defaultTheme: LensTheme;
-  themes: LensTheme[];
+  defaultTheme: ThemeType;
+  themes: ThemeType[];
 }
 
 const NonInjectedTheme = observer(({ state, themes, defaultTheme }: Dependencies) => {
@@ -36,7 +36,7 @@ const NonInjectedTheme = observer(({ state, themes, defaultTheme }: Dependencies
         options={themeOptions}
         value={state.colorTheme}
         onChange={(value) => (state.colorTheme = value?.value ?? defaultTheme.name)}
-        themeName="lens"
+        themeName="k8sight"
       />
     </section>
   );
@@ -45,7 +45,7 @@ const NonInjectedTheme = observer(({ state, themes, defaultTheme }: Dependencies
 export const Theme = withInjectables<Dependencies>(NonInjectedTheme, {
   getProps: (di) => ({
     state: di.inject(userPreferencesStateInjectable),
-    defaultTheme: di.inject(defaultLensThemeInjectable),
-    themes: di.injectMany(lensThemeDeclarationInjectionToken),
+    defaultTheme: di.inject(defaultThemeInjectable),
+    themes: di.injectMany(themeDeclarationInjectionToken),
   }),
 });

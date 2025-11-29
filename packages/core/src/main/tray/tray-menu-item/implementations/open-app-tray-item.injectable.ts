@@ -4,7 +4,7 @@ import { computed } from "mobx";
 import withErrorLoggingInjectable from "../../../../common/utils/with-error-logging/with-error-logging.injectable";
 import { withErrorSuppression } from "../../../../common/utils/with-error-suppression/with-error-suppression";
 import productNameInjectable from "../../../../common/vars/product-name.injectable";
-import showApplicationWindowInjectable from "../../../start-main-application/lens-window/show-application-window.injectable";
+import showApplicationWindowInjectable from "../../../start-main-application/k8sight-window/show-application-window.injectable";
 import { trayMenuItemInjectionToken } from "../tray-menu-item-injection-token";
 
 const openAppTrayItemInjectable = getInjectable({

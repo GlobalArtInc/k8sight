@@ -25,7 +25,7 @@ export interface StatusBarComponents {
 }
 
 /**
- * The type for registering status bar items from the LensRendererExtension
+ * The type for registering status bar items from the K8sightRendererExtension
  */
 export interface StatusBarRegistration {
   /**

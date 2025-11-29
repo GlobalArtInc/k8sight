@@ -73,7 +73,7 @@ exports[`status-bar-items-originating-from-extensions when application starts wh
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="flex justify-center Welcome align-center"

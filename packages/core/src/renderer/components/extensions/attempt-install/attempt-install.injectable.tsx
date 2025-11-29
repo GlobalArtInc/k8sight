@@ -13,7 +13,7 @@ import createTempFilesAndValidateInjectable from "./create-temp-files-and-valida
 import getExtensionDestFolderInjectable from "./get-extension-dest-folder.injectable";
 import unpackExtensionInjectable from "./unpack-extension.injectable";
 
-import type { LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 import type { ShowNotification } from "@kubesightapp/notifications";
 import type { Disposer } from "@kubesightapp/utilities";
 
@@ -30,7 +30,7 @@ export interface InstallRequest {
 
 interface Dependencies {
   extensionLoader: ExtensionLoader;
-  uninstallExtension: (id: LensExtensionId) => Promise<boolean>;
+  uninstallExtension: (id: K8sightExtensionId) => Promise<boolean>;
   unpackExtension: UnpackExtension;
   createTempFilesAndValidate: CreateTempFilesAndValidate;
   getExtensionDestFolder: GetExtensionDestFolder;

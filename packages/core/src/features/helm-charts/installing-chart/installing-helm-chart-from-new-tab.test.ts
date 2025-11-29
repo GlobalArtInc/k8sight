@@ -2,7 +2,7 @@ import asyncFn from "@async-fn/jest";
 import { flushPromises } from "@kubesightapp/test-utils";
 import { fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import directoryForLensLocalStorageInjectable from "../../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import readJsonFileInjectable from "../../../common/fs/read-json-file.injectable";
 import writeJsonFileInjectable from "../../../common/fs/write-json-file.injectable";
 import { HelmChart } from "../../../common/k8s-api/endpoints/helm-charts.api";
@@ -54,7 +54,7 @@ describe("installing helm chart from new tab", () => {
     requestCreateHelmReleaseMock = asyncFn();
 
     builder.beforeWindowStart(({ windowDi }) => {
-      windowDi.override(directoryForLensLocalStorageInjectable, () => "/some-directory-for-lens-local-storage");
+      windowDi.override(directoryForK8sightLocalStorageInjectable, () => "/some-directory-for-k8sight-local-storage");
       windowDi.override(requestDetailedHelmReleaseInjectable, () => requestDetailedHelmReleaseMock);
       windowDi.override(requestHelmChartsInjectable, () => requestHelmChartsMock);
       windowDi.override(requestHelmChartVersionsInjectable, () => requestHelmChartVersionsMock);
@@ -90,7 +90,7 @@ describe("installing helm chart from new tab", () => {
 
       const writeJsonFile = windowDi.inject(writeJsonFileInjectable);
 
-      await writeJsonFile("/some-directory-for-lens-local-storage/some-cluster-id.json", {
+      await writeJsonFile("/some-directory-for-k8sight-local-storage/some-cluster-id.json", {
         dock: {
           height: 300,
           tabs: [],
@@ -622,7 +622,7 @@ describe("installing helm chart from new tab", () => {
                 const readJsonFile = windowDi.inject(readJsonFileInjectable);
 
                 const actual = (await readJsonFile(
-                  "/some-directory-for-lens-local-storage/some-cluster-id.json",
+                  "/some-directory-for-k8sight-local-storage/some-cluster-id.json",
                 )) as any;
 
                 const version = actual.install_charts["some-first-tab-id"].version;
@@ -693,7 +693,7 @@ describe("installing helm chart from new tab", () => {
                 const readJsonFile = windowDi.inject(readJsonFileInjectable);
 
                 const actual = (await readJsonFile(
-                  "/some-directory-for-lens-local-storage/some-cluster-id.json",
+                  "/some-directory-for-k8sight-local-storage/some-cluster-id.json",
                 )) as any;
 
                 const namespace = actual.install_charts["some-first-tab-id"].namespace;
@@ -791,7 +791,7 @@ describe("installing helm chart from new tab", () => {
             it("stores the changed configuration", async () => {
               const readJsonFile = windowDi.inject(readJsonFileInjectable);
 
-              const actual = (await readJsonFile("/some-directory-for-lens-local-storage/some-cluster-id.json")) as any;
+              const actual = (await readJsonFile("/some-directory-for-k8sight-local-storage/some-cluster-id.json")) as any;
 
               const configuration = actual.install_charts["some-first-tab-id"].values;
 
@@ -846,7 +846,7 @@ describe("installing helm chart from new tab", () => {
             it("stores the changed custom name", async () => {
               const readJsonFile = windowDi.inject(readJsonFileInjectable);
 
-              const actual = (await readJsonFile("/some-directory-for-lens-local-storage/some-cluster-id.json")) as any;
+              const actual = (await readJsonFile("/some-directory-for-k8sight-local-storage/some-cluster-id.json")) as any;
 
               const customName = actual.install_charts["some-first-tab-id"].releaseName;
 

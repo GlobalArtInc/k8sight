@@ -4,16 +4,16 @@ import initializeSystemThemeTypeInjectable from "../../features/theme/system-typ
 import initUserStoreInjectable from "../../features/user-preferences/renderer/load-storage.injectable";
 import { beforeFrameStartsSecondInjectionToken } from "../before-frame-starts/tokens";
 import activeThemeInjectable from "./active.injectable";
-import applyLensThemeInjectable from "./apply-lens-theme.injectable";
+import applyThemeInjectable from "./apply-k8sight-theme.injectable";
 
 const setupApplyActiveThemeInjectable = getInjectable({
   id: "setup-apply-active-theme",
   instantiate: (di) => ({
     run: () => {
       const activeTheme = di.inject(activeThemeInjectable);
-      const applyLensTheme = di.inject(applyLensThemeInjectable);
+      const applyTheme = di.inject(applyThemeInjectable);
 
-      reaction(() => activeTheme.get(), applyLensTheme, {
+      reaction(() => activeTheme.get(), applyTheme, {
         fireImmediately: true,
       });
     },

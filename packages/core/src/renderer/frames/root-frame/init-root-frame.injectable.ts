@@ -5,7 +5,7 @@ import { bundledExtensionsLoaded } from "../../../common/ipc/extension-handling"
 import catalogEntityRegistryInjectable from "../../api/catalog/entity/registry.injectable";
 import registerIpcListenersInjectable from "../../ipc/register-ipc-listeners.injectable";
 import bindProtocolAddRouteHandlersInjectable from "../../protocol-handler/bind-protocol-add-route-handlers/bind-protocol-add-route-handlers.injectable";
-import lensProtocolRouterRendererInjectable from "../../protocol-handler/lens-protocol-router-renderer/lens-protocol-router-renderer.injectable";
+import k8sightProtocolRouterRendererInjectable from "../../protocol-handler/k8sight-protocol-router-renderer/k8sight-protocol-router-renderer.injectable";
 import ipcRendererInjectable from "../../utils/channel/ipc-renderer.injectable";
 import loadExtensionsInjectable from "../load-extensions.injectable";
 
@@ -16,7 +16,7 @@ const initRootFrameInjectable = getInjectable({
     const registerIpcListeners = di.inject(registerIpcListenersInjectable);
     const ipcRenderer = di.inject(ipcRendererInjectable);
     const bindProtocolAddRouteHandlers = di.inject(bindProtocolAddRouteHandlersInjectable);
-    const lensProtocolRouterRenderer = di.inject(lensProtocolRouterRendererInjectable);
+    const k8sightProtocolRouterRenderer = di.inject(k8sightProtocolRouterRendererInjectable);
     const catalogEntityRegistry = di.inject(catalogEntityRegistryInjectable);
 
     return async () => {
@@ -37,7 +37,7 @@ const initRootFrameInjectable = getInjectable({
         ipcRenderer.send(bundledExtensionsLoaded);
       }
 
-      lensProtocolRouterRenderer.init();
+      k8sightProtocolRouterRenderer.init();
 
       bindProtocolAddRouteHandlers();
 

@@ -5,7 +5,7 @@ import { extensionRegistratorInjectionToken } from "../../../extensions/extensio
 import extensionShouldBeEnabledForClusterFrameInjectable from "../../extension-loader/extension-should-be-enabled-for-cluster-frame.injectable";
 import { kubeObjectMenuItemInjectionToken } from "./kube-object-menu-item-injection-token";
 
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
 
 const kubeObjectMenuItemRegistratorInjectable = getInjectable({
   id: "kube-object-menu-item-registrator",
@@ -13,11 +13,11 @@ const kubeObjectMenuItemRegistratorInjectable = getInjectable({
   instantiate: (di) => {
     const getRandomId = di.inject(getRandomIdInjectionToken);
 
-    const getExtensionShouldBeEnabledForClusterFrame = (extension: LensRendererExtension) =>
+    const getExtensionShouldBeEnabledForClusterFrame = (extension: K8sightRendererExtension) =>
       di.inject(extensionShouldBeEnabledForClusterFrameInjectable, extension);
 
     return (ext) => {
-      const extension = ext as LensRendererExtension;
+      const extension = ext as K8sightRendererExtension;
 
       const extensionShouldBeEnabledForClusterFrame = getExtensionShouldBeEnabledForClusterFrame(extension);
 

@@ -2,7 +2,7 @@ import asyncFn from "@async-fn/jest";
 import { flushPromises } from "@kubesightapp/test-utils";
 import { fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import directoryForLensLocalStorageInjectable from "../../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import { HelmChart } from "../../../common/k8s-api/endpoints/helm-charts.api";
 import requestHelmChartsInjectable from "../../../common/k8s-api/endpoints/helm-charts.api/request-charts.injectable";
 import requestHelmChartReadmeInjectable from "../../../common/k8s-api/endpoints/helm-charts.api/request-readme.injectable";
@@ -38,7 +38,7 @@ describe("opening dock tab for installing helm chart", () => {
     requestHelmChartValuesMock = jest.fn();
 
     builder.beforeWindowStart(({ windowDi }) => {
-      windowDi.override(directoryForLensLocalStorageInjectable, () => "/some-directory-for-lens-local-storage");
+      windowDi.override(directoryForK8sightLocalStorageInjectable, () => "/some-directory-for-k8sight-local-storage");
       windowDi.override(hostedClusterIdInjectable, () => "some-cluster-id");
       windowDi.override(requestHelmChartsInjectable, () => requestHelmChartsMock);
       windowDi.override(requestHelmChartVersionsInjectable, () => requestHelmChartVersionsMock);

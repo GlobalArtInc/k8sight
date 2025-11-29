@@ -2,7 +2,7 @@ import React from "react";
 import "@testing-library/jest-dom";
 
 import { fireEvent } from "@testing-library/react";
-import directoryForLensLocalStorageInjectable from "../../../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import { getDiForUnitTesting } from "../../../getDiForUnitTesting";
 import { renderFor } from "../../test-utils/renderFor";
 import { PodTolerations } from "../pod-tolerations";
@@ -32,7 +32,7 @@ describe("<PodTolerations />", () => {
   beforeEach(() => {
     const di = getDiForUnitTesting();
 
-    di.override(directoryForLensLocalStorageInjectable, () => "some-directory-for-lens-local-storage");
+    di.override(directoryForK8sightLocalStorageInjectable, () => "some-directory-for-k8sight-local-storage");
 
     render = renderFor(di);
   });

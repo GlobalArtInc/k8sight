@@ -52,7 +52,7 @@ const NonInjectedExtensionInstallRegistry = observer(({ state }: Dependencies) =
             }
           })
         }
-        themeName="lens"
+        themeName="k8sight"
       />
       <p className="mt-4 mb-5 leading-relaxed">
         {"This setting is to change the registry URL for installing extensions by name. "}

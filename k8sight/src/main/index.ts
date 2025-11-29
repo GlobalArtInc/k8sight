@@ -1,6 +1,6 @@
 import { applicationFeature, startApplicationInjectionToken } from "@kubesightapp/application";
 import { applicationFeatureForElectronMain } from "@kubesightapp/application-for-electron-main";
-import { commonExtensionApi as Common, mainExtensionApi as Main, registerLensCore } from "@kubesightapp/core/main";
+import { commonExtensionApi as Common, mainExtensionApi as Main, registerK8sightCore } from "@kubesightapp/core/main";
 import { registerFeature } from "@kubesightapp/feature-core";
 import { kubeApiSpecificsFeature } from "@kubesightapp/kube-api-specifics";
 import { loggerFeature } from "@kubesightapp/logger";
@@ -21,7 +21,7 @@ const di = createContainer(environment, {
 registerMobX(di);
 
 runInAction(() => {
-  registerLensCore(di, environment);
+  registerK8sightCore(di, environment);
 
   registerFeature(
     di,
@@ -61,7 +61,7 @@ export {
   Pty,
 } from "@kubesightapp/core/main";
 
-export const LensExtensions = {
+export const K8sightExtensions = {
   Main,
   Common,
 };

@@ -6,10 +6,10 @@ import React from "react";
 import extensionDiscoveryInjectable from "../../../extensions/extension-discovery/extension-discovery.injectable";
 import extensionInstallationStateStoreInjectable from "../../../extensions/extension-installation-state-store/extension-installation-state-store.injectable";
 import extensionLoaderInjectable from "../../../extensions/extension-loader/extension-loader.injectable";
-import { extensionDisplayName } from "../../../extensions/lens-extension";
+import { extensionDisplayName } from "../../../extensions/k8sight-extension";
 import { getMessageFromError } from "./get-message-from-error/get-message-from-error";
 
-import type { LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
 const uninstallExtensionInjectable = getInjectable({
   id: "uninstall-extension",
@@ -22,7 +22,7 @@ const uninstallExtensionInjectable = getInjectable({
     const showSuccessNotification = di.inject(showSuccessNotificationInjectable);
     const showErrorNotification = di.inject(showErrorNotificationInjectable);
 
-    return async (extensionId: LensExtensionId): Promise<boolean> => {
+    return async (extensionId: K8sightExtensionId): Promise<boolean> => {
       const ext = extensionLoader.getExtensionById(extensionId);
 
       if (!ext) {

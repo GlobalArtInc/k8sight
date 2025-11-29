@@ -14,7 +14,7 @@ import Helm from "../assets/helm.svg";
 import Install from "../assets/install.svg";
 import Kube from "../assets/kube.svg";
 import License from "../assets/license.svg";
-import LogoLens from "../assets/logo-lens.svg";
+import LogoK8sight from "../assets/logo-k8sight.svg";
 import Logout from "../assets/logout.svg";
 import Nodes from "../assets/nodes.svg";
 import Notice from "../assets/notice.svg";
@@ -52,7 +52,7 @@ const localSvgIcons = new Map([
   ["install", Install],
   ["kube", Kube],
   ["license", License],
-  ["logo-lens", LogoLens],
+  ["logo-k8sight", LogoK8sight],
   ["logout", Logout],
   ["nodes", Nodes],
   ["push_off", PushOff],
@@ -76,7 +76,7 @@ export type NamedSvg =
   | "install"
   | "kube"
   | "license"
-  | "logo-lens"
+  | "logo-k8sight"
   | "logout"
   | "nodes"
   | "push_off"

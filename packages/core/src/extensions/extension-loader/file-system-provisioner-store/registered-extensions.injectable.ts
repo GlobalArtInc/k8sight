@@ -1,9 +1,9 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { observable } from "mobx";
 
-import type { LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
 export const registeredExtensionsInjectable = getInjectable({
   id: "registered-extensions",
-  instantiate: () => observable.map<LensExtensionId, string>(),
+  instantiate: () => observable.map<K8sightExtensionId, string>(),
 });

@@ -29,14 +29,14 @@ const getEsbuildLoader = (options: Partial<TSLoaderOptions>, testRegExp: RegExp)
   }
 );
 
-const getTypescriptLoaderImpl = process.env.LENS_DEV_USE_ESBUILD_LOADER === "true" ? getEsbuildLoader : getTsLoader;
+const getTypescriptLoaderImpl = process.env.K8SIGHT_DEV_USE_ESBUILD_LOADER === "true" ? getEsbuildLoader : getTsLoader;
 
 // by default covers react/jsx-stuff
 const defaultTestRegExp = /\.tsx?$/;
 
 /**
  * A function returning webpack ts/tsx loader
- * depends on env LENS_DEV_USE_ESBUILD_LOADER to use esbuild-loader (faster) or good-old ts-loader
+ * depends on env K8SIGHT_DEV_USE_ESBUILD_LOADER to use esbuild-loader (faster) or good-old ts-loader
  * @returns ts/tsx webpack loader configuration object
  */
 export const getTypescriptLoader = (options?: Partial<TSLoaderOptions>, testRegExp?: RegExp) => {

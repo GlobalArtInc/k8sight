@@ -14,7 +14,7 @@ import { ZebraStripesPlugin } from "./zebra-stripes.plugin";
 import type { ChartOptions, ChartTooltipCallback, ChartTooltipItem, Scriptable } from "chart.js";
 import type { IComputedValue } from "mobx";
 
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 import type { ChartProps } from "./chart";
 
 export interface BarChartProps extends ChartProps {
@@ -25,7 +25,7 @@ export interface BarChartProps extends ChartProps {
 const getBarColor: Scriptable<string> = ({ dataset }) => Color(dataset?.borderColor).alpha(0.2).string();
 
 interface Dependencies {
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
 }
 
 const NonInjectedBarChart = observer(

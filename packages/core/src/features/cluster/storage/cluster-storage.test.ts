@@ -85,7 +85,7 @@ describe("cluster storage technical tests", () => {
     beforeEach(async () => {
       getCustomKubeConfigFilePath = di.inject(getCustomKubeConfigFilePathInjectable);
 
-      writeJsonSync("/some-directory-for-user-data/lens-cluster-store.json", {});
+      writeJsonSync("/some-directory-for-user-data/k8sight-cluster-store.json", {});
       clustersPersistentStorage = di.inject(clustersPersistentStorageInjectable);
       clustersPersistentStorage.loadAndStartSyncing();
     });
@@ -152,7 +152,7 @@ describe("cluster storage technical tests", () => {
   describe("config with existing clusters", () => {
     beforeEach(() => {
       writeFileSync("/temp-kube-config", kubeconfig);
-      writeJsonSync("/some-directory-for-user-data/lens-cluster-store.json", {
+      writeJsonSync("/some-directory-for-user-data/k8sight-cluster-store.json", {
         __internal__: {
           migrations: {
             version: "99.99.99",

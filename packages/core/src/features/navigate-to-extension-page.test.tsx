@@ -8,12 +8,12 @@ import queryParametersInjectable from "../renderer/routes/query-parameters.injec
 import type { RenderResult } from "@testing-library/react";
 import type { IComputedValue } from "mobx";
 
-import type { LensRendererExtension } from "../extensions/lens-renderer-extension";
+import type { K8sightRendererExtension } from "../extensions/k8sight-renderer-extension";
 import type { FakeExtensionOptions } from "../renderer/components/test-utils/get-extension-fake";
 
 describe("navigate to extension page", () => {
   let rendered: RenderResult;
-  let testExtension: LensRendererExtension;
+  let testExtension: K8sightRendererExtension;
   let queryParameters: IComputedValue<object>;
   let currentPath: IComputedValue<string>;
 

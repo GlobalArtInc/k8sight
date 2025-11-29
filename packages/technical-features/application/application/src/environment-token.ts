@@ -1,5 +1,5 @@
 import { getInjectionToken } from "@ogre-tools/injectable";
 
-export const lensBuildEnvironmentInjectionToken = getInjectionToken<string>({
-  id: "lens-build-environment-token",
+export const k8sightBuildEnvironmentInjectionToken = getInjectionToken<string>({
+  id: "k8sight-build-environment-token",
 });

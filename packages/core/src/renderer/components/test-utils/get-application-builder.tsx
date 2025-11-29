@@ -39,10 +39,10 @@ import navigateToPreferencesInjectable from "../../../features/preferences/commo
 import { catalogEntityFromCluster } from "../../../main/cluster/manager";
 import shouldStartHiddenInjectable from "../../../main/electron-app/features/should-start-hidden.injectable";
 import { getDiForUnitTesting as getMainDi } from "../../../main/getDiForUnitTesting";
-import lensProxyPortInjectable from "../../../main/lens-proxy/lens-proxy-port.injectable";
-import { applicationWindowInjectionToken } from "../../../main/start-main-application/lens-window/application-window/application-window-injection-token";
-import createApplicationWindowInjectable from "../../../main/start-main-application/lens-window/application-window/create-application-window.injectable";
-import createElectronWindowInjectable from "../../../main/start-main-application/lens-window/application-window/create-electron-window.injectable";
+import k8sightProxyPortInjectable from "../../../main/k8sight-proxy/k8sight-proxy-port.injectable";
+import { applicationWindowInjectionToken } from "../../../main/start-main-application/k8sight-window/application-window/application-window-injection-token";
+import createApplicationWindowInjectable from "../../../main/start-main-application/k8sight-window/application-window/create-application-window.injectable";
+import createElectronWindowInjectable from "../../../main/start-main-application/k8sight-window/application-window/create-electron-window.injectable";
 import electronTrayInjectable from "../../../main/tray/electron-tray/electron-tray.injectable";
 import { getOverrideFsWithFakes } from "../../../test-utils/override-fs-with-fakes";
 import { testUsingFakeTime } from "../../../test-utils/use-fake-time";
@@ -65,11 +65,11 @@ import type { Route } from "../../../common/front-end-routing/front-end-route-in
 import type { NavigateToRouteOptions } from "../../../common/front-end-routing/navigate-to-route-injection-token";
 import type { NavigateToHelmCharts } from "../../../common/front-end-routing/routes/cluster/helm/charts/navigate-to-helm-charts.injectable";
 import type { KubeApiResourceDescriptor } from "../../../common/rbac";
-import type { LensExtension } from "../../../extensions/lens-extension";
-import type { LensMainExtension } from "../../../extensions/lens-main-extension";
-import type { LensRendererExtension } from "../../../extensions/lens-renderer-extension";
-import type { CreateElectronWindow } from "../../../main/start-main-application/lens-window/application-window/create-electron-window.injectable";
-import type { LensWindow } from "../../../main/start-main-application/lens-window/application-window/create-lens-window.injectable";
+import type { K8sightExtension } from "../../../extensions/k8sight-extension";
+import type { K8sightMainExtension } from "../../../extensions/k8sight-main-extension";
+import type { K8sightRendererExtension } from "../../../extensions/k8sight-renderer-extension";
+import type { CreateElectronWindow } from "../../../main/start-main-application/k8sight-window/application-window/create-electron-window.injectable";
+import type { K8sightWindow } from "../../../main/start-main-application/k8sight-window/application-window/create-k8sight-window.injectable";
 import type { MinimalTrayMenuItem } from "../../../main/tray/electron-tray/electron-tray.injectable";
 import type { NamespaceStore } from "../namespaces/store";
 import type { FakeExtensionOptions } from "./get-extension-fake";
@@ -77,7 +77,7 @@ import type { FakeExtensionOptions } from "./get-extension-fake";
 type MainDiCallback = (container: { mainDi: DiContainer }) => void | Promise<void>;
 type WindowDiCallback = (container: { windowDi: DiContainer }) => void | Promise<void>;
 
-type LensWindowWithHelpers = LensWindow & { rendered: RenderResult; di: DiContainer };
+type K8sightWindowWithHelpers = K8sightWindow & { rendered: RenderResult; di: DiContainer };
 
 const createNamespace = (namespace: string) =>
   new Namespace({
@@ -118,20 +118,20 @@ export interface ApplicationBuilder {
     disable: (...extensions: FakeExtensionOptions[]) => void;
 
     get: (id: string) => {
-      main: LensMainExtension;
+      main: K8sightMainExtension;
 
-      applicationWindows: Record<string, LensRendererExtension> & {
-        only: LensRendererExtension;
+      applicationWindows: Record<string, K8sightRendererExtension> & {
+        only: K8sightRendererExtension;
       };
     };
   };
 
   applicationWindow: {
     closeAll: () => void;
-    only: LensWindowWithHelpers;
-    get: (id: string) => LensWindowWithHelpers;
-    getAll: () => LensWindowWithHelpers[];
-    create: (id: string) => LensWindowWithHelpers;
+    only: K8sightWindowWithHelpers;
+    get: (id: string) => K8sightWindowWithHelpers;
+    getAll: () => K8sightWindowWithHelpers[];
+    create: (id: string) => K8sightWindowWithHelpers;
   };
 
   allowKubeResource: (resource: KubeApiResourceDescriptor) => ApplicationBuilder;
@@ -319,7 +319,7 @@ export const getApplicationBuilder = (user: UserEvent = userEvent.setup()) => {
   const startApp = async ({ shouldStartHidden }: { shouldStartHidden: boolean }) => {
     const startApplication = mainDi.inject(startApplicationInjectionToken);
 
-    mainDi.inject(lensProxyPortInjectable).set(42);
+    mainDi.inject(k8sightProxyPortInjectable).set(42);
 
     for (const callback of beforeApplicationStartCallbacks) {
       await callback({ mainDi });
@@ -339,10 +339,10 @@ export const getApplicationBuilder = (user: UserEvent = userEvent.setup()) => {
     mainDi,
     applicationWindow: {
       closeAll: () => {
-        const lensWindows = mainDi.injectMany(applicationWindowInjectionToken);
+        const k8sightWindows = mainDi.injectMany(applicationWindowInjectionToken);
 
-        for (const lensWindow of lensWindows) {
-          lensWindow.close();
+        for (const k8sightWindow of k8sightWindows) {
+          k8sightWindow.close();
         }
 
         document.documentElement.innerHTML = "";
@@ -587,7 +587,7 @@ export const getApplicationBuilder = (user: UserEvent = userEvent.setup()) => {
           ],
           "current-context": cluster.contextName,
         });
-        writeJsonSync("/some-directory-for-app-data/some-product-name/lens-cluster-store.json", {
+        writeJsonSync("/some-directory-for-app-data/some-product-name/k8sight-cluster-store.json", {
           clusters: [
             {
               id: cluster.id,
@@ -607,7 +607,7 @@ export const getApplicationBuilder = (user: UserEvent = userEvent.setup()) => {
         const windowInstances = pipeline(
           builder.applicationWindow.getAll(),
 
-          map((window): [string, LensRendererExtension] => [
+          map((window): [string, K8sightRendererExtension] => [
             window.id,
             findExtensionInstance(window.di, rendererExtensionsInjectable, id),
           ]),
@@ -765,15 +765,15 @@ export const getApplicationBuilder = (user: UserEvent = userEvent.setup()) => {
 
 export const rendererExtensionsStateInjectable = getInjectable({
   id: "renderer-extensions-state",
-  instantiate: () => observable.map<string, LensRendererExtension>(),
+  instantiate: () => observable.map<string, K8sightRendererExtension>(),
 });
 
 const mainExtensionsStateInjectable = getInjectable({
   id: "main-extensions-state",
-  instantiate: () => observable.map<string, LensMainExtension>(),
+  instantiate: () => observable.map<string, K8sightMainExtension>(),
 });
 
-const findExtensionInstance = <T extends LensExtension>(
+const findExtensionInstance = <T extends K8sightExtension>(
   di: DiContainer,
   injectable: Injectable<IComputedValue<T[]>, any, any>,
   id: string,
@@ -794,7 +794,7 @@ type ApplicationWindowHelpers = Map<string, { di: DiContainer; getRendered: () =
 
 const toWindowWithHelpersFor =
   (windowHelpers: ApplicationWindowHelpers) =>
-  (applicationWindow: LensWindow): LensWindowWithHelpers => ({
+  (applicationWindow: K8sightWindow): K8sightWindowWithHelpers => ({
     ...applicationWindow,
 
     get rendered() {
@@ -846,7 +846,7 @@ const selectOptionFor = (builder: ApplicationBuilder, user: UserEvent, menuId: s
 function enableExtensionFor(di: DiContainer, stateInjectable: Injectable<ObservableMap<string, any>, any, any>) {
   const extensionState = di.inject(stateInjectable);
 
-  return (instance: LensExtension) => {
+  return (instance: K8sightExtension) => {
     const extension = di.inject(extensionInjectable, instance);
 
     extension.register();

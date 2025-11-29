@@ -11,13 +11,13 @@ import { NoMetrics } from "../resource-metrics/no-metrics";
 
 import type { IComputedValue } from "mobx";
 
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 import type { ChartDataSets } from "../chart";
 
 export interface ContainerChartsProps {}
 
 interface Dependencies {
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
 }
 
 const NonInjectedContainerCharts = observer(({ activeTheme }: Dependencies & ContainerChartsProps) => {

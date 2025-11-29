@@ -4,7 +4,7 @@ import { ipcMain } from "electron";
 import readFileInjectable from "../../../../../../common/fs/read-file.injectable";
 import joinPathsInjectable from "../../../../../../common/path/join-paths.injectable";
 import staticFilesDirectoryInjectable from "../../../../../../common/vars/static-files-directory.injectable";
-import createElectronWindowInjectable from "../../../../../../main/start-main-application/lens-window/application-window/create-electron-window.injectable";
+import createElectronWindowInjectable from "../../../../../../main/start-main-application/k8sight-window/application-window/create-electron-window.injectable";
 
 export type ShowLicensesWindow = () => Promise<void>;
 

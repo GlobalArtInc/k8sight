@@ -162,7 +162,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                   this.onSaveProvider();
                 }}
                 options={this.options}
-                themeName="lens"
+                themeName="k8sight"
               />
               <small className="hint">What query format is used to fetch metrics from Prometheus</small>
             </>

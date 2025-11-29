@@ -1,7 +1,7 @@
-import type { LensApiResult } from "./route";
+import type { K8sightApiResult } from "./route";
 
-export interface LensApiResultContentType {
-  resultMapper: (result: LensApiResult<unknown>) => {
+export interface K8sightApiResultContentType {
+  resultMapper: (result: K8sightApiResult<unknown>) => {
     statusCode: number;
     content: unknown;
     headers: Record<string, string>;
@@ -9,7 +9,7 @@ export interface LensApiResultContentType {
 }
 
 const resultMapperFor =
-  (contentType: string): LensApiResultContentType["resultMapper"] =>
+  (contentType: string): K8sightApiResultContentType["resultMapper"] =>
   ({ response, error, statusCode = error ? 400 : 200, headers = {} }) => ({
     statusCode,
     content: error || response,
@@ -29,13 +29,13 @@ export type SupportedFileExtension =
   | "woff2"
   | "ttf";
 
-export interface ContentTypes extends Record<SupportedFileExtension, LensApiResultContentType> {
-  [key: string]: LensApiResultContentType | undefined;
+export interface ContentTypes extends Record<SupportedFileExtension, K8sightApiResultContentType> {
+  [key: string]: K8sightApiResultContentType | undefined;
 }
 
 export const contentTypes: ContentTypes = {
   json: {
-    resultMapper: (result: LensApiResult<unknown>) => {
+    resultMapper: (result: K8sightApiResult<unknown>) => {
       const resultMapper = resultMapperFor("application/json");
 
       const mappedResult = resultMapper(result);

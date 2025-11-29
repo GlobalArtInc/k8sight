@@ -3,38 +3,38 @@ import { loggerInjectionToken } from "@kubesightapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import AwaitLock from "await-lock";
 import { comparer, reaction, runInAction, toJS } from "mobx";
-import directoryForLensLocalStorageInjectable from "../../../common/directory-for-lens-local-storage/directory-for-lens-local-storage.injectable";
+import directoryForK8sightLocalStorageInjectable from "../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import readJsonFileInjectable from "../../../common/fs/read-json-file.injectable";
 import writeJsonFileInjectable from "../../../common/fs/write-json-file.injectable";
 import joinPathsInjectable from "../../../common/path/join-paths.injectable";
 import setupAppPathsInjectable from "../../app-paths/setup-app-paths.injectable";
 import hostedClusterIdInjectable from "../../cluster-frame-context/hosted-cluster-id.injectable";
 import { storageHelperLogPrefix } from "../storage-helper";
-import lensLocalStorageStateInjectable from "./state.injectable";
+import k8sightLocalStorageStateInjectable from "./state.injectable";
 import storageSaveDelayInjectable from "./storage-save-delay.injectable";
 
 const initializeStateInjectable = getInjectable({
-  id: "initialize-lens-local-storage-state",
+  id: "initialize-k8sight-local-storage-state",
   instantiate: (di) => ({
     run: async () => {
       const joinPaths = di.inject(joinPathsInjectable);
-      const directoryForLensLocalStorage = di.inject(directoryForLensLocalStorageInjectable);
+      const directoryForK8sightLocalStorage = di.inject(directoryForK8sightLocalStorageInjectable);
       const hostedClusterId = di.inject(hostedClusterIdInjectable);
-      const lensLocalStorageState = di.inject(lensLocalStorageStateInjectable);
+      const k8sightLocalStorageState = di.inject(k8sightLocalStorageStateInjectable);
       const readJsonFile = di.inject(readJsonFileInjectable);
       const writeJsonFile = di.inject(writeJsonFileInjectable);
       const logger = di.inject(loggerInjectionToken);
       const storageSaveDelay = di.inject(storageSaveDelayInjectable);
       const lock = new AwaitLock();
 
-      const filePath = joinPaths(directoryForLensLocalStorage, `${hostedClusterId || "app"}.json`);
+      const filePath = joinPaths(directoryForK8sightLocalStorage, `${hostedClusterId || "app"}.json`);
 
       try {
         const localFile = await readJsonFile(filePath);
 
         if (typeof localFile === "object") {
           runInAction(() => {
-            Object.assign(lensLocalStorageState, localFile);
+            Object.assign(k8sightLocalStorageState, localFile);
           });
         }
       } catch {
@@ -43,7 +43,7 @@ const initializeStateInjectable = getInjectable({
         logger.info(`${storageHelperLogPrefix} loading finished for ${filePath}`);
       }
 
-      reaction(() => toJS(lensLocalStorageState), saveFile, {
+      reaction(() => toJS(k8sightLocalStorageState), saveFile, {
         delay: storageSaveDelay, // lazy, avoid excessive writes to fs
         equals: comparer.structural, // save only when something really changed
       });

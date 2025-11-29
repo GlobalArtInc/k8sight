@@ -11,7 +11,7 @@ import { Chart } from "./chart";
 import type { ChartOptions } from "chart.js";
 import type { IComputedValue } from "mobx";
 
-import type { LensTheme } from "../../themes/lens-theme";
+import type { Theme } from "../../themes/k8sight-theme";
 import type { ChartProps } from "./chart";
 
 export interface PieChartProps extends ChartProps {}
@@ -42,7 +42,7 @@ function getCutout(length: number | undefined): number {
 }
 
 interface Dependencies {
-  activeTheme: IComputedValue<LensTheme>;
+  activeTheme: IComputedValue<Theme>;
 }
 
 const NonInjectedPieChart = observer(

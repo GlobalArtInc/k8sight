@@ -9,15 +9,15 @@ import extensionDiscoveryInjectable from "../../../../extensions/extension-disco
 import { getMessageFromError } from "../get-message-from-error/get-message-from-error";
 import { validatePackage } from "./validate-package";
 
-import type { LensExtensionId, LensExtensionManifest } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId, K8sightExtensionManifest } from "@kubesightapp/legacy-extensions";
 
 import type { InstallRequest } from "./attempt-install.injectable";
 
 export interface InstallRequestValidated {
   fileName: string;
   data: Buffer;
-  id: LensExtensionId;
-  manifest: LensExtensionManifest;
+  id: K8sightExtensionId;
+  manifest: K8sightExtensionManifest;
   tempFile: string; // temp system path to packed extension for unpacking
 }
 
@@ -33,7 +33,7 @@ const createTempFilesAndValidateInjectable = getInjectable({
     const showErrorNotification = di.inject(showErrorNotificationInjectable);
     const tempDirectoryPath = di.inject(tempDirectoryPathInjectable);
 
-    const getTempExtensionPackagePath = (fileName: string) => joinPaths(tempDirectoryPath, "lens-extensions", fileName);
+    const getTempExtensionPackagePath = (fileName: string) => joinPaths(tempDirectoryPath, "k8sight-extensions", fileName);
 
     return async ({ fileName, data }) => {
       // validate packages

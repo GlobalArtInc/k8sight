@@ -291,7 +291,7 @@ describe("custom category columns for catalog", () => {
 });
 
 class TestCategory extends CatalogCategory {
-  apiVersion = "catalog.k8slens.dev/v1alpha1";
+  apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   kind = "CatalogCategory";
   metadata = {
     name: "Test",

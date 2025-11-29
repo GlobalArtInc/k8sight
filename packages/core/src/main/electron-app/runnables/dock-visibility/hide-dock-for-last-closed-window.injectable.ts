@@ -1,6 +1,6 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { isEmpty } from "lodash/fp";
-import getVisibleWindowsInjectable from "../../../start-main-application/lens-window/get-visible-windows.injectable";
+import getVisibleWindowsInjectable from "../../../start-main-application/k8sight-window/get-visible-windows.injectable";
 import { afterQuitOfFrontEndInjectionToken } from "../../../start-main-application/runnable-tokens/phases";
 import electronAppInjectable from "../../electron-app.injectable";
 

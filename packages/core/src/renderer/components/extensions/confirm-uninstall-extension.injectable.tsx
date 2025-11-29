@@ -1,15 +1,15 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import React from "react";
-import { extensionDisplayName } from "../../../extensions/lens-extension";
+import { extensionDisplayName } from "../../../extensions/k8sight-extension";
 import confirmInjectable from "../confirm-dialog/confirm.injectable";
 import uninstallExtensionInjectable from "./uninstall-extension.injectable";
 
-import type { InstalledExtension, LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { InstalledExtension, K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
 import type { Confirm } from "../confirm-dialog/confirm.injectable";
 
 interface Dependencies {
-  uninstallExtension: (id: LensExtensionId) => Promise<boolean>;
+  uninstallExtension: (id: K8sightExtensionId) => Promise<boolean>;
   confirm: Confirm;
 }
 

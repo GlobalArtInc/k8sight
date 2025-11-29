@@ -12,7 +12,7 @@ export interface GeneralEntitySpec extends CatalogEntitySpec {
 }
 
 export class GeneralEntity extends CatalogEntity<CatalogEntityMetadata, CatalogEntityStatus, GeneralEntitySpec> {
-  public readonly apiVersion = "entity.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "entity.k8sk8sight.dev/v1alpha1";
   public readonly kind = "General";
 
   async onRun(context: CatalogEntityActionContext) {
@@ -21,14 +21,14 @@ export class GeneralEntity extends CatalogEntity<CatalogEntityMetadata, CatalogE
 }
 
 export class GeneralCategory extends CatalogCategory {
-  public readonly apiVersion = "catalog.k8slens.dev/v1alpha1";
+  public readonly apiVersion = "catalog.k8sk8sight.dev/v1alpha1";
   public readonly kind = "CatalogCategory";
   public metadata = {
     name: "General",
     icon: "settings",
   };
   public spec = {
-    group: "entity.k8slens.dev",
+    group: "entity.k8sk8sight.dev",
     versions: [categoryVersion("v1alpha1", GeneralEntity)],
     names: {
       kind: "General",

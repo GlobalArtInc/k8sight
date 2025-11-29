@@ -4,9 +4,9 @@ import activeThemeInjectable from "./active.injectable";
 
 import type { IComputedValue } from "mobx";
 
-import type { LensThemeType } from "./lens-theme";
+import type { ThemeType } from "./k8sight-theme";
 
-export type ActiveThemeType = IComputedValue<LensThemeType>;
+export type ActiveThemeType = IComputedValue<ThemeType>;
 
 const activeThemeTypeInjectable = getInjectable({
   id: "active-theme-type",

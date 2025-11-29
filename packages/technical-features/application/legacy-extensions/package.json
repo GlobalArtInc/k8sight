@@ -2,7 +2,7 @@
   "name": "@kubesightapp/legacy-extensions",
   "private": false,
   "version": "1.7.0-0",
-  "description": "Package for Lens extensions using the v1 API",
+  "description": "Package for K8sight extensions using the v1 API",
   "type": "commonjs",
   "files": [
     "dist"
@@ -25,7 +25,7 @@
   "homepage": "https://k8sight.app",
   "scripts": {
     "clean": "pnpm dlx rimraf@6.1.2 dist",
-    "build": "lens-webpack-build",
+    "build": "k8sight-webpack-build",
     "clean:node_modules": "pnpm dlx rimraf@6.1.2 node_modules"
   },
   "dependencies": {

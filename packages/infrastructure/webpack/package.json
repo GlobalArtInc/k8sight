@@ -2,7 +2,7 @@
   "name": "@kubesightapp/webpack",
   "private": false,
   "version": "1.7.0-0",
-  "description": "Webpack configurations and scripts for Lens packages.",
+  "description": "Webpack configurations and scripts for K8Sight packages.",
   "type": "commonjs",
   "publishConfig": {
     "access": "public",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lensapp/lens.git"
+    "url": "git+https://github.com/GlobalArtInc/k8sight.git"
   },
   "main": "dist/index.js",
   "author": {
@@ -18,7 +18,7 @@
     "email": "tech@globalart.dev"
   },
   "license": "MIT",
-  "homepage": "https://github.com/lensapp/lens",
+  "homepage": "https://github.com/GlobalArtInc/k8sight",
   "scripts": {
     "build": "webpack",
     "clean": "pnpm dlx rimraf@6.1.2 dist",
@@ -59,6 +59,6 @@
     "ts-jest": "^29.4.5"
   },
   "bin": {
-    "lens-webpack-build": "bin/webpack-build"
+    "k8sight-webpack-build": "bin/webpack-build"
   }
 }

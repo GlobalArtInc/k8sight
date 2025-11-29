@@ -6,7 +6,7 @@ import applicationMenuItemInjectionToken from "./menu-items/application-menu-ite
 
 import type { Injectable } from "@ogre-tools/injectable";
 
-import type { LensMainExtension } from "../../../extensions/lens-main-extension";
+import type { K8sightMainExtension } from "../../../extensions/k8sight-main-extension";
 import type {
   ApplicationMenuItemTypes,
   ClickableMenuItem,
@@ -23,7 +23,7 @@ const applicationMenuItemRegistratorInjectable = getInjectable({
     const toRecursedInjectables = toRecursedInjectablesFor(logError);
 
     return (ext) => {
-      const mainExtension = ext as LensMainExtension;
+      const mainExtension = ext as K8sightMainExtension;
 
       return computed(() => {
         const appMenus = Array.isArray(mainExtension.appMenus) ? mainExtension.appMenus : mainExtension.appMenus.get();

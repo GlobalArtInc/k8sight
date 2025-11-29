@@ -57,7 +57,7 @@ const GeneralKubernetesClusterSettings = withInjectables<Dependencies, EntitySet
 const generalKubernetesClusterEntitySettingsInjectable = getInjectable({
   id: "general-kubernetes-cluster-entity-settings",
   instantiate: () => ({
-    apiVersions: new Set(["entity.k8slens.dev/v1alpha1"]),
+    apiVersions: new Set(["entity.k8sk8sight.dev/v1alpha1"]),
     kind: "KubernetesCluster",
     source: "local",
     title: "General",

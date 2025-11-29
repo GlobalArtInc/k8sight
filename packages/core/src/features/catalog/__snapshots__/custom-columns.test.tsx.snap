@@ -74,7 +74,7 @@ exports[`custom category columns for catalog renders 1`] = `
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -148,7 +148,7 @@ exports[`custom category columns for catalog renders 1`] = `
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -179,7 +179,7 @@ exports[`custom category columns for catalog renders 1`] = `
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -208,7 +208,7 @@ exports[`custom category columns for catalog renders 1`] = `
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -662,7 +662,7 @@ exports[`custom category columns for catalog when category is added using defaul
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -736,7 +736,7 @@ exports[`custom category columns for catalog when category is added using defaul
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -767,7 +767,7 @@ exports[`custom category columns for catalog when category is added using defaul
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -796,7 +796,7 @@ exports[`custom category columns for catalog when category is added using defaul
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -1281,7 +1281,7 @@ exports[`custom category columns for catalog when category is added using defaul
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -1355,7 +1355,7 @@ exports[`custom category columns for catalog when category is added using defaul
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -1386,7 +1386,7 @@ exports[`custom category columns for catalog when category is added using defaul
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -1415,7 +1415,7 @@ exports[`custom category columns for catalog when category is added using defaul
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -1890,7 +1890,7 @@ exports[`custom category columns for catalog when category is added using defaul
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -1964,7 +1964,7 @@ exports[`custom category columns for catalog when category is added using defaul
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -1995,7 +1995,7 @@ exports[`custom category columns for catalog when category is added using defaul
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -2024,7 +2024,7 @@ exports[`custom category columns for catalog when category is added using defaul
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -2488,7 +2488,7 @@ exports[`custom category columns for catalog when category is added with custom 
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -2562,7 +2562,7 @@ exports[`custom category columns for catalog when category is added with custom 
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -2593,7 +2593,7 @@ exports[`custom category columns for catalog when category is added with custom 
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -2622,7 +2622,7 @@ exports[`custom category columns for catalog when category is added with custom 
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -3107,7 +3107,7 @@ exports[`custom category columns for catalog when category is added with custom 
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -3181,7 +3181,7 @@ exports[`custom category columns for catalog when category is added with custom 
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -3212,7 +3212,7 @@ exports[`custom category columns for catalog when category is added with custom 
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -3241,7 +3241,7 @@ exports[`custom category columns for catalog when category is added with custom 
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -3663,7 +3663,7 @@ exports[`custom category columns for catalog when category is added without defa
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -3737,7 +3737,7 @@ exports[`custom category columns for catalog when category is added without defa
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -3768,7 +3768,7 @@ exports[`custom category columns for catalog when category is added without defa
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -3797,7 +3797,7 @@ exports[`custom category columns for catalog when category is added without defa
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div
@@ -4282,7 +4282,7 @@ exports[`custom category columns for catalog when category is added without defa
       </div>
       <main>
         <div
-          id="lens-views"
+          id="k8sight-views"
         />
         <div
           class="mainLayout"
@@ -4356,7 +4356,7 @@ exports[`custom category columns for catalog when category is added without defa
                   >
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
+                      data-testid="entity.k8sk8sight.dev/WebLink-tab"
                       role="treeitem"
                     >
                       <div
@@ -4387,7 +4387,7 @@ exports[`custom category columns for catalog when category is added without defa
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                      data-testid="entity.k8sk8sight.dev/KubernetesCluster-tab"
                       role="treeitem"
                     >
                       <div
@@ -4416,7 +4416,7 @@ exports[`custom category columns for catalog when category is added without defa
                     </li>
                     <li
                       class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
+                      data-testid="entity.k8sk8sight.dev/General-tab"
                       role="treeitem"
                     >
                       <div

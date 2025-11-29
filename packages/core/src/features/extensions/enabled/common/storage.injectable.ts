@@ -8,9 +8,9 @@ import { enabledExtensionsMigrationDeclarationInjectionToken } from "../main/mig
 import enabledExtensionsStateInjectable from "./state.injectable";
 import { enabledExtensionsPersistentStorageVersionInitializable } from "./storage-version";
 
-import type { LensExtensionId } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId } from "@kubesightapp/legacy-extensions";
 
-import type { LensExtensionState } from "./state.injectable";
+import type { K8sightExtensionState } from "./state.injectable";
 
 const stateModel = z.object({
   enabled: z.boolean(),
@@ -18,7 +18,7 @@ const stateModel = z.object({
 });
 
 interface EnabledExtensionsStorageModal {
-  extensions: [LensExtensionId, LensExtensionState][];
+  extensions: [K8sightExtensionId, K8sightExtensionState][];
 }
 
 const enabledExtensionsPersistentStorageInjectable = getInjectable({
@@ -28,7 +28,7 @@ const enabledExtensionsPersistentStorageInjectable = getInjectable({
     const state = di.inject(enabledExtensionsStateInjectable);
 
     return createPersistentStorage<EnabledExtensionsStorageModal>({
-      configName: "lens-extensions",
+      configName: "k8sight-extensions",
       fromStore: action(({ extensions: rawExtensions = [] }) => {
         const extensions = rawExtensions
           .map(([key, value]) => {

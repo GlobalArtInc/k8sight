@@ -42,7 +42,7 @@ const NamespaceKubernetesClusterSettings = withInjectables<Dependencies, EntityS
 const namespaceKubernetesClusterEntitySettingsInjectable = getInjectable({
   id: "namespace-kubernetes-cluster-entity-settings",
   instantiate: () => ({
-    apiVersions: new Set(["entity.k8slens.dev/v1alpha1"]),
+    apiVersions: new Set(["entity.k8sk8sight.dev/v1alpha1"]),
     kind: "KubernetesCluster",
     title: "Namespace",
     group: "Settings",

@@ -1,14 +1,14 @@
 import { ipcRenderer } from "electron";
 import { once } from "lodash";
-import { Disposers } from "../lens-extension";
+import { Disposers } from "../k8sight-extension";
 import { IpcPrefix, IpcRegistrar } from "./ipc-registrar";
 
 import type { Disposer } from "@kubesightapp/utilities";
 
-import type { LensRendererExtension } from "../lens-renderer-extension";
+import type { K8sightRendererExtension } from "../k8sight-renderer-extension";
 
 export abstract class IpcRenderer extends IpcRegistrar {
-  constructor(extension: LensRendererExtension) {
+  constructor(extension: K8sightRendererExtension) {
     super(extension);
 
     // Call the static method on the bottom child class.
@@ -21,7 +21,7 @@ export abstract class IpcRenderer extends IpcRegistrar {
    * a component then putting the returned value in a `disposeOnUnmount` call will suffice.
    * @param channel The channel to listen for broadcasts on
    * @param listener The function that will be called with the arguments of the broadcast
-   * @returns An optional disposer, Lens will cleanup even if this is not called
+   * @returns An optional disposer, K8sight will cleanup even if this is not called
    */
   listen(channel: string, listener: (event: Electron.IpcRendererEvent, ...args: any[]) => any): Disposer {
     const prefixedChannel = `extensions@${this[IpcPrefix]}:${channel}`;

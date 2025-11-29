@@ -1,5 +1,5 @@
 import { getInjectable } from "@ogre-tools/injectable";
-import lensProtocolRouterMainInjectable from "../../protocol-handler/lens-protocol-router-main/lens-protocol-router-main.injectable";
+import k8sightProtocolRouterMainInjectable from "../../protocol-handler/k8sight-protocol-router-main/k8sight-protocol-router-main.injectable";
 import { onQuitOfBackEndInjectionToken } from "../../start-main-application/runnable-tokens/phases";
 
 const cleanUpDeepLinkingInjectable = getInjectable({
@@ -7,9 +7,9 @@ const cleanUpDeepLinkingInjectable = getInjectable({
 
   instantiate: (di) => ({
     run: () => {
-      const lensProtocolRouterMain = di.inject(lensProtocolRouterMainInjectable);
+      const k8sightProtocolRouterMain = di.inject(k8sightProtocolRouterMainInjectable);
 
-      lensProtocolRouterMain.cleanup();
+      k8sightProtocolRouterMain.cleanup();
 
       return undefined;
     },
