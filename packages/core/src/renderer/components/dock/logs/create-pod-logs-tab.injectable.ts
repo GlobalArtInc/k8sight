@@ -18,7 +18,6 @@ const createPodLogsTabInjectable = getInjectable({
 
     return ({ selectedPod, selectedContainer }: PodLogsTabData): TabId =>
       createLogsTab(`Pod ${selectedPod.getName()}`, {
-        owner: selectedPod.getOwnerRefs()[0],
         namespace: selectedPod.getNs(),
         selectedContainer: selectedContainer.name,
         selectedPodId: selectedPod.getId(),

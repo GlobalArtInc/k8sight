@@ -49,7 +49,7 @@ const createWorkloadLogsTabInjectable = getInjectable({
         },
         namespace: workload.getNs(),
         selectedContainer: firstContainer.name,
-        selectedPodId: firstPod.getId(),
+        selectedPodId: "all-pods",
       });
     };
   },

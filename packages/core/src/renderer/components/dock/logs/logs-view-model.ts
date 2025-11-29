@@ -71,6 +71,10 @@ export class LogTabViewModel {
       return undefined;
     }
 
+    if (data.selectedPodId === "all-pods") {
+      return undefined;
+    }
+
     return this.dependencies.getPodById(data.selectedPodId);
   });
 

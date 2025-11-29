@@ -7,6 +7,7 @@ import type { IntervalFn } from "@kubesightapp/utilities";
 import type { IComputedValue } from "mobx";
 
 import type { GetPodsByOwner } from "../../workloads-pods/get-pods-by-owner.injectable";
+import type { PodStore } from "../../workloads-pods/store";
 import type { TabId } from "../dock/store";
 import type { CallForLogs } from "./call-for-logs.injectable";
 import type { LogTabData } from "./tab-store";
@@ -18,6 +19,7 @@ const logLinesToLoad = 500;
 interface Dependencies {
   callForLogs: CallForLogs;
   getPodsByOwner: GetPodsByOwner;
+  podStore: PodStore;
 }
 
 export class LogStore {
@@ -144,28 +146,24 @@ export class LogStore {
     logTabData: IComputedValue<LogTabData | undefined>,
     params: Partial<PodLogsQuery>,
   ): Promise<string[]> {
-    const {
-      pod,
-      tabData: { selectedContainer, showPrevious, owner },
-    } = await waitUntilDefined(() => {
-      const pod = computedPod.get();
-      const tabData = logTabData.get();
+    const tabData = await waitUntilDefined(() => logTabData.get());
 
-      if (pod && tabData) {
-        return { pod, tabData };
+    if (!tabData) {
+      return [];
+    }
+
+    const { selectedContainer, showPrevious, owner, selectedPodId, namespace } = tabData;
+
+    if (owner?.uid || selectedPodId === "all-pods") {
+      let pods: Pod[];
+
+      if (owner?.uid) {
+        pods = this.dependencies.getPodsByOwner(owner, namespace);
+      } else if (selectedPodId === "all-pods") {
+        pods = this.dependencies.podStore.items.filter((pod) => pod.getNs() === namespace);
+      } else {
+        pods = [];
       }
-
-      return undefined;
-    });
-
-    if (owner?.uid) {
-      const tabData = logTabData.get();
-
-      if (!tabData) {
-        return [];
-      }
-
-      const pods = this.dependencies.getPodsByOwner(owner, tabData.namespace);
 
       if (pods.length === 0) {
         return [];
@@ -176,10 +174,10 @@ export class LogStore {
       await Promise.all(
         pods.map(async (pod) => {
           try {
-            const namespace = pod.getNs();
-            const name = pod.getName();
+            const podNamespace = pod.getNs();
+            const podName = pod.getName();
             const podLogs = await this.dependencies.callForLogs(
-              { namespace, name },
+              { namespace: podNamespace, name: podName },
               {
                 ...params,
                 timestamps: true,
@@ -191,7 +189,7 @@ export class LogStore {
             const lines = podLogs.trimEnd().replace(/\r/g, "\n").split("\n").filter(Boolean);
 
             for (const line of lines) {
-              allLogs.push(`[${name}] ${line}`);
+              allLogs.push(`[${podName}] ${line}`);
             }
           } catch (error) {
             const errorMessage = `[${pod.getName()}] Failed to load logs: ${error instanceof Error ? error.message : String(error)}`;
@@ -212,11 +210,17 @@ export class LogStore {
       });
     }
 
-    const namespace = pod.getNs();
-    const name = pod.getName();
+    const pod = computedPod.get();
+
+    if (!pod) {
+      return [];
+    }
+
+    const podNamespace = pod.getNs();
+    const podName = pod.getName();
 
     const result = await this.dependencies.callForLogs(
-      { namespace, name },
+      { namespace: podNamespace, name: podName },
       {
         ...params,
         timestamps: true,
