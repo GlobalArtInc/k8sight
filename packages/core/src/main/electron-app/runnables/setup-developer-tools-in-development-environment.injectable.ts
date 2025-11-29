@@ -1,7 +1,7 @@
 import { onLoadOfApplicationInjectionToken } from "@kubesightapp/application";
 import { loggerInjectionToken } from "@kubesightapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
-import { nodeEnvInjectionToken } from "../../../common/vars/node-env-injection-token";
+import isProductionInjectable from "../../../common/vars/is-production.injectable";
 
 const setupDeveloperToolsInDevelopmentEnvironmentInjectable = getInjectable({
   id: "setup-developer-tools-in-development-environment",
@@ -9,9 +9,9 @@ const setupDeveloperToolsInDevelopmentEnvironmentInjectable = getInjectable({
   instantiate: (di) => ({
     run: () => {
       const logger = di.inject(loggerInjectionToken);
-      const nodeEnv = di.inject(nodeEnvInjectionToken);
+      const isProduction = di.inject(isProductionInjectable);
 
-      if (nodeEnv !== "development") {
+      if (isProduction) {
         return;
       }
 

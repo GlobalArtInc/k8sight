@@ -1,10 +1,27 @@
+import { getInjectable } from "@ogre-tools/injectable";
+import isDevelopmentInjectable from "../../../../../../common/vars/is-development.injectable";
 import { getApplicationMenuOperationSystemActionInjectable } from "../../get-application-menu-operation-system-action-injectable";
+import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
 
-export const actionForToggleDevTools = getApplicationMenuOperationSystemActionInjectable({
-  id: "toggle-dev-tools",
-  parentId: "view",
-  orderNumber: 70,
-  actionName: "toggleDevTools",
+import type { OsActionMenuItem } from "../../application-menu-item-injection-token";
+
+export const actionForToggleDevTools = getInjectable({
+  id: "application-menu-operation-system-action/toggle-dev-tools",
+
+  instantiate: (di): OsActionMenuItem => {
+    const isDevelopment = di.inject(isDevelopmentInjectable);
+
+    return {
+      id: "toggle-dev-tools",
+      parentId: "view",
+      orderNumber: 70,
+      kind: "os-action-menu-item" as const,
+      actionName: "toggleDevTools" as const,
+      isShown: isDevelopment,
+    };
+  },
+
+  injectionToken: applicationMenuItemInjectionToken,
 });
 
 export const actionForResetZoom = getApplicationMenuOperationSystemActionInjectable({

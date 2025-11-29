@@ -27,6 +27,7 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
   const pods = model.pods.get();
   const pod = model.pod.get();
   const isAllPodsMode = selectedPodId === "all-pods";
+  const showAllPodsOption = owner?.uid && owner?.kind && pods.length > 1;
 
   if (pods.length === 0) {
     return null;
@@ -37,13 +38,18 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
     label: "All Pods",
   };
 
-  const podOptions = [
-    allPodsOption,
-    ...pods.map((pod) => ({
-      value: pod,
-      label: pod.getName(),
-    })),
-  ];
+  const podOptions = showAllPodsOption
+    ? [
+        allPodsOption,
+        ...pods.map((pod) => ({
+          value: pod,
+          label: pod.getName(),
+        })),
+      ]
+    : pods.map((pod) => ({
+        value: pod,
+        label: pod.getName(),
+      }));
 
   const currentPod = isAllPodsMode ? pods[0] : pod;
 

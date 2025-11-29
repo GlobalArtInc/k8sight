@@ -5,6 +5,7 @@ import { BrowserWindow } from "electron";
 import pathExistsSyncInjectable from "../../../../common/fs/path-exists-sync.injectable";
 import getAbsolutePathInjectable from "../../../../common/path/get-absolute-path.injectable";
 import openLinkInBrowserInjectable from "../../../../common/utils/open-link-in-browser.injectable";
+import isDevelopmentInjectable from "../../../../common/vars/is-development.injectable";
 import isLinuxInjectable from "../../../../common/vars/is-linux.injectable";
 import k8sightResourcesDirInjectable from "../../../../common/vars/k8sight-resources-dir.injectable";
 import applicationWindowStateInjectable from "./application-window-state.injectable";
@@ -51,6 +52,7 @@ const createElectronWindowInjectable = getInjectable({
     const openLinkInBrowser = di.inject(openLinkInBrowserInjectable);
     const getAbsolutePath = di.inject(getAbsolutePathInjectable);
     const k8sightResourcesDir = di.inject(k8sightResourcesDirInjectable);
+    const isDevelopment = di.inject(isDevelopmentInjectable);
     const isLinux = di.inject(isLinuxInjectable);
     const applicationInformation = di.inject(applicationInformationToken);
     const pathExistsSync = di.inject(pathExistsSyncInjectable);
@@ -83,6 +85,7 @@ const createElectronWindowInjectable = getInjectable({
           nodeIntegration: true,
           nodeIntegrationInSubFrames: true,
           contextIsolation: false,
+          devTools: isDevelopment,
         },
       });
 
