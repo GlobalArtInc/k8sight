@@ -12,7 +12,7 @@ const isGKE = (version: string) => version.includes("gke");
 const isEKS = (version: string) => version.includes("eks");
 const isIKS = (version: string) => version.includes("IKS");
 const isAKS = (apiUrl: URL) => apiUrl.hostname.includes("azmk8s.io");
-const isMirantis = (version: string) => version.includes("-mirantis-") || version.includes("-docker-");
+const isGlobalArt = (version: string) => version.includes("-globalart-") || version.includes("-docker-");
 const isDigitalOcean = (apiUrl: URL) => apiUrl.hostname.endsWith("k8s.ondigitalocean.com");
 const isMinikube = (contextName: string) => contextName.startsWith("minikube");
 const isMicrok8s = (contextName: string) => contextName.startsWith("microk8s");
@@ -95,8 +95,8 @@ const clusterDistributionDetectorInjectable = getInjectable({
           return { value: "vmware", accuracy: 90 };
         }
 
-        if (isMirantis(version)) {
-          return { value: "mirantis", accuracy: 90 };
+        if (isGlobalArt(version)) {
+          return { value: "globalart", accuracy: 90 };
         }
 
         if (isAlibaba(version)) {

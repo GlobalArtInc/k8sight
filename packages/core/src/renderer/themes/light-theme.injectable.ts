@@ -7,7 +7,7 @@ const lightThemeInjectable = getInjectable({
     name: "Light",
     type: "light" as const,
     description: "Original light theme",
-    author: "Mirantis",
+    author: "GlobalArt",
     monacoTheme: "vs" as const,
     colors: {
       blue: "#3d90ce",

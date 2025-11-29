@@ -280,7 +280,7 @@ export class ExtensionDiscovery {
    * Remove the symlink under node_modules if exists.
    * If we don't remove the symlink, the uninstall would leave a non-working symlink,
    * which wouldn't be fixed if the extension was reinstalled, causing the extension not to work.
-   * @param name e.g. "@mirantis/k8sight-extension-cc"
+   * @param name e.g. "@glbalart/k8sight-extension-cc"
    */
   removeSymlinkByPackageName(name: string): Promise<void> {
     return this.dependencies.removePath(this.getInstalledPath(name));

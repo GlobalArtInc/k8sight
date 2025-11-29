@@ -78,7 +78,7 @@ describe("protocol router tests", () => {
       id: extId,
       manifestPath: "/foo/bar",
       manifest: {
-        name: "@mirantis/minikube",
+        name: "@globalart/minikube",
         version: "0.1.1",
         engines: { k8sight: "^0.1.0" },
       },
@@ -94,7 +94,7 @@ describe("protocol router tests", () => {
     });
 
     extensionInstances.set(extId, ext);
-    enabledExtensions.set(extId, { name: "@mirantis/minikube", enabled: true });
+    enabledExtensions.set(extId, { name: "@globalart/minikube", enabled: true });
 
     lpr.addInternalHandler("/", noop);
 
@@ -107,14 +107,14 @@ describe("protocol router tests", () => {
     expect(broadcastMessageMock).toHaveBeenCalledWith(ProtocolHandlerInternal, "k8sight://app", "matched");
 
     try {
-      expect(await lpr.route("k8sight://extension/@mirantis/minikube")).toBeUndefined();
+      expect(await lpr.route("k8sight://extension/@globalart/minikube")).toBeUndefined();
     } catch (error) {
       expect(throwIfDefined(error)).not.toThrow();
     }
 
     expect(broadcastMessageMock).toHaveBeenCalledWith(
       ProtocolHandlerExtension,
-      "k8sight://extension/@mirantis/minikube",
+      "k8sight://extension/@globalart/minikube",
       "matched",
     );
   });

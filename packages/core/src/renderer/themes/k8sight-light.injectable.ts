@@ -2,12 +2,12 @@ import { getInjectable } from "@ogre-tools/injectable";
 import { themeDeclarationInjectionToken } from "./declaration";
 
 const lightThemeInjectable = getInjectable({
-  id: "light-theme",
+  id: "k8sight-light-theme",
   instantiate: () => ({
     name: "Light",
     type: "light" as const,
     description: "Original light theme",
-    author: "Mirantis",
+    author: "GlobalArt",
     monacoTheme: "vs" as const,
     colors: {
       blue: "#3d90ce",

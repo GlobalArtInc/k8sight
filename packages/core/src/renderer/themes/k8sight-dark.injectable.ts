@@ -2,12 +2,12 @@ import { getInjectable } from "@ogre-tools/injectable";
 import { themeDeclarationInjectionToken } from "./declaration";
 
 const darkThemeInjectable = getInjectable({
-  id: "dark-theme",
+  id: "k8sight-dark-theme",
   instantiate: () => ({
     name: "Dark",
     type: "dark" as const,
     description: "Original dark theme",
-    author: "Mirantis",
+    author: "GlobalArt",
     monacoTheme: "clouds-midnight" as const,
     colors: {
       blue: "#3d90ce",
