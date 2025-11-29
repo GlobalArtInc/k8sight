@@ -26,9 +26,9 @@ function NonInjectedGeneralKubernetesClusterSettings({
   }
 
   return (
-    <section>
+    <section className="flex gap-4">
       <section>
-        <div className="flex">
+        <div className="flex gap-2">
           <div className="flex-grow pr-8">
             <ClusterNameSetting cluster={cluster} entity={entity as KubernetesCluster} />
           </div>

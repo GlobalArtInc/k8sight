@@ -39,18 +39,19 @@ const NonInjectedNodeMenu: React.FC<NodeMenuProps & Dependencies> = (props) => {
   const kubectlPath = App.Preferences.getKubectlPath() || "kubectl";
 
   const sendToTerminal = (command: string) => {
+    hideDetails();
     sendCommand(command, {
       enter: true,
       newTab: true,
-    }).then(hideDetails);
+    });
   };
 
   const shell = () => {
+    hideDetails();
     createTerminalTab({
       title: `Node: ${nodeName}`,
       node: nodeName,
     });
-    hideDetails();
   };
 
   const cordon = () => {
