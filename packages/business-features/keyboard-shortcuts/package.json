@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/keyboard-shortcuts",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Keyboard shortcuts for K8Sight",
   "type": "commonjs",
   "files": [

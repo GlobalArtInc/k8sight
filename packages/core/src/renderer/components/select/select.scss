@@ -47,7 +47,9 @@ html {
     &__indicator {
       padding: $padding * 0.5;
       opacity: 0.6;
-      transition: opacity var(--select-transition-duration) ease, transform var(--select-transition-duration) ease;
+      transition:
+        opacity var(--select-transition-duration) ease,
+        transform var(--select-transition-duration) ease;
 
       &:hover {
         color: inherit;

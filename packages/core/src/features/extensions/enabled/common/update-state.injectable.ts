@@ -8,7 +8,9 @@ import type { IObservableMapInitialValues } from "mobx";
 
 import type { K8sightExtensionState } from "./state.injectable";
 
-export type UpdateExtensionsState = (state: IObservableMapInitialValues<K8sightExtensionId, K8sightExtensionState>) => void;
+export type UpdateExtensionsState = (
+  state: IObservableMapInitialValues<K8sightExtensionId, K8sightExtensionState>,
+) => void;
 
 const updateExtensionsStateInjectable = getInjectable({
   id: "update-extensions-state",

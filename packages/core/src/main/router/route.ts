@@ -104,12 +104,15 @@ export function clusterRoute<Path extends string>(parts: BaseRoutePaths<Path>): 
   });
 }
 
-export interface ValidatedClusterK8sightApiRequest<Path extends string, Payload> extends ClusterK8sightApiRequest<Path> {
+export interface ValidatedClusterK8sightApiRequest<Path extends string, Payload>
+  extends ClusterK8sightApiRequest<Path> {
   payload: Payload;
 }
 
 export interface ValidatedClusterRouteHandler<Payload, Response, Path extends string> {
-  (request: ValidatedClusterK8sightApiRequest<Path, Payload>): RouteResponse<Response> | Promise<RouteResponse<Response>>;
+  (
+    request: ValidatedClusterK8sightApiRequest<Path, Payload>,
+  ): RouteResponse<Response> | Promise<RouteResponse<Response>>;
 }
 
 export interface BindValidatedClusterHandler<Path extends string, Payload> {

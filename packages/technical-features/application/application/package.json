@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/application",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Package for creating K8Sight applications",
   "type": "commonjs",
   "files": [

@@ -6,9 +6,9 @@ import type { IntervalFn } from "@kubesightapp/utilities";
 
 import type { IComputedValue } from "mobx";
 
+import type { GetPodsByOwner } from "../../workloads-pods/get-pods-by-owner.injectable";
 import type { TabId } from "../dock/store";
 import type { CallForLogs } from "./call-for-logs.injectable";
-import type { GetPodsByOwner } from "../../workloads-pods/get-pods-by-owner.injectable";
 import type { LogTabData } from "./tab-store";
 
 type PodLogLine = string;

@@ -221,7 +221,9 @@ export abstract class K8sightProtocolRouter {
     }
 
     if (!extension.isBundled && !this.dependencies.isExtensionEnabled(extension.id)) {
-      this.dependencies.logger.info(`${K8sightProtocolRouter.LoggingPrefix}: Extension ${name} matched, but not enabled`);
+      this.dependencies.logger.info(
+        `${K8sightProtocolRouter.LoggingPrefix}: Extension ${name} matched, but not enabled`,
+      );
 
       return name;
     }

@@ -95,7 +95,9 @@ export class K8sightProtocolRouterMain extends proto.K8sightProtocolRouter {
     return false;
   }
 
-  protected async _findMatchingExtensionByName(url: URLParse<Record<string, string>>): Promise<K8sightExtension | string> {
+  protected async _findMatchingExtensionByName(
+    url: URLParse<Record<string, string>>,
+  ): Promise<K8sightExtension | string> {
     const firstAttempt = await super._findMatchingExtensionByName(url);
 
     if (typeof firstAttempt !== "string") {

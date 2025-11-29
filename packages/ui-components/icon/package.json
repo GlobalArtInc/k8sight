@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/icon",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Highly extendable icon in the K8Sight.",
   "type": "commonjs",
   "files": [

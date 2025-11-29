@@ -1,4 +1,7 @@
-import { asLegacyGlobalFunctionForExtensionApi, getLegacyGlobalDiForExtensionApi } from "@kubesightapp/legacy-global-di";
+import {
+  asLegacyGlobalFunctionForExtensionApi,
+  getLegacyGlobalDiForExtensionApi,
+} from "@kubesightapp/legacy-global-di";
 import * as utilities from "@kubesightapp/utilities";
 import openLinkInBrowserInjectable, {
   type OpenLinkInBrowser,

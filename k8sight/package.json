@@ -4,7 +4,7 @@
   "productName": "K8Sight",
   "description": "K8Sight - Free IDE for Kubernetes",
   "homepage": "https://k8sight.app",
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GlobalArtInc/k8sight.git"

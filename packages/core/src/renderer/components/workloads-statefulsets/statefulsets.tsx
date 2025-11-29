@@ -45,23 +45,26 @@ function getPods(statefulSet: StatefulSet, statefulSetStore: StatefulSetStore) {
   return `${readyPods}/${pods.length}`;
 }
 
-function getStatus(statefulSet: StatefulSet, statefulSetStore: StatefulSetStore): { status: string; className: string } {
+function getStatus(
+  statefulSet: StatefulSet,
+  statefulSetStore: StatefulSetStore,
+): { status: string; className: string } {
   const replicas = statefulSet.getReplicas();
   const pods = statefulSetStore.getChildPods(statefulSet);
-  
+
   if (replicas === 0 || pods.length === 0) {
     return { status: "Scaled to 0", className: "failed" };
   }
-  
+
   const statuses = new Set(pods.map((pod) => pod.getStatus()));
-  
+
   if (statuses.has(PodStatusPhase.FAILED)) {
     return { status: "Failed", className: "failed" };
   }
   if (statuses.has(PodStatusPhase.PENDING)) {
     return { status: "Pending", className: "pending" };
   }
-  
+
   return { status: "Running", className: "running" };
 }
 
@@ -131,7 +134,9 @@ class NonInjectedStatefulSets extends React.Component<Dependencies> {
               getPods(statefulSet, statefulSetStore),
               statefulSet.getReplicas(),
               <KubeObjectAge key="age" object={statefulSet} />,
-              <span key="status" className={statusInfo.className}>{statusInfo.status}</span>,
+              <span key="status" className={statusInfo.className}>
+                {statusInfo.status}
+              </span>,
             ];
           }}
         />

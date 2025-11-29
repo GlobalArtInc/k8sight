@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/application-for-electron-main",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Electron's main specifics for creating K8Sight applications",
   "type": "commonjs",
   "files": [

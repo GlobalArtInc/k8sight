@@ -4,8 +4,8 @@ import { once } from "lodash";
 import { action, makeObservable, observe, reaction, toJS } from "mobx";
 import {
   isKubernetesCluster,
-  KubernetesCluster,
   K8sightKubernetesClusterStatus,
+  KubernetesCluster,
 } from "../../common/catalog-entities/kubernetes-cluster";
 import { ipcMainOn } from "../../common/ipc";
 

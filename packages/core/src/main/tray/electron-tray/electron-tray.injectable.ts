@@ -45,7 +45,9 @@ const electronTrayInjectable = getInjectable({
 
       if (isWindows) {
         tray.on("click", () => {
-          showApplicationWindow().catch((error) => logger.error(`${TRAY_LOG_PREFIX}: Failed to open k8sight`, { error }));
+          showApplicationWindow().catch((error) =>
+            logger.error(`${TRAY_LOG_PREFIX}: Failed to open k8sight`, { error }),
+          );
         });
       }
     };

@@ -6,8 +6,8 @@ import { Cluster } from "../../common/cluster/cluster";
 import writeJsonFileInjectable from "../../common/fs/write-json-file.injectable";
 import prometheusHandlerInjectable from "../cluster/prometheus-handler/prometheus-handler.injectable";
 import { getDiForUnitTesting } from "../getDiForUnitTesting";
-import createKubeAuthProxyInjectable from "../kube-auth-proxy/create-kube-auth-proxy.injectable";
 import k8sightProxyPortInjectable from "../k8sight-proxy/k8sight-proxy-port.injectable";
+import createKubeAuthProxyInjectable from "../kube-auth-proxy/create-kube-auth-proxy.injectable";
 
 import type { PrometheusProvider } from "@kubesightapp/prometheus";
 

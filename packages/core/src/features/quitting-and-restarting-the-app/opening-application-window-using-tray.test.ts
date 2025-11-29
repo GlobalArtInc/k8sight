@@ -229,7 +229,10 @@ describe("opening application window using tray", () => {
 });
 
 const expectWindowsToBeOpenFor = (builder: ApplicationBuilder) => (windowIds: string[]) => {
-  const windows: K8sightWindow[] = [builder.mainDi.inject(splashWindowInjectable), ...builder.applicationWindow.getAll()];
+  const windows: K8sightWindow[] = [
+    builder.mainDi.inject(splashWindowInjectable),
+    ...builder.applicationWindow.getAll(),
+  ];
 
   expect(windows.filter((window) => window.isVisible).map((window) => window.id)).toEqual(windowIds);
 };

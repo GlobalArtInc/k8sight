@@ -109,4 +109,3 @@ const setupContextMenuHandlerInjectable = getInjectable({
 });
 
 export default setupContextMenuHandlerInjectable;
-

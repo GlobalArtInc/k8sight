@@ -1,14 +1,13 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { runInAction } from "mobx";
-import dockStoreInjectable from "../dock/store.injectable";
 import createDockTabInjectable from "../dock/create-dock-tab.injectable";
 import { TabKind } from "../dock/store";
+import dockStoreInjectable from "../dock/store.injectable";
 import getRandomIdForPodLogsTabInjectable from "./get-random-id-for-pod-logs-tab.injectable";
 import setLogTabDataInjectable from "./set-log-tab-data.injectable";
 import logTabStoreInjectable from "./tab-store.injectable";
 
-import type { DockStore } from "../dock/store";
-import type { DockTab, DockTabCreate, TabId } from "../dock/store";
+import type { DockStore, DockTab, DockTabCreate, TabId } from "../dock/store";
 import type { LogTabData } from "./tab-store";
 
 export type CreateLogsTabData = Pick<LogTabData, "owner" | "selectedPodId" | "selectedContainer" | "namespace"> &

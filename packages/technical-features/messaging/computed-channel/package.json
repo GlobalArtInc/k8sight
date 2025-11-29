@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/computed-channel",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "MobX-like computed between channels",
   "type": "commonjs",
   "publishConfig": {

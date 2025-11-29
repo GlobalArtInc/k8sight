@@ -16,9 +16,9 @@ import type {
   BundledInstalledExtension,
   ExternalInstalledExtension,
   InstalledExtension,
-  LegacyK8sightExtension,
   K8sightExtensionConstructor,
   K8sightExtensionId,
+  LegacyK8sightExtension,
 } from "@kubesightapp/legacy-extensions";
 import type { Logger } from "@kubesightapp/logger";
 

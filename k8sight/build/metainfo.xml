@@ -69,7 +69,7 @@
   <icon type="remote">https://k8sightapp.github.io/images/k8sight-logo-512.png</icon>
   <content_rating type="oars-1.1"></content_rating>
   <releases>
-    <release version="1.7.0-0" date="2025-11-19">
+    <release version="1.0.0-0" date="2025-11-28">
       <description translatable="no">The latest release.</description>
     </release>
   </releases>

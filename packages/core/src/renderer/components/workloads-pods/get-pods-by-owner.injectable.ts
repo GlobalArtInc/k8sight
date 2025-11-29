@@ -1,12 +1,12 @@
 import { getInjectable } from "@ogre-tools/injectable";
+import { LogTabOwnerRef } from "../dock/logs/tab-store";
 import deploymentStoreInjectable from "../workloads-deployments/store.injectable";
-import podStoreInjectable from "./store.injectable";
 import getPodsByOwnerIdInjectable from "./get-pods-by-owner-id.injectable";
+import podStoreInjectable from "./store.injectable";
 
 import type { Pod } from "@kubesightapp/kube-object";
 
 import type { DeploymentStore } from "../workloads-deployments/store";
-import { LogTabOwnerRef } from "../dock/logs/tab-store";
 
 export type GetPodsByOwner = (owner: LogTabOwnerRef, namespace: string) => Pod[];
 
@@ -25,9 +25,7 @@ const getPodsByOwnerInjectable = getInjectable({
         );
 
         if (deployment) {
-          return podStore
-            .getByLabel(deployment.getTemplateLabels())
-            .filter((pod) => pod.getNs() === namespace);
+          return podStore.getByLabel(deployment.getTemplateLabels()).filter((pod) => pod.getNs() === namespace);
         }
 
         return [];
@@ -39,4 +37,3 @@ const getPodsByOwnerInjectable = getInjectable({
 });
 
 export default getPodsByOwnerInjectable;
-

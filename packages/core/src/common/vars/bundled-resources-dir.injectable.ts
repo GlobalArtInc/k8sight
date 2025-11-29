@@ -12,7 +12,9 @@ const bundledResourcesDirectoryInjectable = getInjectable({
     const joinPaths = di.inject(joinPathsInjectable);
     const k8sightResourcesDir = di.inject(k8sightResourcesDirInjectable);
 
-    return isProduction ? k8sightResourcesDir : joinPaths(k8sightResourcesDir, "binaries", "client", normalizedPlatform);
+    return isProduction
+      ? k8sightResourcesDir
+      : joinPaths(k8sightResourcesDir, "binaries", "client", normalizedPlatform);
   },
 });
 

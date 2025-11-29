@@ -8,7 +8,11 @@ const k8sightCreateResourceTemplatesInjectable = getInjectable({
 
   instantiate: (di): RawTemplates => {
     const parsePath = di.inject(parsePathInjectable);
-    const templatesContext = require.context("@kubesightapp/resource-templates/templates", true, /^\.\/.*\.(yaml|yml)$/);
+    const templatesContext = require.context(
+      "@kubesightapp/resource-templates/templates",
+      true,
+      /^\.\/.*\.(yaml|yml)$/,
+    );
 
     return {
       label: "k8sight",

@@ -2,7 +2,7 @@
   "name": "@kubesightapp/extensions",
   "productName": "K8Sight extensions",
   "description": "K8Sight - Free IDE for Kubernetes: extensions",
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "license": "MIT",
   "main": "dist/extension-api.js",
   "types": "dist/extension-api.d.ts",

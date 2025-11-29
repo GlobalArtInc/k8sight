@@ -791,7 +791,9 @@ describe("installing helm chart from new tab", () => {
             it("stores the changed configuration", async () => {
               const readJsonFile = windowDi.inject(readJsonFileInjectable);
 
-              const actual = (await readJsonFile("/some-directory-for-k8sight-local-storage/some-cluster-id.json")) as any;
+              const actual = (await readJsonFile(
+                "/some-directory-for-k8sight-local-storage/some-cluster-id.json",
+              )) as any;
 
               const configuration = actual.install_charts["some-first-tab-id"].values;
 
@@ -846,7 +848,9 @@ describe("installing helm chart from new tab", () => {
             it("stores the changed custom name", async () => {
               const readJsonFile = windowDi.inject(readJsonFileInjectable);
 
-              const actual = (await readJsonFile("/some-directory-for-k8sight-local-storage/some-cluster-id.json")) as any;
+              const actual = (await readJsonFile(
+                "/some-directory-for-k8sight-local-storage/some-cluster-id.json",
+              )) as any;
 
               const customName = actual.install_charts["some-first-tab-id"].releaseName;
 

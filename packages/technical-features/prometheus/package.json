@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/prometheus",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Prometheus support for K8Sight",
   "type": "commonjs",
   "publishConfig": {

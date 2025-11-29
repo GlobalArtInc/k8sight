@@ -9,9 +9,9 @@ import writeJsonSyncInjectable from "../../../common/fs/write-json-sync.injectab
 import platformInjectable from "../../../common/vars/platform.injectable";
 import { buildVersionStateInjectable } from "../../../features/vars/build-version/main/init.injectable";
 import { getDiForUnitTesting } from "../../getDiForUnitTesting";
+import k8sightProxyPortInjectable from "../../k8sight-proxy/k8sight-proxy-port.injectable";
 import kubeconfigManagerInjectable from "../../kubeconfig-manager/kubeconfig-manager.injectable";
 import createKubectlInjectable from "../../kubectl/create-kubectl.injectable";
-import k8sightProxyPortInjectable from "../../k8sight-proxy/k8sight-proxy-port.injectable";
 import spawnPtyInjectable from "../spawn-pty.injectable";
 import openLocalShellSessionInjectable from "./open.injectable";
 

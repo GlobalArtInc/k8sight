@@ -86,7 +86,9 @@ export class K8sightProxy {
       const cluster = this.dependencies.getClusterForRequest(req);
 
       if (!cluster) {
-        this.dependencies.logger.error(`[K8SIGHT-PROXY]: Could not find cluster for upgrade request from url=${req.url}`);
+        this.dependencies.logger.error(
+          `[K8SIGHT-PROXY]: Could not find cluster for upgrade request from url=${req.url}`,
+        );
         socket.destroy();
       } else {
         const isInternal = req.url.startsWith(`${apiPrefix}?`);

@@ -1,5 +1,8 @@
 import { loggerInjectionToken } from "@kubesightapp/logger";
-import { enlistMessageChannelListenerInjectionToken, sendMessageToChannelInjectionToken } from "@kubesightapp/messaging";
+import {
+  enlistMessageChannelListenerInjectionToken,
+  sendMessageToChannelInjectionToken,
+} from "@kubesightapp/messaging";
 import { disposer, isPromiseLike } from "@kubesightapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import { isEqual, kebabCase } from "lodash";

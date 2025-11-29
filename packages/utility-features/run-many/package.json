@@ -1,6 +1,6 @@
 {
   "name": "@kubesightapp/run-many",
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "type": "commonjs",
   "description": "A package containing runMany and runManySync",
   "publishConfig": {

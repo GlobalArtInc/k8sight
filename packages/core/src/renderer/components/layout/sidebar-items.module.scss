@@ -45,8 +45,11 @@
   }
 
   .subMenu {
-    border-inline-start: var(--sidebar-item-submenu-border-width) solid transparent;
-    transition: border-inline-start-color var(--sidebar-item-transition-duration) var(--sidebar-item-transition-timing);
+    border-inline-start: var(--sidebar-item-submenu-border-width) solid
+      transparent;
+    transition: border-inline-start-color
+      var(--sidebar-item-transition-duration)
+      var(--sidebar-item-transition-timing);
 
     .SidebarItem {
       color: var(--textColorPrimary);

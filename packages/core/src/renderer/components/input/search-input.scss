@@ -33,7 +33,9 @@
 
       .modifier {
         padding: 2px 4px;
-        transition: background-color 0.15s, color 0.15s;
+        transition:
+          background-color 0.15s,
+          color 0.15s;
         display: inline-flex;
         align-items: center;
         justify-content: center;

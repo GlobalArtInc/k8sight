@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/typescript",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Typescript configuration for K8Sight packages.",
   "type": "commonjs",
   "publishConfig": {

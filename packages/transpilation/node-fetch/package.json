@@ -1,6 +1,6 @@
 {
   "name": "@kubesightapp/node-fetch",
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Node fetch for K8Sight",
   "license": "MIT",
   "private": false,

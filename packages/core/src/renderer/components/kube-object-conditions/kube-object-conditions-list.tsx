@@ -22,7 +22,7 @@ export const KubeObjectConditionsList = observer((props: KubeObjectConditionsLis
   if (!(object instanceof KubeObject)) {
     return null;
   }
-  
+
   const conditions =
     object instanceof Node
       ? object.getConditions()

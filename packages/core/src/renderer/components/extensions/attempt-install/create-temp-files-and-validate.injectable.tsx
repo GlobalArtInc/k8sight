@@ -33,7 +33,8 @@ const createTempFilesAndValidateInjectable = getInjectable({
     const showErrorNotification = di.inject(showErrorNotificationInjectable);
     const tempDirectoryPath = di.inject(tempDirectoryPathInjectable);
 
-    const getTempExtensionPackagePath = (fileName: string) => joinPaths(tempDirectoryPath, "k8sight-extensions", fileName);
+    const getTempExtensionPackagePath = (fileName: string) =>
+      joinPaths(tempDirectoryPath, "k8sight-extensions", fileName);
 
     return async ({ fileName, data }) => {
       // validate packages

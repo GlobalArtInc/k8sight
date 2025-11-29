@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/legacy-global-di",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Injection tokens for implementing metrics for K8Sight",
   "type": "commonjs",
   "publishConfig": {

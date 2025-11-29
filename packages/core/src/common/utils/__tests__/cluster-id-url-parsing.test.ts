@@ -16,9 +16,7 @@ describe("getClusterIdFromHost", () => {
     expect(getClusterIdFromHost(`abc.def.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(clusterFakeId);
     expect(getClusterIdFromHost(`abc.def.ghi.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(clusterFakeId);
     expect(getClusterIdFromHost(`abc.def.ghi.jkl.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(clusterFakeId);
-    expect(getClusterIdFromHost(`abc.def.ghi.jkl.mno.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(
-      clusterFakeId,
-    );
+    expect(getClusterIdFromHost(`abc.def.ghi.jkl.mno.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(clusterFakeId);
     expect(getClusterIdFromHost(`abc.def.ghi.jkl.mno.pqr.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(
       clusterFakeId,
     );
@@ -28,8 +26,8 @@ describe("getClusterIdFromHost", () => {
     expect(getClusterIdFromHost(`abc.def.ghi.jkl.mno.pqr.stu.vwx.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(
       clusterFakeId,
     );
-    expect(
-      getClusterIdFromHost(`abc.def.ghi.jkl.mno.pqr.stu.vwx.yz.${clusterFakeId}.renderer.k8sight.app:59110`),
-    ).toBe(clusterFakeId);
+    expect(getClusterIdFromHost(`abc.def.ghi.jkl.mno.pqr.stu.vwx.yz.${clusterFakeId}.renderer.k8sight.app:59110`)).toBe(
+      clusterFakeId,
+    );
   });
 });

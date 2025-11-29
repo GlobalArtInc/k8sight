@@ -1,6 +1,6 @@
 {
   "name": "@kubesightapp/openid-client",
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Open ID for K8Sight",
   "license": "MIT",
   "private": false,

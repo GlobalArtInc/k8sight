@@ -1,6 +1,10 @@
 import assert from "assert";
 import React from "react";
-import { EXTENSION_NAME_MATCH, EXTENSION_PUBLISHER_MATCH, K8sightProtocolRouter } from "../../../common/protocol-handler";
+import {
+  EXTENSION_NAME_MATCH,
+  EXTENSION_PUBLISHER_MATCH,
+  K8sightProtocolRouter,
+} from "../../../common/protocol-handler";
 
 import type { ShowNotification } from "@kubesightapp/notifications";
 

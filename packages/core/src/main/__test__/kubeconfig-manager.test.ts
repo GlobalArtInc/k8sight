@@ -13,10 +13,10 @@ import writeJsonSyncInjectable from "../../common/fs/write-json-sync.injectable"
 import normalizedPlatformInjectable from "../../common/vars/normalized-platform.injectable";
 import kubeAuthProxyServerInjectable from "../cluster/kube-auth-proxy-server.injectable";
 import { getDiForUnitTesting } from "../getDiForUnitTesting";
+import k8sightProxyPortInjectable from "../k8sight-proxy/k8sight-proxy-port.injectable";
 import kubeconfigManagerInjectable from "../kubeconfig-manager/kubeconfig-manager.injectable";
 import kubectlBinaryNameInjectable from "../kubectl/binary-name.injectable";
 import kubectlDownloadingNormalizedArchInjectable from "../kubectl/normalized-arch.injectable";
-import k8sightProxyPortInjectable from "../k8sight-proxy/k8sight-proxy-port.injectable";
 
 import type { Logger } from "@kubesightapp/logger";
 

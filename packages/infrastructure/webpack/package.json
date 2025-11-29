@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/webpack",
   "private": false,
-  "version": "1.7.0-0",
+  "version": "1.0.0-0",
   "description": "Webpack configurations and scripts for K8Sight packages.",
   "type": "commonjs",
   "publishConfig": {

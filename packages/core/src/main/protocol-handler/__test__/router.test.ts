@@ -14,7 +14,7 @@ import enabledExtensionsStateInjectable from "../../../features/extensions/enabl
 import { getDiForUnitTesting } from "../../getDiForUnitTesting";
 import k8sightProtocolRouterMainInjectable from "../k8sight-protocol-router-main/k8sight-protocol-router-main.injectable";
 
-import type { LegacyK8sightExtension, K8sightExtensionId } from "@kubesightapp/legacy-extensions";
+import type { K8sightExtensionId, LegacyK8sightExtension } from "@kubesightapp/legacy-extensions";
 
 import type { ObservableMap } from "mobx";
 

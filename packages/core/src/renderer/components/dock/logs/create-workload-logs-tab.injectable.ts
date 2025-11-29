@@ -1,8 +1,8 @@
-import { getInjectable } from "@ogre-tools/injectable";
 import { Deployment } from "@kubesightapp/kube-object";
+import { getInjectable } from "@ogre-tools/injectable";
+import getPodsByOwnerIdInjectable from "../../workloads-pods/get-pods-by-owner-id.injectable";
 import podStoreInjectable from "../../workloads-pods/store.injectable";
 import createLogsTabInjectable from "./create-logs-tab.injectable";
-import getPodsByOwnerIdInjectable from "../../workloads-pods/get-pods-by-owner-id.injectable";
 
 import type { StatefulSet } from "@kubesightapp/kube-object";
 
@@ -25,9 +25,7 @@ const createWorkloadLogsTabInjectable = getInjectable({
       let pods: ReturnType<PodStore["getByLabel"]>;
 
       if (workload instanceof Deployment) {
-        pods = podStore
-          .getByLabel(workload.getTemplateLabels())
-          .filter((pod) => pod.getNs() === workload.getNs());
+        pods = podStore.getByLabel(workload.getTemplateLabels()).filter((pod) => pod.getNs() === workload.getNs());
       } else {
         pods = getPodsByOwnerId(workload.getId());
       }

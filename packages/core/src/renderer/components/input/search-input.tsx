@@ -7,9 +7,9 @@ import autoBindReact from "auto-bind/react";
 import { observer } from "mobx-react";
 import React, { createRef, useState } from "react";
 import * as uuid from "uuid";
+import isMacInjectable from "../../../common/vars/is-mac.injectable";
 import { Checkbox } from "../checkbox";
 import { MenuActions, MenuItem } from "../menu";
-import isMacInjectable from "../../../common/vars/is-mac.injectable";
 import { Input } from "./input";
 
 import type { InputProps } from "./input";
