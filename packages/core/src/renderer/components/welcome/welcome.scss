@@ -1,54 +1,214 @@
 .Welcome {
-  text-align: center;
   width: 100%;
   height: 100%;
   z-index: 1;
+  padding: 40px 20px;
+  overflow-y: auto;
 
-  h2 {
-    color: var(--textColorAccent);
-    font-weight: 600;
-    margin-top: 15px;
-    margin-bottom: 20px;
+  .welcome-container {
+    max-width: 500px;
+    width: 100%;
+    animation: fadeInUp 0.6s ease-out;
   }
 
-  p {
-    line-height: 1.5;
-  }
+  .welcome-header {
+    text-align: center;
+    margin-bottom: 48px;
 
-  ul {
-    margin-top: 20px;
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: scaleIn 0.8s ease-out;
 
-    li {
-      text-align: left;
-      line-height: 1.5;
-      background-color: var(--layoutBackground);
-      padding: 7px;
-      border-radius: 4px;
-      margin-bottom: 7px;
-      cursor: pointer;
+      .Icon.logo {
+        width: 180px;
+        height: 180px;
+        color: var(--primary);
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+        transition: transform 0.3s ease;
 
-      a {
-        margin-left: 10px;
-        border-bottom: none;
+        &:hover {
+          transform: scale(1.05);
+        }
       }
     }
-    li:hover {
-      color: var(--textColorAccent);
+
+    .welcome-title {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0;
+
+      .welcome-greeting {
+        font-size: 28px;
+        font-weight: 300;
+        color: var(--textColorSecondary);
+        letter-spacing: 0.5px;
+      }
+
+      .product-name {
+        font-size: 36px;
+        font-weight: 600;
+        color: var(--textColorAccent);
+        letter-spacing: -0.5px;
+      }
     }
   }
 
-  .Icon.logo {
-    width: 200px;
-    height: 200px;
-    color: var(--primary);
+  .welcome-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
 
-  a.link {
-    color: var(--colorInfo);
+  .welcome-description {
+    text-align: center;
+    line-height: 1.7;
+    color: var(--textColorSecondary);
+    font-size: 15px;
+    margin: 0;
+    padding: 0 16px;
+  }
+
+  .welcome-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .welcome-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--layoutBackground);
+    padding: 16px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    text-align: left;
 
     &:hover {
-      text-decoration: underline;
+      background-color: var(--layoutBackground);
+      border-color: var(--primary);
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+      .menu-item-title {
+        color: var(--textColorAccent);
+      }
+
+      .menu-item-icon {
+        color: var(--primary);
+        transform: scale(1.1);
+      }
+
+      .menu-item-arrow {
+        opacity: 1;
+        transform: translateX(4px);
+      }
     }
+
+    &:active {
+      transform: translateX(2px);
+    }
+
+    &:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .menu-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 8px;
+      background-color: var(--layoutBackground);
+      color: var(--textColorSecondary);
+      transition: all 0.2s ease;
+
+      .Icon {
+        font-size: 20px;
+      }
+    }
+
+    .menu-item-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--textColorPrimary);
+      transition: color 0.2s ease;
+      line-height: 1.5;
+    }
+
+    .menu-item-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      opacity: 0.5;
+      color: var(--textColorSecondary);
+      transition: all 0.2s ease;
+
+      .Icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .welcome-footer {
+    text-align: center;
+    margin-top: 8px;
+    padding-top: 24px;
+    border-top: 1px solid var(--layoutBackground);
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--textColorSecondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .footer-link {
+      color: var(--colorInfo);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        color: var(--textColorAccent);
+        border-bottom-color: var(--textColorAccent);
+      }
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

@@ -13,7 +13,7 @@ import type { IComputedValue } from "mobx";
 
 import type { WelcomeMenuRegistration } from "./welcome-menu-items/welcome-menu-registration";
 
-export const defaultWidth = 320;
+export const defaultWidth = 420;
 
 interface Dependencies {
   welcomeMenuItems: IComputedValue<WelcomeMenuRegistration[]>;
@@ -28,34 +28,57 @@ const NonInjectedWelcome = observer(({ welcomeMenuItems, productName, newVersion
 
   return (
     <div className="flex justify-center Welcome align-center" data-testid="welcome-page">
-      <div style={{ width: `${defaultWidth}px` }} data-testid="welcome-banner-container">
-        <Icon svg="logo-k8sight" className="logo" welcomeLogo={true} data-testid="no-welcome-banners-icon" />
+      <div className="welcome-container" data-testid="welcome-banner-container">
+        <div className="welcome-header">
+          <div className="logo-wrapper">
+            <Icon svg="logo-k8sight" className="logo" welcomeLogo={true} data-testid="no-welcome-banners-icon" />
+          </div>
+          <h1 className="welcome-title">
+            <span className="welcome-greeting">Welcome to</span>
+            <span className="product-name">{productName}</span>
+          </h1>
+        </div>
 
-        <div className="flex justify-center">
-          <div style={{ width: `${defaultWidth}px` }} data-testid="welcome-text-container">
-            <h2>{`Welcome to ${productName}!`}</h2>
+        <div className="welcome-content" data-testid="welcome-text-container">
+          <p className="welcome-description">
+            To get you started we have auto-detected your clusters in your kubeconfig file and added them to the
+            catalog, your centralized view for managing all your cloud-native resources.
+          </p>
 
-            <p>
-              To get you started we have auto-detected your clusters in your kubeconfig file and added them to the
-              catalog, your centralized view for managing all your cloud-native resources.
-              <br />
-              <br />
-              {"If you have any questions or feedback, please join us on our "}
-              <a href={forumsUrl} target="_blank" rel="noreferrer" className="link">
-                Github repository
+          <div className="welcome-actions" data-testid="welcome-menu-container">
+            {welcomeMenuItems.get().map((item, index) => (
+              <div
+                key={index}
+                className="welcome-menu-item"
+                onClick={() => item.click()}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    item.click();
+                  }
+                }}
+              >
+                <div className="menu-item-icon">
+                  <Icon material={item.icon} />
+                </div>
+                <span className="menu-item-title">{typeof item.title === "string" ? item.title : item.title()}</span>
+                <div className="menu-item-arrow">
+                  <Icon material="navigate_next" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="welcome-footer">
+            <p className="footer-text">
+              {"Have questions or feedback? Join us on our "}
+              <a href={forumsUrl} target="_blank" rel="noreferrer" className="footer-link">
+                GitHub repository
               </a>
               .
             </p>
-
-            <ul className="block" style={{ width: `${defaultWidth}px` }} data-testid="welcome-menu-container">
-              {welcomeMenuItems.get().map((item, index) => (
-                <li key={index} className="flex grid-12" onClick={() => item.click()}>
-                  <Icon material={item.icon} className="box col-1" />
-                  <a className="box col-10">{typeof item.title === "string" ? item.title : item.title()}</a>
-                  <Icon material="navigate_next" className="box col-1" />
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
