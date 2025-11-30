@@ -10,10 +10,10 @@ for i in 16 32 64 128 256 512 1024; do
   size=$((i - 2 * border))
   half=$((i / 2))
   if [[ $i -ne 1024 ]]; then
-    convert -background none icon.svg -density 400 -resize "${size}x${size}" -bordercolor transparent -border "${border}" -verbose "icon.iconset/icon_${i}x${i}.png"
+    magick -background none icon.svg -density 400 -resize "${size}x${size}" -bordercolor transparent -border "${border}" -verbose "icon.iconset/icon_${i}x${i}.png"
   fi
   if [[ $i -ne 16 ]]; then
-    convert -background none icon.svg -density 400 -resize "${size}x${size}" -bordercolor transparent -border "${border}" -verbose "icon.iconset/icon_${half}x${half}@2x.png"
+    magick -background none icon.svg -density 400 -resize "${size}x${size}" -bordercolor transparent -border "${border}" -verbose "icon.iconset/icon_${half}x${half}@2x.png"
   fi
 done
 iconutil --convert icns -o icon.icns icon.iconset
