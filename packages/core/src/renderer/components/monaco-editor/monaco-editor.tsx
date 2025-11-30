@@ -18,7 +18,7 @@ import type { Logger } from "@kubesightapp/logger";
 import type { IComputedValue } from "mobx";
 
 import type { UserPreferencesState } from "../../../features/user-preferences/common/state.injectable";
-import type { Theme } from "../../themes/k8sight-theme";
+import type { Theme } from "../../themes/theme";
 import type { MonacoTheme } from "./monaco-themes";
 
 export type MonacoEditorId = string;

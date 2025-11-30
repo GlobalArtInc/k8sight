@@ -11,7 +11,7 @@ import { NoMetrics } from "../resource-metrics/no-metrics";
 
 import type { IComputedValue } from "mobx";
 
-import type { Theme } from "../../themes/k8sight-theme";
+import type { Theme } from "../../themes/theme";
 import type { ChartDataSets } from "../chart";
 
 export interface NodeChartsProps {}

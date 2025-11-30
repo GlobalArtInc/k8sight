@@ -11,7 +11,7 @@ import terminalStoreInjectable from "./store.injectable";
 
 import type { IComputedValue } from "mobx";
 
-import type { Theme } from "../../../themes/k8sight-theme";
+import type { Theme } from "../../../themes/theme";
 import type { DockStore, DockTab } from "../dock/store";
 import type { TerminalStore } from "./store";
 import type { Terminal } from "./terminal";

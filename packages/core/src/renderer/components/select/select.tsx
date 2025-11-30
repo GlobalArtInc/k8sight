@@ -23,7 +23,7 @@ import type {
   SingleValue,
 } from "react-select";
 
-import type { Theme } from "../../themes/k8sight-theme";
+import type { Theme } from "../../themes/theme";
 
 const { Menu } = components;
 

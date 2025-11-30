@@ -29,7 +29,7 @@
     }
 
     &:global(.active) {
-      background-color: var(--sidebarItemHoverBackground);
+      background-color: var(--primary);
       color: var(--sidebarSubmenuActiveColor);
     }
 
@@ -58,12 +58,8 @@
       .navItem {
         padding-block: var(--sidebar-item-submenu-padding-block);
 
-        &:hover {
-          background-color: var(--sidebarItemHoverBackground);
-        }
-
         &:global(.active) {
-          background-color: var(--sidebarItemHoverBackground);
+          background-color: transparent;
           color: var(--sidebarSubmenuActiveColor);
         }
       }

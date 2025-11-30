@@ -26,7 +26,7 @@ import type { NavigateToHelmReleases } from "../../../../../common/front-end-rou
 import type { HelmRelease } from "../../../../../common/k8s-api/endpoints/helm-releases.api";
 import type { RequestHelmReleaseConfiguration } from "../../../../../common/k8s-api/endpoints/helm-releases.api/request-configuration.injectable";
 import type { RequestHelmReleaseUpdate } from "../../../../../common/k8s-api/endpoints/helm-releases.api/request-update.injectable";
-import type { Theme } from "../../../../themes/k8sight-theme";
+import type { Theme } from "../../../../themes/theme";
 import type { TargetHelmRelease } from "../target-helm-release.injectable";
 import type { GetResourceDetailsUrl } from "./get-resource-details-url.injectable";
 import type { DetailedHelmRelease, RequestDetailedHelmRelease } from "./request-detailed-helm-release.injectable";

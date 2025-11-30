@@ -11,7 +11,7 @@ import { Chart } from "./chart";
 import type { ChartOptions } from "chart.js";
 import type { IComputedValue } from "mobx";
 
-import type { Theme } from "../../themes/k8sight-theme";
+import type { Theme } from "../../themes/theme";
 import type { ChartProps } from "./chart";
 
 export interface PieChartProps extends ChartProps {}

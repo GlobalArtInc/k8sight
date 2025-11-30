@@ -14,7 +14,7 @@ import { ZebraStripesPlugin } from "./zebra-stripes.plugin";
 import type { ChartOptions, ChartTooltipCallback, ChartTooltipItem, Scriptable } from "chart.js";
 import type { IComputedValue } from "mobx";
 
-import type { Theme } from "../../themes/k8sight-theme";
+import type { Theme } from "../../themes/theme";
 import type { ChartProps } from "./chart";
 
 export interface BarChartProps extends ChartProps {

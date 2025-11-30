@@ -1,7 +1,7 @@
 import "./resource-selector.scss";
 
 import { observer } from "mobx-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Badge } from "../../badge";
 import { Select } from "../../select";
 
@@ -18,15 +18,31 @@ export interface LogResourceSelectorProps {
 
 export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps) => {
   const tabData = model.logTabData.get();
+  const pods = model.pods.get();
+  const pod = model.pod.get();
+  const selectedPodId = tabData?.selectedPodId;
+  const selectedContainer = tabData?.selectedContainer;
+  const isAllPodsMode = selectedPodId === "all-pods";
+
+  useEffect(() => {
+    if (tabData && pods.length === 1 && selectedPodId === "all-pods") {
+      const singlePod = pods[0];
+      if (singlePod) {
+        model.updateLogTabData({
+          selectedPodId: singlePod.getId(),
+          selectedContainer: singlePod.getAllContainers()[0]?.name ?? selectedContainer,
+        });
+        model.renameTab(`Pod ${singlePod.getName()}`);
+        model.reloadLogs();
+      }
+    }
+  }, [pods.length, selectedPodId, selectedContainer, model, tabData]);
 
   if (!tabData) {
     return null;
   }
 
-  const { selectedContainer, owner, selectedPodId } = tabData;
-  const pods = model.pods.get();
-  const pod = model.pod.get();
-  const isAllPodsMode = selectedPodId === "all-pods";
+  const { owner } = tabData;
   const showAllPodsOption = owner?.uid && owner?.kind && pods.length > 1;
 
   if (pods.length === 0) {
@@ -51,7 +67,7 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
         label: pod.getName(),
       }));
 
-  const currentPod = isAllPodsMode ? pods[0] : pod;
+  const currentPod = isAllPodsMode ? pods[0] : (pod ?? pods[0]);
 
   if (!currentPod) {
     return null;
@@ -85,7 +101,7 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
         selectedPodId: "all-pods",
         selectedContainer: firstPod.getAllContainers()[0]?.name ?? selectedContainer,
       });
-      model.renameTab("All Pods");
+      model.renameTab(`${owner?.kind} ${owner?.name}`);
       model.reloadLogs();
     } else {
       model.updateLogTabData({
@@ -125,7 +141,7 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
       <span>Pod</span>
       <Select<Pod | "all-pods", SelectOption<Pod | "all-pods">, false>
         options={podOptions}
-        value={isAllPodsMode ? "all-pods" : pod}
+        value={isAllPodsMode ? allPodsOption.value : (pod ?? pods[0])}
         isClearable={false}
         onChange={onPodChange}
         className="pod-selector"

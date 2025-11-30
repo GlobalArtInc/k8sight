@@ -22,7 +22,7 @@ import type { IComputedValue } from "mobx";
 
 import type { ApiManager } from "../../../common/k8s-api/api-manager";
 import type { PageParam } from "../../navigation/page-param";
-import type { Theme } from "../../themes/k8sight-theme";
+import type { Theme } from "../../themes/theme";
 import type { EventStore } from "../events/store";
 import type { ToggleKubeDetailsPane } from "../kube-detail-params/toggle-details.injectable";
 import type { NamespaceStore } from "../namespaces/store";

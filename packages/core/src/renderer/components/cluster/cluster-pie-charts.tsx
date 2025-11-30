@@ -19,7 +19,7 @@ import type { IAsyncComputed } from "@ogre-tools/injectable-react";
 import type { IComputedValue } from "mobx";
 
 import type { ClusterMetricData } from "../../../common/k8s-api/endpoints/metrics.api/request-cluster-metrics-by-node-names.injectable";
-import type { Theme } from "../../themes/k8sight-theme";
+import type { Theme } from "../../themes/theme";
 import type { PieChartData } from "../chart";
 import type { SelectedNodeRoleForMetrics } from "./overview/selected-node-role-for-metrics.injectable";
 

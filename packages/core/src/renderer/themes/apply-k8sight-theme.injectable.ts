@@ -3,7 +3,7 @@ import { object } from "@kubesightapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import resetThemeInjectable from "../../features/user-preferences/common/reset-theme.injectable";
 
-import type { Theme } from "./k8sight-theme";
+import type { Theme } from "./theme";
 
 export type ApplyTheme = (theme: Theme) => void;
 

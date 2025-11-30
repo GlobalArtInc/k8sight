@@ -7,7 +7,7 @@ import { themeDeclarationInjectionToken } from "../../../../../../renderer/theme
 import defaultThemeInjectable from "../../../../../../renderer/themes/default-theme.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
 
-import type { Theme as ThemeType } from "../../../../../../renderer/themes/k8sight-theme";
+import type { Theme as ThemeType } from "../../../../../../renderer/themes/theme";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 
 interface Dependencies {

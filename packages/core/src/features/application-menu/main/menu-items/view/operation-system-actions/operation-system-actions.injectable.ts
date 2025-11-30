@@ -1,7 +1,7 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import isDevelopmentInjectable from "../../../../../../common/vars/is-development.injectable";
-import { getApplicationMenuOperationSystemActionInjectable } from "../../get-application-menu-operation-system-action-injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
+import { getApplicationMenuOperationSystemActionInjectable } from "../../get-application-menu-operation-system-action-injectable";
 
 import type { OsActionMenuItem } from "../../application-menu-item-injection-token";
 

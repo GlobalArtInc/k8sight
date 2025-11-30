@@ -4,7 +4,7 @@ import activeThemeInjectable from "./active.injectable";
 
 import type { IComputedValue } from "mobx";
 
-import type { ThemeType } from "./k8sight-theme";
+import type { ThemeType } from "./theme";
 
 export type ActiveThemeType = IComputedValue<ThemeType>;
 

@@ -27,6 +27,7 @@
     100% 12px,
     100% 12px;
   background-attachment: local, local, scroll, scroll;
+  border-left: 3px solid var(--primary);
 }
 
 .sidebarNav :global(.Icon) {

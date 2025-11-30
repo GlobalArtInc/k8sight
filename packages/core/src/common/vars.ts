@@ -1,5 +1,5 @@
 // App's common configuration for any process (main, renderer, build pipeline, etc.)
-import type { ThemeId } from "../renderer/themes/k8sight-theme";
+import type { ThemeId } from "../renderer/themes/theme";
 
 export const defaultThemeId: ThemeId = "dark";
 export const defaultFontSize = 12;
