@@ -5,6 +5,7 @@
   align-items: center;
   padding: calc(var(--padding) * 1.2);
   cursor: pointer;
+  border-left: 3px solid var(--primary);
 
   &:hover {
     background: var(--sidebarLogoBackground);

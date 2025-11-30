@@ -43,7 +43,7 @@ const NonInjectedPods = observer((props: Dependencies) => {
         dependentStores={[eventStore]} // status icon component uses event store
         tableId="workloads_pods"
         isConfigurable
-        defaultHiddenTableColumns={["ip", "node", "qos"]}
+        defaultHiddenTableColumns={["ip"]}
         searchFilters={[
           (pod) => pod.getSearchFields(),
           (pod) => pod.getStatusMessage(),
