@@ -43,12 +43,10 @@
   },
   "devDependencies": {
     "@kubesightapp/jest": "workspace:^",
-    "@kubesightapp/react-testing-library-discovery": "workspace:^",
     "@kubesightapp/typescript": "workspace:^",
     "@kubesightapp/utilities": "workspace:^",
     "@kubesightapp/webpack": "workspace:^",
     "@ogre-tools/fp": "^17.11.1",
-    "@testing-library/react": "^12.1.5",
     "@types/react": "^17.0.89",
     "@types/react-dom": "^17.0.26",
     "@types/webpack-env": "^1.18.8",

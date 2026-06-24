@@ -39,9 +39,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@async-fn/jest": "^1.6.4",
     "@kubesightapp/jest": "workspace:^",
-    "@kubesightapp/test-utils": "workspace:^",
     "@kubesightapp/typescript": "workspace:^",
     "@kubesightapp/webpack": "workspace:^",
     "@types/webpack-env": "^1.18.8",

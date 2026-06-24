@@ -8,9 +8,7 @@
       "ignoreBinaries": ["open", "powershell", "xdg-open"],
       "ignoreDependencies": [
         // used to run pnpm in monorepo workspaces from the root
-        "pnpm",
-        // turbo is used to run tasks in parallel in monorepo
-        "turbo"
+        "pnpm"
       ]
     },
     "k8sight": {
@@ -26,8 +24,6 @@
       "ignoreDependencies": [
         // used for `require.context` in webpacked files
         "@types/webpack-env",
-        // it is really runtime dependency but implicitly used in Electron app
-        "electron",
         // explicit dependency to prevent to install different versions of app-build-lib
         "electron-builder-squirrel-windows",
         // explicit dependency to prevent using version from pnpm
@@ -36,7 +32,6 @@
         "pnpm",
         // used by webpack and for dev-server
         "style-loader",
-        "ts-node",
         // all packages used in require() calls in webpacked files
         "@astronautlabs/jsonpath",
         "@kubesightapp/animate",
@@ -96,7 +91,6 @@
         "semver",
         "stoppable",
         "tcp-port-used",
-        "tar-fs",
         "tempy",
         "triple-beam",
         "typed-regex",
@@ -104,16 +98,13 @@
         "winston",
         "zod"
       ],
-      "ignoreBinaries": ["distwin-unpackedK8Sight.exe", "npm:dev:build", "^start:"],
+      "ignoreBinaries": ["distwin-unpackedK8Sight.exe"],
       "ignoreUnresolved": [
         // used by node-fetch
         "./request",
         "./response",
         // for testing
-        ".*/__mocks__/assetMock.t",
-        // webpack exceptions
-        "../../declarations/WebpackOptions",
-        "./Logger"
+        ".*/__mocks__/assetMock.t"
       ],
       "typescript": {
         "config": ["tsconfig.json"]
@@ -185,16 +176,12 @@
         "@kubesightapp/resource-templates",
         // used for `require.context` in webpacked files
         "@types/webpack-env",
-        // it is really runtime dependency but implicitly used in Electron app
-        "electron",
         // explicit dependency to prevent using version from pnpm
         "node-gyp",
         // used as script to run in fork() to install extensions
         "pnpm",
         // webpack dependencies are not handled by knip correctly
-        "ts-loader",
         "ts-node",
-        "webpack",
         // tailwind dependencies are not handled by knip correctly
         "@tailwindcss/postcss",
         "tailwindcss"

@@ -46,10 +46,8 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@async-fn/jest": "^1.6.4",
     "@kubesightapp/jest": "workspace:^",
     "@kubesightapp/typescript": "workspace:^",
-    "@ogre-tools/test-utils": "^17.11.1",
     "@types/fs-extra": "^11.0.4",
     "@types/lodash": "^4.17.20",
     "@types/webpack-env": "^1.18.8",
