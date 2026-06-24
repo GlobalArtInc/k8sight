@@ -26,4 +26,3 @@ for i in 16 32 64 128 256 512 1024; do
 done
 iconutil --convert icns -o icon.icns icon.iconset
 rm -rf icon.iconset
-

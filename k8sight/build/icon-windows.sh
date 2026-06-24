@@ -12,4 +12,3 @@ else
 fi
 
 ${IMAGEMAGICK_CMD} -background none icon.svg -density 400 -define icon:auto-resize=256,16,20,24,32,40,48,60,64,72,80,96 -verbose icon.ico
-

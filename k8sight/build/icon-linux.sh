@@ -16,4 +16,3 @@ for i in 16 22 24 32 36 48 64 72 96 128 192 256 512; do
   size=$((i - 2 * border))
   ${IMAGEMAGICK_CMD} -background none icon.svg -density 400 -resize "${size}x${size}" -bordercolor transparent -border "${border}" -verbose "icons/${i}x${i}.png"
 done
-
