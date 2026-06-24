@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-if command -v magick &> /dev/null; then
+if command -v magick &>/dev/null; then
   IMAGEMAGICK_CMD="magick"
-elif command -v convert &> /dev/null; then
+elif command -v convert &>/dev/null; then
   IMAGEMAGICK_CMD="convert"
 else
   echo "Error: ImageMagick not found. Please install ImageMagick."
