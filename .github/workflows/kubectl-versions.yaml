@@ -92,7 +92,10 @@ jobs:
         if: env.changes == 'true'
         run: |-
           kubectl_version=$(cat .github/version.log)
-          if [[ $(gh pr view automated/kubectl-versions --json state --jq .state || true) != "OPEN" ]]; then
+          gh label create automated --force || true
+          gh label create kubectl --force || true
+          existing_pr=$(gh pr list --head automated/kubectl-versions --json number --jq '.[0].number')
+          if [[ -z "$existing_pr" ]]; then
             gh pr create \
               --head automated/kubectl-versions \
               --title "Automated update of kubectl versions (bundled ${kubectl_version})" \
