@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/react-testing-library-discovery",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A way to discover HTML-elements using react-testing-library",
   "type": "commonjs",
   "files": [

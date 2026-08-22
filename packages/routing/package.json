@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/routing",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Highly extendable routing in the K8Sight.",
   "type": "commonjs",
   "files": [

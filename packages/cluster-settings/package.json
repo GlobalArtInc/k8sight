@@ -1,6 +1,6 @@
 {
   "name": "@kubesightapp/cluster-settings",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Injection token exporter for cluster settings configuration",
   "license": "MIT",
   "type": "commonjs",

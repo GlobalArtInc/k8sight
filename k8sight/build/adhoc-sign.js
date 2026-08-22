@@ -23,8 +23,14 @@ exports.default = async function adhocSign({ electronPlatformName, appOutDir, pa
   }
 
   const appPath = join(appOutDir, `${packager.appInfo.productFilename}.app`);
-  const sign = (target, ...flags) =>
-    execFileSync("codesign", ["--force", "--sign", "-", ...flags, target], { stdio: "inherit" });
+  const run = (command, ...args) => execFileSync(command, args, { stdio: "inherit" });
+
+  const sign = (target, ...flags) => {
+    // codesign announces itself only when it replaces a signature that was already there, so a
+    // silent run says nothing about whether it ran. Say it here instead.
+    console.log(`ad-hoc signing ${target}`);
+    run("codesign", "--force", "--sign", "-", ...flags, target);
+  };
 
   /**
    * The bundled command line tools are plain executables under Resources rather than nested bundles,
@@ -43,4 +49,11 @@ exports.default = async function adhocSign({ electronPlatformName, appOutDir, pa
   }
 
   sign(appPath, "--deep");
+
+  /**
+   * Fail the build rather than publish another bundle that cannot be opened. Everything above is
+   * silent on success, so without this the difference between a signed app and a hook that quietly
+   * did nothing only shows up on the machine of whoever downloads it.
+   */
+  run("codesign", "--verify", "--deep", "--verbose=2", appPath);
 };

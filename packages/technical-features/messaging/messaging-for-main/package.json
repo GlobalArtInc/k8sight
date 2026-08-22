@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/messaging-for-main",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Implementations for 'messaging' in Electron main",
   "type": "commonjs",
   "publishConfig": {

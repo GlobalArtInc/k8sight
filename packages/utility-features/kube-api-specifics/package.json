@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/kube-api-specifics",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Kube api",
   "type": "commonjs",
   "publishConfig": {
