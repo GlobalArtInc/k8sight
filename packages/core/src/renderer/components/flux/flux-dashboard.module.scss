@@ -1,0 +1,189 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--contentColor);
+  border: 1px solid var(--borderFaintColor);
+  border-radius: 8px;
+}
+
+.cardTitle {
+  color: var(--textColorAccent);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.cardCount {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.cardCountValue {
+  color: var(--textColorAccent);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.cardCountLabel {
+  color: var(--textColorSecondary);
+  font-size: 13px;
+}
+
+.cardStates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.failing {
+  color: var(--colorError);
+}
+
+.reconciling {
+  color: var(--colorInfo, var(--primary));
+}
+
+.suspended {
+  color: var(--colorWarning);
+}
+
+.ready {
+  color: var(--colorSuccess);
+}
+
+.absent {
+  color: var(--textColorSecondary);
+  font-size: 13px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  color: var(--textColorAccent);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.empty {
+  padding: 16px;
+  color: var(--textColorSecondary);
+  font-size: 13px;
+  background: var(--contentColor);
+  border: 1px solid var(--borderFaintColor);
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--contentColor);
+  border: 1px solid var(--borderFaintColor);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.table th {
+  padding: 10px 12px;
+  color: var(--textColorSecondary);
+  text-align: start;
+  font-weight: 500;
+  border-bottom: 1px solid var(--borderFaintColor);
+}
+
+.table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--borderFaintColor);
+  vertical-align: top;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.name {
+  color: var(--textColorAccent);
+}
+
+/* Failure text runs long; keep it on one line so rows stay scannable. */
+.message {
+  max-width: 0;
+  width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--textColorSecondary);
+}
+
+/* Cards are buttons; strip the default chrome and keep the panel look. */
+.card {
+  width: 100%;
+  text-align: start;
+  color: inherit;
+  font: inherit;
+}
+
+.card.clickable {
+  cursor: pointer;
+}
+
+.card.clickable:hover {
+  border-color: var(--primary);
+}
+
+.card:disabled {
+  cursor: default;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cardChevron {
+  color: var(--textColorSecondary);
+}
+
+/* The age is the row's narrowest column; never let a wide message wrap it. */
+.age {
+  white-space: nowrap;
+  color: var(--textColorSecondary);
+}
+
+.row {
+  cursor: pointer;
+}
+
+.row:hover {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+}
