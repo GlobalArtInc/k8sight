@@ -222,8 +222,17 @@ jobs:
           for var in APPLEID APPLEIDPASS APPLETEAMID CSC_LINK CSC_KEY_PASSWORD CSC_INSTALLER_LINK CSC_INSTALLER_KEY_PASSWORD; do
             test -n "${!var}" || unset $var
           done
+          # A pkg is only worth building when there is a Developer ID Installer certificate to sign
+          # it with. An installer package has no equivalent of the ad-hoc signature that makes the
+          # app bundle openable, so an unsigned one is refused outright by every Mac that downloads
+          # it -- "damaged and can't be opened", with no override -- and shipping it only offers a
+          # dead end beside a dmg that carries the very same app.
+          targets=(dmg)
+          if [[ -n ${CSC_INSTALLER_LINK:-} ]]; then
+            targets+=(pkg)
+          fi
           pnpm --color=always build:app \
-            dmg pkg \
+            "${targets[@]}" \
             --${{ matrix.arch }}
         env:
           APPLEID: ${{ secrets.APPLEID }}
