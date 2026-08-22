@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "@kubesightapp/error-boundary";
 import { clusterFrameChildComponentInjectionToken } from "@kubesightapp/react-application";
 import { getInjectable } from "@ogre-tools/injectable";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -6,8 +7,6 @@ import { observer } from "mobx-react";
 import React from "react";
 import { Redirect } from "react-router";
 import { Dock } from "../../components/dock";
-import { MainLayout } from "../../components/layout/main-layout";
-import { Sidebar } from "../../components/layout/sidebar";
 import currentPathInjectable from "../../routes/current-path.injectable";
 import currentRouteComponentInjectable from "../../routes/current-route-component.injectable";
 import styles from "./cluster-frame.module.css";
@@ -27,20 +26,29 @@ const NonInjectedClusterFrameLayout = observer((props: Dependencies) => {
   const current = props.currentPath.get();
 
   return (
-    <MainLayout sidebar={<Sidebar />} footer={<Dock />}>
-      {Component ? (
-        <Component />
-      ) : // NOTE: this check is to prevent an infinite loop
-      starting !== current ? (
-        <Redirect to={starting} />
-      ) : (
-        <div className={styles.centering}>
-          <div className="error">
-            An error has occurred. No route can be found matching the current route, which is also the starting route.
-          </div>
-        </div>
-      )}
-    </MainLayout>
+    <div className={styles.layout}>
+      <div className={styles.contents}>
+        <ErrorBoundary>
+          {Component ? (
+            <Component />
+          ) : // NOTE: this check is to prevent an infinite loop
+          starting !== current ? (
+            <Redirect to={starting} />
+          ) : (
+            <div className={styles.centering}>
+              <div className="error">
+                An error has occurred. No route can be found matching the current route, which is also the starting
+                route.
+              </div>
+            </div>
+          )}
+        </ErrorBoundary>
+      </div>
+
+      <div className={styles.footer}>
+        <Dock />
+      </div>
+    </div>
   );
 });
 
@@ -54,7 +62,7 @@ const ClusterFrameLayout = withInjectables<Dependencies>(NonInjectedClusterFrame
 });
 
 const clusterFrameLayoutChildComponentInjectable = getInjectable({
-  id: "cluster-frame-layout-child-component",
+  id: "cluster-frame-layout",
 
   instantiate: () => ({
     id: "cluster-frame-layout",

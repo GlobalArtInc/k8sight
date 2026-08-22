@@ -1,20 +1,35 @@
 .ClusterManager {
   --hotbar-width: 75px;
 
+  --navigator-width: 260px;
+
   display: grid;
   grid-template-areas:
-    "topbar topbar"
-    "menu main"
-    "status-bar status-bar";
-  grid-template-rows: auto 1fr min-content;
-  grid-template-columns: min-content 1fr;
+    "topbar topbar topbar"
+    "menu navigator tabs"
+    "menu navigator main"
+    "status-bar status-bar status-bar";
+  grid-template-rows: auto auto 1fr min-content;
+  grid-template-columns: min-content var(--navigator-width) 1fr;
 
   &.hotbarAutoHide {
     grid-template-areas:
-      "topbar"
-      "main"
-      "status-bar";
-    grid-template-columns: 1fr;
+      "topbar topbar"
+      "navigator tabs"
+      "navigator main"
+      "status-bar status-bar";
+    grid-template-columns: var(--navigator-width) 1fr;
+  }
+
+  /* Collapses to nothing while no dashboard tabs are open. */
+  > [data-testid="dashboard-tab-strip"] {
+    grid-area: tabs;
+    min-width: 0;
+  }
+
+  > [data-testid="navigator"] {
+    grid-area: navigator;
+    min-width: 0;
   }
 
   main {

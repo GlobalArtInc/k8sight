@@ -1,0 +1,173 @@
+.navigator {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  background: var(--sidebarBackground);
+  border-right: 1px solid var(--borderFaintColor);
+  font-size: 12px;
+}
+
+.header {
+  flex: none;
+  padding: 9px 12px 6px;
+  color: var(--textColorAccent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.searchRow {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 8px 6px;
+  padding: 0 8px;
+  height: 26px;
+  background: var(--mainBackground);
+  border: 1px solid var(--borderFaintColor);
+  border-radius: 4px;
+}
+
+.searchRow:focus-within {
+  border-color: var(--primary);
+}
+
+.searchIcon {
+  flex: none;
+  color: var(--textColorSecondary);
+  opacity: 0.7;
+}
+
+.search {
+  flex: 1;
+  min-width: 0;
+  color: var(--textColorAccent);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 12px;
+}
+
+.tree {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.group {
+  margin-bottom: 2px;
+}
+
+.groupLabel {
+  padding: 6px 12px 3px;
+  color: var(--textColorSecondary);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.clusterRow,
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 24px;
+  padding: 2px 8px;
+  cursor: pointer;
+  text-align: start;
+  color: var(--textColorPrimary);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.clusterRow:hover,
+.itemRow:hover {
+  background: color-mix(in srgb, var(--textColorAccent) 8%, transparent);
+  color: var(--textColorAccent);
+}
+
+/*
+ * The page you are on is marked with a tint rather than a filled bar: at this row height a solid
+ * block dominates the panel, and the point of the highlight is to be findable, not loud.
+ */
+.itemActive,
+.itemActive:hover {
+  color: var(--textColorAccent);
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+  font-weight: 500;
+}
+
+.clusterRow {
+  color: var(--textColorAccent);
+  font-weight: 500;
+}
+
+.clusterName,
+.itemTitle {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  flex: none;
+  opacity: 0.55;
+  font-size: 14px;
+}
+
+/* Keeps rows without a chevron aligned with the ones that have one. */
+.chevronSlot {
+  flex: none;
+  display: inline-flex;
+  width: 14px;
+  justify-content: center;
+}
+
+.status {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--halfGray);
+}
+
+.status.connected {
+  background: var(--colorSuccess);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+}
+
+.connecting {
+  padding: 5px 12px 5px 24px;
+  color: var(--textColorSecondary);
+  font-size: 11px;
+}
+
+/* Icons only appear at the top level, and sit quietly next to the label. */
+.navigator :global(.Icon) {
+  flex: none;
+  font-size: 15px;
+  opacity: 0.75;
+}
+
+.itemActive :global(.Icon) {
+  opacity: 1;
+}

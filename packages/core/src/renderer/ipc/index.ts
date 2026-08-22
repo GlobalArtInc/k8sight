@@ -1,5 +1,5 @@
 import { getLegacyGlobalDiForExtensionApi } from "@kubesightapp/legacy-global-di";
-import { clusterSetFrameIdHandler, clusterStates } from "../../common/ipc/cluster";
+import { clusterSetFrameIdHandler, clusterStates, clusterUnsetFrameIdChannel } from "../../common/ipc/cluster";
 import { extensionDiscoveryStateChannel, extensionLoaderFromMainChannel } from "../../common/ipc/extension-handling";
 import {
   type WindowAction,
@@ -46,6 +46,14 @@ export function requestWindowAction(type: WindowAction): Promise<void> {
 
 export function requestSetClusterFrameId(clusterId: ClusterId): Promise<void> {
   return requestMain(clusterSetFrameIdHandler, clusterId);
+}
+
+/**
+ * Lets go of this frame's slot in the main process's frame registry as the frame is torn down, so
+ * later broadcasts are not aimed at a frame that no longer exists.
+ */
+export function emitUnsetClusterFrameId(): void {
+  emitToMain(clusterUnsetFrameIdChannel);
 }
 
 export function requestInitialClusterStates(): Promise<{ id: string; state: ClusterState }[]> {

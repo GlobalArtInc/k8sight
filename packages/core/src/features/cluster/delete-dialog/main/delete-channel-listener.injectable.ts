@@ -1,6 +1,7 @@
 import { getRequestChannelListenerInjectable } from "@kubesightapp/messaging";
 import { noop } from "@kubesightapp/utilities";
 import emitAppEventInjectable from "../../../../common/app-event-bus/emit-event.injectable";
+import { deleteFramesOfCluster } from "../../../../common/cluster-frames.injectable";
 import clusterFramesInjectable from "../../../../common/cluster-frames.injectable";
 import directoryForK8sightLocalStorageInjectable from "../../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import removePathInjectable from "../../../../common/fs/remove.injectable";
@@ -32,7 +33,7 @@ const deleteClusterChannelListenerInjectable = getRequestChannelListenerInjectab
       const clusterConnection = di.inject(clusterConnectionInjectable, cluster);
 
       clusterConnection.disconnect();
-      clusterFrames.delete(cluster.id);
+      deleteFramesOfCluster(clusterFrames, cluster.id);
       clustersState.delete(cluster.id);
 
       // remove the local storage file

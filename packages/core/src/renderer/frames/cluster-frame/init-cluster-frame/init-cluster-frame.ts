@@ -1,5 +1,5 @@
 import { when } from "mobx";
-import { requestSetClusterFrameId } from "../../../ipc";
+import { emitUnsetClusterFrameId, requestSetClusterFrameId } from "../../../ipc";
 
 import type { Logger } from "@kubesightapp/logger";
 import type { ShowNotification } from "@kubesightapp/notifications";
@@ -37,6 +37,10 @@ export const initClusterFrame =
     logger.info(`${logPrefix} Init dashboard, clusterId=${hostedCluster.id}, frameId=${frameRoutingId}`);
 
     await requestSetClusterFrameId(hostedCluster.id);
+
+    // Frames come and go with their tabs now, so each one hands its registration back on the way
+    // out rather than leaving a dead entry for broadcasts to trip over.
+    window.addEventListener("pagehide", () => emitUnsetClusterFrameId(), { once: true });
     await when(() => hostedCluster.ready.get()); // cluster.activate() is done at this point
 
     catalogEntityRegistry.activeEntity = hostedCluster.id;

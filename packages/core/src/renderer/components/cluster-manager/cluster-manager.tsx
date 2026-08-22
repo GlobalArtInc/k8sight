@@ -10,9 +10,11 @@ import userPreferencesStateInjectable from "../../../features/user-preferences/c
 import watchForGeneralEntityNavigationInjectable from "../../api/helpers/watch-for-general-entity-navigation.injectable";
 import currentPathInjectable from "../../routes/current-path.injectable";
 import currentRouteComponentInjectable from "../../routes/current-route-component.injectable";
+import { TabStrip } from "../dashboard-tabs/tab-strip";
 import { DeleteClusterDialog } from "../delete-cluster-dialog";
 import { HotbarMenu } from "../hotbar/hotbar-menu";
 import { TopBar } from "../layout/top-bar/top-bar";
+import { Navigator } from "../navigator/navigator";
 import { StatusBar } from "../status-bar/status-bar";
 
 import type { IComputedValue } from "mobx";
@@ -61,6 +63,8 @@ class NonInjectedClusterManager extends React.Component<Dependencies> {
     return (
       <div className={cssNames("ClusterManager", { hotbarAutoHide: this.props.userPreferencesState.hotbarAutoHide })}>
         <TopBar />
+        <Navigator />
+        <TabStrip />
         <main>
           <div id="k8sight-views" />
           {this.renderMainComponent()}

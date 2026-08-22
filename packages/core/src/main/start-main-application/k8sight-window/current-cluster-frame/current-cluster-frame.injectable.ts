@@ -17,7 +17,9 @@ const currentClusterFrameInjectable = getInjectable({
         return undefined;
       }
 
-      return clusterFrames.get(clusterId);
+      // A cluster can be open in several tabs; reloading targets the most recently registered of
+      // its frames, which is the one the window most recently brought up.
+      return [...clusterFrames.values()].reverse().find((frame) => frame.clusterId === clusterId);
     });
   },
 });

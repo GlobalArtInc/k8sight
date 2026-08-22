@@ -4,3 +4,24 @@
   justify-content: center;
   align-items: center;
 }
+
+/*
+ * The cluster frame is now only content plus the dock: navigation lives in the root frame's
+ * navigator, which spans every cluster rather than just this one.
+ */
+.layout {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  width: 100%;
+  height: 100%;
+}
+
+.contents {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.footer {
+  position: relative;
+  min-width: 0; /* restrict size when overflow content (e.g. <Dock> tabs scrolling) */
+}

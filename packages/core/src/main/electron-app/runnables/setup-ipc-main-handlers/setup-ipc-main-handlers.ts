@@ -1,9 +1,11 @@
 import { BrowserWindow, Menu } from "electron";
+import { clusterFrameKey } from "../../../../common/cluster-frames.injectable";
 import { broadcastMainChannel, broadcastMessage, ipcMainHandle, ipcMainOn } from "../../../../common/ipc";
 import {
   clusterRefreshAccessibilityChannel,
   clusterSetFrameIdHandler,
   clusterStates,
+  clusterUnsetFrameIdChannel,
 } from "../../../../common/ipc/cluster";
 import {
   windowActionHandleChannel,
@@ -45,9 +47,15 @@ export const setupIpcMainHandlers = ({
     const cluster = getClusterById(clusterId);
 
     if (cluster) {
-      clusterFrames.set(cluster.id, { frameId: event.frameId, processId: event.processId });
+      const frame = { clusterId: cluster.id, frameId: event.frameId, processId: event.processId };
+
+      clusterFrames.set(clusterFrameKey(frame), frame);
       pushCatalogToRenderer();
     }
+  });
+
+  ipcMainOn(clusterUnsetFrameIdChannel, (event) => {
+    clusterFrames.delete(clusterFrameKey({ processId: event.processId, frameId: event.frameId }));
   });
 
   ipcMainHandle(windowActionHandleChannel, (event, action) => handleWindowAction(action));
