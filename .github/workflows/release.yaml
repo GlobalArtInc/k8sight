@@ -313,7 +313,12 @@ jobs:
             --${{ matrix.arch }}
 
       - name: Azure Trusted Signing (Windows)
-        if: runner.os == 'Windows'
+        # Skipped unless the Azure Trusted Signing configuration is present. The action validates its
+        # own inputs and throws when they are empty, which used to take the whole job down after the
+        # installers had already been built. Add the secrets AZURE_TENANT_ID, AZURE_CLIENT_ID and
+        # AZURE_CLIENT_SECRET plus the vars AZURE_ENDPOINT, AZURE_CODE_SIGNING_NAME and
+        # AZURE_CERT_PROFILE_NAME to the `signing` environment and this step runs again on its own.
+        if: runner.os == 'Windows' && vars.AZURE_CODE_SIGNING_NAME != '' && vars.AZURE_ENDPOINT != ''
         uses: azure/trusted-signing-action@v0.5.10
         with:
           azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -360,6 +365,55 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
 
+      - name: Drop update metadata that must not be published
+        shell: bash
+        run: |
+          # macOS: normally a no-op, since electron-builder writes latest-mac.yml only for a `zip`
+          # target and this repo ships dmg and pkg. It is here so that adding `zip` later cannot
+          # quietly start advertising an update macOS still cannot apply -- Squirrel.Mac refuses an
+          # unsigned bundle, and both macOS jobs would write this same filename.
+          rm -f k8sight/dist/latest-mac.yml k8sight/dist/latest-mac.json
+          # Windows latest.yml carries no per-arch entries -- electron-updater takes the first .exe
+          # it finds -- and both Windows jobs write one. Only x64 publishes, so the two cannot race
+          # to overwrite each other; Windows on arm64 runs the x64 installer under emulation.
+          if [[ $RUNNER_OS == Windows && $ARCH != x64 ]]; then
+            rm -f k8sight/dist/latest.yml
+          fi
+          # Linux is already unambiguous: latest-linux.yml for x64, latest-linux-arm64.yml for arm64.
+        env:
+          ARCH: ${{ matrix.arch }}
+
+      - name: Point update metadata at the renamed installers
+        shell: bash
+        run: |
+          # electron-builder wrote latest*.yml against the names it produced, which the step above
+          # has just renamed. An installed app follows those names literally, so a yml left pointing
+          # at the old ones is a 404 for every user. Sizes and hashes are unaffected by a rename.
+          perl << 'END'
+          use strict;
+          use warnings;
+          chdir "k8sight/dist" or die $!;
+          for my $meta (glob "latest*.yml") {
+            open my $in, "<", $meta or die "$meta: $!";
+            my @lines = <$in>;
+            close $in;
+            for my $line (@lines) {
+              # Both the entries under `files:` and the legacy top-level `path:` name an artifact.
+              next unless $line =~ /^(\s*(?:-\s+)?(?:url|path):\s+)(\S+)\s*$/;
+              my ($prefix, $name) = ($1, $2);
+              my ($ext) = $name =~ /\.([^.]+)$/ or die "no extension on $name in $meta";
+              # One artifact of any given kind per job, so the extension identifies it outright.
+              my @found = glob "K8Sight*.$ext";
+              die "expected one .$ext for $meta, found: @found" unless @found == 1;
+              $line = "$prefix$found[0]\n";
+            }
+            open my $out, ">", $meta or die "$meta: $!";
+            print $out @lines;
+            close $out;
+            print "rewrote $meta\n";
+          }
+          END
+
       - name: Make checksums for binaries (Linux, Windows)
         if: runner.os == 'Linux' || runner.os == 'Windows'
         shell: bash
@@ -383,7 +437,8 @@ jobs:
       - name: List files before upload
         shell: bash
         run: |
-          for f in k8sight/dist/K8Sight*.*; do
+          for f in k8sight/dist/K8Sight*.* k8sight/dist/latest*.yml; do
+            test -e "$f" || continue
             echo "$(ls -l "$f")" "|" "$(file -b "$f")"
           done
 
@@ -391,6 +446,12 @@ jobs:
         shell: bash
         run: |
           gh release upload ${GITHUB_REF_NAME#sign/} k8sight/dist/K8Sight*.*
+          # Without these an installed app has nothing to compare itself against and the in-app
+          # updater is inert. --clobber so re-running a job replaces its own metadata; the pruning
+          # step above already guarantees no two jobs publish the same name.
+          if compgen -G "k8sight/dist/latest*.yml" > /dev/null; then
+            gh release upload ${GITHUB_REF_NAME#sign/} k8sight/dist/latest*.yml --clobber
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

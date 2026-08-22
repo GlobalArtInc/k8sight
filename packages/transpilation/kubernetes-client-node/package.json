@@ -1,6 +1,6 @@
 {
   "name": "@kubesightapp/kubernetes-client-node",
-  "version": "1.0.0-1",
+  "version": "1.0.1",
   "description": "Kubernetes client for K8Sight",
   "author": {
     "name": "GlobalArt Inc.",

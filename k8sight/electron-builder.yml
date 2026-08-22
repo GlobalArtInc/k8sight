@@ -5,10 +5,22 @@ electronVersion: 35.7.5 # datasource=npm depName=electron
 ## Run `pnpm electron-rebuild` instead
 npmRebuild: false
 
-## There is no support in app for autoupdates yet
+## Every release so far carries a semver prerelease tag (`1.0.0-1`). Channel detection would try to
+## read `alpha`/`beta` out of that and find neither, so updates stay on the single `latest` channel
+## and the app decides at runtime whether it wants prereleases -- see
+## `packages/core/src/features/application-update/main/updater.injectable.ts`.
 detectUpdateChannel: false
 generateUpdatesFilesForAllChannels: true
-publish: []
+
+## Present only so electron-builder writes the update metadata: `latest*.yml` next to the installers
+## and `app-update.yml` inside the app, which is where electron-updater learns who to ask. Nothing is
+## uploaded from here -- every build runs `electron-builder --publish never` and `.github/workflows/
+## release.yaml` attaches the artifacts with `gh release upload`. Keep it that way: the release is a
+## draft until every matrix job has finished, and letting electron-builder publish would break that.
+publish:
+  provider: github
+  owner: GlobalArtInc
+  repo: k8sight
 
 ## Files in app.asar
 files:
@@ -28,7 +40,9 @@ protocols:
     - k8sight
   role: Viewer
 
-## For Linux targets
+## For Linux targets. Publishing is inherited from the top level so `latest-linux[-arm64].yml` is
+## written; only the AppImage is listed in it, since deb and rpm belong to the system package
+## manager and the app cannot write to what it installed.
 linux:
   appId: app.k8sight.K8Sight
   category: Development;Network
@@ -42,7 +56,6 @@ linux:
       to: ./${arch}/k8sight-k8s-proxy
     - from: binaries/client/linux/${arch}/helm
       to: ./${arch}/helm
-  publish: null
 
 appImage:
   executableArgs:
@@ -128,12 +141,20 @@ mac:
       to: ./${arch}/k8sight-k8s-proxy
     - from: binaries/client/darwin/${arch}/helm
       to: ./${arch}/helm
+  ## No `zip` target on purpose, so macOS never advertises an update it cannot apply: Squirrel.Mac
+  ## installs from a zip and refuses an app bundle that is not signed, and these builds are only
+  ## signed when the Apple secrets happen to be configured. The app knows this and sends macOS users
+  ## to the release page instead. Adding `zip` here (and to the macOS build step in
+  ## `.github/workflows/release.yaml`) is what would turn macOS self-update on, once signing is a
+  ## given -- at the cost of another full-size artifact per arch.
   publish: null
 
 pkg:
   license: static/build/license.txt
 
-## For Windows targets
+## For Windows targets. Publishing is inherited from the top level so `latest.yml` is written. It
+## lists the NSIS installer only: msi produces no update metadata, by electron-builder's own rule
+## that an msi install is somebody's managed deployment.
 win:
   appId: app.k8sight.K8Sight
   target:
@@ -145,7 +166,6 @@ win:
       to: ./${arch}/k8sight-k8s-proxy.exe
     - from: binaries/client/windows/${arch}/helm.exe
       to: ./${arch}/helm.exe
-  publish: null
 
 msi:
   perMachine: false

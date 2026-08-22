@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/random",
   "private": false,
-  "version": "1.0.0-1",
+  "version": "1.0.1",
   "description": "Highly extendable random in the K8Sight.",
   "type": "commonjs",
   "files": [

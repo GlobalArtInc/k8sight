@@ -33,6 +33,10 @@
         "@types/webpack-env",
         // it is really runtime dependency but implicitly used in Electron app
         "electron",
+        // loaded at runtime from the packaged app via __non_webpack_require__, so it is declared in
+        // k8sight (electron-builder must pack it) but required from the core bundle -- knip sees
+        // neither side
+        "electron-updater",
         // explicit dependency to prevent to install different versions of app-build-lib
         "electron-builder-squirrel-windows",
         // explicit dependency to prevent using version from pnpm
@@ -203,6 +207,9 @@
       ],
       "ignore": ["static/build/**/*.d.ts"],
       "ignoreDependencies": [
+        // required at runtime from the packaged app via __non_webpack_require__, and declared on
+        // k8sight rather than here because electron-builder is what has to pack it
+        "electron-updater",
         // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
         // plus a few that only production global-overrides import
         "@kubesightapp/messaging-fake-bridge",

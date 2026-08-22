@@ -1,49 +1,35 @@
 import { loggerInjectionToken } from "@kubesightapp/logger";
-import { showInfoNotificationInjectable } from "@kubesightapp/notifications";
+import { requestFromChannelInjectionToken } from "@kubesightapp/messaging";
 import { getInjectable } from "@ogre-tools/injectable";
-import React from "react";
-import * as semver from "semver";
-import productNameInjectable from "../../../common/vars/product-name.injectable";
-import { buildVersionInitializable } from "../../../features/vars/build-version/common/token";
-import getLatestVersionViaChannelInjectable from "../../common/utils/get-latest-version-via-channel.injectable";
+import {
+  applicationUpdateStateChannel,
+  checkForApplicationUpdateChannel,
+} from "../../../features/application-update/common/channels";
+import showApplicationUpdateNotificationInjectable from "../../../features/application-update/renderer/show-update-notification.injectable";
 
+/**
+ * Opening the Welcome page is the one moment the user is plainly not busy, so it is where a check
+ * is nudged along.
+ *
+ * The result is not awaited here: main pushes every state change to the renderer, and the listener
+ * in the application-update feature is what actually raises the notification. This only catches up
+ * with whatever main already knows, for a frame that started after the last push.
+ */
 const newVersionNotificationInjectable = getInjectable({
   id: "new-version-notification",
 
   instantiate: (di) => {
-    const productName = di.inject(productNameInjectable);
-    const buildVersion = di.inject(buildVersionInitializable.stateToken);
-    const currentVersion = buildVersion;
-    const getLatestVersion = di.inject(getLatestVersionViaChannelInjectable);
+    const requestFromChannel = di.inject(requestFromChannelInjectionToken);
+    const showApplicationUpdateNotification = di.inject(showApplicationUpdateNotificationInjectable);
     const logger = di.inject(loggerInjectionToken);
-    const showInfoNotification = di.inject(showInfoNotificationInjectable);
 
     return async () => {
-      let newVersion: string | undefined;
-
       try {
-        newVersion = await getLatestVersion();
-      } catch (error) {
-        logger.error(`[WELCOME]: Failed to check latest version: ${error}`);
-      }
+        showApplicationUpdateNotification(await requestFromChannel(applicationUpdateStateChannel));
 
-      if (newVersion && semver.gt(newVersion, currentVersion)) {
-        showInfoNotification(
-          <div className="flex column gaps">
-            <div>
-              {productName} v{newVersion} is available! Open the{" "}
-              <a
-                href={`https://github.com/GlobalArtInc/k8sight/releases`}
-                target="_blank"
-                rel="noreferrer"
-                className="NotificationLink"
-              >
-                release notes
-              </a>{" "}
-              to learn more.
-            </div>
-          </div>,
-        );
+        await requestFromChannel(checkForApplicationUpdateChannel);
+      } catch (error) {
+        logger.warn(`[WELCOME]: Failed to check for updates: ${error}`);
       }
     };
   },

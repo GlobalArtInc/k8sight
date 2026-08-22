@@ -1,6 +1,6 @@
 {
   "name": "@kubesightapp/generate-tray-icons",
-  "version": "1.0.0-1",
+  "version": "1.0.1",
   "description": "CLI generating tray icons for building a k8sight-like application",
   "license": "MIT",
   "scripts": {
