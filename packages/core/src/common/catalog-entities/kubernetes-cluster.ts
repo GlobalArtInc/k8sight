@@ -54,6 +54,15 @@ export enum K8sightKubernetesClusterStatus {
 export interface KubernetesClusterMetadata extends CatalogEntityMetadata {
   distro?: string;
   kubeVersion?: string;
+  /**
+   * The address of the context's apiserver, as the kubeconfig gives it.
+   *
+   * Two synced files that describe the same cluster produce two entities, because an entity is
+   * identified by the file it came from. This is what lets them be recognised as one cluster
+   * without connecting to it. Absent for entities that came from somewhere other than a synced
+   * kubeconfig.
+   */
+  apiServer?: string;
 }
 
 /**

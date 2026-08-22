@@ -237,7 +237,7 @@ export class ClusterManager {
   };
 }
 
-export function catalogEntityFromCluster(cluster: Cluster) {
+export function catalogEntityFromCluster(cluster: Cluster): KubernetesCluster {
   return new KubernetesCluster({
     metadata: {
       uid: cluster.id,

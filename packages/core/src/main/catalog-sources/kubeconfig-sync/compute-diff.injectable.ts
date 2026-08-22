@@ -45,6 +45,17 @@ const computeKubeconfigDiffInjectable = getInjectable({
         const rawModels = configToModels(config, filePath);
         const models = new Map(rawModels.map((model) => [model.contextName, model]));
 
+        /**
+         * Recorded on the entity so that the same cluster reached through several synced files can
+         * be recognised as one. The context name alone will not do: `default` is what more than one
+         * provider calls the only context in the kubeconfig it hands out.
+         */
+        const apiServerOf = (contextName: string) => {
+          const clusterName = config.getContextObject(contextName)?.cluster;
+
+          return clusterName ? config.getCluster(clusterName)?.server : undefined;
+        };
+
         logger.debug(`File now has ${models.size} entries`, { filePath });
 
         for (const [contextName, value] of source) {
@@ -69,6 +80,7 @@ const computeKubeconfigDiffInjectable = getInjectable({
 
           // or update the model and mark it as not needed to be added
           value[0].updateModel(model);
+          value[1].metadata.apiServer = apiServerOf(contextName);
           models.delete(contextName);
           logger.debug(`Updated old cluster from sync`, { filePath, contextName });
         }
@@ -79,6 +91,8 @@ const computeKubeconfigDiffInjectable = getInjectable({
             const clusterId = createHash("md5").update(`${filePath}:${contextName}`).digest("hex");
             const cluster = getClusterById(clusterId) ?? new Cluster({ ...model, id: clusterId });
             const entity = catalogEntityFromCluster(cluster);
+
+            entity.metadata.apiServer = apiServerOf(contextName);
 
             if (!filePath.startsWith(directoryForKubeConfigs)) {
               entity.metadata.labels.file = filePath.replace(homedir(), "~");
