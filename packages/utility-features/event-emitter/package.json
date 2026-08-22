@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/event-emitter",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Event emitter",
   "type": "commonjs",
   "publishConfig": {

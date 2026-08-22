@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/tooltip",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Highly extendable tooltip in the K8Sight.",
   "type": "commonjs",
   "files": [

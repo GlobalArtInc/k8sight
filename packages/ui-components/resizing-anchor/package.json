@@ -1,7 +1,7 @@
 {
   "name": "@kubesightapp/resizing-anchor",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Highly extendable resizing-anchor in the K8Sight.",
   "type": "commonjs",
   "files": [
