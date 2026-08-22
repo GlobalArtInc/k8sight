@@ -476,6 +476,12 @@ jobs:
   publish-npm-release:
     name: publish NPM release
 
+    # Opt-in, because this fork has no npm credentials and the job fails with ENEEDAUTH after the
+    # installers are already published, which makes a perfectly good release look broken. Set the
+    # repository variable NPM_PUBLISH to `true` once the secret NPM_TOKEN exists. A job-level `if`
+    # cannot read `secrets`, so the switch has to be a variable rather than the token itself.
+    if: vars.NPM_PUBLISH == 'true'
+
     needs:
       - make-draft-release
       - build-app
@@ -575,6 +581,11 @@ jobs:
 
   release-apt-repository:
     name: Release APT repository
+
+    # Opt-in, for the same reason as the npm job: without GPG_PASSPHRASE the signing key cannot be
+    # unlocked and this fails long after the .deb is already attached to the release. Set the
+    # repository variable APT_PUBLISH to `true` once the apt-signing environment holds its secrets.
+    if: vars.APT_PUBLISH == 'true'
 
     needs:
       - make-draft-release
