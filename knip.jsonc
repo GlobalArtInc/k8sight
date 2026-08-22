@@ -15,6 +15,7 @@
     },
     "k8sight": {
       "entry": [
+        "build/adhoc-sign.js",
         "build/notarize.js",
         "integration/**/*.tests.ts",
         "src/{main,renderer}/library.ts",

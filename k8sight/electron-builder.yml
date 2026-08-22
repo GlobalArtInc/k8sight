@@ -30,6 +30,9 @@ files:
   - "!node_modules/@kubesightapp/core/static/build/library/fonts"
   - "!node_modules/electron"
 
+## Gives unsigned macOS builds an ad-hoc signature, without which Apple Silicon will not run them
+afterPack: build/adhoc-sign.js
+
 ## Notarization
 afterSign: build/notarize.js
 
