@@ -1,6 +1,6 @@
 import { getMessageChannelListenerInjectable } from "@kubesightapp/messaging";
-import { mcpServerStatusChangedChannel } from "../common/channels";
 import currentlyInClusterFrameInjectable from "../../../renderer/routes/currently-in-cluster-frame.injectable";
+import { mcpServerStatusChangedChannel } from "../common/channels";
 import mcpServerStatusInjectable from "./server-status.injectable";
 
 /**

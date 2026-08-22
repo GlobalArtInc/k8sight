@@ -1,7 +1,7 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { reaction } from "mobx";
-import { beforeMainFrameStartsSecondInjectionToken } from "../../../renderer/before-frame-starts/tokens";
 import catalogEntityRegistryInjectable from "../../../renderer/api/catalog/entity/registry.injectable";
+import { beforeMainFrameStartsSecondInjectionToken } from "../../../renderer/before-frame-starts/tokens";
 import dashboardTabsStoreInjectable from "./tabs-store.injectable";
 
 /**

@@ -1,11 +1,11 @@
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import mcpServerStatusInjectable from "../../../../../mcp-server/renderer/server-status.injectable";
-import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
 import { Input } from "../../../../../../renderer/components/input";
 import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
 import { Switch } from "../../../../../../renderer/components/switch";
+import mcpServerStatusInjectable from "../../../../../mcp-server/renderer/server-status.injectable";
+import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
 import { RemovableItem } from "../../../removable-item/removable-item";
 
 import type { McpServerStatusStore } from "../../../../../mcp-server/renderer/server-status.injectable";
@@ -38,8 +38,8 @@ const NonInjectedMcpServer = observer(({ state, serverStatus }: Dependencies) =>
       <small className="hint">
         Exposes a Model Context Protocol endpoint on this machine only, so assistants such as Claude or Cursor can
         inspect the clusters K8Sight is already connected to -- no separate kubeconfig setup on their side. Reading
-        resources, logs and events happens on its own; restarting a workload, deleting a pod or driving Flux always
-        asks you here first.
+        resources, logs and events happens on its own; restarting a workload, deleting a pod or driving Flux always asks
+        you here first.
       </small>
 
       {state.mcpServerEnabled && (

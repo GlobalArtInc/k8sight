@@ -114,9 +114,7 @@ const registerMcpToolsInjectable = getInjectable({
         async ({ clusterId, namespace, pod, container, tailLines, previous }) => {
           const api = await coreApiFor(clusterId);
 
-          return asText(
-            await api.readNamespacedPodLog({ name: pod, namespace, container, tailLines, previous }),
-          );
+          return asText(await api.readNamespacedPodLog({ name: pod, namespace, container, tailLines, previous }));
         },
       );
 

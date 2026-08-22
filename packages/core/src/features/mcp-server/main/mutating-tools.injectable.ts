@@ -120,8 +120,7 @@ const registerMcpMutatingToolsInjectable = getInjectable({
         "delete_pod",
         {
           title: "Delete a pod",
-          description:
-            "Deletes one pod so its controller replaces it. Asks the user to confirm in k8sight first.",
+          description: "Deletes one pod so its controller replaces it. Asks the user to confirm in k8sight first.",
           inputSchema: {
             clusterId: clusterIdSchema,
             namespace: z.string(),
@@ -136,9 +135,7 @@ const registerMcpMutatingToolsInjectable = getInjectable({
               tool: "delete_pod",
               target: `Pod ${namespace}/${name}`,
               action:
-                gracePeriodSeconds === undefined
-                  ? "Delete it"
-                  : `Delete it with a ${gracePeriodSeconds}s grace period`,
+                gracePeriodSeconds === undefined ? "Delete it" : `Delete it with a ${gracePeriodSeconds}s grace period`,
             },
             async () => {
               const api = await access.coreApiFor(clusterId);
@@ -206,9 +203,7 @@ const registerMcpMutatingToolsInjectable = getInjectable({
                 clusterId,
                 tool,
                 target: `${kind} ${namespace}/${name}`,
-                action: suspend
-                  ? "Suspend it, so Flux stops reconciling it"
-                  : "Resume it, so Flux reconciles it again",
+                action: suspend ? "Suspend it, so Flux stops reconciling it" : "Resume it, so Flux reconciles it again",
               },
               async () => {
                 const api = await access.objectApiFor(clusterId);

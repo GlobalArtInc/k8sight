@@ -8,7 +8,6 @@ import { fluxStateOf, messageOf } from "./flux-state";
 import type { KubeObject } from "@kubesightapp/kube-object";
 
 import type { ApiManager } from "../../../common/k8s-api/api-manager";
-
 import type { FluxKind } from "./flux-resource-kinds";
 import type { FluxState } from "./flux-state";
 

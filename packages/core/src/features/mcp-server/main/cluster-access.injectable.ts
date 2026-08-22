@@ -1,8 +1,8 @@
 import { CoreV1Api, KubernetesObjectApi } from "@kubesightapp/kubernetes-client-node";
 import { getInjectable } from "@ogre-tools/injectable";
-import getClusterByIdInjectable from "../../cluster/storage/common/get-by-id.injectable";
-import clustersInjectable from "../../cluster/storage/common/clusters.injectable";
 import loadProxyKubeconfigInjectable from "../../../main/cluster/load-proxy-kubeconfig.injectable";
+import clustersInjectable from "../../cluster/storage/common/clusters.injectable";
+import getClusterByIdInjectable from "../../cluster/storage/common/get-by-id.injectable";
 
 import type { KubeConfig } from "@kubesightapp/kubernetes-client-node";
 

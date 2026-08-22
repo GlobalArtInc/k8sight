@@ -33,9 +33,8 @@ export interface McpPromptAnswer {
  */
 export const mcpConfirmationRequestedChannel = getMessageChannel<McpConfirmation>("mcp-confirmation-requested");
 
-export const mcpAuthorizationRequestedChannel = getMessageChannel<McpAuthorizationRequest>(
-  "mcp-authorization-requested",
-);
+export const mcpAuthorizationRequestedChannel =
+  getMessageChannel<McpAuthorizationRequest>("mcp-authorization-requested");
 
 /** Both kinds of prompt are settled by id, so one channel carries either answer back. */
 export const mcpPromptAnsweredChannel = getRequestChannel<McpPromptAnswer, void>("mcp-prompt-answered");

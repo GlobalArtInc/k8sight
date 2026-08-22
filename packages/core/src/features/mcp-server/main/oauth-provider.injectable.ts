@@ -4,19 +4,13 @@ import { getRandomIdInjectionToken } from "@kubesightapp/random";
 import { getInjectable } from "@ogre-tools/injectable";
 import { createHash } from "crypto";
 import { mcpServerStatusChangedChannel } from "../common/channels";
-import {
-  mcpAccessTokenLifetimeSeconds,
-  mcpServerOrigin,
-  mcpServerScope,
-  mcpServerUrl,
-} from "../common/vars";
+import { mcpAccessTokenLifetimeSeconds, mcpServerOrigin, mcpServerScope, mcpServerUrl } from "../common/vars";
 import { McpOAuthError } from "./oauth-errors";
 import mcpOAuthStoreInjectable from "./oauth-store.injectable";
 import { withRedirectParams } from "./redirect-uri";
 import requestMcpAuthorizationInjectable from "./request-authorization.injectable";
 
 import type { AuthInfo } from "@modelcontextprotocol/sdk/server/auth/types.js";
-
 import type {
   OAuthClientInformationFull,
   OAuthClientMetadata,

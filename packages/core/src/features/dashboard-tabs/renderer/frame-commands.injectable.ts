@@ -1,7 +1,7 @@
 import { getInjectable } from "@ogre-tools/injectable";
 
-import type { FrameState } from "./frame-states.injectable";
 import type { RootToFrameMessage } from "../common/frame-bridge";
+import type { FrameState } from "./frame-states.injectable";
 
 export interface FrameCommand {
   readonly message: RootToFrameMessage;

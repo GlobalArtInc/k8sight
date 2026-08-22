@@ -77,8 +77,7 @@ const mcpOAuthStoreInjectable = getInjectable({
      */
     let cachedFilePath: string | undefined;
 
-    const getFilePath = () =>
-      (cachedFilePath ??= joinPaths(di.inject(directoryForUserDataInjectable), storeFileName));
+    const getFilePath = () => (cachedFilePath ??= joinPaths(di.inject(directoryForUserDataInjectable), storeFileName));
 
     let clients: McpStoredClient[] | undefined;
 

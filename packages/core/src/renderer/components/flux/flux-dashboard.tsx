@@ -133,8 +133,7 @@ const NonInjectedFluxDashboard = observer(
       navigateToFluxResource(trouble.kind, { selfLink: trouble.selfLink, search: trouble.name });
 
     const openActivity = (activity: FluxActivity) =>
-      activity.kind &&
-      navigateToFluxResource(activity.kind, { selfLink: activity.selfLink, search: activity.name });
+      activity.kind && navigateToFluxResource(activity.kind, { selfLink: activity.selfLink, search: activity.name });
 
     const summaries = fluxSummaries.summaries.get();
     const needsAttention = fluxSummaries.needsAttention.get();
@@ -179,9 +178,7 @@ const NonInjectedFluxDashboard = observer(
                       title="Open details"
                       data-testid={`flux-trouble-${trouble.name}`}
                       onClick={() => openTrouble(trouble)}
-                      onKeyDown={(event) =>
-                        event.key === "Enter" && openTrouble(trouble)
-                      }
+                      onKeyDown={(event) => event.key === "Enter" && openTrouble(trouble)}
                     >
                       <td>{trouble.kind.kind}</td>
                       <td className={styles.name}>{trouble.name}</td>

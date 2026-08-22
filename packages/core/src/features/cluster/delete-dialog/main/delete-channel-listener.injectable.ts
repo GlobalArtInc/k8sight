@@ -1,8 +1,7 @@
 import { getRequestChannelListenerInjectable } from "@kubesightapp/messaging";
 import { noop } from "@kubesightapp/utilities";
 import emitAppEventInjectable from "../../../../common/app-event-bus/emit-event.injectable";
-import { deleteFramesOfCluster } from "../../../../common/cluster-frames.injectable";
-import clusterFramesInjectable from "../../../../common/cluster-frames.injectable";
+import clusterFramesInjectable, { deleteFramesOfCluster } from "../../../../common/cluster-frames.injectable";
 import directoryForK8sightLocalStorageInjectable from "../../../../common/directory-for-k8sight-local-storage/directory-for-k8sight-local-storage.injectable";
 import removePathInjectable from "../../../../common/fs/remove.injectable";
 import joinPathsInjectable from "../../../../common/path/join-paths.injectable";

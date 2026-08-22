@@ -33,8 +33,7 @@ const fluxGroups = new Set(fluxKindGroups.flatMap(({ kinds }) => kinds.map(({ gr
 const groupOf = (apiVersion: string) => (apiVersion.includes("/") ? apiVersion.slice(0, apiVersion.indexOf("/")) : "");
 
 /** Flux writes progress into `lastTimestamp`, so a repeating event stays where its latest report puts it. */
-const timestampOf = (event: KubeEvent) =>
-  event.lastTimestamp ?? event.eventTime ?? event.metadata.creationTimestamp;
+const timestampOf = (event: KubeEvent) => event.lastTimestamp ?? event.eventTime ?? event.metadata.creationTimestamp;
 
 export interface FluxActivity {
   /** The event's uid: stable while the store re-sorts, so rows are not rebuilt as events stream in. */

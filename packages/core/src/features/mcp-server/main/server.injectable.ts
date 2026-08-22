@@ -9,7 +9,6 @@ import { applyCorsHeaders, pathnameOf, readBody, sendJson } from "./http-helpers
 import mcpOAuthEndpointsInjectable from "./oauth-endpoints.injectable";
 import mcpOAuthProviderInjectable from "./oauth-provider.injectable";
 import registerMcpToolsInjectable from "./tools.injectable";
-
 import type { Server } from "http";
 
 export interface McpHttpServer {

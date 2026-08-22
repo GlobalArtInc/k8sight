@@ -10,17 +10,17 @@ import clusterNavigationInjectable from "../../../features/dashboard-tabs/render
 import expandedClustersInjectable from "../../../features/dashboard-tabs/renderer/expanded-clusters.injectable";
 import catalogEntityRegistryInjectable from "../../api/catalog/entity/registry.injectable";
 import clusterFrameHandlerInjectable from "../cluster-manager/cluster-frame-handler.injectable";
+import styles from "./navigator.module.scss";
 import { NavigatorItem } from "./navigator-item";
 import { buildNavigatorNodes } from "./navigator-nodes";
-import styles from "./navigator.module.scss";
 
 import type { SidebarItemDeclaration } from "@kubesightapp/cluster-sidebar";
 
 import type { IComputedValue, ObservableSet } from "mobx";
 
 import type { ClusterNavigation } from "../../../features/dashboard-tabs/renderer/cluster-navigation.injectable";
-import type { CatalogEntity } from "../../api/catalog-entity";
 import type { CatalogEntityRegistry } from "../../api/catalog/entity/registry";
+import type { CatalogEntity } from "../../api/catalog-entity";
 import type { ClusterFrameHandler } from "../cluster-manager/cluster-frame-handler";
 
 interface Dependencies {
@@ -120,11 +120,7 @@ const NonInjectedNavigator = observer(
                       title={entity.getName()}
                       data-testid={`navigator-cluster-${clusterId}`}
                     >
-                      <Icon
-                        material={isExpanded ? "expand_more" : "chevron_right"}
-                        small
-                        className={styles.chevron}
-                      />
+                      <Icon material={isExpanded ? "expand_more" : "chevron_right"} small className={styles.chevron} />
                       <span className={styles.clusterName}>{entity.getName()}</span>
                       <span
                         className={cssNames(styles.status, {

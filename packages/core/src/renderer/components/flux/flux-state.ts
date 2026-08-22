@@ -15,7 +15,8 @@ const conditionsOf = (resource: KubeObject): FluxCondition[] =>
 export const readyConditionOf = (resource: KubeObject) =>
   conditionsOf(resource).find((condition) => condition.type === "Ready");
 
-export const isSuspended = (resource: KubeObject) => (resource.spec as { suspend?: boolean } | undefined)?.suspend === true;
+export const isSuspended = (resource: KubeObject) =>
+  (resource.spec as { suspend?: boolean } | undefined)?.suspend === true;
 
 /**
  * Reduces a Flux resource to the state its dashboard tile counts it under.

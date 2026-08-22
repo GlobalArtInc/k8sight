@@ -1,8 +1,8 @@
 import { getMessageChannelListenerInjectable, requestFromChannelInjectionToken } from "@kubesightapp/messaging";
 import React from "react";
-import { mcpConfirmationRequestedChannel, mcpPromptAnsweredChannel } from "../common/channels";
 import confirmInjectable from "../../../renderer/components/confirm-dialog/confirm.injectable";
 import currentlyInClusterFrameInjectable from "../../../renderer/routes/currently-in-cluster-frame.injectable";
+import { mcpConfirmationRequestedChannel, mcpPromptAnsweredChannel } from "../common/channels";
 
 const mcpConfirmationListenerInjectable = getMessageChannelListenerInjectable({
   id: "mcp-confirmation-listener",

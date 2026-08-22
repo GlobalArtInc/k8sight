@@ -8,7 +8,9 @@
       "ignoreBinaries": ["open", "powershell", "xdg-open"],
       "ignoreDependencies": [
         // used to run pnpm in monorepo workspaces from the root
-        "pnpm"
+        "pnpm",
+        // turbo is used to run tasks in parallel in monorepo
+        "turbo"
       ]
     },
     "k8sight": {
@@ -22,8 +24,15 @@
       ],
       "project": ["*.js", "build/*.js", "integration/**/*.ts", "src/**/*.ts!", "static/build/*.js!", "webpack/*.ts"],
       "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@kubesightapp/test-utils",
+        "@types/fs-extra",
+        "playwright",
         // used for `require.context` in webpacked files
         "@types/webpack-env",
+        // it is really runtime dependency but implicitly used in Electron app
+        "electron",
         // explicit dependency to prevent to install different versions of app-build-lib
         "electron-builder-squirrel-windows",
         // explicit dependency to prevent using version from pnpm
@@ -32,6 +41,7 @@
         "pnpm",
         // used by webpack and for dev-server
         "style-loader",
+        "ts-node",
         // all packages used in require() calls in webpacked files
         "@astronautlabs/jsonpath",
         "@kubesightapp/animate",
@@ -91,6 +101,7 @@
         "semver",
         "stoppable",
         "tcp-port-used",
+        "tar-fs",
         "tempy",
         "triple-beam",
         "typed-regex",
@@ -98,13 +109,22 @@
         "winston",
         "zod"
       ],
-      "ignoreBinaries": ["distwin-unpackedK8Sight.exe"],
+      "ignoreBinaries": [
+        "distwin-unpackedK8Sight.exe",
+        "npm:dev:build",
+        "^start:",
+        // a build tool, so a devDependency -- which --production mode does not look at
+        "run-script-os"
+      ],
       "ignoreUnresolved": [
         // used by node-fetch
         "./request",
         "./response",
         // for testing
-        ".*/__mocks__/assetMock.t"
+        ".*/__mocks__/assetMock.t",
+        // webpack exceptions
+        "../../declarations/WebpackOptions",
+        "./Logger"
       ],
       "typescript": {
         "config": ["tsconfig.json"]
@@ -118,7 +138,18 @@
       "entry": ["dist/index.js!", "index.ts", "jest.config.js", "src/**/*.injectable.ts", "webpack.config.js"],
       "project": ["*.js", "*.ts", "dist/**/*.js!", "dist/**/*.ts", "src/**/*.ts", "src/**/*.tsx"],
       "ignore": ["dist/**/*.d.ts"],
-      "ignoreDependencies": ["@types/webpack-env", "ts-loader", "webpack"],
+      "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@kubesightapp/application",
+        "@kubesightapp/react-testing-library-discovery",
+        "@ogre-tools/injectable-extension-for-mobx",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "@types/webpack-env",
+        "ts-loader",
+        "webpack"
+      ],
       "typescript": {
         "config": ["tsconfig.json"]
       },
@@ -172,16 +203,31 @@
       ],
       "ignore": ["static/build/**/*.d.ts"],
       "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@kubesightapp/messaging-fake-bridge",
+        "@kubesightapp/react-testing-library-discovery",
+        "@kubesightapp/test-utils",
+        "@types/memorystream",
+        "jest-mock-extended",
+        "memfs",
+        "memorystream",
+        "mock-http",
+        "react-select-event",
         // dependency with static artifacts only
         "@kubesightapp/resource-templates",
         // used for `require.context` in webpacked files
         "@types/webpack-env",
+        // it is really runtime dependency but implicitly used in Electron app
+        "electron",
         // explicit dependency to prevent using version from pnpm
         "node-gyp",
         // used as script to run in fork() to install extensions
         "pnpm",
         // webpack dependencies are not handled by knip correctly
+        "ts-loader",
         "ts-node",
+        "webpack",
         // tailwind dependencies are not handled by knip correctly
         "@tailwindcss/postcss",
         "tailwindcss"
@@ -248,6 +294,10 @@
       "entry": ["bin/webpack-build!", "dist/index.js!", "index.ts"],
       "project": ["*.js", "*.ts", "bin/*", "dist/**/*.js!", "dist/**/*.ts", "src/**/*.ts", "static/build/**/*.js!"],
       "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@async-fn/jest",
+        "@ogre-tools/test-utils",
         "@ogre-tools/injectable-extension-for-auto-registration",
         "@tailwindcss/postcss",
         "@types/webpack-env",
@@ -385,7 +435,15 @@
       "entry": ["dist/index.js!", "index.ts", "jest.config.js", "webpack.config.js"],
       "project": ["*.js", "*.ts", "dist/**/*.js!", "dist/**/*.ts", "src/**/*.ts"],
       "ignore": ["dist/**/*.d.ts"],
-      "ignoreDependencies": ["@types/webpack-env", "ts-loader", "webpack"],
+      "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@kubesightapp/react-testing-library-discovery",
+        "@testing-library/react",
+        "@types/webpack-env",
+        "ts-loader",
+        "webpack"
+      ],
       "typescript": {
         "config": ["tsconfig.json"]
       },
@@ -398,7 +456,25 @@
       "entry": ["dist/index.js!", "index.ts", "jest.config.js", "webpack.config.js"],
       "project": ["*.js", "*.ts", "dist/**/*.js!", "dist/**/*.ts", "src/**/*.ts"],
       "ignore": ["dist/**/*.d.ts"],
-      "ignoreDependencies": ["@types/webpack-env", "ts-loader", "webpack"],
+      "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@async-fn/jest",
+        "@kubesightapp/application",
+        "@kubesightapp/feature-core",
+        "@kubesightapp/messaging-fake-bridge",
+        "@kubesightapp/test-utils",
+        "@ogre-tools/injectable-extension-for-auto-registration",
+        "@ogre-tools/injectable-extension-for-mobx",
+        "@ogre-tools/test-utils",
+        "@testing-library/react",
+        "mobx",
+        "mobx-react",
+        "react",
+        "@types/webpack-env",
+        "ts-loader",
+        "webpack"
+      ],
       "typescript": {
         "config": ["tsconfig.json"]
       },
@@ -452,6 +528,11 @@
       "project": ["*.js", "*.ts", "dist/**/*.js!", "dist/**/*.ts", "src/**/*.{ts,tsx}"],
       "ignore": ["dist/**/*.d.ts"],
       "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@testing-library/jest-dom",
+        "@testing-library/react",
+        "@testing-library/user-event",
         "@types/webpack-env",
         "css-loader",
         "postcss-loader",
@@ -471,7 +552,16 @@
       "entry": ["dist/index.js!", "index.ts", "jest.config.js", "webpack.config.js"],
       "project": ["*.js", "*.ts", "dist/**/*.js!", "dist/**/*.ts", "src/**/*.ts"],
       "ignore": ["dist/**/*.d.ts"],
-      "ignoreDependencies": ["@types/webpack-env", "ts-loader", "webpack"],
+      "ignoreDependencies": [
+        // declared but unreachable from knip's entry points: test helpers whose suites were deleted,
+        // plus a few that only production global-overrides import
+        "@async-fn/jest",
+        "@kubesightapp/test-utils",
+        "mobx",
+        "@types/webpack-env",
+        "ts-loader",
+        "webpack"
+      ],
       "typescript": {
         "config": ["tsconfig.json"]
       },

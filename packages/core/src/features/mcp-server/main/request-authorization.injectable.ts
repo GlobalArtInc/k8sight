@@ -1,7 +1,7 @@
 import { sendMessageToChannelInjectionToken } from "@kubesightapp/messaging";
 import { getInjectable } from "@ogre-tools/injectable";
-import { mcpAuthorizationRequestedChannel } from "../common/channels";
 import showApplicationWindowInjectable from "../../../main/start-main-application/k8sight-window/show-application-window.injectable";
+import { mcpAuthorizationRequestedChannel } from "../common/channels";
 import askMcpUserInjectable from "./ask-user.injectable";
 
 import type { McpAuthorizationRequest } from "../common/channels";

@@ -1,7 +1,6 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import emitAppEventInjectable from "../../../../common/app-event-bus/emit-event.injectable";
-import { deleteFramesOfCluster } from "../../../../common/cluster-frames.injectable";
-import clusterFramesInjectable from "../../../../common/cluster-frames.injectable";
+import clusterFramesInjectable, { deleteFramesOfCluster } from "../../../../common/cluster-frames.injectable";
 import clusterConnectionInjectable from "../../../../main/cluster/cluster-connection.injectable";
 import getClusterByIdInjectable from "../../storage/common/get-by-id.injectable";
 import { requestClusterDeactivationInjectionToken } from "../common/request-token";

@@ -13,7 +13,6 @@ import {
 import { isMcpOAuthError, McpOAuthError } from "./oauth-errors";
 import mcpOAuthProviderInjectable from "./oauth-provider.injectable";
 import { redirectUriMatches, withRedirectParams } from "./redirect-uri";
-
 import type { IncomingMessage, ServerResponse } from "http";
 
 import type {
@@ -79,10 +78,7 @@ const mcpOAuthEndpointsInjectable = getInjectable({
      * RFC 6749 section 2.3: a client with a secret must present it, a public client must not be
      * asked for one.
      */
-    const authenticateClient = (
-      req: IncomingMessage,
-      params: Record<string, string>,
-    ): OAuthClientInformationFull => {
+    const authenticateClient = (req: IncomingMessage, params: Record<string, string>): OAuthClientInformationFull => {
       const basic = parseBasicAuth(req.headers.authorization);
       const clientId = basic?.clientId ?? params.client_id;
       const clientSecret = basic?.clientSecret ?? params.client_secret;

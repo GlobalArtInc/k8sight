@@ -16,8 +16,7 @@ const requestMcpConfirmationInjectable = getInjectable({
     const sendMessageToChannel = di.inject(sendMessageToChannelInjectionToken);
     const askUser = di.inject(askMcpUserInjectable);
 
-    return (request) =>
-      askUser((id) => sendMessageToChannel(mcpConfirmationRequestedChannel, { id, ...request }));
+    return (request) => askUser((id) => sendMessageToChannel(mcpConfirmationRequestedChannel, { id, ...request }));
   },
 });
 

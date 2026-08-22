@@ -1,8 +1,8 @@
 import { getMessageChannelListenerInjectable, requestFromChannelInjectionToken } from "@kubesightapp/messaging";
 import React from "react";
-import { mcpAuthorizationRequestedChannel, mcpPromptAnsweredChannel } from "../common/channels";
 import confirmInjectable from "../../../renderer/components/confirm-dialog/confirm.injectable";
 import currentlyInClusterFrameInjectable from "../../../renderer/routes/currently-in-cluster-frame.injectable";
+import { mcpAuthorizationRequestedChannel, mcpPromptAnsweredChannel } from "../common/channels";
 
 /**
  * The consent step of the OAuth flow, asked here instead of on a web page: the user is deciding
@@ -33,8 +33,8 @@ const mcpAuthorizationListenerInjectable = getMessageChannelListenerInjectable({
                 <b>{clientName}</b> wants to connect to K8Sight.
               </p>
               <p>
-                It will be able to read every cluster K8Sight is connected to. Changing a cluster
-                still asks you here, each time.
+                It will be able to read every cluster K8Sight is connected to. Changing a cluster still asks you here,
+                each time.
               </p>
               {/* The redirect URI is the one thing that says which program is really at the other end. */}
               <p className="hint">
