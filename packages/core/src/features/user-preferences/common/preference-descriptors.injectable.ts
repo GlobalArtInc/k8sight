@@ -4,6 +4,7 @@ import { observable } from "mobx";
 import kubeDirectoryPathInjectable from "../../../common/os/kube-directory-path.injectable";
 import { defaultThemeId } from "../../../common/vars";
 import currentTimezoneInjectable from "../../../common/vars/current-timezone.injectable";
+import { clampLiveFrames, defaultMaxLiveFrames } from "../../dashboard-tabs/common/live-frames";
 import {
   defaultEditorConfig,
   defaultExtensionRegistryUrlLocation,
@@ -51,6 +52,16 @@ const userPreferenceDescriptorsInjectable = getInjectable({
       localeTimezone: getPreferenceDescriptor<string>({
         fromStore: (val) => val || currentTimezone,
         toStore: (val) => (!val || val === currentTimezone ? undefined : val),
+      }),
+      /** How many dashboard tabs keep a live cluster frame; the rest rebuild when reopened. */
+      maxLiveClusterFrames: getPreferenceDescriptor<number>({
+        fromStore: (val) => (val === undefined ? defaultMaxLiveFrames : clampLiveFrames(val)),
+        toStore: (val) => (val === defaultMaxLiveFrames ? undefined : clampLiveFrames(val)),
+      }),
+      /** Whether k8sight exposes its clusters to AI assistants over a local MCP endpoint. */
+      mcpServerEnabled: getPreferenceDescriptor<boolean>({
+        fromStore: (val) => val ?? false,
+        toStore: (val) => (!val ? undefined : val),
       }),
       allowUntrustedCAs: getPreferenceDescriptor<boolean>({
         fromStore: (val) => val ?? false,

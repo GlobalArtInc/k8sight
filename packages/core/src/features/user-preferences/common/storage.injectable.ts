@@ -44,6 +44,8 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
         state.httpsProxy = descriptors.httpsProxy.fromStore(preferences.httpsProxy);
         state.kubectlBinariesPath = descriptors.kubectlBinariesPath.fromStore(preferences.kubectlBinariesPath);
         state.localeTimezone = descriptors.localeTimezone.fromStore(preferences.localeTimezone);
+        state.maxLiveClusterFrames = descriptors.maxLiveClusterFrames.fromStore(preferences.maxLiveClusterFrames);
+        state.mcpServerEnabled = descriptors.mcpServerEnabled.fromStore(preferences.mcpServerEnabled);
         state.openAtLogin = descriptors.openAtLogin.fromStore(preferences.openAtLogin);
         state.showTrayIcon = descriptors.showTrayIcon.fromStore(preferences.showTrayIcon);
         state.hotbarAutoHide = descriptors.hotbarAutoHide.fromStore(preferences.hotbarAutoHide);
@@ -68,6 +70,8 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
             httpsProxy: descriptors.httpsProxy.toStore(state.httpsProxy),
             kubectlBinariesPath: descriptors.kubectlBinariesPath.toStore(state.kubectlBinariesPath),
             localeTimezone: descriptors.localeTimezone.toStore(state.localeTimezone),
+            maxLiveClusterFrames: descriptors.maxLiveClusterFrames.toStore(state.maxLiveClusterFrames),
+            mcpServerEnabled: descriptors.mcpServerEnabled.toStore(state.mcpServerEnabled),
             openAtLogin: descriptors.openAtLogin.toStore(state.openAtLogin),
             showTrayIcon: descriptors.showTrayIcon.toStore(state.showTrayIcon),
             hotbarAutoHide: descriptors.hotbarAutoHide.toStore(state.hotbarAutoHide),

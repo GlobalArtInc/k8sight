@@ -141,3 +141,23 @@
   flex-direction: column;
   height: 100%;
 }
+
+/* The catalog fills the content column; navigation for it lives in the root frame's navigator. */
+.catalogPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+
+  /*
+   * `#k8sight-views` covers the whole content area with an opaque background at z-index 1, so a
+   * page rendered alongside it has to be lifted or it is painted underneath and simply not seen.
+   */
+  position: relative;
+  z-index: 1;
+}
+
+.catalogPage .views {
+  flex: 1;
+  min-height: 0;
+}

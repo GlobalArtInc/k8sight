@@ -12,14 +12,13 @@ import activeHotbarInjectable from "../../../features/hotbar/storage/common/acti
 import normalizeCatalogEntityContextMenuInjectable from "../../catalog/normalize-menu-item.injectable";
 import navigateInjectable from "../../navigation/navigate.injectable";
 import { ItemListLayout } from "../item-object-list";
-import { MainLayout } from "../layout/main-layout";
 import { MenuActions, MenuItem } from "../menu";
 import { RenderDelay } from "../render-delay/render-delay";
 import styles from "./catalog.module.scss";
 import { CatalogAddButton } from "./catalog-add-button";
 import { browseCatalogTab } from "./catalog-browse-tab";
 import catalogEntityStoreInjectable from "./catalog-entity-store.injectable";
-import { CatalogMenu } from "./catalog-menu";
+import { CatalogCategoryTabs } from "./catalog-category-tabs";
 import catalogPreviousActiveTabStorageInjectable from "./catalog-previous-active-tab-storage/catalog-previous-active-tab-storage.injectable";
 import catalogRouteParametersInjectable from "./catalog-route-parameters.injectable";
 import getCategoryColumnsInjectable from "./columns/get.injectable";
@@ -292,14 +291,15 @@ class NonInjectedCatalog extends React.Component<Dependencies> {
     const activeCategory = this.props.catalogEntityStore.activeCategory.get();
 
     return (
-      <MainLayout sidebar={<CatalogMenu activeTab={this.activeTab} onItemClick={this.onTabChange} />}>
+      <div className={styles.catalogPage}>
+        <CatalogCategoryTabs activeTab={this.activeTab} onItemClick={this.onTabChange} />
         <div className={styles.views}>{this.renderViews(activeCategory)}</div>
         {activeCategory ? (
           <RenderDelay>
             <CatalogAddButton category={activeCategory} />
           </RenderDelay>
         ) : null}
-      </MainLayout>
+      </div>
     );
   }
 }
