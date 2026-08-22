@@ -75,6 +75,10 @@ jobs:
       ELECTRON_CACHE: ${{ github.workspace }}/.cache/electron
       ELECTRON_BUILDER_CACHE: ${{ github.workspace }}/.cache/electron-builder
       ELECTRON_HEADERS_CACHE: ${{ github.workspace }}/.cache/electron-headers
+      # The production renderer bundle is ~40 MB unminified and its source map larger still, and
+      # generating that map dies under the default heap -- as a hard V8 crash, not a tidy
+      # out-of-memory error, which makes it look like anything but memory.
+      NODE_OPTIONS: --max-old-space-size=8192
 
     steps:
       - name: Checkout

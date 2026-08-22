@@ -41,10 +41,15 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
+    "@kubesightapp/application": "workspace:^",
     "@kubesightapp/jest": "workspace:^",
+    "@kubesightapp/react-testing-library-discovery": "workspace:^",
     "@kubesightapp/typescript": "workspace:^",
     "@kubesightapp/utilities": "workspace:^",
     "@kubesightapp/webpack": "workspace:^",
+    "@ogre-tools/injectable-extension-for-mobx": "^17.11.1",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "^17.0.89",
     "@types/webpack-env": "^1.18.8",
     "identity-obj-proxy": "^3.0.0",

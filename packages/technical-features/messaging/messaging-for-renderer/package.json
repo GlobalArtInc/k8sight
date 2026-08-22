@@ -38,13 +38,16 @@
     "electron": "^35.7.5"
   },
   "devDependencies": {
+    "@async-fn/jest": "^1.6.4",
     "@kubesightapp/jest": "workspace:^",
     "@kubesightapp/typescript": "workspace:^",
     "@kubesightapp/webpack": "workspace:^",
+    "@ogre-tools/injectable-extension-for-mobx": "^17.11.1",
     "@types/webpack-env": "^1.18.8",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "lodash": "^4.17.21",
+    "mobx": "^6.15.0",
     "ts-jest": "^29.4.5",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
